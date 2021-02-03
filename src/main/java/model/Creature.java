@@ -1,4 +1,4 @@
-package OOP20.rogue.model;
+package model;
 
 public interface Creature {
 
