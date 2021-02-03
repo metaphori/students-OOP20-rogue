@@ -13,7 +13,7 @@ public class WorldImpl implements World {
 
     public WorldImpl(final int depth) {
         IntStream.range(0, depth).forEach(i -> {
-            this.levels.add(new Level(50, 50));
+            this.levels.add(new LevelImpl(50, 50));
         });
     }
 }

@@ -2,30 +2,10 @@ package OOP20.rogue.model.world;
 
 import OOP20.rogue.model.Entity;
 
-enum Material {
-    BRICKS, DIRT, LADDER
-}
+public interface Tile {
+    Entity getEntity();
 
-public class Tile {
-    private Material material;
-    private boolean isWall;
+    void setEntity(Entity entity);
 
-    private Entity entity;
-
-    public Entity getEntity() {
-        return this.entity;
-    }
-
-    public void setEntity(Entity entity) {
-        this.entity = entity;
-    }
-
-    public Tile(final Material material, final boolean isWall) {
-        this.material = material;
-        this.isWall = isWall;
-    }
-
-    public String toString() {
-        return this.material + ": " + this.isWall;
-    }
+    String toString();
 }
