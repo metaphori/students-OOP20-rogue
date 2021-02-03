@@ -1,5 +1,7 @@
 package OOP20.rogue.model.world;
 
+import OOP20.rogue.model.Entity;
+
 enum Material {
     BRICKS, DIRT, LADDER
 }
