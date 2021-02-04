@@ -24,7 +24,7 @@ public class LevelImpl implements Level {
     // TODO
     private void generate() {
         IntStream.range(0, this.height*this.width).forEach(index -> {
-            tileMatrix.set(index, new TileImpl(this, Material.BRICKS, false));
+            tileMatrix.add(new TileImpl(this, Material.BRICKS, false));
         });
     };
 
