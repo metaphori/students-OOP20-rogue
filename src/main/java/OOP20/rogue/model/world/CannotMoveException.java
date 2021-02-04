@@ -6,7 +6,7 @@ public class CannotMoveException extends Exception {
     public CannotMoveException() {
     }
 
-    public CannotMoveException(String message) {
+    public CannotMoveException(final String message) {
         super(message);
     }
 }
