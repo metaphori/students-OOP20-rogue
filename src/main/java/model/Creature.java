@@ -8,7 +8,7 @@ public interface Creature {
 
     /**
      * TODO to finish.
-     * @return true if the movement was successful, false otherwise.
+     * @return true if the movement was successful, false otherwise
      */
     boolean move();
 

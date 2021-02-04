@@ -21,7 +21,7 @@ public interface Life {
 
     /**
      * 
-     * @return the creature's experience.
+     * @return the creature's experience
      */
     int getExperience();
 
