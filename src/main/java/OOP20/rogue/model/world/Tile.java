@@ -5,5 +5,9 @@ public interface Tile {
 
     void setEntity(Entity entity);
 
+    Coordinates getPosition();
+
     String toString();
+
+	Level getLevel();
 }

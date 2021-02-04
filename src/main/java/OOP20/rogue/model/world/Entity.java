@@ -1,5 +1,6 @@
 package OOP20.rogue.model.world;
 
 public interface Entity {
-    void move(Direction where, int howMuch) throws CannotMoveException;
+    Coordinates getPosition();
+    void setPosition(int x, int y) throws CannotMoveException;
 }

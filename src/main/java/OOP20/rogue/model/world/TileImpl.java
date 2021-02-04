@@ -5,10 +5,14 @@ enum Material {
 }
 
 public class TileImpl implements Tile {
+    private Level level;
     private Material material;
     private boolean isWall;
-
     private Entity entity;
+
+    public Level getLevel() {
+        return level;
+    }
 
     public Entity getEntity() {
         return this.entity;
@@ -18,7 +22,12 @@ public class TileImpl implements Tile {
         this.entity = entity;
     }
 
-    public TileImpl(final Material material, final boolean isWall) {
+    public Coordinates getPosition() {
+        return this.level.getPosition(this);
+    }
+
+    public TileImpl(final Level level, final Material material, final boolean isWall) {
+        this.level = level;
         this.material = material;
         this.isWall = isWall;
     }
