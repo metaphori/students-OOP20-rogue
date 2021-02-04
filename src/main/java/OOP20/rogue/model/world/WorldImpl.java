@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class WorldImpl implements World {
-    // 50x50 world seems ok I guess
-    private static final int WORLD_SIZE_X = 50;
-    private static final int WORLD_SIZE_Y = 50;
+    // terminal inspired world size
+    private static final int WORLD_SIZE_X = 80;
+    private static final int WORLD_SIZE_Y = 24;
 
     private List<Level> levels = new ArrayList<>();
 
-    public Level getLevel(int i) {
+    public final Level getLevel(final int i) {
         return this.levels.get(i);
     }
 

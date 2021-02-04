@@ -13,11 +13,12 @@ public class LevelImpl implements Level {
             public Coordinates getPosition() {
                 return TileImpl.this.getPosition();
             }
-        
-            public void setPosition(int x, int y) throws CannotMoveException {
-                if (LevelImpl.this.getTile(x, y).getEntity() != null)
+
+            public void setPosition(final int x, final int y) throws CannotMoveException {
+                if (LevelImpl.this.getTile(x, y).getEntity() != null) {
                     throw new CannotMoveException();
-        
+                }
+
                 TileImpl.this.setEntity(null);
                 LevelImpl.this.getTile(x, y).setEntity(this);
             }
@@ -31,7 +32,7 @@ public class LevelImpl implements Level {
             return this.entity;
         }
 
-        public void setEntity(Entity entity) {
+        public void setEntity(final Entity entity) {
             this.entity = entity;
         }
 
@@ -39,7 +40,7 @@ public class LevelImpl implements Level {
             return LevelImpl.this.getPosition(this);
         }
 
-        public TileImpl(final Material material, final boolean isWall) {
+        TileImpl(final Material material, final boolean isWall) {
             this.material = material;
             this.isWall = isWall;
         }
@@ -58,11 +59,11 @@ public class LevelImpl implements Level {
     private int height;
     private int width;
 
-    public Tile getTile(int x, int y) {
+    public final Tile getTile(final int x, final int y) {
         return tileMatrix.get(x * y);
     }
 
-    public Coordinates getPosition(Tile t) {
+    public final Coordinates getPosition(final Tile t) {
         int index = tileMatrix.indexOf(t);
         return new Coordinates(index % this.width, index % this.height);
     }

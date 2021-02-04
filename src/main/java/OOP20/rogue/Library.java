@@ -4,7 +4,7 @@
 package OOP20.rogue;
 
 public class Library {
-    public boolean someLibraryMethod() {
+    public final boolean someLibraryMethod() {
         return true;
     }
 }
