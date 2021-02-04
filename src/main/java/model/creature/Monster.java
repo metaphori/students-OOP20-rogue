@@ -1,4 +1,4 @@
-package model;
+package model.creature;
 
 /**
  * An interface modeling the enemy/monster.
@@ -28,7 +28,7 @@ public interface Monster extends Creature {
      * 
      * @return the monster's item
      */
-	Item getItem();
+	//Item getItem();
 	
 	/**
      * 
