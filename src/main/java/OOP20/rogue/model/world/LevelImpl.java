@@ -3,17 +3,47 @@ package OOP20.rogue.model.world;
 import java.util.Vector;
 import java.util.stream.IntStream;
 
+enum Material {
+    BRICKS, DIRT, LADDER
+}
+
 public class LevelImpl implements Level {
-    /* 0 | 1 | 2 | 3
-     * 4 | 5 | 6 | 7
-     * 8 | 9 ...
+    private class TileImpl implements Tile {
+        private Material material;
+        private boolean isWall;
+        private Entity entity;
+
+        public Entity getEntity() {
+            return this.entity;
+        }
+
+        public void setEntity(Entity entity) {
+            this.entity = entity;
+        }
+
+        public Coordinates getPosition() {
+            return LevelImpl.this.getPosition(this);
+        }
+
+        public TileImpl(final Material material, final boolean isWall) {
+            this.material = material;
+            this.isWall = isWall;
+        }
+
+        public String toString() {
+            return this.material + ": " + this.isWall;
+        }
+    }
+
+    /*
+     * 0 | 1 | 2 | 3 4 | 5 | 6 | 7 8 | 9 ...
      */
     private Vector<Tile> tileMatrix = new Vector<>();
     private int height;
     private int width;
 
     public Tile getTile(int x, int y) {
-        return tileMatrix.get(x*y);
+        return tileMatrix.get(x * y);
     }
 
     public Coordinates getPosition(Tile t) {
@@ -23,8 +53,8 @@ public class LevelImpl implements Level {
 
     // TODO
     private void generate() {
-        IntStream.range(0, this.height*this.width).forEach(index -> {
-            tileMatrix.add(new TileImpl(this, Material.BRICKS, false));
+        IntStream.range(0, this.height * this.width).forEach(index -> {
+            tileMatrix.add(new TileImpl(Material.BRICKS, false));
         });
     };
 

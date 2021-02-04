@@ -8,6 +8,4 @@ public interface Tile {
     Coordinates getPosition();
 
     String toString();
-
-	Level getLevel();
 }
