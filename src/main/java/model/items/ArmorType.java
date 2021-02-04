@@ -42,7 +42,7 @@ public enum ArmorType {
     PLATE_MAIL(3);
 
     /**
-     * A lower AC gives worse chance to avoid damage.
+     * A lower AC gives a better chance to avoid damage.
      */
     private final int ac;
 
