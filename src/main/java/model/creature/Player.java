@@ -1,4 +1,4 @@
-package model;
+package model.creature;
 
 /**
  * An interface modeling the player.

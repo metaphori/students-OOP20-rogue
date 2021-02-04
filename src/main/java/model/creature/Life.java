@@ -1,4 +1,4 @@
-package model;
+package model.creature;
 
 /** 
  * An interface modeling a life for a {@link Creature}.

@@ -1,4 +1,4 @@
-package model;
+package model.creature;
 
 public abstract class AbstractLife implements Life {
 
