@@ -1,4 +1,4 @@
-package model.items;
+package model.items.rings;
 
 /** 
  * An interface modeling a game Ring. 

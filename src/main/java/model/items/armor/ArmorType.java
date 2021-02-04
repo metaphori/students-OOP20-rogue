@@ -1,4 +1,4 @@
-package model.items;
+package model.items.armor;
 
 /**
  * Represents an enumeration for declaring armor types.

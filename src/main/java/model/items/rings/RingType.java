@@ -1,4 +1,4 @@
-package model.items;
+package model.items.rings;
 
 // import java.util.function.Consumer;
 

@@ -1,4 +1,4 @@
-package model.items;
+package model.items.armor;
 
 /**
  * An interface modeling a game armor.
