@@ -8,6 +8,14 @@ import model.items.Item;
  */
 public interface Weapon extends Item {
 
+    /** 
+     * Represents an enumeration for declaring weapon use.
+     */
+    enum Use {
+        HANDLED, 
+        THROWABLE;
+    }
+
     /**
      * 
      * @return the weapon's damage
