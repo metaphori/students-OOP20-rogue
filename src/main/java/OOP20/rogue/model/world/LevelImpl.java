@@ -9,6 +9,20 @@ enum Material {
 
 public class LevelImpl implements Level {
     private class TileImpl implements Tile {
+        private class EntityImpl implements Entity {
+            public Coordinates getPosition() {
+                return TileImpl.this.getPosition();
+            }
+        
+            public void setPosition(int x, int y) throws CannotMoveException {
+                if (LevelImpl.this.getTile(x, y).getEntity() != null)
+                    throw new CannotMoveException();
+        
+                TileImpl.this.setEntity(null);
+                LevelImpl.this.getTile(x, y).setEntity(this);
+            }
+        }
+
         private Material material;
         private boolean isWall;
         private Entity entity;
