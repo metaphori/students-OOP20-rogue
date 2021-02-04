@@ -1,9 +1,9 @@
 package model.items;
 
-import model.Creature;
+import model.creature.Player;
 
 public interface Item {
 
-    boolean use(Creature creature);
+    boolean use(Player creature);
 
 }

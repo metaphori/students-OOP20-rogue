@@ -1,6 +1,6 @@
 package model.items.food;
 
-import model.Creature;
+import model.creature.Player;
 
 /** 
  * Represents an implementation for a game {@link Food}.
@@ -16,10 +16,10 @@ public class FoodImpl implements Food {
 
     /**
      * Use this method to consume the Food item.
-     * @param creature 
+     * @param player 
      * @return true if item was correctly used, false otherwise.
      */
-    public boolean use(final Creature creature) {
+    public boolean use(final Player player) {
         /*
          * Checks if the given creature is the player,
          * Food has no use for a monster creature.
