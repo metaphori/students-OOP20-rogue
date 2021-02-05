@@ -39,4 +39,10 @@ public interface PlayerLife extends Life {
      *          the quantity to add/subtract to the leftover food.
      */
     void updateFood(int quantity);
+
+    /**
+     * 
+     * @return the quantity of food left
+     */
+    int getFood();
 }
