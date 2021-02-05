@@ -23,6 +23,10 @@ public class LevelImpl implements Level {
             throw new CannotMoveException("There's already an entity in this position!");
         }
 
+        if (getTile(c).isWall()) {
+            throw new CannotMoveException("Wall!");
+        }
+
         entityMap.remove(e.getPosition());
         entityMap.put(c, e);
     }
