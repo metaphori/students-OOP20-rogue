@@ -81,9 +81,9 @@ public enum WeaponType {
      * @return a damage supplier
      */
     public Supplier<Integer> getDamageSupplier(final Use use) {
-        return () -> IntStream.range(0, this.damageMap.get(use).getKey())
+        return () -> IntStream.range(0, damageMap.get(use).getKey())
                 .boxed()
-                .collect(Collectors.summingInt(i -> this.rnd.nextInt(this.damageMap.get(use).getValue())));
+                .collect(Collectors.summingInt(i -> rnd.nextInt(damageMap.get(use).getValue()) + 1));
     }
 
 }
