@@ -3,6 +3,7 @@ package model.creature;
 public class PlayerLifeImpl extends AbstractLife implements PlayerLife {
 
     private int strength;
+    private int leftFood;
 
     public PlayerLifeImpl(final int healthPoints, final int experience, final int strength) {
         super(healthPoints, experience);
@@ -39,6 +40,14 @@ public class PlayerLifeImpl extends AbstractLife implements PlayerLife {
     @Override
     public int getStrength() {
         return this.strength;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateFood(final int quantity) {
+        this.leftFood = this.leftFood + quantity;
     }
 
 }
