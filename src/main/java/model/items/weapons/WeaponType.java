@@ -65,9 +65,12 @@ public enum WeaponType {
      */
     SPEAR(new Pair<>(2, 3), new Pair<>(1, 6));
 
-    private final Random rnd = new Random();
-
+    /**
+     * The accuracy is the same for each weapon.
+     */
+    private static final int ACCURACY = 0;
     private final Map<Weapon.Use, Pair<Integer, Integer>> damageMap;
+    private final Random rnd = new Random();
 
     WeaponType(final Pair<Integer, Integer> handledDamage, final Pair<Integer, Integer> throwableDamage) {
         this.damageMap = new EnumMap<>(Use.class);
@@ -80,10 +83,18 @@ public enum WeaponType {
      *          the use of the weapon
      * @return a damage supplier
      */
-    public Supplier<Integer> getDamageSupplier(final Use use) {
+    protected Supplier<Integer> getDamageSupplier(final Use use) {
         return () -> IntStream.range(0, damageMap.get(use).getKey())
                 .boxed()
                 .collect(Collectors.summingInt(i -> rnd.nextInt(damageMap.get(use).getValue()) + 1));
+    }
+
+    /**
+     * 
+     * @return the weapon accuracy
+     */
+    protected int getAccuracy() {
+        return ACCURACY;
     }
 
 }
