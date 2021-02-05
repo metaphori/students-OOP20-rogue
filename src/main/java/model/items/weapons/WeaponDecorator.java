@@ -6,7 +6,7 @@ import model.creature.Player;
  * A decorator for a {@link BaseWeapon}.
  *
  */
-public class WeaponDecorator implements Weapon {
+public abstract class WeaponDecorator implements Weapon {
 
     private final BaseWeapon weapon;
 
