@@ -1,0 +1,41 @@
+package model.items.weapons;
+
+import model.creature.Player;
+
+/**
+ * A decorator for a {@link BaseWeapon}.
+ *
+ */
+public class WeaponDecorator implements Weapon {
+
+    private final BaseWeapon weapon;
+
+    public WeaponDecorator(final BaseWeapon weapon) {
+        this.weapon = weapon;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean use(final Player player) {
+        return this.weapon.use(player);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getDamage(final Use use) {
+        return this.weapon.getDamage(use);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getPrecision() {
+        return this.weapon.getPrecision();
+    }
+
+}
