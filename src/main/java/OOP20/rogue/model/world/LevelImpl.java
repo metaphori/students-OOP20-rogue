@@ -1,21 +1,22 @@
 package OOP20.rogue.model.world;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.stream.IntStream;
+
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.HashBiMap;
+import com.google.common.collect.Table;
 
 import OOP20.rogue.model.Entity;
 
 public class LevelImpl implements Level {
     private final int height;
     private final int width;
-    private List<List<Tile>> tileMap = new ArrayList<>();
-    private Map<Coordinates, Entity> entityMap = new HashMap<>();
+    private Table<Integer, Integer, Tile> levelMap = HashBasedTable.create();
+    private BiMap<Tile, Entity> entityMap = HashBiMap.create();
 
     public final Tile getTile(final Coordinates c) {
-        return tileMap.get(c.getX()).get(c.getY());
+        return this.levelMap.get(c.getX(), c.getY());
     }
 
     public final void moveEntity(final Entity e, final Coordinates c) throws CannotMoveException {
@@ -27,18 +28,16 @@ public class LevelImpl implements Level {
             throw new CannotMoveException("Wall!");
         }
 
-        entityMap.remove(e.getPosition());
-        entityMap.put(c, e);
+        entityMap.inverse().remove(e);
+        entityMap.put(this.getTile(c), e);
     }
 
     // TODO
     private void generate() {
         IntStream.range(0, this.height).forEach(x -> {
-            List<Tile> currentRow = new ArrayList<>();
             IntStream.range(0, this.width).forEach(y -> {
-                currentRow.add(new TileImpl(Material.BRICKS, false));
+                this.levelMap.put(x, y, new TileImpl(Material.BRICKS, false));
             });
-            tileMap.add(currentRow);
         });
     };
 
