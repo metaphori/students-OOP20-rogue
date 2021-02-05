@@ -1,10 +1,11 @@
 package model.creature;
 
 /**
- * An interface modeling game Creature.
+ * An interface modeling a game Creature: Monsters or Player.
  *
+ * @param <L> the creature's life
  */
-public interface Creature {
+public interface Creature<L extends Life> {
 
     /**
      * TODO to finish.
@@ -16,6 +17,6 @@ public interface Creature {
      * 
      * @return the creature's life
      */
-    Life getLife();
+    L getLife();
 
 }
