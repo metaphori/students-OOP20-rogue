@@ -8,7 +8,7 @@ public final class PlayerLifeTest {
 
     @org.junit.Before
     public void init() {
-        pl = new PlayerLifeImpl(50, 0, 5, 25);
+        pl = new PlayerLifeImpl.Builder().initHealthPoints(50).initStrength(5).initFood(25).build();
     }
 
     @org.junit.Test
