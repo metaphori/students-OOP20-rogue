@@ -6,4 +6,6 @@ package model.creature;
  */
 public interface Player extends Creature {
 
+    // TODO
+
 }
