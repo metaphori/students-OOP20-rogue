@@ -53,7 +53,7 @@ public enum ArmorType {
     /**
      * @return the armor's AC value.
      */
-    public int getAC() {
+    protected int getAC() {
         return this.ac;
     }
 
