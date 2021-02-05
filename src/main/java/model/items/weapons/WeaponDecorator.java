@@ -8,9 +8,9 @@ import model.creature.Player;
  */
 public abstract class WeaponDecorator implements Weapon {
 
-    private final BaseWeapon weapon;
+    private final Weapon weapon;
 
-    public WeaponDecorator(final BaseWeapon weapon) {
+    public WeaponDecorator(final Weapon weapon) {
         this.weapon = weapon;
     }
 
