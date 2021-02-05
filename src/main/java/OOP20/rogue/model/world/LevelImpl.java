@@ -1,77 +1,40 @@
 package OOP20.rogue.model.world;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.IntStream;
 
-enum Material {
-    BRICKS, DIRT, LADDER
-}
+import OOP20.rogue.model.Entity;
 
 public class LevelImpl implements Level {
-    private class TileImpl implements Tile {
-        private class EntityImpl implements Entity {
-            public Coordinates getPosition() {
-                return TileImpl.this.getPosition();
-            }
+    private final int height;
+    private final int width;
+    private List<List<Tile>> tileMap = new ArrayList<>();
+    private Map<Coordinates, Entity> entityMap = new HashMap<>();
 
-            public void setPosition(final int x, final int y) throws CannotMoveException {
-                if (LevelImpl.this.getTile(x, y).getEntity() != null) {
-                    throw new CannotMoveException();
-                }
-
-                TileImpl.this.setEntity(null);
-                LevelImpl.this.getTile(x, y).setEntity(this);
-            }
-        }
-
-        private Material material;
-        private boolean isWall;
-        private Entity entity;
-
-        public Entity getEntity() {
-            return this.entity;
-        }
-
-        public void setEntity(final Entity entity) {
-            this.entity = entity;
-        }
-
-        public Coordinates getPosition() {
-            return LevelImpl.this.getPosition(this);
-        }
-
-        TileImpl(final Material material, final boolean isWall) {
-            this.material = material;
-            this.isWall = isWall;
-        }
-
-        public String toString() {
-            return this.material + ": " + this.isWall;
-        }
+    public final Tile getTile(final Coordinates c) {
+        return tileMap.get(c.getX()).get(c.getY());
     }
 
-    /*
-     * 0 | 1 | 2 | 3
-     * 4 | 5 | 6 | 7
-     * 8 | 9 ...
-     */
-    private Vector<Tile> tileMatrix = new Vector<>();
-    private int height;
-    private int width;
+    public final void moveEntity(final Entity e, final Coordinates c) throws CannotMoveException {
+        if (entityMap.get(c) != null) {
+            throw new CannotMoveException("There's already an entity in this position!");
+        }
 
-    public final Tile getTile(final int x, final int y) {
-        return tileMatrix.get(x * y);
-    }
-
-    public final Coordinates getPosition(final Tile t) {
-        int index = tileMatrix.indexOf(t);
-        return new Coordinates(index % this.width, index % this.height);
+        entityMap.remove(e.getPosition());
+        entityMap.put(c, e);
     }
 
     // TODO
     private void generate() {
-        IntStream.range(0, this.height * this.width).forEach(index -> {
-            tileMatrix.add(new TileImpl(Material.BRICKS, false));
+        IntStream.range(0, this.height).forEach(x -> {
+            List<Tile> currentRow = new ArrayList<>();
+            IntStream.range(0, this.width).forEach(y -> {
+                currentRow.add(new TileImpl(Material.BRICKS, false));
+            });
+            tileMap.add(currentRow);
         });
     };
 

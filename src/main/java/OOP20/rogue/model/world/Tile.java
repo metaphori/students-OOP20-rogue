@@ -1,11 +1,7 @@
 package OOP20.rogue.model.world;
 
 public interface Tile {
-    Entity getEntity();
+    Material getMaterial();
 
-    void setEntity(Entity entity);
-
-    Coordinates getPosition();
-
-    String toString();
+    boolean isWall();
 }
