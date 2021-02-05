@@ -1,10 +1,16 @@
 package model.creature;
 
-public abstract class AbstractCreature implements Creature {
+/**
+ * An abstract implementation for {@link Creature} common either for 
+ * Monsters and player.
+ *
+ * @param <L> the creature's life
+ */
+public abstract class AbstractCreature<L extends Life> implements Creature<L> {
 
-    private final Life life;
+    private final L life;
 
-    protected AbstractCreature(final Life life) {
+    protected AbstractCreature(final L life) {
         this.life = life;
     }
 
@@ -21,7 +27,7 @@ public abstract class AbstractCreature implements Creature {
      * {@inheritDoc}
      */
     @Override
-    public Life getLife() {
+    public L getLife() {
         return this.life;
     }
 
