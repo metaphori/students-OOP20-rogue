@@ -36,8 +36,7 @@ public class BaseWeapon implements Weapon {
      */
     @Override
     public int getPrecision() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.weapon.getAccuracy();
     }
 
 }
