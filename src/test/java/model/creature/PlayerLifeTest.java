@@ -1,6 +1,8 @@
 package model.creature;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public final class PlayerLifeTest {
 
@@ -19,9 +21,9 @@ public final class PlayerLifeTest {
         pl.powerUp(25);
         pl.hurt(60);
         assertEquals(25, pl.getHealthPoints());
-        assertEquals(false, pl.isDead());
+        assertFalse(pl.isDead());
         pl.hurt(25);
-        assertEquals(true, pl.isDead());
+        assertTrue(pl.isDead());
     }
 
     @org.junit.Test
@@ -39,7 +41,7 @@ public final class PlayerLifeTest {
         assertEquals(8, pl.getStrength());
         pl.addStrength(5);
         assertEquals(13, pl.getStrength());
-        assertEquals(false, pl.isDead());
+        assertFalse(pl.isDead());
     }
 
     @org.junit.Test
@@ -51,7 +53,7 @@ public final class PlayerLifeTest {
         pl.updateFood(-28);
         pl.updateFood(2);
         assertEquals(0, pl.getFood());
-        assertEquals(true, pl.isDead());
+        assertTrue(pl.isDead());
     }
 
 }

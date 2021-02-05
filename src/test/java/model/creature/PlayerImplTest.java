@@ -1,6 +1,8 @@
 package model.creature;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class PlayerImplTest {
 
@@ -22,17 +24,17 @@ public class PlayerImplTest {
 
         pl.getLife().hurt(49);
         assertEquals(1, pl.getLife().getHealthPoints());
-        assertEquals(false, pl.getLife().isDead());
+        assertFalse(pl.getLife().isDead());
         pl.getLife().increaseExperience(10);
         assertEquals(10, pl.getLife().getExperience());
         pl.getLife().updateFood(-4);
-        assertEquals(false, pl.getLife().isDead());
+        assertFalse(pl.getLife().isDead());
         assertEquals(46, pl.getLife().getFood());
         pl.getLife().updateFood(-46);
         pl.getLife().updateFood(+3);
         pl.getLife().updateFood(-2);
         pl.getLife().updateFood(-1);
-        assertEquals(true, pl.getLife().isDead());
+        assertTrue(pl.getLife().isDead());
     }
 
     @org.junit.Test
@@ -48,17 +50,17 @@ public class PlayerImplTest {
 
         pl.getLife().hurt(2);
         assertEquals(1, pl.getLife().getHealthPoints());
-        assertEquals(false, pl.getLife().isDead());
+        assertFalse(pl.getLife().isDead());
         pl.getLife().increaseExperience(10);
         assertEquals(30, pl.getLife().getExperience());
         pl.getLife().updateFood(-4);
-        assertEquals(false, pl.getLife().isDead());
+        assertFalse(pl.getLife().isDead());
         assertEquals(6, pl.getLife().getFood());
         pl.getLife().updateFood(-6);
         pl.getLife().updateFood(+3);
         pl.getLife().updateFood(-2);
         pl.getLife().updateFood(-1);
-        assertEquals(true, pl.getLife().isDead());
+        assertTrue(pl.getLife().isDead());
     }
 
     @org.junit.Test(expected = IllegalStateException.class)
@@ -67,7 +69,6 @@ public class PlayerImplTest {
         final PlayerLifeImpl.Builder lifeBuilder = new PlayerLifeImpl.Builder();
         lifeBuilder.initExperience(20).initFood(10).initStrength(50).initHealthPoints(3).build();
         lifeBuilder.build();
-
     }
 
 }
