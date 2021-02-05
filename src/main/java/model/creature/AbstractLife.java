@@ -1,5 +1,9 @@
 package model.creature;
 
+/**
+ * A generic implementation for a creature {@link Life}.
+ *
+ */
 public abstract class AbstractLife implements Life {
 
     private int healthPoints;
