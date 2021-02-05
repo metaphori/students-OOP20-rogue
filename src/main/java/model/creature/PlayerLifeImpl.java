@@ -5,6 +5,7 @@ public class PlayerLifeImpl extends AbstractLife implements PlayerLife {
     private int strength;
     private int leftFood;
 
+    // TODO
     public PlayerLifeImpl(final int healthPoints, final int experience, final int strength, final int food) {
         super(healthPoints, experience);
         this.strength = strength;
@@ -59,4 +60,11 @@ public class PlayerLifeImpl extends AbstractLife implements PlayerLife {
         return this.leftFood;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isDead() {
+        return super.isDead() || this.leftFood == 0;
+    }
 }
