@@ -17,10 +17,11 @@ public interface Weapon extends Item {
     }
 
     /**
-     * 
+     * @param use 
+     *          how the Weapon is used (by hand or thrown)
      * @return the weapon's damage
      */
-    int getDamage();
+    int getDamage(Use use);
 
     /**
      * 
