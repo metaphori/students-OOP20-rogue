@@ -79,7 +79,7 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
         private int food = FOOD;
         private int experience = EXPERIENCE;
         private int strength = STRENGTH;
-        private boolean consumed = false;
+        private boolean consumed;
 
         /**
          * Initialize the food.
