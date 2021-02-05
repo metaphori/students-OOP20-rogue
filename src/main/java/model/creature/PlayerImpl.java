@@ -1,11 +1,11 @@
 package model.creature;
 
-public class PlayerImpl extends AbstractCreature implements Player {
+public class PlayerImpl extends AbstractCreature<PlayerLife> implements Player {
 
-    // TODO Weapon, Armor, Inventory.
-
-    protected PlayerImpl(Life life) {
+    public PlayerImpl(final PlayerLife life) {
         super(life);
     }
+
+    // TODO
 
 }
