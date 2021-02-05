@@ -1,12 +1,11 @@
 package model.creature;
 
-public class PlayerLifeImpl extends AbstractLife implements PlayerLife {
+public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
 
     private int strength;
     private int leftFood;
 
-    // TODO
-    public PlayerLifeImpl(final int healthPoints, final int experience, final int strength, final int food) {
+    private PlayerLifeImpl(final int healthPoints, final int experience, final int strength, final int food) {
         super(healthPoints, experience);
         this.strength = strength;
         this.leftFood = food;
@@ -66,5 +65,72 @@ public class PlayerLifeImpl extends AbstractLife implements PlayerLife {
     @Override
     public boolean isDead() {
         return super.isDead() || this.leftFood == 0;
+    }
+
+    public static class Builder {
+
+        // TODO review constants!
+        private static final int HEALTH_POINTS = 50;
+        private static final int FOOD = 50;
+        private static final int EXPERIENCE = 0;
+        private static final int STRENGTH = 0;
+
+        private int healthPoints = HEALTH_POINTS;
+        private int food = FOOD;
+        private int experience = EXPERIENCE;
+        private int strength = STRENGTH;
+        private boolean consumed = false;
+
+        /**
+         * Initialize the food.
+         * @param food
+         *      the initial food quantity
+         * @return this Builder for chaining
+         */
+        public Builder initFood(final int food) {
+            this.food = food;
+            return this;
+        }
+
+        /**
+         * Initialize the player experience.
+         * @param experience
+         *      the initial player experience
+         * @return this Builder for chaining
+         */
+        public Builder initExperience(final int experience) {
+            this.experience = experience;
+            return this;
+        }
+
+        /**
+         * Initialize the player health points.
+         * @param healthPoints
+         *      the initial player health points.
+         * @return this Builder for chaining
+         */
+        public Builder initHealthPoints(final int healthPoints) {
+            this.healthPoints = healthPoints;
+            return this;
+        }
+
+        /**
+         * Initialize the player experience.
+         * @param strength
+         *      the initial player strength
+         * @return this Builder for chaining
+         */
+        public Builder initStrength(final int strength) {
+            this.strength = strength;
+            return this;
+        }
+
+        public final PlayerLifeImpl build() {
+            if (consumed) {
+                throw new IllegalStateException("The builder can only be used once");
+            }
+            consumed = true;
+            return new PlayerLifeImpl(healthPoints, experience, strength, food);
+        }
     }
 }
