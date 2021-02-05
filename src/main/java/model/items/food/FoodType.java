@@ -9,9 +9,33 @@ package model.items.food;
 public enum FoodType {
 
     /** 
-     * Foods list.
+     * Apple.
      */
-    APPLE(5), CAKE(10), SOUP(8), HAMBURGER(12), CHEESE(4), STEAK(8), BREAD(6);
+    APPLE(5),
+    /**
+     * Cake.
+     */
+    CAKE(10),
+    /**
+     * Soup.
+     */
+    SOUP(8),
+    /**
+     * Hamburger.
+     */
+    HAMBURGER(12),
+    /**
+     * Cheese.
+     */
+    CHEESE(4),
+    /**
+     * Steak.
+     */
+    STEAK(8),
+    /**
+     * Bread.
+     */
+    BREAD(6);
 
     /*
      * The higher the starvationValue of a food is, the longer the player's

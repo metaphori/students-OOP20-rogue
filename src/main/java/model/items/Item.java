@@ -4,6 +4,6 @@ import model.creature.Player;
 
 public interface Item {
 
-    boolean use(Player creature);
+    boolean use(Player player);
 
 }
