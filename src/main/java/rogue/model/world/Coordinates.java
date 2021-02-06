@@ -4,7 +4,7 @@ enum Direction {
     NORTH, EAST, SOUTH, WEST
 }
 
-public class Coordinates {
+class Coordinates {
     private int x, y;
 
     public final int getX() {

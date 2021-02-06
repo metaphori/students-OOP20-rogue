@@ -30,7 +30,7 @@ class CannotRemoveException extends Exception {
     }
 }
 
-public class LevelImpl implements Level {
+class LevelImpl implements Level {
     private final int height;
     private final int width;
     private final BiMap<Tile, Coordinates> levelMap = HashBiMap.create();
