@@ -23,23 +23,27 @@ public class Coordinates {
         this.y = y;
     }
 
-    public final void shift(final Direction direction, final int howMuch) {
+    public final Coordinates shift(final Direction direction, final int howMuch) {
+        Coordinates c = new Coordinates(this.x, this.y);
+
         switch (direction) {
             case NORTH:
-                this.y -= howMuch;
+                c.y -= howMuch;
                 break;
             case EAST:
-                this.x += howMuch;
+                c.x += howMuch;
                 break;
             case SOUTH:
-                this.y += howMuch;
+                c.y += howMuch;
                 break;
             case WEST:
-                this.y -= howMuch;
+                c.y -= howMuch;
                 break;
             default:
                 break;
         }
+
+        return c;
     }
 
     public Coordinates(final int x, final int y) {

@@ -1,9 +1,7 @@
 package rogue.model.world;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -37,8 +35,8 @@ class CannotRemoveException extends Exception {
 public class LevelImpl implements Level {
     private final int height;
     private final int width;
-    private Map<Tile, Coordinates> levelMap = new HashMap<>();
-    private BiMap<Tile, Entity> entityMap = HashBiMap.create();
+    private final BiMap<Tile, Coordinates> levelMap = HashBiMap.create();
+    private final BiMap<Tile, Entity> entityMap = HashBiMap.create();
 
     public final Stream<Tile> getTileStream() {
         List<Tile> ts = new ArrayList<>();
@@ -62,6 +60,19 @@ public class LevelImpl implements Level {
         }
 
         entityMap.put(t, e);
+    }
+
+    public final void shiftEntity(final Entity e, final Direction d, final int i) throws CannotMoveException {
+        if (!entityMap.containsValue(e)) {
+            throw new CannotMoveException("There's already an entity in this position!");
+        }
+
+        Tile currentTile = entityMap.inverse().get(e);
+        Coordinates currentCoordinates = levelMap.get(currentTile);
+        Coordinates finalCoordinates = currentCoordinates.shift(d, i);
+        Tile finalTile = levelMap.inverse().get(finalCoordinates);
+
+        moveEntity(e, finalTile);
     }
 
     public final void removeEntity(final Entity e) throws CannotRemoveException {
