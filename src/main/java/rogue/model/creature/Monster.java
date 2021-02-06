@@ -1,39 +1,47 @@
 package rogue.model.creature;
 
+import javafx.util.Pair;
+
 /**
  * An interface modeling the enemy/monster.
  *
  */
-public interface Monster extends Creature {
+public interface Monster extends Creature<MonsterLife> {
 	
-	 /**
+     /**
      * 
-     * @return the Class Armor of the monster
+     * @return the type of the monster
      */	
-	int getCA();
+     MonsterType getMonsterType();	
 	
-	 /**
+     /**
+     * 
+     * @return the Armor Class of the monster
+     */	
+     int getAC();
+	
+     /**
      * 
      * @return the maximum damage the monster can do the minimum is 1 
      */
-	int getMaxDamage();	 
+     Pair<Integer, Integer> getDamage();
 	
-	/**
-     * 
-     * @return the amount of money of the monster 
-     */
-	int getMoney();
-	
-	/**
-     * 
-     * @return the monster's item
-     */
-	//Item getItem();
-	
-	/**
+     /**
      * 
      * @return the monster's special skill
      */
-	Special getSpecial();
+     Special getSpecial();
+	
+     /**
+     * 
+     * @return the amount of money of the monster 
+     */
+     int getMoney();
+	
+     /**
+     * 
+     * @return the monster's item
+     */
+     //Item getItem();
 		
 }
