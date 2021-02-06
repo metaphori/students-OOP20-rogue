@@ -46,7 +46,7 @@ class Coordinates {
         return c;
     }
 
-    public Coordinates(final int x, final int y) {
+    Coordinates(final int x, final int y) {
         this.x = x;
         this.y = y;
     }
