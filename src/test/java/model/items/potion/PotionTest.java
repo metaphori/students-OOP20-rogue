@@ -21,6 +21,7 @@ public class PotionTest {
 
     private static final String TOO_HIGH = "too high";
     private static final String TOO_LOW = "too low";
+
     @Test
     public void testPotionI() {
         final int test = PotionType.POTION_I.getHpValue();
