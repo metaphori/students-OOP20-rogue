@@ -1,56 +1,73 @@
 package model.items.scroll;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import javafx.util.Pair;
 
+/**
+ * Represents an enumeration for declaring scroll types.
+ * 
+ * Each scroll has type can add or remove strength to the player.
+ * The first field keeps track of the effect of the scroll (Gain or lose strength)
+ * The second filed is the number of turns the effect will last.
+ * The last field is the amount of strength added or removed, it's a pair
+ * containing the minimum and maximum, a random number between the two will
+ * be randomly picked.
+ */
 public enum ScrollType {
 
     /**
      * Scroll I, increases the player's strength by a small
      * amount and lasts for 15 turns.
      */
-    SCROLL_I(new Pair<>(2, 15)),
+    SCROLL_I(Scroll.ScrollEffect.GAIN, 15, new Pair<>(1, 3)),
     /**
      * Scroll II, increases the player's strength by a small
      * amount and lasts for 25 turns. 
      */
-    SCROLL_II(new Pair<>(2, 25)),
+    SCROLL_II(Scroll.ScrollEffect.GAIN, 25, new Pair<>(1, 3)),
     /**
      * Scroll III, increases the player's strength by a medium
      * amount and lasts for 15 turns.
      */
-    SCROLL_III(new Pair<>(4, 15)),
+    SCROLL_III(Scroll.ScrollEffect.GAIN, 15, new Pair<>(3, 5)),
     /**
      * Scroll IV, increases the player's strength by a medium
      * amount and lasts for 25 turns.
      */
-    SCROLL_IV(new Pair<>(4, 25)),
+    SCROLL_IV(Scroll.ScrollEffect.GAIN, 25, new Pair<>(3, 5)),
     /**
      * Scroll V, increases the player's strength by a high
      * amount and lasts for 15 turns.
      */
-    SCROLL_V(new Pair<>(7, 15)),
+    SCROLL_V(Scroll.ScrollEffect.GAIN, 15, new Pair<>(5, 7)),
     /**
      * Corrupt Scroll I, decreases the player's strength by
      * a small amount and lasts for 30 turns.
      */
-    CORRUPT_SCROLL_I(new Pair<>(-2, 30)),
+    CORRUPT_SCROLL_I(Scroll.ScrollEffect.LOSE, 30, new Pair<>(1, 3)),
     /**
      * Corrupt Scroll II, decreases the player's strength by
      * a medium amount and lasts for 20 turns.
      */
-    CORRUPT_SCROLL_II(new Pair<>(-4, 20));
+    CORRUPT_SCROLL_II(Scroll.ScrollEffect.LOSE, 20, new Pair<>(3, 5));
 
-    private final Pair<Integer, Integer> scrollValues;
+    private final Scroll.ScrollEffect effect;
+    private final int effectDuration;
+    private final Pair<Integer, Integer> scrollValue;
 
-    ScrollType(final Pair<Integer, Integer> scrollValues) {
-        this.scrollValues = scrollValues;
+    ScrollType(final Scroll.ScrollEffect effect, final int effectDuration, final Pair<Integer, Integer> scrollValue) {
+        this.effect = effect;
+        this.effectDuration = effectDuration;
+        this.scrollValue = scrollValue;
     }
 
     public int getEffectValue() {
-        return this.scrollValues.getKey();
+        return ThreadLocalRandom.current().nextInt(this.scrollValue.getKey(), this.scrollValue.getValue() + 1) 
+                * (this.effect.equals(Scroll.ScrollEffect.GAIN) ? 1 : -1);
     }
 
     public int getEffectDuration() {
-        return this.scrollValues.getValue();
+        return this.effectDuration;
     }
 }
