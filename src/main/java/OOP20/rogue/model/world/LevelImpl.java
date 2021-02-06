@@ -1,23 +1,19 @@
 package OOP20.rogue.model.world;
 
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.IntStream;
 
 import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.HashBiMap;
-import com.google.common.collect.Table;
 
 import OOP20.rogue.model.Entity;
 
 public class LevelImpl implements Level {
     private final int height;
     private final int width;
-    private Table<Integer, Integer, Tile> levelMap = HashBasedTable.create();
+    private Map<Tile, Coordinates> levelMap = new TreeMap<>();
     private BiMap<Tile, Entity> entityMap = HashBiMap.create();
-
-    public final Tile getTile(final Coordinates c) {
-        return this.levelMap.get(c.getX(), c.getY());
-    }
 
     public final void moveEntity(final Entity e, final Tile t) throws CannotMoveException {
         if (entityMap.get(t) != null) {
@@ -36,11 +32,17 @@ public class LevelImpl implements Level {
         entityMap.put(t, e);
     }
 
+    public final int distance(final Tile t1, final Tile t2) {
+        Coordinates c1 = levelMap.get(t1);
+        Coordinates c2 = levelMap.get(t2);
+        return Math.abs(c1.getX() - c2.getX()) + Math.abs(c1.getY() - c2.getY());
+    }
+
     // TODO
     private void generate() {
         IntStream.range(0, this.height).forEach(x -> {
             IntStream.range(0, this.width).forEach(y -> {
-                this.levelMap.put(x, y, new TileImpl(Material.BRICKS, false));
+                this.levelMap.put(new TileImpl(Material.BRICKS, false), new Coordinates(x, y));
             });
         });
     };
