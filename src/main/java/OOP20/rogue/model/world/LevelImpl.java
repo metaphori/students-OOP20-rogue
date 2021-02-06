@@ -12,6 +12,28 @@ import com.google.common.collect.HashBiMap;
 
 import OOP20.rogue.model.Entity;
 
+class CannotMoveException extends Exception {
+    private static final long serialVersionUID = 1484670650603806971L;
+
+    public CannotMoveException() {
+    }
+
+    public CannotMoveException(final String message) {
+        super(message);
+    }
+}
+
+class CannotRemoveException extends Exception {
+    private static final long serialVersionUID = -5155914335574994788L;
+
+    public CannotRemoveException() {
+    }
+
+    public CannotRemoveException(final String message) {
+        super(message);
+    }
+}
+
 public class LevelImpl implements Level {
     private final int height;
     private final int width;
@@ -40,6 +62,14 @@ public class LevelImpl implements Level {
         }
 
         entityMap.put(t, e);
+    }
+
+    public final void removeEntity(final Entity e) throws CannotRemoveException {
+        if (!entityMap.containsValue(e)) {
+            throw new CannotRemoveException("Entity already absent!");
+        }
+
+        entityMap.inverse().remove(e);
     }
 
     public final int distance(final Tile t1, final Tile t2) {
