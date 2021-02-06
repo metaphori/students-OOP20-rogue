@@ -1,7 +1,5 @@
 package rogue.model.world;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -39,10 +37,10 @@ public class LevelImpl implements Level {
     private final BiMap<Tile, Entity> entityMap = HashBiMap.create();
 
     public final Stream<Tile> getTileStream() {
-        List<Tile> ts = new ArrayList<>();
+        Stream.Builder<Tile> ts = Stream.builder();
         this.levelMap.forEach((tile, coords) -> ts.add(tile));
 
-        return ts.stream();
+        return ts.build();
     }
 
     public final void moveEntity(final Entity e, final Tile t) throws CannotMoveException {
