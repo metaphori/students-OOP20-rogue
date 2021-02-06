@@ -4,7 +4,7 @@ import model.items.Item;
 
 public interface Potion extends Item {
 
-    enum Effect {
+    enum PotionEffect {
         HEAL, HURT;
     }
 
