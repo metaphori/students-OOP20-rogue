@@ -96,7 +96,7 @@ class LevelImpl implements Level {
         });
     };
 
-    public LevelImpl(final int height, final int width) {
+    LevelImpl(final int height, final int width) {
         this.height = height;
         this.width = width;
         this.generate();
