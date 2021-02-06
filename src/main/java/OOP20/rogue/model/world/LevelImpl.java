@@ -1,8 +1,11 @@
 package OOP20.rogue.model.world;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
@@ -12,8 +15,15 @@ import OOP20.rogue.model.Entity;
 public class LevelImpl implements Level {
     private final int height;
     private final int width;
-    private Map<Tile, Coordinates> levelMap = new TreeMap<>();
+    private Map<Tile, Coordinates> levelMap = new HashMap<>();
     private BiMap<Tile, Entity> entityMap = HashBiMap.create();
+
+    public final Stream<Tile> getTileStream() {
+        List<Tile> ts = new ArrayList<>();
+        this.levelMap.forEach((tile, coords) -> ts.add(tile));
+
+        return ts.stream();
+    }
 
     public final void moveEntity(final Entity e, final Tile t) throws CannotMoveException {
         if (entityMap.get(t) != null) {
