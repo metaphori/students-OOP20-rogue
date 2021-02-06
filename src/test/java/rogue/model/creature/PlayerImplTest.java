@@ -4,12 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import rogue.model.creature.PlayerImpl;
-import rogue.model.creature.PlayerLifeImpl;
-
 public class PlayerImplTest {
 
-    private PlayerImpl pl;
+    private Player pl;
 
     @org.junit.Before
     public void init() {
@@ -18,7 +15,7 @@ public class PlayerImplTest {
     @org.junit.Test
     public void testDefaultsLife() {
         // with default configs
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
 
         assertEquals(50, pl.getLife().getHealthPoints());
         assertEquals(0, pl.getLife().getExperience());
@@ -44,7 +41,7 @@ public class PlayerImplTest {
     public void testExplicitLife() {
         // with default configs
         final PlayerLifeImpl.Builder lifeBuilder = new PlayerLifeImpl.Builder();
-        pl = new PlayerImpl(lifeBuilder.initExperience(20).initFood(10).initStrength(50).initHealthPoints(3).build());
+        pl = new PlayerFactoryImpl().createByLife(lifeBuilder.initExperience(20).initFood(10).initStrength(50).initHealthPoints(3).build());
 
         assertEquals(3, pl.getLife().getHealthPoints());
         assertEquals(20, pl.getLife().getExperience());
