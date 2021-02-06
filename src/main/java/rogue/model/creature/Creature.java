@@ -1,11 +1,13 @@
 package rogue.model.creature;
 
+import rogue.model.Entity;
+
 /**
  * An interface modeling a game Creature: Monsters or Player.
  *
  * @param <L> the creature's life
  */
-public interface Creature<L extends Life> {
+public interface Creature<L extends Life> extends Entity {
 
     /**
      * TODO to finish.
