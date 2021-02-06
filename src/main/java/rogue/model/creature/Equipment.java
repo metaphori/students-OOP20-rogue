@@ -1,5 +1,7 @@
 package rogue.model.creature;
 
+import java.util.Optional;
+
 import rogue.model.items.armor.Armor;
 import rogue.model.items.rings.Ring;
 import rogue.model.items.weapons.Weapon;
@@ -40,7 +42,7 @@ public interface Equipment {
      * 
      * @return the ring currently in use
      */
-    Ring getRing();
+    Optional<Ring> getRing();
 
     /**
      * Try to wear a ring. Note that only one ring per time could be worn.
