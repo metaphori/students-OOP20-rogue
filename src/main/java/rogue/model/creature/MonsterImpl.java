@@ -1,22 +1,14 @@
 package rogue.model.creature;
 
+import javafx.util.Pair;
+
+
 public class MonsterImpl implements Monster{
 	
-	 private final int ca;
-	 private final int maxDamage;
-	 private final Life life;
-	 private final int money;
-	// private final Item item;
-	 private final Special special;	
+	private final MonsterType type;	
 	
-	
-	public MonsterImpl(int ca, int maxDamage, Life life, int money/*, Item item*/, Special special) {
-		this.ca = ca;
-		this.maxDamage = maxDamage;
-		this.life = life;
-		this.money = money;
-	//	this.item = item;
-		this.special = special;
+	public MonsterImpl(MonsterType type) {
+		this.type = type;
 	}
 
 	@Override
@@ -26,39 +18,45 @@ public class MonsterImpl implements Monster{
 	}
 
 	@Override
-	public Life getLife() {
-		
-		return this.life;
+	public MonsterLife getLife() {
+		// TODO Auto-generated method stub
+		return this.type.getLife();
 	}
 
 	@Override
-	public int getCA() {
+	public MonsterType getMonsterType() {
 		// TODO Auto-generated method stub
-		return this.ca;
+		return this.type;
 	}
 
 	@Override
-	public int getMaxDamage() {
+	public int getAC() {
 		// TODO Auto-generated method stub
-		return this.maxDamage;
+		return this.type.getAC();
+	}
+
+	@Override
+	public Pair<Integer, Integer> getDamage() {
+		// TODO Auto-generated method stub
+		return this.type.getDamage();
+	}
+
+	@Override
+	public Special getSpecial() {
+		// TODO Auto-generated method stub
+		return this.type.getSpecial();
 	}
 
 	@Override
 	public int getMoney() {
 		// TODO Auto-generated method stub
-		return this.money;
+		return this.type.getMoney();
 	}
-
-	/*@Override
-	public Item getItem() {
-		// TODO Auto-generated method stub
-		return this.money;
-	}*/
-
-	@Override
-	public Special getSpecial() {
-		// TODO Auto-generated method stub
-		return this.special;
+	
+	public int attackDamage() {	
+		
+		return (int)(Math.random()*(this.getDamage().getValue() - this.getDamage().getKey()) + this.getDamage().getKey());		
 	}
+	
 
 }
