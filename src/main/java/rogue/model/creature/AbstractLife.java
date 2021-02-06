@@ -1,4 +1,4 @@
-package model.creature;
+package rogue.model.creature;
 
 /**
  * A generic implementation for a creature {@link Life}.

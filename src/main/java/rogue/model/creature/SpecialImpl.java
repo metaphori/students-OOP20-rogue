@@ -1,4 +1,4 @@
-package model.creature;
+package rogue.model.creature;
 
 public class SpecialImpl implements Special{
 	

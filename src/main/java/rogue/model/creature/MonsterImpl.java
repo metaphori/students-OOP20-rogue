@@ -1,4 +1,4 @@
-package model.creature;
+package rogue.model.creature;
 
 public class MonsterImpl implements Monster{
 	

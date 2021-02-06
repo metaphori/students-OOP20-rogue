@@ -1,4 +1,4 @@
-package model.creature;
+package rogue.model.creature;
 
 /**
  * An interface modeling a specific {@link Life} for the {@link Player}.

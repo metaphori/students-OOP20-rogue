@@ -1,4 +1,4 @@
-package model.creature;
+package rogue.model.creature;
 
 /**
  * An abstract implementation for {@link Creature} common either for 

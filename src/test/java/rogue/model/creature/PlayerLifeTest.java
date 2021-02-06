@@ -1,8 +1,11 @@
-package model.creature;
+package rogue.model.creature;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import rogue.model.creature.PlayerLife;
+import rogue.model.creature.PlayerLifeImpl;
 
 public final class PlayerLifeTest {
 

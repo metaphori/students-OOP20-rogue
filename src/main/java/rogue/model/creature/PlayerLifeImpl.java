@@ -1,4 +1,4 @@
-package model.creature;
+package rogue.model.creature;
 
 public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
 

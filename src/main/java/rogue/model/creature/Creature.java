@@ -1,4 +1,4 @@
-package model.creature;
+package rogue.model.creature;
 
 /**
  * An interface modeling a game Creature: Monsters or Player.

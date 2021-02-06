@@ -1,4 +1,4 @@
-package model.creature;
+package rogue.model.creature;
 
 public interface Special {
 	
