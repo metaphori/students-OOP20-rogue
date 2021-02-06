@@ -19,17 +19,21 @@ public class LevelImpl implements Level {
         return this.levelMap.get(c.getX(), c.getY());
     }
 
-    public final void moveEntity(final Entity e, final Coordinates c) throws CannotMoveException {
-        if (entityMap.get(c) != null) {
+    public final void moveEntity(final Entity e, final Tile t) throws CannotMoveException {
+        if (entityMap.get(t) != null) {
             throw new CannotMoveException("There's already an entity in this position!");
         }
 
-        if (getTile(c).isWall()) {
+        if (t.isWall()) {
             throw new CannotMoveException("Wall!");
         }
 
-        entityMap.inverse().remove(e);
-        entityMap.put(this.getTile(c), e);
+        // remove entity if already present
+        if (entityMap.containsValue(e)) {
+            entityMap.inverse().remove(e);
+        }
+
+        entityMap.put(t, e);
     }
 
     // TODO
