@@ -1,4 +1,4 @@
-package OOP20.rogue.model.world;
+package rogue.model.world;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
-import OOP20.rogue.model.Entity;
+import rogue.model.Entity;
 
 class CannotMoveException extends Exception {
     private static final long serialVersionUID = 1484670650603806971L;

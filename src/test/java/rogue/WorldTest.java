@@ -1,11 +1,11 @@
-package OOP20.rogue;
+package rogue;
 
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
-import OOP20.rogue.model.world.World;
-import OOP20.rogue.model.world.WorldImpl;
+import rogue.model.world.World;
+import rogue.model.world.WorldImpl;
 
 public class WorldTest {
     @Test public void testWorldCreation() {

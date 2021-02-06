@@ -1,4 +1,4 @@
-package OOP20.rogue.model;
+package rogue.model;
 
 public interface Entity {
 }

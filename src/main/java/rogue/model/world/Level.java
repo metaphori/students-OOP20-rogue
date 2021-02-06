@@ -1,8 +1,8 @@
-package OOP20.rogue.model.world;
+package rogue.model.world;
 
 import java.util.stream.Stream;
 
-import OOP20.rogue.model.Entity;
+import rogue.model.Entity;
 
 public interface Level {
     Stream<Tile> getTileStream();

@@ -1,4 +1,4 @@
-package OOP20.rogue.model.world;
+package rogue.model.world;
 
 public interface Tile {
     Material getMaterial();
