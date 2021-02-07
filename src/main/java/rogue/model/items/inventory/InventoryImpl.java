@@ -54,7 +54,11 @@ public class InventoryImpl implements Inventory {
                 final Item toUse = inventory.get(index).getKey().get();
                 /*
                  * Use the item, check if correctly used.
+                 * if the item is scroll item, activate it.
                  */
+                if (Item.class.equals(Scroll.class)) {
+                    activateScroll((Scroll) toUse);
+                }
                 if (!toUse.use(this.player)) {
                     /*
                      * If not correctly used the item can't be consumed,
