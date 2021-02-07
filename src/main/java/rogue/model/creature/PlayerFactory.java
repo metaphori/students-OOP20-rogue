@@ -2,7 +2,6 @@ package rogue.model.creature;
 
 /**
  * An interface modeling a factory for the {@link Player}.
- * 
  */
 public interface PlayerFactory {
 

@@ -2,7 +2,7 @@ package rogue.model.creature;
 
 /**
  * An implementation for a {@link PlayerLife}. 
- * Use the pattern builder in order to create a new instance (even custom).
+ * Uses the pattern builder in order to create a new instance (even custom).
  */
 public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
 

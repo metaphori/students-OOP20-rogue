@@ -5,6 +5,10 @@ import java.util.Objects;
 import rogue.model.items.Inventory;
 import rogue.model.items.InventoryImpl;
 
+/** 
+ * An implementation for {@link PlayerFactory} which encapsulates the 
+ * implementation of {@link Player}.
+ */
 public class PlayerFactoryImpl implements PlayerFactory {
 
     private class PlayerImpl extends AbstractCreature<PlayerLife> implements Player {

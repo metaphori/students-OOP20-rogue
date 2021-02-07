@@ -2,7 +2,6 @@ package rogue.model.creature;
 
 /**
  * A generic implementation for a creature {@link Life}.
- *
  */
 public abstract class AbstractLife implements Life {
 
@@ -31,7 +30,7 @@ public abstract class AbstractLife implements Life {
     }
 
     /**
-     * 
+     * Set the health points to the given value.
      * @param healthPoints
      *          the healthPoints
      */
@@ -48,7 +47,7 @@ public abstract class AbstractLife implements Life {
     }
 
     /**
-     * 
+     * Set the experience to the given value.
      * @param experience
      *          the experience
      */
