@@ -34,8 +34,17 @@ public class InventoryImpl implements Inventory {
     private static final int INVENTORY_SIZE = 20;
     private static final int ITEM_AMOUNT_MAX = 10;
 
+    /**
+     * Active scroll container.
+     */
     private Pair<Optional<Scroll>, Integer> scroll;
+    /**
+     * Player's to which apply the item's use.
+     */
     private final Player player;
+    /**
+     * Inventory map.
+     */
     private final Map<Integer, Pair<Optional<Item>, Integer>> inventory = new HashMap<>(INVENTORY_SIZE);
 
     public InventoryImpl(final Player player) {
@@ -107,7 +116,7 @@ public class InventoryImpl implements Inventory {
      * false if the inventory is full or if the inventory contains the
      * limit amount for the item.
      */
-    public boolean addItem(final Item item) throws InventoryIsFullException{
+    public boolean addItem(final Item item) throws InventoryIsFullException {
         /*
          * Checks if item is already contained in inventory.
          */
