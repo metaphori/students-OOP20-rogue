@@ -4,6 +4,14 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import javafx.util.Pair;
 
+/**
+ * Represents an enumeration for declaring potion types.
+ * 
+ * The first field keeps track of the potion's effect (HEAL or HURT)
+ * The second field is the amount of health points added or removed to the player.
+ * it's a pair containing the minimum and maximum, a random number between the two will
+ * be randomly picked.
+ */
 public enum PotionType {
 
     /**
@@ -52,6 +60,10 @@ public enum PotionType {
         this.hpValue = value;
     }
 
+    /**
+     * Use this method to get the potion's health points.
+     * @return the potion's health points.
+     */
     public int getHpValue() {
         return ThreadLocalRandom.current().nextInt(this.hpValue.getKey(), this.hpValue.getValue() + 1) 
                 * (this.effect.equals(Potion.PotionEffect.HEAL) ? 1 : -1);
