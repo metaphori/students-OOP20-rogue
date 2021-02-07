@@ -1,78 +1,57 @@
 package rogue.model.creature;
 
+ /** 
+ * An interface modeling the Special skill for a {@link Monster}.
+ *
+ */
 public interface Special {
-	
-	 /**
+
+    /**
      * 
      * @return true if the monster is hostile
-     */	
-	boolean getHostile();
-	
-	 /**
+     */
+     boolean isHostile();
+
+    /**
      * 
      * @return true if the monster can fly
-     */	
-	boolean getFlyng();
-	
-	 /**
+     */
+    boolean isFlyng();
+
+    /**
      * 
      * @return true if the monster attempt to pick up gold
-     */	
-	boolean getGreedy();
-	
-	 /**
+     */
+     boolean isGreedy();
+
+    /**
      * 
      * @return true if the monster invisible
-     */	
-	boolean getInvisible();
-	
-	/**
+     */
+     boolean isInvisible();
+
+    /**
      * 
      * @return true if the monster flies randomly
-     */	
-	boolean getFlyingRandom();
-	
-	/**
+     */
+     boolean isFlyingRandom();
+
+    /**
      * 
-     * @return true if the monster can blow fire
-     */	
-	boolean getFireBlow();
-	
-	/**
-     * 
-     * @return true if the monster can freeze the player
-     */	
-	boolean getFreeze();
-	
-	/**
-     * 
-     * @return true if the monster can confuse the player
-     */	
-	boolean getConfuse();
-	
-	/**
-     * 
-     * @return true if the monster can steal Item from the player
-     */	
-	boolean getSteal();
-	
-	/**
+     * @return true if the monster can decrease the player's strength
+     */
+     boolean isWeaken();
+
+    /**
      * 
      * @return true if the monster can poison the player
-     */	
-	boolean getPoisonous();
-	
-	/**
+     */
+     boolean isPoisonous();
+
+    /**
      * 
      * @return true if the monster can steal life from the player
-     */	
-	boolean getDrainLife();
-	
-	/**
-     * 
-     * @return true if the monster can paralyze the player
-     */	
-	boolean getParalyze();
-	
+     */
+    boolean isDrainLife();
 
 }
