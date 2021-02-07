@@ -7,6 +7,7 @@ import java.util.Optional;
 import javafx.util.Pair;
 import rogue.model.creature.Player;
 import rogue.model.items.Item;
+import rogue.model.items.scroll.Scroll.ScrollEffect;
 
 class OutOfInventoryException extends Exception {
 
@@ -138,6 +139,14 @@ public class InventoryImpl implements Inventory {
          */
         //TODO Make InventoryFullException (??)
         return false;
+    }
+
+    /**
+     * @return Currently active effect.
+     */
+    public Optional<ScrollEffect> getActiveEffect() {
+        // TODO Auto-generated method stub
+        return Optional.empty();
     }
 
 }

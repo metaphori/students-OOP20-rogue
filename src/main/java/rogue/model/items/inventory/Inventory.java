@@ -3,6 +3,7 @@ package rogue.model.items.inventory;
 import java.util.Optional;
 
 import rogue.model.items.Item;
+import rogue.model.items.scroll.Scroll;
 
 /**
  * An interface for modeling a game Inventory.
@@ -34,5 +35,11 @@ public interface Inventory {
      * the inventory is full.
      */
     boolean addItem(Item item);
+
+    /**
+     * Get the currently active effect.
+     * @return Optional.empty() if no active effect, Optional.of(Scroll.ScrollEffect) otherwise
+     */
+    Optional<Scroll.ScrollEffect> getActiveEffect();
 
 }
