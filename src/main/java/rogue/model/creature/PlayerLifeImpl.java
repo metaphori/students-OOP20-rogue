@@ -1,84 +1,115 @@
 package rogue.model.creature;
 
+/**
+ * An implementation for a {@link PlayerLife}. 
+ * Use the pattern builder in order to create a new instance (even custom).
+ */
 public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
 
     private int strength;
     private int leftFood;
+    private int level;
+    private int coins;
 
-    private PlayerLifeImpl(final int healthPoints, final int experience, final int strength, final int food) {
+    private PlayerLifeImpl(final int healthPoints, final int experience, final int strength, final int food, final int level, final int coins) {
         super(healthPoints, experience);
         this.strength = strength;
         this.leftFood = food;
+        this.level = level;
+        this.coins = coins;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void increaseExperience(final int increment) {
         this.setExperience(this.getExperience() + increment);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void powerUp(final int increment) {
         this.setHealthPoints(this.getHealthPoints() + increment);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void addStrength(final int increment) {
         this.strength = this.strength + increment;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int getStrength() {
         return this.strength;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void updateFood(final int quantity) {
-        this.leftFood = this.leftFood + quantity;
+    private void updateFood(final int amount) {
+        this.leftFood = this.leftFood + amount;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
+    public void increaseFood(final int amount) {
+        this.updateFood(amount);
+    }
+
+    @Override
+    public void decreaseFood(final int amount) {
+        this.updateFood(-amount);
+    }
+
     @Override
     public int getFood() {
         return this.leftFood;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isDead() {
         return super.isDead() || this.leftFood == 0;
     }
 
+    private void updateCoins(final int amount) {
+        this.coins = this.coins + amount;
+    }
+
+    @Override
+    public void addCoins(final int amount) {
+        this.updateCoins(amount);
+    }
+
+    @Override
+    public void subCoins(final int amount) {
+        this.updateCoins(-amount);
+    }
+
+    @Override
+    public int getCoins() {
+        return this.coins;
+    }
+
+    @Override
+    public void increaseLevel(final int amount) {
+        this.level = this.level + amount;
+    }
+
+    @Override
+    public int getLevel() {
+        return this.level;
+    }
+
     public static class Builder {
 
-        // TODO review constants!
-        private static final int HEALTH_POINTS = 50;
-        private static final int FOOD = 50;
+        /**
+         * Default values.
+         */
+        private static final int HEALTH_POINTS = 12;
+        private static final int FOOD = 50; // TODO
         private static final int EXPERIENCE = 0;
-        private static final int STRENGTH = 0;
+        private static final int STRENGTH = 16;
+        private static final int COINS = 0;
+        private static final int LEVEL = 0;
 
         private int healthPoints = HEALTH_POINTS;
         private int food = FOOD;
         private int experience = EXPERIENCE;
         private int strength = STRENGTH;
+        private int level = LEVEL;
+        private int coins = COINS;
         private boolean consumed;
 
         /**
@@ -125,12 +156,38 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
             return this;
         }
 
+        /**
+         * Initialize the player level.
+         * @param level
+         *      the initial player level
+         * @return this Builder for chaining
+         */
+        public Builder initLevel(final int level) {
+            this.level = level;
+            return this;
+        }
+
+        /**
+         * Initialize the player level.
+         * @param coins
+         *      the initial amount of player coins
+         * @return this Builder for chaining
+         */
+        public Builder initCoins(final int coins) {
+            this.coins = coins;
+            return this;
+        }
+
+        /**
+         * @return a player life 
+         */
         public final PlayerLifeImpl build() {
             if (consumed) {
                 throw new IllegalStateException("The builder can only be used once");
             }
             consumed = true;
-            return new PlayerLifeImpl(healthPoints, experience, strength, food);
+            return new PlayerLifeImpl(healthPoints, experience, strength, food, level, coins);
         }
     }
+
 }
