@@ -42,4 +42,11 @@ public interface Inventory {
      */
     Optional<Scroll.ScrollEffect> getActiveEffect();
 
+    /**
+     * Update the currently active effect duration.
+     * @return true if correctly updated, false if there's no active effect to update.
+     * @param amount to subtract to the effect duration.
+     */
+    boolean updateEffectDuration(int amount);
+
 }

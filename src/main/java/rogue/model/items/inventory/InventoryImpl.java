@@ -149,4 +149,14 @@ public class InventoryImpl implements Inventory {
         return Optional.empty();
     }
 
+    /**
+     * @param amount to subtract to effect's duration
+     * @return true if correctly updated the duration, false if
+     * there's no active effect.
+     */
+    public boolean updateEffectDuration(final int amount) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
 }
