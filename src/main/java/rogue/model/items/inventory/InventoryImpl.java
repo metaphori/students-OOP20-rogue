@@ -148,9 +148,10 @@ public class InventoryImpl implements Inventory {
      */
     public void activateScroll(final Scroll scroll) {
         /*
-         * Even if there's another active scroll, activate scroll
-         * simply overwrites the currently active one.
+         * Use the removeActiveScroll method to remove eventual active scroll.
+         * Then activate the given scroll.
          */
+        removeActiveScroll();
         this.scroll = new Pair<>(Optional.of(scroll), scroll.getEffectDuration());
     }
 
