@@ -62,11 +62,19 @@ public enum ScrollType {
         this.scrollValue = scrollValue;
     }
 
+    /**
+     * Get the Scroll strength value.
+     * @return the amount of strength of the scroll.
+     */
     public int getEffectValue() {
         return ThreadLocalRandom.current().nextInt(this.scrollValue.getKey(), this.scrollValue.getValue() + 1) 
                 * (this.effect.equals(Scroll.ScrollEffect.GAIN) ? 1 : -1);
     }
 
+    /**
+     * Get the Scroll effect duration.
+     * @return the amount of turns the effect will last.
+     */
     public int getEffectDuration() {
         return this.effectDuration;
     }
