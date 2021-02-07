@@ -27,12 +27,12 @@ public class InventoryImpl implements Inventory {
     private static final int INVENTORY_SIZE = 20;
     private static final int ITEM_AMOUNT_MAX = 10;
 
-    private final Pair<Optional<Scroll>, Integer> effect;
+    private Pair<Optional<Scroll>, Integer> scroll;
     private final Player player;
     private final Map<Integer, Pair<Optional<Item>, Integer>> inventory = new HashMap<>(INVENTORY_SIZE);
 
     public InventoryImpl(final Player player) {
-        this.effect = new Pair<>(Optional.empty(), 0);
+        this.scroll = new Pair<>(Optional.empty(), 0);
         this.player = player;
         for (int i = 1; i <= INVENTORY_SIZE; i++) {
             this.inventory.put(i, new Pair<>(Optional.empty(), 0));
@@ -147,17 +147,40 @@ public class InventoryImpl implements Inventory {
      * @return Currently active scroll.
      */
     public Optional<Scroll> getActiveScroll() {
-        return this.effect.getKey();
+        return this.scroll.getKey();
     }
 
     /**
-     * @param amount to subtract to effect's duration
+     * @param amount to subtract to scroll's duration
      * @return true if correctly updated the duration, false if
-     * there's no active effect.
+     * there's no active scroll.
      */
     public boolean updateEffectDuration(final int amount) {
-        // TODO Auto-generated method stub
-        return false;
+        /*
+         * Check if active Scroll
+         */
+        if (!this.scroll.getKey().equals(Optional.empty())) {
+            /*
+             * Check if amount will remove the scroll.
+             */
+            if (this.scroll.getValue() - amount <= 0) {
+                /*
+                 * Scroll duration is over, remove scroll.
+                 */
+                this.scroll = new Pari<>(Optional.empty(), 0);
+            } else {
+                /*
+                 * Update scroll's duration
+                 */
+                this.scroll = new Pair<>(this.scroll.getKey(), this.scroll.getValue() - amount);
+                return true;
+            }
+        } else {
+            /*
+             * No active scroll, nothing to update
+             */
+            return false;
+        }
     }
 
 }

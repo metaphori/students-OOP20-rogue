@@ -38,14 +38,14 @@ public interface Inventory {
 
     /**
      * Get the currently active scroll.
-     * @return Optional.empty() if no active effect, Optional.of(Scroll) otherwise
+     * @return Optional.empty() if no active scroll, Optional.of(Scroll) otherwise
      */
     Optional<Scroll> getActiveScroll();
 
     /**
-     * Update the currently active effect duration.
-     * @return true if correctly updated, false if there's no active effect to update.
-     * @param amount to subtract to the effect duration.
+     * Update the currently active scroll duration.
+     * @return true if correctly updated, false if there's no active scroll to update.
+     * @param amount to subtract to the scroll's duration.
      */
     boolean updateEffectDuration(int amount);
 
