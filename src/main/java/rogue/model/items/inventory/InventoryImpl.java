@@ -70,9 +70,9 @@ public class InventoryImpl implements Inventory {
      * @param index of the inventory slot to select.
      * @return the item contained in the given inventory slot.
      */
-    public boolean getItem(final int index) {
+    public Optional<Item> getItem(final int index) {
         // TODO Auto-generated method stub
-        return false;
+        return Optional.empty();
     }
 
     /**
