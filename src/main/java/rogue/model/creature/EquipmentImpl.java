@@ -2,6 +2,7 @@ package rogue.model.creature;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import rogue.model.items.armor.Armor;
 import rogue.model.items.armor.ArmorImpl;
@@ -67,16 +68,28 @@ public class EquipmentImpl implements Equipment {
         return this.ring;
     }
 
+    private boolean updateRing(final Predicate<Optional<Ring>> predicate, final Optional<Ring> ring) {
+        if (predicate.test(this.ring)) {
+            this.ring = ring;
+            return true;
+        }
+        return false;
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean putRing(final Ring ring) {
-        if (this.ring.isEmpty()) {
-            this.ring = Optional.of(ring);
-            return true;
-        }
-        return false;
+    public boolean attachRing(final Ring ring) {
+        return this.updateRing(r -> r.isEmpty(), Optional.of(ring));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean detachRing() {
+        return this.updateRing(r -> r.isPresent(), Optional.empty());
     }
 
 }
