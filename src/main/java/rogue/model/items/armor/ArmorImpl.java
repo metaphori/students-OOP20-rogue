@@ -1,5 +1,7 @@
 package rogue.model.items.armor;
 
+import rogue.model.creature.Player;
+
 /** 
  * Represents an implementation for a game {@link Armor}.
  *
@@ -20,6 +22,15 @@ public class ArmorImpl implements Armor {
     @Override
     public final int getAC() {
         return armor.getAC();
+    }
+
+    /**
+     * Equip the player with this armor.
+     */
+    @Override
+    public boolean use(final Player player) {
+        player.getEquipment().setArmor(this);
+        return true;
     }
 
 }
