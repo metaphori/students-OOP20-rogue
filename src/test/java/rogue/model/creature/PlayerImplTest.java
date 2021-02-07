@@ -27,13 +27,13 @@ public class PlayerImplTest {
         assertFalse(pl.getLife().isDead());
         pl.getLife().increaseExperience(10);
         assertEquals(10, pl.getLife().getExperience());
-        pl.getLife().updateFood(-4);
+        pl.getLife().decreaseFood(-4);
         assertFalse(pl.getLife().isDead());
         assertEquals(46, pl.getLife().getFood());
-        pl.getLife().updateFood(-46);
-        pl.getLife().updateFood(+3);
-        pl.getLife().updateFood(-2);
-        pl.getLife().updateFood(-1);
+        pl.getLife().decreaseFood(-46);
+        pl.getLife().increaseFood(+3);
+        pl.getLife().decreaseFood(-2);
+        pl.getLife().decreaseFood(-1);
         assertTrue(pl.getLife().isDead());
     }
 
@@ -53,13 +53,13 @@ public class PlayerImplTest {
         assertFalse(pl.getLife().isDead());
         pl.getLife().increaseExperience(10);
         assertEquals(30, pl.getLife().getExperience());
-        pl.getLife().updateFood(-4);
+        pl.getLife().decreaseFood(-4);
         assertFalse(pl.getLife().isDead());
         assertEquals(6, pl.getLife().getFood());
-        pl.getLife().updateFood(-6);
-        pl.getLife().updateFood(+3);
-        pl.getLife().updateFood(-2);
-        pl.getLife().updateFood(-1);
+        pl.getLife().decreaseFood(-6);
+        pl.getLife().increaseFood(+3);
+        pl.getLife().decreaseFood(-2);
+        pl.getLife().decreaseFood(-1);
         assertTrue(pl.getLife().isDead());
     }
 

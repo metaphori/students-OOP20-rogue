@@ -50,11 +50,11 @@ public final class PlayerLifeTest {
     @org.junit.Test
     public void testFood() {
         assertEquals(25, pl.getFood());
-        pl.updateFood(5);
-        pl.updateFood(-4);
+        pl.increaseFood(5);
+        pl.decreaseFood(-4);
         assertEquals(26, pl.getFood());
-        pl.updateFood(-28);
-        pl.updateFood(2);
+        pl.decreaseFood(-28);
+        pl.increaseFood(2);
         assertEquals(0, pl.getFood());
         assertTrue(pl.isDead());
     }
