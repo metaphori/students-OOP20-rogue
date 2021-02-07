@@ -19,7 +19,7 @@ public abstract class AbstractLife implements Life {
      */
     @Override
     public void hurt(final int damage) {
-        this.healthPoints = this.healthPoints - damage;
+        this.healthPoints = this.healthPoints - damage < 0 ? 0 : this.healthPoints - damage;
     }
 
     /**
