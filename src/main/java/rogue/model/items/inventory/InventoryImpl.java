@@ -166,7 +166,11 @@ public class InventoryImpl implements Inventory {
             return false;
         } else {
             /*
-             * remove active scroll.
+             * Before removing the scroll, remove the scroll's effect.
+             */
+            this.scroll.getKey().get().remove(this.player);
+            /*
+             * Remove the scroll.
              */
             this.scroll = new Pair<>(Optional.empty(), 0);
             return true;
