@@ -46,6 +46,12 @@ public interface Equipment {
      *          the ring to put on
      * @return true if it's possible to wear it, false otherwise
      */
-    boolean putRing(Ring ring);
+    boolean attachRing(Ring ring);
+
+    /**
+     * Remove the current ring.
+     * @return true if had been removed, false otherwise
+     */
+    boolean detachRing();
 
 }
