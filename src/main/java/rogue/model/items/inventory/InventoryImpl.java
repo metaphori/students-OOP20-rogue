@@ -147,7 +147,11 @@ public class InventoryImpl implements Inventory {
      * @param scroll to activate 
      */
     public void activateScroll(final Scroll scroll) {
-        // TODO Auto-generated method stub
+        /*
+         * Even if there's another active scroll, activate scroll
+         * simply overwrites the currently active one.
+         */
+        this.scroll = new Pair<>(Optional.of(scroll), scroll.getEffectDuration());
     }
 
     /**
