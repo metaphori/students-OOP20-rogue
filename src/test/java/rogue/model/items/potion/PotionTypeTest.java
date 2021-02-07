@@ -2,12 +2,11 @@ package rogue.model.items.potion;
 
 import org.junit.Test;
 
-import rogue.model.items.potion.PotionType;
-
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 
-public class PotionTest {
+public class PotionTypeTest {
+
     private static final int POTION_I_MAX = 10;
     private static final int POTION_I_MIN = 5;
     private static final int POTION_II_MAX = 20;

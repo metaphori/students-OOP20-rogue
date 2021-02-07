@@ -2,12 +2,10 @@ package rogue.model.items.scroll;
 
 import org.junit.Test;
 
-import rogue.model.items.scroll.ScrollType;
-
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 
-public class ScrollTest {
+public class ScrollTypeTest {
 
     private static final int SCROLL_I_DURATION = 15;
     private static final int SCROLL_II_DURATION = 25;
