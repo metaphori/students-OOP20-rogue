@@ -11,6 +11,7 @@ import rogue.model.items.Item;
 public class InventoryImpl implements Inventory {
 
     private static final int INVENTORY_SIZE = 20;
+    private static final int ITEM_AMOUNT_MAX = 10;
 
     private final Player player;
     private final Map<Integer, Pair<Optional<Item>, Integer>> inventory = new HashMap<>(INVENTORY_SIZE);
@@ -71,8 +72,7 @@ public class InventoryImpl implements Inventory {
      * @return the item contained in the given inventory slot.
      */
     public Optional<Item> getItem(final int index) {
-        // TODO Auto-generated method stub
-        return Optional.empty();
+        return this.inventory.get(index).getKey();
     }
 
     /**
@@ -82,7 +82,49 @@ public class InventoryImpl implements Inventory {
      * limit amount for the item.
      */
     public boolean addItem(final Item item) {
-        // TODO Auto-generated method stub
+        /*
+         * Checks if item is already contained in inventory.
+         */
+        for (int i = 1; i <= INVENTORY_SIZE; i++) {
+            if (this.inventory.get(i).getKey().equals(Optional.of(item))) {
+                /*
+                 * Inventory already contains the item to add.
+                 * Increase it's quantity.
+                 * Check if item's quantity is already at max.
+                 */
+                if (this.inventory.get(i).getValue().equals(ITEM_AMOUNT_MAX)) {
+                    /*
+                     * Item's amount already at max, cannot add item to
+                     * inventory.
+                     */
+                    return false;
+                } else {
+                    /*
+                     * Increase item's amount.
+                     */
+                    this.inventory.put(i, new Pair<>(this.inventory.get(i).getKey(), 
+                            this.inventory.get(i).getValue() + 1));
+                    return true;
+                }
+            }
+        }
+        /*
+         * Item's not already contained in inventory.
+         * Look for first Empty slot
+         */
+        for (int j = 1; j <= INVENTORY_SIZE; j++) {
+            if (this.inventory.get(j).getKey().equals(Optional.empty())) {
+                /*
+                 * Empty slot found, insert item.
+                 */
+                this.inventory.put(j, new Pair<>(Optional.of(item), 1));
+                return true;
+            }
+        }
+        /*
+         * No empty slot found return false.
+         */
+        //TODO Make InventoryFullException (??)
         return false;
     }
 
