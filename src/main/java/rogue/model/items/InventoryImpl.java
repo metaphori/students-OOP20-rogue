@@ -22,8 +22,10 @@ public class InventoryImpl implements Inventory {
     }
 
     /**
+     * Use the item in the given slot.
      * @param index of the inventory slot to select.
-     * @return true if the item was correctly used, false otherwise.
+     * @return true if the inventory was correctly updated, false if there
+     * was no inventory update (Item's use returned false).
      */
     public boolean useItem(final int index) {
         if (inventory.containsKey(index)) {
@@ -32,6 +34,16 @@ public class InventoryImpl implements Inventory {
                  * Save to use Item.
                  */
                 final Item toUse = inventory.get(index).getKey().get();
+                /*
+                 * Use the item, check if correctly used.
+                 */
+                if (!toUse.use(this.player)) {
+                    /*
+                     * If not correctly used the item can't be consumed,
+                     * can't update inventory.
+                     */
+                    return false;
+                } else  {
                 /*
                  * Update Inventory.
                  */
@@ -43,10 +55,8 @@ public class InventoryImpl implements Inventory {
                     //Lower amount of item by one after use.
                     inventory.put(index, new Pair<>(Optional.of(toUse), amount - 1));
                 }
-                /*
-                 * Use item
-                 */
-                return toUse.use(this.player);
+                return true;
+                }
             } else {
                 return false;
             }
