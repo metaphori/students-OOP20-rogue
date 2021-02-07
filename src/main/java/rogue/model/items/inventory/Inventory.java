@@ -37,10 +37,10 @@ public interface Inventory {
     boolean addItem(Item item);
 
     /**
-     * Get the currently active effect.
-     * @return Optional.empty() if no active effect, Optional.of(Scroll.ScrollEffect) otherwise
+     * Get the currently active scroll.
+     * @return Optional.empty() if no active effect, Optional.of(Scroll) otherwise
      */
-    Optional<Scroll.ScrollEffect> getActiveEffect();
+    Optional<Scroll> getActiveScroll();
 
     /**
      * Update the currently active effect duration.

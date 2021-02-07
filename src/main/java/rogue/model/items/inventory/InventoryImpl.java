@@ -7,7 +7,7 @@ import java.util.Optional;
 import javafx.util.Pair;
 import rogue.model.creature.Player;
 import rogue.model.items.Item;
-import rogue.model.items.scroll.Scroll.ScrollEffect;
+import rogue.model.items.scroll.Scroll;
 
 class OutOfInventoryException extends Exception {
 
@@ -27,10 +27,12 @@ public class InventoryImpl implements Inventory {
     private static final int INVENTORY_SIZE = 20;
     private static final int ITEM_AMOUNT_MAX = 10;
 
+    private final Pair<Optional<Scroll>, Integer> effect;
     private final Player player;
     private final Map<Integer, Pair<Optional<Item>, Integer>> inventory = new HashMap<>(INVENTORY_SIZE);
 
     public InventoryImpl(final Player player) {
+        this.effect = new Pair<>(Optional.empty(), 0);
         this.player = player;
         for (int i = 1; i <= INVENTORY_SIZE; i++) {
             this.inventory.put(i, new Pair<>(Optional.empty(), 0));
@@ -142,11 +144,10 @@ public class InventoryImpl implements Inventory {
     }
 
     /**
-     * @return Currently active effect.
+     * @return Currently active scroll.
      */
-    public Optional<ScrollEffect> getActiveEffect() {
-        // TODO Auto-generated method stub
-        return Optional.empty();
+    public Optional<Scroll> getActiveScroll() {
+        return this.effect.getKey();
     }
 
     /**
