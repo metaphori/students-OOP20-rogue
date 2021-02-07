@@ -7,13 +7,11 @@ import rogue.model.items.rings.Ring;
 import rogue.model.items.weapons.Weapon;
 
 /**
- * An interface modeling the player's equipment.
- *
+ * An interface modeling an equipment.
  */
 public interface Equipment {
 
     /**
-     * 
      * @return the armor currently in use
      */
     Armor getArmor();
@@ -26,7 +24,6 @@ public interface Equipment {
     void setArmor(Armor armor);
 
     /**
-     * 
      * @return the weapon currently in use
      */
     Weapon getWeapon();
@@ -39,7 +36,6 @@ public interface Equipment {
     void setWeapon(Weapon weapon);
 
     /**
-     * 
      * @return the ring currently in use
      */
     Optional<Ring> getRing();
