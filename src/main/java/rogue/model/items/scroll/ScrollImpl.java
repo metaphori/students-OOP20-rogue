@@ -48,6 +48,14 @@ public class ScrollImpl implements Scroll {
         }
     }
 
+    /*
+     * Removes the scroll effect.
+     */
+    public void remove() {
+        // TODO Auto-generated method stub
+
+    }
+
     /**
      * @return The scroll's effect.
      */

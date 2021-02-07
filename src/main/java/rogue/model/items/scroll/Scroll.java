@@ -8,6 +8,8 @@ public interface Scroll extends Item {
         GAIN, LOSE;
     }
 
+    void remove();
+    
     int getEffectValue();
 
     int getEffectDuration();
