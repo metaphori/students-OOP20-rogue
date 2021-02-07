@@ -6,7 +6,7 @@ import rogue.model.items.Item;
 
 public interface Inventory {
 
-    boolean useItem(int index);
+    boolean useItem(int index) throws OutOfInventoryException;
 
     Optional<Item> getItem(int index);
 

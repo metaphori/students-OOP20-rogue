@@ -8,8 +8,21 @@ import javafx.util.Pair;
 import rogue.model.creature.Player;
 import rogue.model.items.Item;
 
+class OutOfInventoryException extends Exception {
+
+    private static final long serialVersionUID = -4154450610441652376L;
+
+    OutOfInventoryException(final String message) {
+        super(message);
+    }
+
+}
+
 public class InventoryImpl implements Inventory {
 
+    /*
+     * TODO Make scroll container,get and update.
+     */
     private static final int INVENTORY_SIZE = 20;
     private static final int ITEM_AMOUNT_MAX = 10;
 
@@ -29,7 +42,7 @@ public class InventoryImpl implements Inventory {
      * @return true if the inventory was correctly updated, false if there
      * was no inventory update (Item's use returned false).
      */
-    public boolean useItem(final int index) {
+    public boolean useItem(final int index) throws OutOfInventoryException {
         if (inventory.containsKey(index)) {
             if (inventory.get(index).getKey().isPresent()) {
                 /*
@@ -63,8 +76,7 @@ public class InventoryImpl implements Inventory {
                 return false;
             }
         }
-        //TODO Add OutOfInventoryException
-        return false;
+        throw new OutOfInventoryException("Given index is out of the inventory.");
     }
 
     /**
