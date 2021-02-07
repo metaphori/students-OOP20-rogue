@@ -1,4 +1,4 @@
-package rogue.model.creature;
+package rogue.model.items;
 
 import java.util.Objects;
 import java.util.Optional;

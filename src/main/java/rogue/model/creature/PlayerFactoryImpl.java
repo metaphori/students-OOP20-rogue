@@ -2,6 +2,8 @@ package rogue.model.creature;
 
 import java.util.Objects;
 
+import rogue.model.items.Equipment;
+import rogue.model.items.EquipmentImpl;
 import rogue.model.items.Inventory;
 import rogue.model.items.InventoryImpl;
 

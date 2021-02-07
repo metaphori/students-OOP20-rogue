@@ -1,5 +1,6 @@
 package rogue.model.creature;
 
+import rogue.model.items.Equipment;
 import rogue.model.items.Inventory;
 
 /**
