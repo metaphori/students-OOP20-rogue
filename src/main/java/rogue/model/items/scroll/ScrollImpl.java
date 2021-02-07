@@ -48,12 +48,26 @@ public class ScrollImpl implements Scroll {
         }
     }
 
-    /*
+    /**
      * Removes the scroll effect.
+     * @param player on which to remove the effect.
      */
-    public void remove() {
-        // TODO Auto-generated method stub
-
+    public void remove(final Player player) {
+        /*
+         * removes the scroll's effect. both GAIN and LOSE.
+         * Strength cannot be below 0
+         */
+        if (player.getLife().getStrength() - this.scroll.getEffectValue() < 0) {
+            /*
+             * Set player's strength to 0.
+             */
+            player.getLife().addStrength(-player.getLife().getStrength());
+        } else {
+            /*
+             * Remove scroll's value to the player.
+             */
+            player.getLife().addStrength(-getEffectValue());
+        }
     }
 
     /**

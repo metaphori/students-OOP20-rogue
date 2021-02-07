@@ -1,5 +1,6 @@
 package rogue.model.items.scroll;
 
+import rogue.model.creature.Player;
 import rogue.model.items.Item;
 
 public interface Scroll extends Item {
@@ -8,8 +9,8 @@ public interface Scroll extends Item {
         GAIN, LOSE;
     }
 
-    void remove();
-    
+    void remove(Player player);
+
     int getEffectValue();
 
     int getEffectDuration();
