@@ -16,9 +16,20 @@ public class ScrollImpl implements Scroll {
      * @return true if the item was correctly used, false otherwise.
      */
     public boolean use(final Player player) {
+        /*
+         * The minimum value for strength is 0,
+         * There is no maximum value for strength.
+         * Check the effect of the scroll
+         */
         return false;
     }
 
+    /**
+     * @return The scroll's effect.
+     */
+    public Scroll.ScrollEffect getEffect() {
+        return this.scroll.getEffect();
+    }
     /**
      * @return amount of strength to add or remove to the player.
      */

@@ -63,6 +63,13 @@ public enum ScrollType {
     }
 
     /**
+     * Get the scroll's effect.
+     * @return the scroll's effect.
+     */
+    public Scroll.ScrollEffect getEffect() {
+        return effect;
+    }
+    /**
      * Get the Scroll strength value.
      * @return the amount of strength of the scroll.
      */
