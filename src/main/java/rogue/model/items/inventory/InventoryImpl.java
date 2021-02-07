@@ -1,4 +1,4 @@
-package rogue.model.items;
+package rogue.model.items.inventory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import javafx.util.Pair;
 import rogue.model.creature.Player;
+import rogue.model.items.Item;
 
 public class InventoryImpl implements Inventory {
 

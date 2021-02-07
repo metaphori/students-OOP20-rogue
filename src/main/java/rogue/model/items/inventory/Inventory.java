@@ -1,4 +1,6 @@
-package rogue.model.items;
+package rogue.model.items.inventory;
+
+import rogue.model.items.Item;
 
 public interface Inventory {
 
