@@ -21,7 +21,31 @@ public class ScrollImpl implements Scroll {
          * There is no maximum value for strength.
          * Check the effect of the scroll
          */
-        return false;
+        if (this.scroll.getEffect().equals(Scroll.ScrollEffect.GAIN)) {
+            /*
+             * Since there's no maximum strength for the player
+             * simply increase the player's strength.
+             */
+            player.getLife().addStrength(this.scroll.getEffectValue());
+            return true;
+        } else {
+            /*
+             * LOSE effect, player's strength can't go below 0
+             */
+            final int decrease = this.scroll.getEffectValue();
+            if (player.getLife().getStrength() + decrease < 0) {
+                /*
+                 * Just set the player's strength to 0.
+                 */
+                player.getLife().addStrength(-player.getLife().getStrength());
+            } else {
+                /*
+                 * Simply decrease player's strength.
+                 */
+                player.getLife().addStrength(decrease);
+            }
+            return true;
+        }
     }
 
     /**
