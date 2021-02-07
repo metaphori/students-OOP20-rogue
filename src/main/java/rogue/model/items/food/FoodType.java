@@ -1,7 +1,7 @@
 package rogue.model.items.food;
 
 /**
- * Represents an enumeration for declaring foods types.
+ * Represents an enumeration for declaring food types.
  * 
  * The field keeps track of the food's starvation value.
  *
@@ -37,21 +37,25 @@ public enum FoodType {
      */
     BREAD(6);
 
-    /*
+    /**
      * The higher the starvationValue of a food is, the longer the player's
      * hunger will last.
      */
     private final int starvationValue;
 
     /**
+     * Constructor for a FoodType.
+     * @param Starvation value of the Food.
+     */
+    FoodType(final int value) {
+        starvationValue = value;
+    }
+
+    /**
      * @return the food's starvation value.
      */
     public int getStarvationValue() {
         return starvationValue;
-    }
-
-    FoodType(final int value) {
-        starvationValue = value;
     }
 
 }
