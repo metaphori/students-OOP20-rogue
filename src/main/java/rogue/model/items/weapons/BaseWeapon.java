@@ -4,7 +4,6 @@ import rogue.model.creature.Player;
 
 /**
  * A minimal implementation for a {@link Weapon}.
- *
  */
 public class BaseWeapon implements Weapon {
 
@@ -15,12 +14,12 @@ public class BaseWeapon implements Weapon {
     }
 
     /**
-     * {@inheritDoc}
+     * Equip the player with this weapon.
      */
     @Override
     public boolean use(final Player player) {
-        // TODO Auto-generated method stub
-        return false;
+        player.getEquipment().setWeapon(this);
+        return true;
     }
 
     /**
