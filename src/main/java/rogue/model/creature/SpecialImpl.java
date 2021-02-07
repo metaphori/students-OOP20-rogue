@@ -1,135 +1,124 @@
 package rogue.model.creature;
 
-public class SpecialImpl implements Special{
-	
+public class SpecialImpl implements Special {
+
      /**
      * TODO to finish.
      * per il momento non mi fà impazzire il costruttore visto che ci deve passare una valangata di boolean
      * ma attualmente non mi viene in mente nulla di meglio per sitemarlo
      */
-	
-     private final boolean hostile;
-     private final boolean flying;
-     private final boolean greedy;
-     private final boolean invisible;
-     private final boolean flyingRandom;
-     private final boolean fireBlow;
-     private final boolean freeze;
-     private final boolean confuse;
-     private final boolean steal;
-     private final boolean poisonous;
-     private final boolean drainLife;
-     private final boolean paralyze;
-	
-	
-     public SpecialImpl(final boolean hostile, final boolean flying, final boolean greedy, final boolean invisible, final boolean flyingRandom, 
-	final boolean fireBlow, final boolean freeze, final boolean confuse, final boolean steal, final boolean poisonous, 
-	final boolean drainLife, final boolean paralyze) {
-		
-       this.hostile = hostile;
-       this.flying = flying;
-       this.greedy = greedy;
-       this.invisible = invisible;
-       this.flyingRandom = flyingRandom;
-       this.fireBlow = fireBlow;
-       this.freeze = freeze;
-       this.confuse = confuse;
-       this.steal = steal;
-       this.poisonous = poisonous;
-       this.drainLife = drainLife;
-       this.paralyze = paralyze;       
+
+    private final boolean hostile;
+    private final boolean flying;
+    private final boolean greedy;
+    private final boolean invisible;
+    private final boolean flyingRandom;
+    private final boolean weaken;
+    private final boolean poisonous;
+    private final boolean drainLife;
+
+
+    public SpecialImpl(final boolean hostile, final boolean flying, final boolean greedy, final boolean invisible,
+            final boolean flyingRandom, final boolean weaken, final boolean poisonous, final boolean drainLife) {
+        super();
+        this.hostile = hostile;
+        this.flying = flying;
+        this.greedy = greedy;
+        this.invisible = invisible;
+        this.flyingRandom = flyingRandom;
+        this.weaken = weaken;
+        this.poisonous = poisonous;
+        this.drainLife = drainLife;
     }
-	
-   public SpecialImpl(boolean hostile) {
-       super();
-       this.hostile = hostile;
-       this.flying = false;
-       this.greedy = false;
-       this.invisible = false;
-       this.flyingRandom = false;
-       this.fireBlow = false;
-       this.freeze = false;
-       this.confuse = false;
-       this.steal = false;
-       this.poisonous = false;
-       this.drainLife = false;
-       this.paralyze = false; 
-   }
-	
+
+    public SpecialImpl(final boolean hostile) {
+        super();
+        this.hostile = hostile;
+        this.flying = false;
+        this.greedy = false;
+        this.invisible = false;
+        this.flyingRandom = false;
+        this.weaken = false;
+        this.poisonous = false;
+        this.drainLife = false;
+    }
+
     public SpecialImpl() {
         super();
-	this.hostile = false;
-	this.flying = false;
-	this.greedy = false;
-	this.invisible = false;
-	this.flyingRandom = false;
-	this.fireBlow = false;
-	this.freeze = false;
-	this.confuse = false;
-	this.steal = false;
-	this.poisonous = false;
-	this.drainLife = false;
-	this.paralyze = false;
+        this.hostile = false;
+        this.flying = false;
+        this.greedy = false;
+        this.invisible = false;
+        this.flyingRandom = false;
+        this.weaken = false;
+        this.poisonous = false;
+        this.drainLife = false;
     }
 
-   @Override
-   public boolean getHostile() {  	
-       return this.hostile;
+
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isHostile() {
+        return this.hostile;
    }
 
-  @Override
-  public boolean getFlyng() {
-      return this.flying;
-   }
-	
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean getGreedy() {
+    public boolean isFlyng() {
+        return this.flying;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isGreedy() {
         return this.greedy;
     }
-	
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean getInvisible() {
-	return this.invisible;
+    public boolean isInvisible() {
+        return this.invisible;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean getFlyingRandom() {
-	return this.flyingRandom;
+    public boolean isFlyingRandom() {
+        return this.flyingRandom;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean getFireBlow() {
-	return this.fireBlow;
-    }
-
-   @Override
-   public boolean getFreeze() {
-	return this.freeze;
+    public boolean isWeaken() {
+        return this.weaken;
    }
 
-   @Override
-   public boolean getConfuse() {
-	return this.confuse;
-   }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean getSteal() {
-	return this.steal;
-     }
-
-    @Override
-    public boolean getPoisonous() {
-	return this.poisonous;
+    public boolean isPoisonous() {
+        return this.poisonous;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean getDrainLife() {
-	return this.drainLife;
-    }
-
-    @Override
-    public boolean getParalyze() {
-	return this.paralyze;
+    public boolean isDrainLife() {
+        return this.drainLife;
     }
 
 }
