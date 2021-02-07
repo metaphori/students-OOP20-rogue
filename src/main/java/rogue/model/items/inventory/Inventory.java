@@ -37,6 +37,12 @@ public interface Inventory {
     boolean addItem(Item item);
 
     /**
+     * Activate a scroll.
+     * @param scroll to activate.
+     */
+    void activateScroll(Scroll scroll);
+
+    /**
      * Get the currently active scroll.
      * @return Optional.empty() if no active scroll, Optional.of(Scroll) otherwise
      */

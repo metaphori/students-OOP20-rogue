@@ -144,6 +144,13 @@ public class InventoryImpl implements Inventory {
     }
 
     /**
+     * @param scroll to activate 
+     */
+    public void activateScroll(final Scroll scroll) {
+        // TODO Auto-generated method stub
+    }
+
+    /**
      * @return Currently active scroll.
      */
     public Optional<Scroll> getActiveScroll() {
