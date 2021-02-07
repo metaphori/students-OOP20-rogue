@@ -43,6 +43,13 @@ public interface Inventory {
     void activateScroll(Scroll scroll);
 
     /**
+     * Remove an active scroll.
+     * @return true if active scroll was successfully removed, false if
+     * there's no active scroll to remove.
+     */
+    boolean removeActiveScroll();
+
+    /**
      * Get the currently active scroll.
      * @return Optional.empty() if no active scroll, Optional.of(Scroll) otherwise
      */
