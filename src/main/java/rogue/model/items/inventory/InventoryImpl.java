@@ -67,15 +67,6 @@ public class InventoryImpl implements Inventory {
     }
 
     /**
-     * @param item to search in the inventory and use.
-     * @return true if the item was correctly used, false otherwise.
-     */
-    public boolean useItem(final Item item) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    /**
      * @param index of the inventory slot to select.
      * @return the item contained in the given inventory slot.
      */
