@@ -167,7 +167,8 @@ public class InventoryImpl implements Inventory {
                 /*
                  * Scroll duration is over, remove scroll.
                  */
-                this.scroll = new Pari<>(Optional.empty(), 0);
+                this.scroll = new Pair<>(Optional.empty(), 0);
+                return true;
             } else {
                 /*
                  * Update scroll's duration
