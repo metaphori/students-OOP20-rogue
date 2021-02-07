@@ -34,4 +34,11 @@ public class PotionImpl implements Potion {
         return this.potion.getHpValue();
     }
 
+    /**
+     * @return the potion's effect.
+     */
+    public Potion.PotionEffect getEffect() {
+        return this.potion.getEffect();
+    }
+
 }
