@@ -4,6 +4,7 @@ import rogue.model.creature.Player;
 
 public class PotionImpl implements Potion {
 
+    private static final int MAXIMUM_HEALTH = 50;
     private final PotionType potion;
 
     public PotionImpl(final PotionType potion) {
@@ -23,7 +24,50 @@ public class PotionImpl implements Potion {
          * if the potion effect is HURT we have to check not to 
          * lower it under 0, we just set it to 0 and the player dies.
          */
-        return false;
+        if (this.potion.getEffect().equals(Potion.PotionEffect.HEAL)) {
+            final int increase = this.potion.getHpValue();
+            /*
+             * HEAL
+             */
+            if (player.getLife().getHealthPoints() != MAXIMUM_HEALTH) {
+                if (player.getLife().getHealthPoints() + increase > MAXIMUM_HEALTH) {
+                    /*
+                     * I can't increase the player's health over the MAXIMUM_HEALTH
+                     * so i just set it to max.
+                     */
+                    player.getLife().powerUp(MAXIMUM_HEALTH - player.getLife().getHealthPoints());
+                } else {
+                    /*
+                     * Simply updates the player's health points.
+                     */
+                    player.getLife().powerUp(increase);
+                }
+                return true;
+            } else {
+                /*
+                 * Player's life already full, cannot use item.
+                 */
+                return false;
+            }
+        } else {
+            /*
+             * HURT
+             */
+            final int decrease = this.potion.getHpValue();
+            if (player.getLife().getHealthPoints() + decrease < 0) {
+                /*
+                 * Player's health can't be below 0.
+                 * Update player's health to exactly 0.
+                 */
+                player.getLife().powerUp(-player.getLife().getHealthPoints());
+            } else {
+                /*
+                 * Simply update player's health points.
+                 */
+                player.getLife().powerUp(decrease);
+            }
+            return false;
+        }
     }
 
     /**

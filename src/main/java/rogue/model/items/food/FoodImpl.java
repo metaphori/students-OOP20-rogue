@@ -8,7 +8,7 @@ import rogue.model.creature.Player;
  */
 public class FoodImpl implements Food {
 
-    private static final int HUNGER_VALUE_MAX = 30;
+    private static final int HUNGER_VALUE_MAX = 50;
     private final FoodType food;
 
     public FoodImpl(final FoodType food) {
