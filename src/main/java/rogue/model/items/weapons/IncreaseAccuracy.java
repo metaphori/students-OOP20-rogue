@@ -1,5 +1,8 @@
 package rogue.model.items.weapons;
 
+/**
+ * A decorator to increase the weapon accuracy.
+ */
 public class IncreaseAccuracy extends WeaponDecorator {
 
     private static final int ADDITIONAL_ACCURACY = 2;

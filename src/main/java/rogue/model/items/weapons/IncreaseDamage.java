@@ -1,8 +1,11 @@
 package rogue.model.items.weapons;
 
+/**
+ * A decorator to increase the weapon damage.
+ */
 public class IncreaseDamage extends WeaponDecorator {
 
-    private static final int ADDITIONAL_DAMAGE = 2;
+    private static final int ADDITIONAL_DAMAGE = 3;
 
     public IncreaseDamage(final Weapon weapon) {
         super(weapon);

@@ -4,7 +4,6 @@ import rogue.model.creature.Player;
 
 /**
  * A decorator for a {@link BaseWeapon}.
- *
  */
 public abstract class WeaponDecorator implements Weapon {
 
