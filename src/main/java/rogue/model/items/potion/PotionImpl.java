@@ -16,6 +16,13 @@ public class PotionImpl implements Potion {
      * @return true if the potion was correctly used, false otherwise
      */
     public boolean use(final Player player) {
+        /*
+         * The first thing to check is the potion effect.
+         * If the potion effect is HEAL we have to check not to
+         * increase over the MAXIMUM_HEALTH value-
+         * if the potion effect is HURT we have to check not to 
+         * lower it under 0, we just set it to 0 and the player dies.
+         */
         return false;
     }
 

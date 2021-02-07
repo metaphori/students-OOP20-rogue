@@ -69,4 +69,12 @@ public enum PotionType {
                 * (this.effect.equals(Potion.PotionEffect.HEAL) ? 1 : -1);
     }
 
+    /**
+     * Use this method to get the potion's effect.
+     * @return the potion's effect, HEAL or HURT.
+     */
+    public Potion.PotionEffect getEffect() {
+        return this.effect;
+    }
+
 }
