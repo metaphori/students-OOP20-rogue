@@ -19,11 +19,18 @@ class OutOfInventoryException extends Exception {
 
 }
 
+class InventoryIsFullException extends Exception {
+
+    private static final long serialVersionUID = 7054497161949466512L;
+
+    InventoryIsFullException(final String message) {
+        super(message);
+    }
+
+}
+
 public class InventoryImpl implements Inventory {
 
-    /*
-     * TODO Make scroll container,get and update.
-     */
     private static final int INVENTORY_SIZE = 20;
     private static final int ITEM_AMOUNT_MAX = 10;
 
@@ -100,7 +107,7 @@ public class InventoryImpl implements Inventory {
      * false if the inventory is full or if the inventory contains the
      * limit amount for the item.
      */
-    public boolean addItem(final Item item) {
+    public boolean addItem(final Item item) throws InventoryIsFullException{
         /*
          * Checks if item is already contained in inventory.
          */
@@ -141,10 +148,9 @@ public class InventoryImpl implements Inventory {
             }
         }
         /*
-         * No empty slot found return false.
+         * No empty slot found, inventory is full.
          */
-        //TODO Make InventoryFullException (??)
-        return false;
+        throw new InventoryIsFullException("Inventory is full.");
     }
 
     /**
