@@ -8,6 +8,7 @@ import rogue.model.creature.Player;
  */
 public class FoodImpl implements Food {
 
+    private static final int HUNGER_VALUE_MAX = 30;
     private final FoodType food;
 
     public FoodImpl(final FoodType food) {
@@ -21,7 +22,28 @@ public class FoodImpl implements Food {
      * player's hunger is already at max.
      */
     public boolean use(final Player player) {
-        return false;
+        if (player.getLife().getFood() == HUNGER_VALUE_MAX) {
+            /*
+             * Player's hunger is already at max, cannot
+             * use the food item.
+             */
+            return false;
+        } else {
+            if (player.getLife().getFood() + this.food.getStarvationValue() > HUNGER_VALUE_MAX) {
+                /*
+                 * Adding the food's starvation value to the current
+                 * player's hunger would exceed the hunger maximum value.
+                 * So the player's hunger is updated to max.
+                 */
+                player.getLife().updateFood(HUNGER_VALUE_MAX - player.getLife().getFood());
+            } else {
+                /*
+                 * simply add the food's starvation value.
+                 */
+                player.getLife().updateFood(this.food.getStarvationValue());
+            }
+            return true;
+        }
     }
 
     /**
