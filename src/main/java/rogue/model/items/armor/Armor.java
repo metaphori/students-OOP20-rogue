@@ -12,8 +12,16 @@ public interface Armor extends Item {
      */
     int getAC();
 
+    /**
+     * Increases the armor's AC of the given value.
+     * @param value
+     *          the value to add to the armor's AC
+     */
     void increaseAC(int value);
 
+    /**
+     * @return the armor type
+     */
     ArmorType getArmorType();
 
 }
