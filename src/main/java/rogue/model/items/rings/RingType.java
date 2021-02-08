@@ -2,10 +2,10 @@ package rogue.model.items.rings;
 
 import java.util.function.Consumer;
 
+import rogue.model.items.Equipment;
+import rogue.model.items.armor.ArmorImpl;
 import rogue.model.items.weapons.IncreaseAccuracy;
 import rogue.model.items.weapons.IncreaseDamage;
-
-import rogue.model.creature.Player;
 
 /**
  * Represents an enumeration for declaring ring types.
@@ -19,25 +19,28 @@ public enum RingType {
     /**
      * Increase armor AC.
      */
-    PROTECTION(9, p -> p.getEquipment().getArmor().increaseAC(2)),
+    PROTECTION(9, e -> { 
+        e.setArmor(new ArmorImpl(e.getArmor().getArmorType())); 
+        e.getArmor().increaseAC(2); 
+    }),
     /**
      * Improves weapon accuracy.
      */
-    DEXTERITY(8, p -> p.getEquipment().setWeapon(new IncreaseAccuracy(p.getEquipment().getWeapon()))),
+    DEXTERITY(8, e -> e.setWeapon(new IncreaseAccuracy(e.getWeapon()))),
     /**
      * Increases weapon damage.
      */
-    INCREASE_DAMAGE(8, p -> p.getEquipment().setWeapon(new IncreaseDamage(p.getEquipment().getWeapon())));
+    INCREASE_DAMAGE(8, e -> e.setWeapon(new IncreaseDamage(e.getWeapon())));
 
     private final int chance;
-    private final Consumer<Player> consumer;
+    private final Consumer<Equipment> consumer;
 
-    RingType(final int chance, final Consumer<Player> consumer) {
+    RingType(final int chance, final Consumer<Equipment> consumer) {
         this.chance = chance;
         this.consumer = consumer;
     }
 
-    protected Consumer<Player> getConsumer() {
+    protected Consumer<Equipment> getConsumer() {
         return this.consumer;
     }
 
