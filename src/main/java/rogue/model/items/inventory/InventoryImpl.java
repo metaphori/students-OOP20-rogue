@@ -121,7 +121,7 @@ public class InventoryImpl implements Inventory {
          * Checks if item is already contained in inventory.
          */
         for (int i = 1; i <= INVENTORY_SIZE; i++) {
-            if (this.inventory.get(i).getKey().equals(Optional.of(item))) {
+            if (this.inventory.get(i).getKey().get().equals(item)) {
                 /*
                  * Inventory already contains the item to add.
                  * Increase it's quantity.
