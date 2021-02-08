@@ -21,6 +21,7 @@ public class EquipmentImpl implements Equipment {
     private Weapon weapon;
     private Armor armor;
     private Optional<Ring> ring;
+    private Memento memento;
 
     static final class Memento {
         private final Weapon weapon;
@@ -59,7 +60,14 @@ public class EquipmentImpl implements Equipment {
      */
     @Override
     public void setArmor(final Armor armor) {
-        this.armor = Objects.requireNonNull(armor);
+        if (this.ring.isPresent()) {
+            final Ring ring = this.ring.get();
+            this.detachRing();
+            this.armor = Objects.requireNonNull(armor);
+            this.attachRing(ring);
+        } else {
+            this.armor = Objects.requireNonNull(armor);
+        }
     }
 
     /**
@@ -70,12 +78,25 @@ public class EquipmentImpl implements Equipment {
         return this.weapon;
     }
 
+    private void reset() {
+        this.weapon = this.memento.getWeapon();
+        this.armor = this.memento.getArmor();
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void setWeapon(final Weapon weapon) {
-        this.weapon = Objects.requireNonNull(weapon);
+        if (this.ring.isPresent()) {
+            final Ring ring = this.ring.get();
+            this.detachRing();
+            this.weapon = Objects.requireNonNull(weapon);
+            this.attachRing(ring);
+        } else {
+            this.weapon = Objects.requireNonNull(weapon);
+        }
+
     }
 
     /**
@@ -86,39 +107,49 @@ public class EquipmentImpl implements Equipment {
         return this.ring;
     }
 
-    private boolean updateRing(final Predicate<Optional<Ring>> predicate, final Optional<Ring> ring) {
-        if (predicate.test(this.ring)) {
-            this.ring = ring;
+    @Override
+    public boolean attachRing(Ring ring) {
+        if (this.ring.isEmpty()) {
+            this.memento = new Memento(this.weapon, this.armor);
+            ring.consume(this);
+            this.ring = Optional.of(ring);
             return true;
-        }
+        } 
         return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean attachRing(final Ring ring) {
-        return this.updateRing(r -> r.isEmpty(), Optional.of(ring));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean detachRing() {
-        return this.updateRing(r -> r.isPresent(), Optional.empty());
+        if (this.ring.isEmpty()) {
+            return false;
+        }
+        this.reset();
+        this.ring = Optional.empty();
+        return true;
     }
 
-    // TODO
-
-    public Memento save() {
-        return new Memento(this.weapon, this.armor);
-    }
-
-    public void restore(final Memento memento) {
-        this.armor = memento.getArmor();
-        this.weapon = memento.getWeapon();
-    }
+//    private boolean updateRing(final Predicate<Optional<Ring>> predicate, final Optional<Ring> ring) {
+//        if (predicate.test(this.ring)) {
+//            this.ring = ring;
+//            return true;
+//        }
+//        return false;
+//    }
+//
+//    /**
+//     * {@inheritDoc}
+//     */
+//    @Override
+//    public boolean attachRing(final Ring ring) {
+//        return this.updateRing(r -> r.isEmpty(), Optional.of(ring));
+//    }
+//
+//    /**
+//     * {@inheritDoc}
+//     */
+//    @Override
+//    public boolean detachRing() {
+//        return this.updateRing(r -> r.isPresent(), Optional.empty());
+//    }
 
 }
