@@ -53,7 +53,7 @@ public class PotionImpl implements Potion {
             }
         } else {
             /*
-             * HURT
+             * HURT, always used since they can kill the player.
              */
             final int decrease = this.hpValue;
             if (player.getLife().getHealthPoints() + decrease < 0) {
@@ -62,13 +62,14 @@ public class PotionImpl implements Potion {
                  * Update player's health to exactly 0.
                  */
                 player.getLife().powerUp(-player.getLife().getHealthPoints());
+                return true;
             } else {
                 /*
                  * Simply update player's health points.
                  */
                 player.getLife().powerUp(decrease);
+                return true;
             }
-            return false;
         }
     }
 
