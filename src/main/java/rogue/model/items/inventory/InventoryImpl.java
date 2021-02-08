@@ -241,9 +241,17 @@ public class InventoryImpl implements Inventory {
     /**
      * @param first slot to swap.
      * @param second slot to swap.
+     * @return true if correclty swapped, false if given
+     * two empty slots.
      */
-    public void swap(final int first, final int second) {
-        // TODO Auto-generated method stub
+    public boolean swap(final int first, final int second) {
+        /*
+         * Even if this method is given a occupied slot and
+         * an empty slot it works as a move method.
+         * If given two empty slots nothing happens.
+         */
+        final Pair<Optional<Item>, Integer> toSwap = this.inventory.get(first);
+        return false;
     }
 
 }

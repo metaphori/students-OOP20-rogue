@@ -67,6 +67,8 @@ public interface Inventory {
      * Swaps the contents of two slots.
      * @param first slot to swap.
      * @param second slot to swap.
+     * @return true if the two slots have been correctly swapped, false
+     * if given two empty slots indexes.
      */
-    void swap(int first, int second);
+    boolean swap(int first, int second);
 }
