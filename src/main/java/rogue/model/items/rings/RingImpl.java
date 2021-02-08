@@ -1,6 +1,7 @@
 package rogue.model.items.rings;
 
 import rogue.model.creature.Player;
+import rogue.model.items.Equipment;
 
 public class RingImpl implements Ring {
 
@@ -10,14 +11,16 @@ public class RingImpl implements Ring {
         this.ring = ring;
     }
 
+    public void consume(final Equipment equipment) {
+        this.ring.getConsumer().accept(equipment);
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public boolean use(final Player player) {
-        player.getEquipment().save();
-        this.ring.getConsumer().accept(player);
-        return true;
+        return player.getEquipment().attachRing(this);
     }
 
     /**
