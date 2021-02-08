@@ -148,7 +148,7 @@ public class InventoryImpl implements Inventory {
          * Look for first Empty slot
          */
         for (int j = 1; j <= INVENTORY_SIZE; j++) {
-            if (this.inventory.get(j).getKey().equals(Optional.empty())) {
+            if (this.inventory.get(j).getKey().isEmpty()) {
                 /*
                  * Empty slot found, insert item.
                  */
@@ -213,7 +213,7 @@ public class InventoryImpl implements Inventory {
         /*
          * Check if active Scroll
          */
-        if (!this.scroll.getKey().equals(Optional.empty())) {
+        if (!this.scroll.getKey().isEmpty()) {
             /*
              * Check if amount will remove the scroll.
              */
@@ -253,8 +253,8 @@ public class InventoryImpl implements Inventory {
         /*
          * Check if both slots are empty.
          */
-        if (this.inventory.get(first).getKey().equals(Optional.empty())
-         && this.inventory.get(second).getKey().equals(Optional.empty())) {
+        if (this.inventory.get(first).getKey().isEmpty()
+         && this.inventory.get(second).getKey().isEmpty()) {
             /*
              * Both slots are empty return false.
              */
