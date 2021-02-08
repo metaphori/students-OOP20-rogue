@@ -35,10 +35,6 @@ public class InventoryImpl implements Inventory {
     private static final int ITEM_AMOUNT_MAX = 10;
 
     /**
-     * Active scroll container.
-     */
-    private Pair<Optional<Scroll>, Integer> scroll;
-    /**
      * Player's to which apply the item's use.
      */
     private final Player player;
@@ -48,7 +44,6 @@ public class InventoryImpl implements Inventory {
     private final Map<Integer, Pair<Optional<Item>, Integer>> inventory = new HashMap<>(INVENTORY_SIZE);
 
     public InventoryImpl(final Player player) {
-        this.scroll = new Pair<>(Optional.empty(), 0);
         this.player = player;
         for (int i = 1; i <= INVENTORY_SIZE; i++) {
             this.inventory.put(i, new Pair<>(Optional.empty(), 0));
@@ -73,7 +68,7 @@ public class InventoryImpl implements Inventory {
                  * if the item is scroll item, activate it.
                  */
                 if (Item.class.equals(Scroll.class)) {
-                    activateScroll((Scroll) toUse);
+                    //activateScroll((Scroll) toUse);
                 }
                 if (!toUse.use(this.player)) {
                     /*
@@ -160,82 +155,6 @@ public class InventoryImpl implements Inventory {
          * No empty slot found, inventory is full.
          */
         throw new InventoryIsFullException("Inventory is full.");
-    }
-
-    /**
-     * @param scroll to activate 
-     */
-    public void activateScroll(final Scroll scroll) {
-        /*
-         * Use the removeActiveScroll method to remove eventual active scroll.
-         * Then activate the given scroll.
-         */
-        removeActiveScroll();
-        this.scroll = new Pair<>(Optional.of(scroll), scroll.getEffectDuration());
-    }
-
-    /**
-     * @return true if correctly removed active scroll, false if there's
-     * no scroll to remove.
-     */
-    public boolean removeActiveScroll() {
-        if (this.scroll.getKey().isEmpty()) {
-            /*
-             * No scroll to remove.
-             */
-            return false;
-        } else {
-            /*
-             * Before removing the scroll, remove the scroll's effect.
-             */
-            this.scroll.getKey().get().remove(this.player);
-            /*
-             * Remove the scroll.
-             */
-            this.scroll = new Pair<>(Optional.empty(), 0);
-            return true;
-        }
-    }
-
-    /**
-     * @return Currently active scroll.
-     */
-    public Optional<Scroll> getActiveScroll() {
-        return this.scroll.getKey();
-    }
-
-    /**
-     * @param amount to subtract to scroll's duration
-     * @return true if correctly updated the duration, false if
-     * there's no active scroll.
-     */
-    public boolean updateEffectDuration(final int amount) {
-        /*
-         * Check if active Scroll
-         */
-        if (!this.scroll.getKey().isEmpty()) {
-            /*
-             * Check if amount will remove the scroll.
-             */
-            if (this.scroll.getValue() - amount <= 0) {
-                /*
-                 * Scroll duration is over, remove scroll.
-                 */
-                this.scroll = new Pair<>(Optional.empty(), 0);
-                return true;
-            } else {
-                /*
-                 * Update scroll's duration
-                 */
-                this.scroll = new Pair<>(this.scroll.getKey(), this.scroll.getValue() - amount);
-                return true;
-            }
-        } else {
-            /*
-             * No active scroll, nothing to update
-             */
-            return false;
-        }
     }
 
     /**
