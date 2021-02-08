@@ -5,9 +5,11 @@ import rogue.model.creature.Player;
 public class ScrollImpl implements Scroll {
 
     private final ScrollType scroll;
+    private final int effectValue;
 
     public ScrollImpl(final ScrollType scroll) {
         this.scroll = scroll;
+        this.effectValue = scroll.getEffectValue();
     }
 
     /**
@@ -80,7 +82,7 @@ public class ScrollImpl implements Scroll {
      * @return amount of strength to add or remove to the player.
      */
     public int getEffectValue() {
-        return this.scroll.getEffectValue();
+        return this.effectValue;
     }
 
     /**
