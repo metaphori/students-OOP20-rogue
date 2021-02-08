@@ -44,7 +44,7 @@ public enum ArmorType {
     /**
      * A lower AC gives a better chance to avoid damage.
      */
-    private int ac;
+    private final int ac;
 
     ArmorType(final int ac) {
         this.ac = ac;
@@ -55,15 +55,6 @@ public enum ArmorType {
      */
     protected int getAC() {
         return this.ac;
-    }
-
-    /**
-     * Sets the AC value to the one given in input.
-     * @param value
-     *          the value to set the ac
-     */
-    protected void setAC(final int value) {
-        this.ac = value;
     }
 
 }
