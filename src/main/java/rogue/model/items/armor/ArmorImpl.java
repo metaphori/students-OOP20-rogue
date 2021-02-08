@@ -9,6 +9,7 @@ import rogue.model.creature.Player;
 public class ArmorImpl implements Armor {
 
     private final ArmorType armor;
+    private int ac;
 
     /**
      * Builds a new {@link ArmorImpl}.
@@ -17,11 +18,16 @@ public class ArmorImpl implements Armor {
      */
     public ArmorImpl(final ArmorType armor) {
         this.armor = armor;
+        this.ac = this.armor.getAC();
     }
 
     @Override
     public final int getAC() {
-        return armor.getAC();
+        return this.ac;
+    }
+
+    public ArmorType getArmorType() {
+        return this.armor;
     }
 
     /**
@@ -34,7 +40,32 @@ public class ArmorImpl implements Armor {
     }
 
     public void increaseAC(final int value) {
-        this.armor.setAC(this.armor.getAC() + value);
+        this.ac += value;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((armor == null) ? 0 : armor.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof ArmorImpl)) {
+            return false;
+        }
+        final ArmorImpl other = (ArmorImpl) obj;
+        return armor == other.armor;
+    }
+
+    @Override
+    public String toString() {
+        return "ArmorImpl [armor=" + armor + ", " + armor.getAC() + "]";
     }
 
 }
