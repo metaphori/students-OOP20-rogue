@@ -4,9 +4,8 @@ import rogue.model.creature.Player;
 
 /** 
  * Represents an implementation for a game {@link Armor}.
- *
  */
-public class ArmorImpl implements Armor {
+public final class ArmorImpl implements Armor {
 
     private final ArmorType armor;
     private int ac;
@@ -22,16 +21,19 @@ public class ArmorImpl implements Armor {
     }
 
     @Override
-    public final int getAC() {
+    public int getAC() {
         return this.ac;
     }
 
+    @Override
     public ArmorType getArmorType() {
         return this.armor;
     }
 
     /**
      * Equip the player with this armor.
+     * @param player
+     *          the player who wants to wear this armor
      */
     @Override
     public boolean use(final Player player) {
@@ -39,6 +41,7 @@ public class ArmorImpl implements Armor {
         return true;
     }
 
+    @Override
     public void increaseAC(final int value) {
         this.ac += value;
     }
