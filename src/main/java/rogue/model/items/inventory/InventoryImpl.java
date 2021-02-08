@@ -241,7 +241,7 @@ public class InventoryImpl implements Inventory {
     /**
      * @param first slot to swap.
      * @param second slot to swap.
-     * @return true if correclty swapped, false if given
+     * @return true if correctly swapped, false if given
      * two empty slots.
      */
     public boolean swap(final int first, final int second) {
@@ -250,8 +250,24 @@ public class InventoryImpl implements Inventory {
          * an empty slot it works as a move method.
          * If given two empty slots nothing happens.
          */
-        final Pair<Optional<Item>, Integer> toSwap = this.inventory.get(first);
-        return false;
+        /*
+         * Check if both slots are empty.
+         */
+        if (this.inventory.get(first).getKey().equals(Optional.empty())
+         && this.inventory.get(second).getKey().equals(Optional.empty())) {
+            /*
+             * Both slots are empty return false.
+             */
+            return false;
+        } else {
+            /*
+             * Execute swap.
+             */
+            final Pair<Optional<Item>, Integer> toSwap = this.inventory.get(first);
+            this.inventory.put(first, this.inventory.get(second));
+            this.inventory.put(second, toSwap);
+            return true;
+        }
     }
 
 }
