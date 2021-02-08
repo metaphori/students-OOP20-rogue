@@ -179,7 +179,7 @@ public class InventoryImpl implements Inventory {
      * no scroll to remove.
      */
     public boolean removeActiveScroll() {
-        if (this.scroll.getKey().equals(Optional.empty())) {
+        if (this.scroll.getKey().isEmpty()) {
             /*
              * No scroll to remove.
              */
