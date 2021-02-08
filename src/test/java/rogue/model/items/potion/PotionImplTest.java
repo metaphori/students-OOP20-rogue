@@ -12,6 +12,7 @@ import static org.junit.Assert.assertEquals;
 public class PotionImplTest {
 
     private static final int MAXIMUM_HEALTH = 50;
+    private static final int REMOVE_AMOUNT_40 = 40;
     private static final int REMOVE_AMOUNT_30 = 30;
     private static final int REMOVE_AMOUNT_20 = 20;
     private static final int REMOVE_AMOUNT_10 = 10;
@@ -103,5 +104,20 @@ public class PotionImplTest {
         final int newAmount = pl.getLife().getHealthPoints();
         assertTrue(potion.use(pl));
         assertEquals(newAmount + potion.getHpValue(), pl.getLife().getHealthPoints());
+    }
+
+    @Test
+    public void useCorruptBelowZero() {
+        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        final PotionImpl potion = new PotionImpl(PotionType.CORRUPT_POTION_II);
+        /*
+         * Use corrupt potion when the potion value would
+         * set the health below zero.
+         * Expect true and correct update of health to 0.
+         * corrupt potion II removes from 15-20, set health to 10.
+         */
+        pl.getLife().hurt(REMOVE_AMOUNT_40);
+        assertTrue(potion.use(pl));
+        assertEquals(0, pl.getLife().getHealthPoints());
     }
 }
