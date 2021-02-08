@@ -6,9 +6,11 @@ public class PotionImpl implements Potion {
 
     private static final int MAXIMUM_HEALTH = 50;
     private final PotionType potion;
+    private final int hpValue;
 
     public PotionImpl(final PotionType potion) {
         this.potion = potion;
+        this.hpValue = potion.getHpValue();
     }
 
     /**
@@ -75,7 +77,7 @@ public class PotionImpl implements Potion {
      * to the player.
      */
     public int getHpValue() {
-        return this.potion.getHpValue();
+        return this.hpValue;
     }
 
     /**
