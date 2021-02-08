@@ -33,4 +33,8 @@ public class ArmorImpl implements Armor {
         return true;
     }
 
+    public void increaseAC(final int value) {
+        this.armor.setAC(this.armor.getAC() + value);
+    }
+
 }
