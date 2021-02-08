@@ -2,6 +2,7 @@ package rogue.model.items;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 
 import rogue.model.items.armor.Armor;
@@ -14,45 +15,20 @@ import rogue.model.items.weapons.WeaponType;
 
 /**
  * An implementation for an {@link Equipment}.
- *
  */
 public class EquipmentImpl implements Equipment {
+
+    private Weapon lastWeapon;
+    private Armor lastArmor;
 
     private Weapon weapon;
     private Armor armor;
     private Optional<Ring> ring;
-    private Memento memento;
-
-    static final class Memento {
-        private final Weapon weapon;
-        private final Armor armor;
-
-        private Memento(final Weapon weapon, final Armor armor) {
-            this.weapon = weapon;
-            this.armor = armor;
-        }
-
-        private Weapon getWeapon() {
-            return this.weapon;
-        }
-
-        private Armor getArmor() {
-            return this.armor;
-        }
-    }
 
     public EquipmentImpl() {
         this.weapon = new BaseWeapon(WeaponType.MACE);
         this.armor = new ArmorImpl(ArmorType.LEATHER);
         this.ring = Optional.empty();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Armor getArmor() {
-        return this.armor;
     }
 
     /**
@@ -68,19 +44,6 @@ public class EquipmentImpl implements Equipment {
         } else {
             this.armor = Objects.requireNonNull(armor);
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Weapon getWeapon() {
-        return this.weapon;
-    }
-
-    private void reset() {
-        this.weapon = this.memento.getWeapon();
-        this.armor = this.memento.getArmor();
     }
 
     /**
@@ -103,14 +66,43 @@ public class EquipmentImpl implements Equipment {
      * {@inheritDoc}
      */
     @Override
+    public Armor getArmor() {
+        return this.armor;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Weapon getWeapon() {
+        return this.weapon;
+    }
+
+    private void setState() {
+        this.lastArmor = this.armor;
+        this.lastWeapon = this.weapon;
+    }
+
+    private void restore() {
+        this.weapon = this.lastWeapon;
+        this.armor = this.lastArmor;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Optional<Ring> getRing() {
         return this.ring;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean attachRing(Ring ring) {
+    public boolean attachRing(final Ring ring) {
         if (this.ring.isEmpty()) {
-            this.memento = new Memento(this.weapon, this.armor);
+            this.setState();
             ring.consume(this);
             this.ring = Optional.of(ring);
             return true;
@@ -118,38 +110,17 @@ public class EquipmentImpl implements Equipment {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean detachRing() {
         if (this.ring.isEmpty()) {
             return false;
         }
-        this.reset();
+        this.restore();
         this.ring = Optional.empty();
         return true;
     }
-
-//    private boolean updateRing(final Predicate<Optional<Ring>> predicate, final Optional<Ring> ring) {
-//        if (predicate.test(this.ring)) {
-//            this.ring = ring;
-//            return true;
-//        }
-//        return false;
-//    }
-//
-//    /**
-//     * {@inheritDoc}
-//     */
-//    @Override
-//    public boolean attachRing(final Ring ring) {
-//        return this.updateRing(r -> r.isEmpty(), Optional.of(ring));
-//    }
-//
-//    /**
-//     * {@inheritDoc}
-//     */
-//    @Override
-//    public boolean detachRing() {
-//        return this.updateRing(r -> r.isPresent(), Optional.empty());
-//    }
 
 }
