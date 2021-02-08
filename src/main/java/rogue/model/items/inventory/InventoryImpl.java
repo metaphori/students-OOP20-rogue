@@ -238,4 +238,12 @@ public class InventoryImpl implements Inventory {
         }
     }
 
+    /**
+     * @param first slot to swap.
+     * @param second slot to swap.
+     */
+    public void swap(final int first, final int second) {
+        // TODO Auto-generated method stub
+    }
+
 }

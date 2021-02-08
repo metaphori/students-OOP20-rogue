@@ -63,4 +63,10 @@ public interface Inventory {
      */
     boolean updateEffectDuration(int amount);
 
+    /**
+     * Swaps the contents of two slots.
+     * @param first slot to swap.
+     * @param second slot to swap.
+     */
+    void swap(int first, int second);
 }
