@@ -3,7 +3,6 @@ package rogue.model.items.inventory;
 import java.util.Optional;
 
 import rogue.model.items.Item;
-import rogue.model.items.scroll.Scroll;
 
 /**
  * An interface for modeling a game Inventory.

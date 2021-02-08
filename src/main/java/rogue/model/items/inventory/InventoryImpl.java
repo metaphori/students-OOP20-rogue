@@ -38,12 +38,17 @@ public class InventoryImpl implements Inventory {
      * Player's to which apply the item's use.
      */
     private final Player player;
+    /*
+     * Scroll container for the scroll effect.
+     */
+    private final ScrollContainer scrollContainer;
     /**
      * Inventory map.
      */
     private final Map<Integer, Pair<Optional<Item>, Integer>> inventory = new HashMap<>(INVENTORY_SIZE);
 
     public InventoryImpl(final Player player) {
+        scrollContainer = new ScrollContainerImpl(player);
         this.player = player;
         for (int i = 1; i <= INVENTORY_SIZE; i++) {
             this.inventory.put(i, new Pair<>(Optional.empty(), 0));
@@ -67,8 +72,8 @@ public class InventoryImpl implements Inventory {
                  * Use the item, check if correctly used.
                  * if the item is scroll item, activate it.
                  */
-                if (Item.class.equals(Scroll.class)) {
-                    //activateScroll((Scroll) toUse);
+                if (toUse.getClass().equals(Scroll.class)) {
+                    this.scrollContainer.activateScroll((Scroll) toUse);
                 }
                 if (!toUse.use(this.player)) {
                     /*
