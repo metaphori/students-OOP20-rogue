@@ -44,4 +44,11 @@ public interface Inventory {
      * if given two empty slots indexes.
      */
     boolean swap(int first, int second);
+
+    /**
+     * Get the scroll container which contains currently active
+     * scroll (could also be empty).
+     * @return ScrollContainer associated with the inventory.
+     */
+    ScrollContainer getScrollContainer();
 }

@@ -194,4 +194,11 @@ public class InventoryImpl implements Inventory {
         }
     }
 
+    /**
+     * @return ScrollContainer associated with inventory.
+     */
+    public ScrollContainer getScrollContainer() {
+        return this.scrollContainer;
+    }
+
 }
