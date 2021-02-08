@@ -19,4 +19,14 @@ public class IncreaseDamage extends WeaponDecorator {
         return super.getDamage(use) + ADDITIONAL_DAMAGE;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public String toString() {
+        return "IncreaseDamage [" + super.toString() + "]";
+    }
+
 }

@@ -37,4 +37,36 @@ public abstract class WeaponDecorator implements Weapon {
         return this.weapon.getPrecision();
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((weapon == null) ? 0 : weapon.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof WeaponDecorator)) {
+            return false;
+        }
+        WeaponDecorator other = (WeaponDecorator) obj;
+        if (weapon == null) {
+            if (other.weapon != null) {
+                return false;
+            }
+        } else if (!weapon.equals(other.weapon)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return this.weapon.toString();
+    }
+
 }

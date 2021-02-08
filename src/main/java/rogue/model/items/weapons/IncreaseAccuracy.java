@@ -19,4 +19,14 @@ public class IncreaseAccuracy extends WeaponDecorator {
         return super.getPrecision() + ADDITIONAL_ACCURACY;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public String toString() {
+        return "IncreaseAccuracy [" + super.toString() + "]";
+    }
+
 }
