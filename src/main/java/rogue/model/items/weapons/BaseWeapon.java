@@ -5,16 +5,23 @@ import rogue.model.creature.Player;
 /**
  * A minimal implementation for a {@link Weapon}.
  */
-public class BaseWeapon implements Weapon {
+public final class BaseWeapon implements Weapon {
 
     private final WeaponType weapon;
 
+    /**
+     * Builds a new Weapon.
+     * @param weapon
+     *          the weapon type
+     */
     public BaseWeapon(final WeaponType weapon) {
         this.weapon = weapon;
     }
 
     /**
      * Equip the player with this weapon.
+     * @param player
+     *          the player who wants to wear this weapon
      */
     @Override
     public boolean use(final Player player) {
@@ -22,19 +29,13 @@ public class BaseWeapon implements Weapon {
         return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int getDamage(final Use use) {
         return this.weapon.getDamageSupplier(use).get();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public int getPrecision() {
+    public int getAccuracy() {
         return this.weapon.getAccuracy();
     }
 
@@ -60,7 +61,7 @@ public class BaseWeapon implements Weapon {
 
     @Override
     public String toString() {
-        return "BaseWeapon [weapon=" + weapon + "]";
+        return "Weapon [weapon=" + weapon + "]";
     }
 
 }

@@ -3,7 +3,7 @@ package rogue.model.items.weapons;
 /**
  * A decorator to increase the weapon damage.
  */
-public class IncreaseDamage extends WeaponDecorator {
+public final class IncreaseDamage extends WeaponDecorator {
 
     private static final int ADDITIONAL_DAMAGE = 3;
 
@@ -11,17 +11,9 @@ public class IncreaseDamage extends WeaponDecorator {
         super(weapon);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int getDamage(final Use use) {
         return super.getDamage(use) + ADDITIONAL_DAMAGE;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
     }
 
     @Override
