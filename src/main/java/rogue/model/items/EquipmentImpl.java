@@ -22,6 +22,24 @@ public class EquipmentImpl implements Equipment {
     private Armor armor;
     private Optional<Ring> ring;
 
+    static final class Memento {
+        private final Weapon weapon;
+        private final Armor armor;
+
+        private Memento(final Weapon weapon, final Armor armor) {
+            this.weapon = weapon;
+            this.armor = armor;
+        }
+
+        private Weapon getWeapon() {
+            return this.weapon;
+        }
+
+        private Armor getArmor() {
+            return this.armor;
+        }
+    }
+
     public EquipmentImpl() {
         this.weapon = new BaseWeapon(WeaponType.MACE);
         this.armor = new ArmorImpl(ArmorType.LEATHER);
@@ -90,6 +108,17 @@ public class EquipmentImpl implements Equipment {
     @Override
     public boolean detachRing() {
         return this.updateRing(r -> r.isPresent(), Optional.empty());
+    }
+
+    // TODO
+
+    public Memento save() {
+        return new Memento(this.weapon, this.armor);
+    }
+
+    public void restore(final Memento memento) {
+        this.armor = memento.getArmor();
+        this.weapon = memento.getWeapon();
     }
 
 }
