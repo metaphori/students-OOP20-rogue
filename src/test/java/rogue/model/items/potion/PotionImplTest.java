@@ -13,6 +13,7 @@ public class PotionImplTest {
 
     private static final int MAXIMUM_HEALTH = 50;
     private static final int REMOVE_AMOUNT_30 = 30;
+    private static final int REMOVE_AMOUNT_20 = 20;
     private static final int REMOVE_AMOUNT_10 = 10;
 
     private PlayerImpl pl;
@@ -79,7 +80,7 @@ public class PotionImplTest {
     }
 
     @Test
-    public void useCorruptWithMax() {
+    public void useCorruptWithMaxHealth() {
         pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
         final PotionImpl potion = new PotionImpl(PotionType.CORRUPT_POTION_I);
         /*
@@ -88,5 +89,19 @@ public class PotionImplTest {
          */
         assertTrue(potion.use(pl));
         assertEquals(MAXIMUM_HEALTH + potion.getHpValue(), pl.getLife().getHealthPoints());
+    }
+
+    @Test
+    public void useCorruptWithNormalHealth() {
+        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        final PotionImpl potion = new PotionImpl(PotionType.CORRUPT_POTION_I);
+        /*
+         * Use a corrupt potion with normal health,
+         * Except true and correct health update.
+         */
+        pl.getLife().hurt(REMOVE_AMOUNT_20);
+        final int newAmount = pl.getLife().getHealthPoints();
+        assertTrue(potion.use(pl));
+        assertEquals(newAmount + potion.getHpValue(), pl.getLife().getHealthPoints());
     }
 }
