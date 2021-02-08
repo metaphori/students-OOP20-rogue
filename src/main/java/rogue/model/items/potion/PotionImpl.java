@@ -27,7 +27,7 @@ public class PotionImpl implements Potion {
          * lower it under 0, we just set it to 0 and the player dies.
          */
         if (this.potion.getEffect().equals(Potion.PotionEffect.HEAL)) {
-            final int increase = this.potion.getHpValue();
+            final int increase = this.hpValue;
             /*
              * HEAL
              */
@@ -55,7 +55,7 @@ public class PotionImpl implements Potion {
             /*
              * HURT
              */
-            final int decrease = this.potion.getHpValue();
+            final int decrease = this.hpValue;
             if (player.getLife().getHealthPoints() + decrease < 0) {
                 /*
                  * Player's health can't be below 0.
