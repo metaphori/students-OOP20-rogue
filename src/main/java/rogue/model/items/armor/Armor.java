@@ -14,4 +14,6 @@ public interface Armor extends Item {
 
     void increaseAC(int value);
 
+    ArmorType getArmorType();
+
 }
