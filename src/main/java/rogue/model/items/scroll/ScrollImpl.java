@@ -68,7 +68,7 @@ public class ScrollImpl implements Scroll {
             /*
              * Remove scroll's value to the player.
              */
-            player.getLife().addStrength(-getEffectValue());
+            player.getLife().addStrength(-this.effectValue);
         }
     }
 
