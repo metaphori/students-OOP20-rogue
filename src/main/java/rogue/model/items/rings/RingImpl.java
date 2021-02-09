@@ -1,8 +1,7 @@
 package rogue.model.items.rings;
 
 import rogue.model.creature.Player;
-import rogue.model.items.Equipment;
-import rogue.model.items.Memento;
+import rogue.model.items.EquipmentImpl.Memento;
 
 public final class RingImpl implements Ring {
 
