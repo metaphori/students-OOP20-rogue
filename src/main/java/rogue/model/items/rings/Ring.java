@@ -1,6 +1,6 @@
 package rogue.model.items.rings;
 
-import rogue.model.items.Equipment;
+import rogue.model.creature.Player;
 import rogue.model.items.Item;
 
 /** 
@@ -16,6 +16,10 @@ public interface Ring extends Item {
      */
     int getChance();
 
-    void consume(Equipment equipment);
+    /**
+     * 
+     * @param player
+     */
+    void stopUsing(Player player);
 
 }
