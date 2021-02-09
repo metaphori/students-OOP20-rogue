@@ -207,7 +207,17 @@ public class InventoryImpl implements Inventory {
      */
     public boolean remove(final int index) throws OutOfInventoryException {
         if (this.inventory.containsKey(index)) {
-            return false;
+            if (this.inventory.get(index).getKey().isEmpty()) {
+                /*
+                 * given slot is empty, return false
+                 */
+                return false;
+            }
+            /*
+             * remove item contained in slot.
+             */
+            inventory.put(index, new Pair<>(Optional.empty(), 0));
+            return true;
         }
         throw new OutOfInventoryException("Given index is out of the inventory.");
     }
