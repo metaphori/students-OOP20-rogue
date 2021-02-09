@@ -25,7 +25,7 @@ public interface Inventory {
      * @return Optional.empty if given slot is empty, Optional.of(Item)
      * otherwise.
      */
-    Optional<Item> getItem(int index);
+    Optional<Item> getItem(int index) throws OutOfInventoryException;
 
     /**
      * 
@@ -50,7 +50,7 @@ public interface Inventory {
      * @return true if the two slots have been correctly swapped, false
      * if given two empty slots indexes.
      */
-    boolean swap(int first, int second);
+    boolean swap(int first, int second) throws OutOfInventoryException;
 
     /**
      * Get the scroll container which contains currently active

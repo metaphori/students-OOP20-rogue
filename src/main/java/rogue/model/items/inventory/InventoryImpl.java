@@ -34,6 +34,9 @@ public class InventoryImpl implements Inventory {
     private static final int INVENTORY_SIZE = 20;
     private static final int ITEM_AMOUNT_MAX = 10;
 
+    private static final String OUT_OF_INVENTORY_MESSAGE = "Given index is out of the inventory.";
+    private static final String FULL_INVENTORY_MESSAGE = "Inventory is full.";
+
     /**
      * Player's to which apply the item's use.
      */
@@ -99,15 +102,18 @@ public class InventoryImpl implements Inventory {
                 return false;
             }
         }
-        throw new OutOfInventoryException("Given index is out of the inventory.");
+        throw new OutOfInventoryException(OUT_OF_INVENTORY_MESSAGE);
     }
 
     /**
      * @param index of the inventory slot to select.
      * @return the item contained in the given inventory slot.
      */
-    public Optional<Item> getItem(final int index) {
-        return this.inventory.get(index).getKey();
+    public Optional<Item> getItem(final int index) throws OutOfInventoryException {
+        if (this.inventory.containsKey(index)) {
+            return this.inventory.get(index).getKey();
+        }
+        throw new OutOfInventoryException(OUT_OF_INVENTORY_MESSAGE);
     }
 
     /**
@@ -162,7 +168,7 @@ public class InventoryImpl implements Inventory {
         /*
          * No empty slot found, inventory is full.
          */
-        throw new InventoryIsFullException("Inventory is full.");
+        throw new InventoryIsFullException(FULL_INVENTORY_MESSAGE);
     }
 
     /**
@@ -171,12 +177,13 @@ public class InventoryImpl implements Inventory {
      * @return true if correctly swapped, false if given
      * two empty slots.
      */
-    public boolean swap(final int first, final int second) {
+    public boolean swap(final int first, final int second) throws OutOfInventoryException {
         /*
          * Even if this method is given a occupied slot and
          * an empty slot it works as a move method.
          * If given two empty slots nothing happens.
          */
+        if (this.inventory.containsKey(first) && this.inventory.containsKey(second)) {
         /*
          * Check if both slots are empty.
          */
@@ -195,6 +202,8 @@ public class InventoryImpl implements Inventory {
             this.inventory.put(second, toSwap);
             return true;
         }
+        }
+        throw new OutOfInventoryException(OUT_OF_INVENTORY_MESSAGE);
     }
 
     /**
@@ -222,7 +231,7 @@ public class InventoryImpl implements Inventory {
             inventory.put(index, new Pair<>(Optional.empty(), 0));
             return true;
         }
-        throw new OutOfInventoryException("Given index is out of the inventory.");
+        throw new OutOfInventoryException(OUT_OF_INVENTORY_MESSAGE);
     }
 
     /**
@@ -234,7 +243,7 @@ public class InventoryImpl implements Inventory {
         if (this.inventory.containsKey(index)) {
             return this.inventory.get(index).getValue();
         }
-        throw new OutOfInventoryException("Given index is out of the inventory.");
+        throw new OutOfInventoryException(OUT_OF_INVENTORY_MESSAGE);
     }
 
 }
