@@ -16,8 +16,6 @@ import rogue.model.items.scroll.ScrollType;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.Optional;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
@@ -178,6 +176,26 @@ public class InventoryImplTest {
          * try to swap two empty slots, expect false.
          */
         assertFalse(inv.swap(4, 1));
+    }
+
+    @Test
+    public void testRemove() throws OutOfInventoryException, InventoryIsFullException {
+        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        final Inventory inv = new InventoryImpl(pl);
+        final Scroll scroll = new ScrollImpl(ScrollType.SCROLL_II);
+        /*
+         * Try to remove empty slot.
+         */
+        assertFalse(inv.remove(1));
+        /*
+         * Add scroll and remove it.
+         */
+        assertTrue(inv.addItem(scroll));
+        assertTrue(inv.remove(1));
+        /*
+         * check the slot
+         */
+        assertTrue(inv.getItem(1).isEmpty()); 
     }
 
     @org.junit.Test(expected = OutOfInventoryException.class)
