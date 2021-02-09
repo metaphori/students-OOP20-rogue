@@ -132,4 +132,18 @@ public class InventoryImplTest {
         final Inventory inv = new InventoryImpl(pl);
         inv.getAmount(INVENTORY_SIZE + 10);
     }
+
+    @org.junit.Test(expected = OutOfInventoryException.class)
+    public void testIndexOutOfInventorySwap() throws OutOfInventoryException {
+        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        final Inventory inv = new InventoryImpl(pl);
+        inv.swap(INVENTORY_SIZE + 10, 1);
+    }
+
+    @org.junit.Test(expected = OutOfInventoryException.class)
+    public void testIndexOutOfInventoryGetItem() throws OutOfInventoryException {
+        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        final Inventory inv = new InventoryImpl(pl);
+        inv.getItem(INVENTORY_SIZE + 10);
+    }
 }
