@@ -111,4 +111,11 @@ public class InventoryImplTest {
         }
         assertEquals(ITEM_AMOUNT_MAX, inv.getAmount(1));
     }
+
+    @org.junit.Test(expected = OutOfInventoryException.class)
+    public void testIndexOutOfInventory() throws OutOfInventoryException {
+        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        final Inventory inv = new InventoryImpl(pl);
+        inv.useItem(INVENTORY_SIZE + 10);
+    }
 }
