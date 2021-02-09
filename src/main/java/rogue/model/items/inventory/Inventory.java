@@ -32,7 +32,7 @@ public interface Inventory {
      * @param index
      * @return amount of item in index, 0 if empty slot.
      */
-    int getAmount(int index);
+    int getAmount(int index) throws OutOfInventoryException;
 
     /**
      * Add an item to the inventory.

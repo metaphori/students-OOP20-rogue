@@ -75,7 +75,7 @@ public class InventoryImplTest {
     }
 
     @Test
-    public void testAddTwoOfSameItems() {
+    public void testAddTwoOfSameItems() throws OutOfInventoryException {
         pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
         final Inventory inv = new InventoryImpl(pl);
         final Scroll scroll = new ScrollImpl(ScrollType.SCROLL_II);
@@ -93,7 +93,7 @@ public class InventoryImplTest {
     }
 
     @Test
-    public void testMaxOfSameItem() {
+    public void testMaxOfSameItem() throws OutOfInventoryException {
         pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
         final Inventory inv = new InventoryImpl(pl);
         final Scroll scroll = new ScrollImpl(ScrollType.SCROLL_II);

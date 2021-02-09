@@ -230,8 +230,11 @@ public class InventoryImpl implements Inventory {
      * @return amount of the item in the slot, 0 if
      * empty slot.
      */
-    public int getAmount(final int index) {
-        return this.inventory.get(index).getValue();
+    public int getAmount(final int index) throws OutOfInventoryException {
+        if (this.inventory.containsKey(index)) {
+            return this.inventory.get(index).getValue();
+        }
+        throw new OutOfInventoryException("Given index is out of the inventory.");
     }
 
 }
