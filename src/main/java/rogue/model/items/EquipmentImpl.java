@@ -2,9 +2,8 @@ package rogue.model.items;
 
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.BiConsumer;
-import java.util.function.Predicate;
 
+import rogue.model.creature.Player;
 import rogue.model.items.armor.Armor;
 import rogue.model.items.armor.ArmorImpl;
 import rogue.model.items.armor.ArmorType;
@@ -18,14 +17,32 @@ import rogue.model.items.weapons.WeaponType;
  */
 public class EquipmentImpl implements Equipment {
 
-    private Weapon lastWeapon;
-    private Armor lastArmor;
+    private final Player owner;
 
     private Weapon weapon;
     private Armor armor;
     private Optional<Ring> ring;
 
-    public EquipmentImpl() {
+    private final class MementoImpl implements Memento {
+        private final Weapon weapon;
+        private final Armor armor;
+
+        private MementoImpl(final Weapon weapon, final Armor armor) {
+            this.weapon = weapon;
+            this.armor  = armor;
+        }
+
+        private Weapon getWeapon() {
+            return this.weapon;
+        }
+
+        private Armor getArmor() {
+            return this.armor;
+        }
+    }
+
+    public EquipmentImpl(final Player player) {
+        this.owner = player;
         this.weapon = new BaseWeapon(WeaponType.MACE);
         this.armor = new ArmorImpl(ArmorType.LEATHER);
         this.ring = Optional.empty();
@@ -38,28 +55,12 @@ public class EquipmentImpl implements Equipment {
     public void setArmor(final Armor armor) {
         if (this.ring.isPresent()) {
             final Ring ring = this.ring.get();
-            this.detachRing();
+            this.ring.get().stopUsing(this.owner);
             this.armor = Objects.requireNonNull(armor);
-            this.attachRing(ring);
+            ring.use(owner);
         } else {
             this.armor = Objects.requireNonNull(armor);
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setWeapon(final Weapon weapon) {
-        if (this.ring.isPresent()) {
-            final Ring ring = this.ring.get();
-            this.detachRing();
-            this.weapon = Objects.requireNonNull(weapon);
-            this.attachRing(ring);
-        } else {
-            this.weapon = Objects.requireNonNull(weapon);
-        }
-
     }
 
     /**
@@ -74,19 +75,25 @@ public class EquipmentImpl implements Equipment {
      * {@inheritDoc}
      */
     @Override
+    public void setWeapon(final Weapon weapon) {
+        if (this.ring.isPresent()) {
+            final Ring ring = this.ring.get();
+            this.ring.get().stopUsing(this.owner);
+            this.weapon = Objects.requireNonNull(weapon);
+            ring.use(owner);
+        } else {
+            this.weapon = Objects.requireNonNull(weapon);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Weapon getWeapon() {
         return this.weapon;
     }
 
-    private void setState() {
-        this.lastArmor = this.armor;
-        this.lastWeapon = this.weapon;
-    }
-
-    private void restore() {
-        this.weapon = this.lastWeapon;
-        this.armor = this.lastArmor;
-    }
 
     /**
      * {@inheritDoc}
@@ -100,27 +107,38 @@ public class EquipmentImpl implements Equipment {
      * {@inheritDoc}
      */
     @Override
-    public boolean attachRing(final Ring ring) {
-        if (this.ring.isEmpty()) {
-            this.setState();
-            ring.consume(this);
-            this.ring = Optional.of(ring);
-            return true;
-        } 
-        return false;
+    public void attachRing(final Ring ring) {
+        if (this.ring.isPresent()) {
+            throw new IllegalStateException("One ring per time could be worn!");
+        }
+        this.ring = Optional.of(ring);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean detachRing() {
-        if (this.ring.isEmpty()) {
-            return false;
+    public Memento save() {
+        return new MementoImpl(this.weapon, this.armor);
+    }
+
+    private void restore(final Memento m) {
+        final MementoImpl mem = (MementoImpl) m;
+        this.weapon = mem.getWeapon();
+        this.armor = mem.getArmor();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean detachRing(final Memento memento) {
+        if (this.ring.isPresent()) {
+            this.ring = Optional.empty();
+            this.restore(memento);
+            return true;
         }
-        this.restore();
-        this.ring = Optional.empty();
-        return true;
+        return false;
     }
 
 }
