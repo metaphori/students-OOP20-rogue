@@ -28,6 +28,13 @@ public interface Inventory {
     Optional<Item> getItem(int index);
 
     /**
+     * 
+     * @param index
+     * @return amount of item in index, 0 if empty slot.
+     */
+    int getAmount(int index);
+
+    /**
      * Add an item to the inventory.
      * @param item to add to the inventory.
      * @return true if item was correctly added, false if

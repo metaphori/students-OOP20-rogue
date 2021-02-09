@@ -61,7 +61,7 @@ public class InventoryImplTest {
         assertEquals(scroll, inv.getItem(1).get());
         /*
          * Add a different scroll, expect different item
-         * to be stored in 2 slot.
+         * to be stored in slot 2.
          */
         try {
             assertTrue(inv.addItem(scroll2));

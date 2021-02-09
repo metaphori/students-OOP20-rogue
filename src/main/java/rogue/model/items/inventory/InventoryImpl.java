@@ -225,4 +225,14 @@ public class InventoryImpl implements Inventory {
         throw new OutOfInventoryException("Given index is out of the inventory.");
     }
 
+    /**
+     * @param index of the wanted slot.
+     * @return amount of the item in the slot, 0 if
+     * empty slot.
+     */
+    public int getAmount(final int index) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
 }
