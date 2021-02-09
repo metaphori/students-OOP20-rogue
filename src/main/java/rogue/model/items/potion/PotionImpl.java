@@ -120,10 +120,7 @@ public class PotionImpl implements Potion {
         if (hpValue != other.hpValue) {
             return false;
         }
-        if (potion != other.potion) {
-            return false;
-        }
-        return true;
+        return potion != other.potion;
     }
 
 }

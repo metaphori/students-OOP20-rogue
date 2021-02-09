@@ -54,4 +54,34 @@ public class FoodImpl implements Food {
         return this.food.getStarvationValue();
     }
 
+    /**
+     * @return hashCode
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((food == null) ? 0 : food.hashCode());
+        return result;
+    }
+
+    /**
+     * equals.
+     * @param obj to apply the equals.
+     * @return true if equal, false otherwise.
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final FoodImpl other = (FoodImpl) obj;
+        return food != other.food;
+    }
 }
