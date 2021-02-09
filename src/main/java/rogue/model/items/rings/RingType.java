@@ -12,12 +12,12 @@ import rogue.model.items.weapons.IncreaseDamage;
  * 
  * The first field keeps track the percentage of chance that the corresponding ring has of being found.
  * The second field keeps track a consumer describing its effect on the player.
- * TODO to finish
+ *
  */
 public enum RingType {
 
     /**
-     * Increase armor AC.
+     * Increase armor AC by 2 points.
      */
     PROTECTION(9, e -> { 
         e.setArmor(new ArmorImpl(e.getArmor().getArmorType())); 
@@ -40,10 +40,16 @@ public enum RingType {
         this.consumer = consumer;
     }
 
+    /**
+     * @return a Consumer which apply the ring's effect on the player given in input
+     */
     protected Consumer<Equipment> getConsumer() {
         return this.consumer;
     }
 
+    /**
+     * @return the ring chance of being found
+     */
     protected int getChance() {
         return this.chance;
     }
