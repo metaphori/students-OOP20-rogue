@@ -21,7 +21,7 @@ public class PlayerFactoryImpl implements PlayerFactory {
         protected PlayerImpl(final PlayerLife life) {
             super(life);
             this.inventory = new InventoryImpl(this);
-            this.equipment = new EquipmentImpl();
+            this.equipment = new EquipmentImpl(this);
         }
 
         @Override
