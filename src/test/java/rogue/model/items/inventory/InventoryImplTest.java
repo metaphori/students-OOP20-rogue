@@ -73,4 +73,42 @@ public class InventoryImplTest {
         assertTrue(inv.getItem(2).isPresent());
         assertEquals(scroll2, inv.getItem(2).get());
     }
+
+    @Test
+    public void testAddTwoOfSameItems() {
+        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        final Inventory inv = new InventoryImpl(pl);
+        final Scroll scroll = new ScrollImpl(ScrollType.SCROLL_II);
+        /*
+         * Add two of the same items.
+         * Expect true and correct quantity update.
+         */
+        try {
+            assertTrue(inv.addItem(scroll));
+            assertTrue(inv.addItem(scroll));
+        } catch (InventoryIsFullException e) {
+            e.printStackTrace();
+        }
+        assertEquals(2, inv.getAmount(1));
+    }
+
+    @Test
+    public void testMaxOfSameItem() {
+        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        final Inventory inv = new InventoryImpl(pl);
+        final Scroll scroll = new ScrollImpl(ScrollType.SCROLL_II);
+        /*
+         * Add 11 of same item, expect 11th add false
+         * and correct update of quantity to 10
+         */
+        try {
+            for (int i = 0; i < 10; i++) {
+                assertTrue(inv.addItem(scroll));
+            }
+            assertFalse(inv.addItem(scroll));
+        } catch (InventoryIsFullException e) {
+            e.printStackTrace();
+        }
+        assertEquals(ITEM_AMOUNT_MAX, inv.getAmount(1));
+    }
 }

@@ -38,7 +38,7 @@ public interface Inventory {
      * Add an item to the inventory.
      * @param item to add to the inventory.
      * @return true if item was correctly added, false if
-     * the inventory is full.
+     * the inventory is full of that item.
      * @throws InventoryIsFullException if the inventory is full.
      */
     boolean addItem(Item item) throws InventoryIsFullException;
