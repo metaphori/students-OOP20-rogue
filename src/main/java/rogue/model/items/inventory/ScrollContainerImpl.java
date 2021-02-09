@@ -59,6 +59,12 @@ public class ScrollContainerImpl implements ScrollContainer {
     }
 
     /**
+     * @return the active scroll duration.
+     */
+    public int getActiveScrollDuration() {
+        return this.scroll.getValue();
+    }
+    /**
      * @param amount to subtract to scroll's duration
      * @return true if correctly updated the duration, false if
      * there's no active scroll.

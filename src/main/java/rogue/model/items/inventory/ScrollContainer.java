@@ -20,6 +20,12 @@ public interface ScrollContainer {
     boolean removeActiveScroll();
 
     /**
+     * Return the active scroll remaining turns.
+     * @return the active scroll duration.
+     */
+    int getActiveScrollDuration();
+
+    /**
      * Get the currently active scroll.
      * @return Optional.empty() if no active scroll, Optional.of(Scroll) otherwise
      */

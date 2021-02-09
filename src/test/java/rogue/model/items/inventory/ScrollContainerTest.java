@@ -4,12 +4,6 @@ import org.junit.Test;
 
 import rogue.model.creature.PlayerImpl;
 import rogue.model.creature.PlayerLifeImpl;
-import rogue.model.items.food.Food;
-import rogue.model.items.food.FoodImpl;
-import rogue.model.items.food.FoodType;
-import rogue.model.items.potion.Potion;
-import rogue.model.items.potion.PotionImpl;
-import rogue.model.items.potion.PotionType;
 import rogue.model.items.scroll.Scroll;
 import rogue.model.items.scroll.ScrollImpl;
 import rogue.model.items.scroll.ScrollType;
@@ -40,5 +34,56 @@ public class ScrollContainerTest {
          * check if activated.
          */
         assertEquals(scroll, inv.getScrollContainer().getActiveScroll().get());
+    }
+
+    @Test
+    public void testReplaceScroll() {
+        //this test also tests removeScroll and getActiveScroll
+        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        final Inventory inv = new InventoryImpl(pl);
+        final Scroll scroll = new ScrollImpl(ScrollType.SCROLL_II);
+        final Scroll scroll2 = new ScrollImpl(ScrollType.SCROLL_II);
+        /*
+         * activate a scroll.
+         */
+        inv.getScrollContainer().activateScroll(scroll);
+        /*
+         * check if activated.
+         */
+        assertEquals(scroll, inv.getScrollContainer().getActiveScroll().get());
+        /*
+         * activate another one.
+         */
+        inv.getScrollContainer().activateScroll(scroll2);
+        /*
+         * check for new activated scroll.
+         */
+        assertEquals(scroll2, inv.getScrollContainer().getActiveScroll().get());
+    }
+
+    @Test
+    public void testUpdateEffectDuration() {
+        //this test also tests removeScroll and getActiveScroll
+        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        final Inventory inv = new InventoryImpl(pl);
+        final Scroll scroll = new ScrollImpl(ScrollType.SCROLL_II);
+        /*
+         * updateEffectDuration does nothing if no active scroll.
+         */
+        assertFalse(inv.getScrollContainer().updateEffectDuration(1));
+        /*
+         * activate a scroll.
+         */
+        inv.getScrollContainer().activateScroll(scroll);
+        /*
+         * check if activated.
+         */
+        assertEquals(scroll, inv.getScrollContainer().getActiveScroll().get());
+        /*
+         * reduce the scroll's duration by one.
+         */
+        final int before = inv.getScrollContainer().getActiveScrollDuration();
+        assertTrue(inv.getScrollContainer().updateEffectDuration(2));
+        assertEquals(before - 2, inv.getScrollContainer().getActiveScrollDuration());
     }
 }
