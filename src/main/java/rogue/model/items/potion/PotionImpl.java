@@ -91,6 +91,7 @@ public class PotionImpl implements Potion {
     /**
      * @return hashCode
      */
+    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -104,6 +105,7 @@ public class PotionImpl implements Potion {
      * @param obj to apply the equals.
      * @return true if equal, false otherwise.
      */
+    @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
