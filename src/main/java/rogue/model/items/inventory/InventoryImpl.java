@@ -231,8 +231,7 @@ public class InventoryImpl implements Inventory {
      * empty slot.
      */
     public int getAmount(final int index) {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.inventory.get(index).getValue();
     }
 
 }
