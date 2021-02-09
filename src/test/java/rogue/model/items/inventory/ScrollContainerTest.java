@@ -2,8 +2,8 @@ package rogue.model.items.inventory;
 
 import org.junit.Test;
 
-import rogue.model.creature.PlayerImpl;
-import rogue.model.creature.PlayerLifeImpl;
+import rogue.model.creature.Player;
+import rogue.model.creature.PlayerFactoryImpl;
 import rogue.model.items.scroll.Scroll;
 import rogue.model.items.scroll.ScrollImpl;
 import rogue.model.items.scroll.ScrollType;
@@ -15,11 +15,11 @@ import static org.junit.Assert.assertEquals;
 
 public class ScrollContainerTest {
 
-    private PlayerImpl pl;
+    private Player pl;
 
     @Test
     public void testActivateScroll() {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final Inventory inv = new InventoryImpl(pl);
         final Scroll scroll = new ScrollImpl(ScrollType.SCROLL_II);
         /*
@@ -39,7 +39,7 @@ public class ScrollContainerTest {
     @Test
     public void testReplaceScroll() {
         //this test also tests removeScroll and getActiveScroll
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final Inventory inv = new InventoryImpl(pl);
         final Scroll scroll = new ScrollImpl(ScrollType.SCROLL_II);
         final Scroll scroll2 = new ScrollImpl(ScrollType.SCROLL_II);
@@ -64,7 +64,7 @@ public class ScrollContainerTest {
     @Test
     public void testUpdateEffectDuration() {
         //this test also tests removeScroll and getActiveScroll
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final Inventory inv = new InventoryImpl(pl);
         final Scroll scroll = new ScrollImpl(ScrollType.SCROLL_II);
         /*

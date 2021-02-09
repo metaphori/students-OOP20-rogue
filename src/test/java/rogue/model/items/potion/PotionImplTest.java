@@ -2,14 +2,17 @@ package rogue.model.items.potion;
 
 import org.junit.Test;
 
-import rogue.model.creature.PlayerImpl;
-import rogue.model.creature.PlayerLifeImpl;
+import rogue.model.creature.Player;
+import rogue.model.creature.PlayerFactoryImpl;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
 public class PotionImplTest {
+    /*
+     * TODO FIX TESTS 
+     */
 
     private static final int MAXIMUM_HEALTH = 50;
     private static final int REMOVE_AMOUNT_40 = 40;
@@ -17,7 +20,7 @@ public class PotionImplTest {
     private static final int REMOVE_AMOUNT_20 = 20;
     private static final int REMOVE_AMOUNT_10 = 10;
 
-    private PlayerImpl pl;
+    private Player pl;
 
     @Test
     public void testGetHpValue() {
@@ -33,7 +36,7 @@ public class PotionImplTest {
 
     @Test
     public void testUseWithMaxHealth() {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final PotionImpl potion = new PotionImpl(PotionType.POTION_II);
         /*
          * Trying to use a potion with the max health.
@@ -44,7 +47,7 @@ public class PotionImplTest {
 
     @Test
     public void testUseWithNormalHealth() {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final PotionImpl potion = new PotionImpl(PotionType.POTION_II);
         /*
          * Trying to use a potion without max health.
@@ -58,7 +61,7 @@ public class PotionImplTest {
 
     @Test
     public void testWithMaxHealth() {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final PotionImpl potion = new PotionImpl(PotionType.POTION_II);
         /*
          * Using potion with max health, expecting false return.
@@ -68,7 +71,7 @@ public class PotionImplTest {
 
     @Test
     public void testExceedMaxHealth() {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final PotionImpl potion = new PotionImpl(PotionType.POTION_II);
         /*
          * Use potion that would exceed the max health,
@@ -82,7 +85,7 @@ public class PotionImplTest {
 
     @Test
     public void useCorruptWithMaxHealth() {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final PotionImpl potion = new PotionImpl(PotionType.CORRUPT_POTION_I);
         /*
          * Use a corrupt potion with max health,
@@ -94,7 +97,7 @@ public class PotionImplTest {
 
     @Test
     public void useCorruptWithNormalHealth() {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final PotionImpl potion = new PotionImpl(PotionType.CORRUPT_POTION_I);
         /*
          * Use a corrupt potion with normal health,
@@ -108,7 +111,7 @@ public class PotionImplTest {
 
     @Test
     public void useCorruptBelowZero() {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final PotionImpl potion = new PotionImpl(PotionType.CORRUPT_POTION_II);
         /*
          * Use corrupt potion when the potion value would

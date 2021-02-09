@@ -35,12 +35,12 @@ public class FoodImpl implements Food {
                  * player's hunger would exceed the hunger maximum value.
                  * So the player's hunger is updated to max.
                  */
-                player.getLife().updateFood(HUNGER_VALUE_MAX - player.getLife().getFood());
+                player.getLife().increaseFood(HUNGER_VALUE_MAX - player.getLife().getFood());
             } else {
                 /*
                  * simply add the food's starvation value.
                  */
-                player.getLife().updateFood(this.food.getStarvationValue());
+                player.getLife().increaseFood(this.food.getStarvationValue());
             }
             return true;
         }

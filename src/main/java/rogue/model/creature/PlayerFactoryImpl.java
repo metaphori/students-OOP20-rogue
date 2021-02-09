@@ -2,8 +2,8 @@ package rogue.model.creature;
 
 import java.util.Objects;
 
-import rogue.model.items.Inventory;
-import rogue.model.items.InventoryImpl;
+import rogue.model.items.inventory.Inventory;
+import rogue.model.items.inventory.InventoryImpl;
 
 /** 
  * An implementation for {@link PlayerFactory} which encapsulates the 

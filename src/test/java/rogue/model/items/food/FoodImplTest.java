@@ -2,8 +2,8 @@ package rogue.model.items.food;
 
 import org.junit.Test;
 
-import rogue.model.creature.PlayerImpl;
-import rogue.model.creature.PlayerLifeImpl;
+import rogue.model.creature.Player;
+import rogue.model.creature.PlayerFactoryImpl;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
@@ -15,11 +15,11 @@ public class FoodImplTest {
     private static final int REMOVE_AMOUNT_20 = -20;
     private static final int REMOVE_AMOUNT_10 = -10;
 
-    private PlayerImpl pl;
+    private Player pl;
 
     @Test
     public void testUseMaxHunger() {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final FoodImpl apple = new FoodImpl(FoodType.APPLE);
         final FoodImpl cake = new FoodImpl(FoodType.CAKE);
         final FoodImpl soup = new FoodImpl(FoodType.SOUP);
@@ -43,13 +43,13 @@ public class FoodImplTest {
 
     @Test
     public void testUseNormalHunger() {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final FoodImpl testFood = new FoodImpl(FoodType.APPLE);
         /*
          * Consume food with not full hunger.
          * expecting true return and correctly updated hunger.
          */
-        pl.getLife().updateFood(REMOVE_AMOUNT_20);
+        pl.getLife().increaseFood(REMOVE_AMOUNT_20);
         final int newAmount = pl.getLife().getFood();
         assertTrue(testFood.use(pl));
         assertEquals(newAmount + testFood.getStarvationValue(), pl.getLife().getFood());
@@ -57,11 +57,11 @@ public class FoodImplTest {
 
     @Test
     public void testUseMultipleFoods() {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final FoodImpl apple = new FoodImpl(FoodType.APPLE);
         final FoodImpl cake = new FoodImpl(FoodType.CAKE);
         final FoodImpl steak = new FoodImpl(FoodType.STEAK);
-        pl.getLife().updateFood(REMOVE_AMOUNT_20 + REMOVE_AMOUNT_20);
+        pl.getLife().increaseFood(REMOVE_AMOUNT_20 + REMOVE_AMOUNT_20);
         final int newAmount = pl.getLife().getFood();
         assertTrue(apple.use(pl));
         assertTrue(cake.use(pl));
@@ -72,13 +72,13 @@ public class FoodImplTest {
 
     @Test
     public void testOverMax() {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final FoodImpl hamburger = new FoodImpl(FoodType.HAMBURGER);
         /*
          * Consume food that would exceed the MAX_FOOD_AMOUNT.
          * Remove 10, hamburger gives 12, expecting 50 anyway.
          */
-       pl.getLife().updateFood(REMOVE_AMOUNT_10);
+       pl.getLife().increaseFood(REMOVE_AMOUNT_10);
        assertTrue(hamburger.use(pl));
        assertEquals(HUNGER_MAX, pl.getLife().getFood());
     }

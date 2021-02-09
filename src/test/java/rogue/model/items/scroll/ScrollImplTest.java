@@ -2,16 +2,20 @@ package rogue.model.items.scroll;
 
 import org.junit.Test;
 
-import rogue.model.creature.PlayerImpl;
-import rogue.model.creature.PlayerLifeImpl;
+import rogue.model.creature.Player;
+import rogue.model.creature.PlayerFactoryImpl;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 public class ScrollImplTest {
 
+    /*
+     * TODO update TESTS
+     */
+
     private static final int STRENGTH_3 = 3;
-    private PlayerImpl pl;
+    private Player pl;
 
     @Test
     public void testGetStrengthValue() {
@@ -26,7 +30,7 @@ public class ScrollImplTest {
 
     @Test
     public void testUseGain() {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final Scroll scroll = new ScrollImpl(ScrollType.SCROLL_II);
         /*
          * No max for scroll.
@@ -39,7 +43,7 @@ public class ScrollImplTest {
 
     @Test
     public void testCorruptBelowZero() {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final Scroll scroll = new ScrollImpl(ScrollType.CORRUPT_SCROLL_II);
         /*
          * Strength cannot go below 0, set strength to 3
