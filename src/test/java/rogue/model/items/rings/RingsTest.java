@@ -32,7 +32,7 @@ public class RingsTest {
         final Ring ring = new RingImpl(RingType.DEXTERITY);
         assertTrue(ring.use(player));
         assertEquals(new IncreaseAccuracy(new BaseWeapon(WeaponType.MACE)), player.getEquipment().getWeapon());
-        this.player.getEquipment().detachRing();
+        ring.stopUsing(player);
         assertEquals(new BaseWeapon(WeaponType.MACE), player.getEquipment().getWeapon());
     }
 
@@ -42,7 +42,7 @@ public class RingsTest {
         final Ring ring = new RingImpl(RingType.PROTECTION);
         assertTrue(ring.use(player));
         assertEquals(10, player.getEquipment().getArmor().getAC());
-        this.player.getEquipment().detachRing();
+        ring.stopUsing(player);
         assertEquals(8, player.getEquipment().getArmor().getAC());
     }
 
@@ -55,7 +55,7 @@ public class RingsTest {
         player.getEquipment().setWeapon(new BaseWeapon(WeaponType.ARROW));
         assertEquals(new IncreaseAccuracy(new BaseWeapon(WeaponType.ARROW)), player.getEquipment().getWeapon());
         assertEquals(new ArmorImpl(ArmorType.LEATHER), player.getEquipment().getArmor());
-        this.player.getEquipment().detachRing();
+        ring.stopUsing(player);
         assertEquals(new BaseWeapon(WeaponType.ARROW), player.getEquipment().getWeapon());
         assertEquals(new ArmorImpl(ArmorType.LEATHER), player.getEquipment().getArmor());
     }
@@ -70,7 +70,7 @@ public class RingsTest {
         player.getEquipment().setWeapon(new BaseWeapon(WeaponType.ARROW));
         assertEquals(new BaseWeapon(WeaponType.ARROW), player.getEquipment().getWeapon());
         assertEquals(10, player.getEquipment().getArmor().getAC());
-        this.player.getEquipment().detachRing();
+        ring.stopUsing(player);
         assertEquals(8, player.getEquipment().getArmor().getAC());
     }
 
@@ -83,7 +83,7 @@ public class RingsTest {
         player.getEquipment().setArmor(new ArmorImpl(ArmorType.CHAIN_MAIL));
         assertEquals(new IncreaseAccuracy(new BaseWeapon(WeaponType.MACE)), player.getEquipment().getWeapon());
         assertEquals(new ArmorImpl(ArmorType.CHAIN_MAIL), player.getEquipment().getArmor());
-        this.player.getEquipment().detachRing();
+        ring.stopUsing(player);
         assertEquals(new BaseWeapon(WeaponType.MACE), player.getEquipment().getWeapon());
         assertEquals(new ArmorImpl(ArmorType.CHAIN_MAIL), player.getEquipment().getArmor());
     }
@@ -111,7 +111,7 @@ public class RingsTest {
         assertEquals(new IncreaseAccuracy(new BaseWeapon(WeaponType.MACE)), player.getEquipment().getWeapon());
         assertEquals(new ArmorImpl(ArmorType.LEATHER), player.getEquipment().getArmor());
 
-        assertTrue(this.player.getEquipment().detachRing());
+        ring.stopUsing(player);
         assertTrue(ring2.use(player));
         assertEquals(new IncreaseDamage(new BaseWeapon(WeaponType.MACE)), player.getEquipment().getWeapon());
         assertEquals(new ArmorImpl(ArmorType.LEATHER), player.getEquipment().getArmor());
