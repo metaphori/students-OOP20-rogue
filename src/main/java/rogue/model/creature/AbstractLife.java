@@ -2,7 +2,6 @@ package rogue.model.creature;
 
 /**
  * A generic implementation for a creature {@link Life}.
- *
  */
 public abstract class AbstractLife implements Life {
 
@@ -15,11 +14,21 @@ public abstract class AbstractLife implements Life {
     }
 
     /**
+     * Check if value is negative or not. 
+     * @param value
+     *          the value to check
+     * @return the value given if it is positive, 0 otherwise
+     */
+    protected int checkNonNegative(final int value) {
+        return value < 0 ? 0 : value;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public void hurt(final int damage) {
-        this.healthPoints = this.healthPoints - damage;
+        this.healthPoints = checkNonNegative(this.healthPoints - damage);
     }
 
     /**
@@ -31,7 +40,7 @@ public abstract class AbstractLife implements Life {
     }
 
     /**
-     * 
+     * Set the health points to the given value.
      * @param healthPoints
      *          the healthPoints
      */
@@ -48,7 +57,7 @@ public abstract class AbstractLife implements Life {
     }
 
     /**
-     * 
+     * Set the experience to the given value.
      * @param experience
      *          the experience
      */

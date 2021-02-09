@@ -1,11 +1,20 @@
 package rogue.model.creature;
 
+import rogue.model.items.Inventory;
+
 /**
  * An interface modeling the player.
- *
  */
 public interface Player extends Creature<PlayerLife> {
 
-    // TODO
+    /**
+     * @return the inventory
+     */
+    Inventory getInventory();
+
+    /**
+     * @return the equipment
+     */
+    Equipment getEquipment();
 
 }

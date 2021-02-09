@@ -3,60 +3,76 @@ package rogue.model.creature;
 import javafx.util.Pair;
 
 
-public class MonsterImpl implements Monster{
-	
-	private final MonsterType type;	
-	
-	public MonsterImpl(MonsterType type) {
-		this.type = type;
-	}
+public class MonsterImpl implements Monster {
 
-	@Override
-	public boolean move() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    private final MonsterType type;
 
-	@Override
-	public MonsterLife getLife() {
-		// TODO Auto-generated method stub
-		return this.type.getLife();
-	}
+    public MonsterImpl(final MonsterType type) {
+        this.type = type;
+    }
 
-	@Override
-	public MonsterType getMonsterType() {
-		// TODO Auto-generated method stub
-		return this.type;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean move() {
+        return false;
+    }
 
-	@Override
-	public int getAC() {
-		// TODO Auto-generated method stub
-		return this.type.getAC();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public MonsterLife getLife() {
+        return this.type.getLife();
+    }
 
-	@Override
-	public Pair<Integer, Integer> getDamage() {
-		// TODO Auto-generated method stub
-		return this.type.getDamage();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public MonsterType getMonsterType() {
+        return this.type;
+    }
 
-	@Override
-	public Special getSpecial() {
-		// TODO Auto-generated method stub
-		return this.type.getSpecial();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getAC() {
+        return this.type.getAC();
+    }
 
-	@Override
-	public int getMoney() {
-		// TODO Auto-generated method stub
-		return this.type.getMoney();
-	}
-	
-	public int attackDamage() {	
-		
-		return (int)(Math.random()*(this.getDamage().getValue() - this.getDamage().getKey()) + this.getDamage().getKey());		
-	}
-	
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Pair<Integer, Integer> getDamage() {
+        return this.type.getDamage();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Special getSpecial() {
+        return this.type.getSpecial();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getMoney() {
+        return this.type.getMoney();
+    }
+
+    /**
+     *
+     * @return the damage that the monster does for that single attack 
+     */
+    public int attackDamage() {
+        return (int) (Math.random() * (this.getDamage().getValue() - this.getDamage().getKey()) + this.getDamage().getKey());
+    }
 
 }
