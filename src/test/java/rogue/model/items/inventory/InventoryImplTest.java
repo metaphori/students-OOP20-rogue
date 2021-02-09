@@ -115,6 +115,24 @@ public class InventoryImplTest {
         assertEquals(ITEM_AMOUNT_MAX, inv.getAmount(1));
     }
 
+    @Test
+    public void testGetAmount() throws OutOfInventoryException {
+        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        final Inventory inv = new InventoryImpl(pl);
+        final Scroll scroll = new ScrollImpl(ScrollType.SCROLL_II);
+        /*
+         * Add 3 scroll.
+         */
+        try {
+            for (int i = 0; i < 3; i++) {
+                assertTrue(inv.addItem(scroll));
+            }
+        } catch (InventoryIsFullException e) {
+            e.printStackTrace();
+        }
+        assertEquals(3, inv.getAmount(1));
+    }
+
     @org.junit.Test(expected = OutOfInventoryException.class)
     public void testIndexOutOfInventoryUse() throws OutOfInventoryException {
         pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
@@ -174,6 +192,7 @@ public class InventoryImplTest {
         final Scroll scroll4 = new ScrollImpl(ScrollType.SCROLL_IV);
         final Scroll scroll5 = new ScrollImpl(ScrollType.SCROLL_V);
         final Scroll scroll6 = new ScrollImpl(ScrollType.CORRUPT_SCROLL_I);
+        final Scroll scroll7 = new ScrollImpl(ScrollType.CORRUPT_SCROLL_II);
         /*
          * Fill the inventory.
          */
@@ -240,6 +259,6 @@ public class InventoryImplTest {
         /*
          * Inventory should be full
          */
-        inv.addItem(scroll6);
+        inv.addItem(scroll7);
     }
 }
