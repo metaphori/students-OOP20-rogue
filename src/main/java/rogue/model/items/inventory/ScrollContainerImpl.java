@@ -13,6 +13,7 @@ public class ScrollContainerImpl implements ScrollContainer {
 
     public ScrollContainerImpl(final Player player) {
         this.player = player;
+        scroll = new Pair<>(Optional.empty(), 0);
     }
 
     /**
