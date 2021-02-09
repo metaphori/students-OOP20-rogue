@@ -15,6 +15,9 @@ import rogue.model.items.scroll.ScrollImpl;
 import rogue.model.items.scroll.ScrollType;
 
 import static org.junit.Assert.assertTrue;
+
+import java.util.Optional;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
@@ -131,6 +134,50 @@ public class InventoryImplTest {
             e.printStackTrace();
         }
         assertEquals(3, inv.getAmount(1));
+    }
+
+    @Test
+    public void testSwap() throws OutOfInventoryException {
+        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        final Inventory inv = new InventoryImpl(pl);
+        final Scroll scroll = new ScrollImpl(ScrollType.SCROLL_II);
+        final Potion potion = new PotionImpl(PotionType.POTION_I);
+        /*
+         * Add a scroll and a potion.
+         */
+        try {
+            assertTrue(inv.addItem(scroll));
+            assertTrue(inv.addItem(potion));
+        } catch (InventoryIsFullException e) {
+            e.printStackTrace();
+        }
+        /*
+         * check scroll in first slot and potion in second
+         */
+        assertEquals(scroll, inv.getItem(1).get());
+        assertEquals(potion, inv.getItem(2).get());
+        /*
+         * swap them
+         */
+        assertTrue(inv.swap(1, 2));
+        /*
+         * check for swap.
+         */
+        assertEquals(potion, inv.getItem(1).get());
+        assertEquals(scroll, inv.getItem(2).get());
+        /*
+         * now swap first with third slot which is empty.
+         */
+        assertTrue(inv.swap(1, 3));
+        /*
+         * check correct swap
+         */
+        assertTrue(inv.getItem(1).isEmpty());
+        assertEquals(potion, inv.getItem(3).get());
+        /*
+         * try to swap two empty slots, expect false.
+         */
+        assertFalse(inv.swap(4, 1));
     }
 
     @org.junit.Test(expected = OutOfInventoryException.class)
