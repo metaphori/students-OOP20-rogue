@@ -25,6 +25,10 @@ public final class EquipmentImpl implements Equipment {
         void doOperation();
     }
 
+    /**
+     * Memento pattern: used to save and restore the previous state
+     * after detaching of a ring.
+     */
     public final class Memento {
         private final Weapon weapon;
         private final Armor armor;
@@ -87,16 +91,16 @@ public final class EquipmentImpl implements Equipment {
     }
 
     @Override
+    public Memento save() {
+        return new Memento(this.weapon, this.armor);
+    }
+
+    @Override
     public void attachRing(final Ring ring) {
         if (this.ring.isPresent()) {
             throw new IllegalStateException("One ring per time could be worn!");
         }
         this.ring = Optional.of(ring);
-    }
-
-    @Override
-    public Memento save() {
-        return new Memento(this.weapon, this.armor);
     }
 
     private void restore(final Memento m) {
