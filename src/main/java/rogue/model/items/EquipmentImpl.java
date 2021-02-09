@@ -23,11 +23,11 @@ public class EquipmentImpl implements Equipment {
     private Armor armor;
     private Optional<Ring> ring;
 
-    private final class MementoImpl implements Memento {
+    public final class Memento {
         private final Weapon weapon;
         private final Armor armor;
 
-        private MementoImpl(final Weapon weapon, final Armor armor) {
+        private Memento(final Weapon weapon, final Armor armor) {
             this.weapon = weapon;
             this.armor  = armor;
         }
@@ -119,13 +119,12 @@ public class EquipmentImpl implements Equipment {
      */
     @Override
     public Memento save() {
-        return new MementoImpl(this.weapon, this.armor);
+        return new Memento(this.weapon, this.armor);
     }
 
     private void restore(final Memento m) {
-        final MementoImpl mem = (MementoImpl) m;
-        this.weapon = mem.getWeapon();
-        this.armor = mem.getArmor();
+        this.weapon = m.getWeapon();
+        this.armor = m.getArmor();
     }
 
     /**

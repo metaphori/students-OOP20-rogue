@@ -2,6 +2,7 @@ package rogue.model.items;
 
 import java.util.Optional;
 
+import rogue.model.items.EquipmentImpl.Memento;
 import rogue.model.items.armor.Armor;
 import rogue.model.items.rings.Ring;
 import rogue.model.items.weapons.Weapon;
