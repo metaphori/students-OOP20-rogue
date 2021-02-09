@@ -57,5 +57,5 @@ public interface Inventory {
      * @param index of the slot to remove the contained item.
      * @return true if item correctly removed, false if slot is empty.
      */
-    boolean remove(int index);
+    boolean remove(int index) throws OutOfInventoryException;
 }
