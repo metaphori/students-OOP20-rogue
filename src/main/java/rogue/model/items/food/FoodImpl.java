@@ -82,6 +82,6 @@ public class FoodImpl implements Food {
             return false;
         }
         final FoodImpl other = (FoodImpl) obj;
-        return food != other.food;
+        return food != other.food ? false : true;
     }
 }

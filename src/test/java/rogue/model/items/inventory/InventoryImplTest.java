@@ -4,6 +4,9 @@ import org.junit.Test;
 
 import rogue.model.creature.PlayerImpl;
 import rogue.model.creature.PlayerLifeImpl;
+import rogue.model.items.food.Food;
+import rogue.model.items.food.FoodImpl;
+import rogue.model.items.food.FoodType;
 import rogue.model.items.potion.Potion;
 import rogue.model.items.potion.PotionImpl;
 import rogue.model.items.potion.PotionType;
@@ -145,5 +148,98 @@ public class InventoryImplTest {
         pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
         final Inventory inv = new InventoryImpl(pl);
         inv.getItem(INVENTORY_SIZE + 10);
+    }
+
+    @org.junit.Test(expected = InventoryIsFullException.class)
+    public void testFullInventory() throws InventoryIsFullException, OutOfInventoryException {
+        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        final Inventory inv = new InventoryImpl(pl);
+        final Food food1 = new FoodImpl(FoodType.APPLE);
+        final Food food2 = new FoodImpl(FoodType.BREAD);
+        final Food food3 = new FoodImpl(FoodType.CAKE);
+        final Food food4 = new FoodImpl(FoodType.CHEESE);
+        final Food food5 = new FoodImpl(FoodType.HAMBURGER);
+        final Food food6 = new FoodImpl(FoodType.SOUP);
+        final Food food7 = new FoodImpl(FoodType.STEAK);
+        final Potion potion1 = new PotionImpl(PotionType.POTION_I);
+        final Potion potion2 = new PotionImpl(PotionType.POTION_II);
+        final Potion potion3 = new PotionImpl(PotionType.POTION_III);
+        final Potion potion4 = new PotionImpl(PotionType.POTION_IV);
+        final Potion potion5 = new PotionImpl(PotionType.POTION_V);
+        final Potion potion6 = new PotionImpl(PotionType.CORRUPT_POTION_I);
+        final Potion potion7 = new PotionImpl(PotionType.CORRUPT_POTION_II);
+        final Scroll scroll1 = new ScrollImpl(ScrollType.SCROLL_I);
+        final Scroll scroll2 = new ScrollImpl(ScrollType.SCROLL_II);
+        final Scroll scroll3 = new ScrollImpl(ScrollType.SCROLL_III);
+        final Scroll scroll4 = new ScrollImpl(ScrollType.SCROLL_IV);
+        final Scroll scroll5 = new ScrollImpl(ScrollType.SCROLL_V);
+        final Scroll scroll6 = new ScrollImpl(ScrollType.CORRUPT_SCROLL_I);
+        /*
+         * Fill the inventory.
+         */
+        for (int i = 0; i < 10; i++) {
+            assertTrue(inv.addItem(food1));
+        }
+        for (int i = 0; i < 10; i++) {
+            assertTrue(inv.addItem(food2));
+        }
+        for (int i = 0; i < 10; i++) {
+            assertTrue(inv.addItem(food3));
+        }
+        for (int i = 0; i < 10; i++) {
+            assertTrue(inv.addItem(food4));
+        }
+        for (int i = 0; i < 10; i++) {
+            assertTrue(inv.addItem(food5));
+        }
+        for (int i = 0; i < 10; i++) {
+            assertTrue(inv.addItem(food6));
+        }
+        for (int i = 0; i < 10; i++) {
+            assertTrue(inv.addItem(food7));
+        }
+        for (int i = 0; i < 10; i++) {
+            assertTrue(inv.addItem(potion1));
+        }
+        for (int i = 0; i < 10; i++) {
+            assertTrue(inv.addItem(potion2));
+        }
+        for (int i = 0; i < 10; i++) {
+            assertTrue(inv.addItem(potion3));
+        }
+        for (int i = 0; i < 10; i++) {
+            assertTrue(inv.addItem(potion4));
+        }
+        for (int i = 0; i < 10; i++) {
+            assertTrue(inv.addItem(potion5));
+        }
+        for (int i = 0; i < 10; i++) {
+            assertTrue(inv.addItem(potion6));
+        }
+        for (int i = 0; i < 10; i++) {
+            assertTrue(inv.addItem(potion7));
+        }
+        for (int i = 0; i < 10; i++) {
+            assertTrue(inv.addItem(scroll1));
+        }
+        for (int i = 0; i < 10; i++) {
+            assertTrue(inv.addItem(scroll2));
+        }
+        for (int i = 0; i < 10; i++) {
+            assertTrue(inv.addItem(scroll3));
+        }
+        for (int i = 0; i < 10; i++) {
+            assertTrue(inv.addItem(scroll4));
+        }
+        for (int i = 0; i < 10; i++) {
+            assertTrue(inv.addItem(scroll5));
+        }
+        for (int i = 0; i < 10; i++) {
+            assertTrue(inv.addItem(scroll6));
+        }
+        /*
+         * Inventory should be full
+         */
+        inv.addItem(scroll6);
     }
 }

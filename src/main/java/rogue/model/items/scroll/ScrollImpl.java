@@ -124,7 +124,7 @@ public class ScrollImpl implements Scroll {
         if (effectValue != other.effectValue) {
             return false;
         }
-        return scroll != other.scroll;
+        return scroll != other.scroll ? false : true;
     }
 
 }
