@@ -201,4 +201,13 @@ public class InventoryImpl implements Inventory {
         return this.scrollContainer;
     }
 
+    /**
+     * @param index of the slot to remove.
+     * @return true if correctly used, false 
+     */
+    public boolean remove(final int index) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
 }

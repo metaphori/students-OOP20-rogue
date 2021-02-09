@@ -51,4 +51,11 @@ public interface Inventory {
      * @return ScrollContainer associated with the inventory.
      */
     ScrollContainer getScrollContainer();
+
+    /**
+     * Remove the item in the given slot.
+     * @param index of the slot to remove the contained item.
+     * @return true if item correctly removed, false if slot is empty.
+     */
+    boolean remove(int index);
 }
