@@ -1,7 +1,8 @@
-package rogue.model.creature;
+package rogue.model.items;
 
 import java.util.Optional;
 
+import rogue.model.items.EquipmentImpl.Memento;
 import rogue.model.items.armor.Armor;
 import rogue.model.items.rings.Ring;
 import rogue.model.items.weapons.Weapon;
@@ -41,17 +42,26 @@ public interface Equipment {
     Optional<Ring> getRing();
 
     /**
-     * Try to wear a ring. Note that only one ring per time could be worn.
+     * Wear a ring. Note that only one ring per time could be worn.
      * @param ring
      *          the ring to put on
-     * @return true if it's possible to wear it, false otherwise
+     * @throws IllegalStateException, if the equipment has already a ring
      */
-    boolean attachRing(Ring ring);
+    void attachRing(Ring ring);
 
     /**
-     * Remove the current ring.
+     * Removes the current ring and restore the state before 
+     * wearing the ring.
+     * @param memento
+     *          the state to restore
      * @return true if had been removed, false otherwise
      */
-    boolean detachRing();
+    boolean detachRing(Memento memento);
+
+    /**
+     * Stores the current state.
+     * @return the memento stored
+     */
+    Memento save();
 
 }

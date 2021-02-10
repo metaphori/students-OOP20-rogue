@@ -4,7 +4,6 @@ import rogue.model.items.Item;
 
 /**
  * An interface for modeling a game weapon.
- *
  */
 public interface Weapon extends Item {
 
@@ -25,8 +24,8 @@ public interface Weapon extends Item {
 
     /**
      * 
-     * @return the weapon's precision
+     * @return the weapon's accuracy
      */
-    int getPrecision();
+    int getAccuracy();
 
 }

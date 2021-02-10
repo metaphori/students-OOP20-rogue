@@ -89,7 +89,6 @@ public enum WeaponType {
     }
 
     /**
-     * 
      * @return the weapon accuracy
      */
     protected int getAccuracy() {

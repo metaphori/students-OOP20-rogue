@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import rogue.model.items.inventory.Inventory;
 import rogue.model.items.inventory.InventoryImpl;
+import rogue.model.items.Equipment;
+import rogue.model.items.EquipmentImpl;
 
 /** 
  * An implementation for {@link PlayerFactory} which encapsulates the 
@@ -19,7 +21,7 @@ public class PlayerFactoryImpl implements PlayerFactory {
         protected PlayerImpl(final PlayerLife life) {
             super(life);
             this.inventory = new InventoryImpl(this);
-            this.equipment = new EquipmentImpl();
+            this.equipment = new EquipmentImpl(this);
         }
 
         @Override
