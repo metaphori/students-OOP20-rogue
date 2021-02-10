@@ -44,17 +44,17 @@ javafx {
 sourceSets {
   main {
     resources {
-        srcDirs = ["src/main/java"]
+        srcDirs = ["src/main/resources"]
         includes = ["**/*.fxml"]
     }
   }
 }
 
-mainClassName = 'rogue.view.MainMenuView'
+mainClassName = "rogue.Main"
 
 jar {
 	manifest {
-		attributes 'Main-Class' : 'rogue.view.MainMenuView'
+		attributes 'Main-Class' : "rogue.Main"
 	}
 	
 	from {
