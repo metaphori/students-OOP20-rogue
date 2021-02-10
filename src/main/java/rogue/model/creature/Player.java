@@ -1,6 +1,6 @@
 package rogue.model.creature;
 
-import rogue.model.items.Inventory;
+import rogue.model.items.inventory.Inventory;
 
 /**
  * An interface modeling the player.

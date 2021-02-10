@@ -2,8 +2,8 @@ package rogue.model.items.inventory;
 
 import org.junit.Test;
 
-import rogue.model.creature.PlayerImpl;
-import rogue.model.creature.PlayerLifeImpl;
+import rogue.model.creature.Player;
+import rogue.model.creature.PlayerFactoryImpl;
 import rogue.model.items.food.Food;
 import rogue.model.items.food.FoodImpl;
 import rogue.model.items.food.FoodType;
@@ -24,11 +24,11 @@ public class InventoryImplTest {
     private static final int INVENTORY_SIZE = 20;
     private static final int ITEM_AMOUNT_MAX = 10;
 
-    private PlayerImpl pl;
+    private Player pl;
 
     @Test
     public void testAddItemAndGetItemPotion() throws OutOfInventoryException {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final Inventory inv = new InventoryImpl(pl);
         final Potion potion = new PotionImpl(PotionType.POTION_I);
         /*
@@ -47,7 +47,7 @@ public class InventoryImplTest {
 
     @Test
     public void testAddTwoItemScroll() throws OutOfInventoryException {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final Inventory inv = new InventoryImpl(pl);
         final Scroll scroll = new ScrollImpl(ScrollType.SCROLL_II);
         final Scroll scroll2 = new ScrollImpl(ScrollType.SCROLL_V);
@@ -80,7 +80,7 @@ public class InventoryImplTest {
 
     @Test
     public void testAddTwoOfSameItems() throws OutOfInventoryException {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final Inventory inv = new InventoryImpl(pl);
         final Scroll scroll = new ScrollImpl(ScrollType.SCROLL_II);
         /*
@@ -98,7 +98,7 @@ public class InventoryImplTest {
 
     @Test
     public void testMaxOfSameItem() throws OutOfInventoryException {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final Inventory inv = new InventoryImpl(pl);
         final Scroll scroll = new ScrollImpl(ScrollType.SCROLL_II);
         /*
@@ -118,7 +118,7 @@ public class InventoryImplTest {
 
     @Test
     public void testGetAmount() throws OutOfInventoryException {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final Inventory inv = new InventoryImpl(pl);
         final Scroll scroll = new ScrollImpl(ScrollType.SCROLL_II);
         /*
@@ -136,7 +136,7 @@ public class InventoryImplTest {
 
     @Test
     public void testSwap() throws OutOfInventoryException {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final Inventory inv = new InventoryImpl(pl);
         final Scroll scroll = new ScrollImpl(ScrollType.SCROLL_II);
         final Potion potion = new PotionImpl(PotionType.POTION_I);
@@ -180,7 +180,7 @@ public class InventoryImplTest {
 
     @Test
     public void testRemove() throws OutOfInventoryException, InventoryIsFullException {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final Inventory inv = new InventoryImpl(pl);
         final Scroll scroll = new ScrollImpl(ScrollType.SCROLL_II);
         /*
@@ -200,42 +200,42 @@ public class InventoryImplTest {
 
     @org.junit.Test(expected = OutOfInventoryException.class)
     public void testIndexOutOfInventoryUse() throws OutOfInventoryException {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final Inventory inv = new InventoryImpl(pl);
         inv.useItem(INVENTORY_SIZE + 10);
     }
 
     @org.junit.Test(expected = OutOfInventoryException.class)
     public void testIndexOutOfInventoryRemove() throws OutOfInventoryException {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final Inventory inv = new InventoryImpl(pl);
         inv.remove(INVENTORY_SIZE + 10);
     }
 
     @org.junit.Test(expected = OutOfInventoryException.class)
     public void testIndexOutOfInventoryGetAmount() throws OutOfInventoryException {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final Inventory inv = new InventoryImpl(pl);
         inv.getAmount(INVENTORY_SIZE + 10);
     }
 
     @org.junit.Test(expected = OutOfInventoryException.class)
     public void testIndexOutOfInventorySwap() throws OutOfInventoryException {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final Inventory inv = new InventoryImpl(pl);
         inv.swap(INVENTORY_SIZE + 10, 1);
     }
 
     @org.junit.Test(expected = OutOfInventoryException.class)
     public void testIndexOutOfInventoryGetItem() throws OutOfInventoryException {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final Inventory inv = new InventoryImpl(pl);
         inv.getItem(INVENTORY_SIZE + 10);
     }
 
     @org.junit.Test(expected = InventoryIsFullException.class)
     public void testFullInventory() throws InventoryIsFullException, OutOfInventoryException {
-        pl = new PlayerImpl(new PlayerLifeImpl.Builder().build());
+        pl = new PlayerFactoryImpl().create();
         final Inventory inv = new InventoryImpl(pl);
         final Food food1 = new FoodImpl(FoodType.APPLE);
         final Food food2 = new FoodImpl(FoodType.BREAD);
