@@ -41,16 +41,16 @@ javafx {
 	modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
-/*
-mainClassName = 'application.Main'
+
+mainClassName = 'rogue.view.MainMenuView'
 
 jar {
 	manifest {
-		attributes 'Main-Class' : 'application.Main'
+		attributes 'Main-Class' : 'rogue.view.MainMenuView'
 	}
 	
 	from {
 		configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
 	}
 }
-*/
+
