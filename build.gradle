@@ -41,6 +41,14 @@ javafx {
 	modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
+sourceSets {
+  main {
+    resources {
+        srcDirs = ["src/main/java"]
+        includes = ["**/*.fxml"]
+    }
+  }
+}
 
 mainClassName = 'rogue.view.MainMenuView'
 
