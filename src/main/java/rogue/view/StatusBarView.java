@@ -3,7 +3,7 @@ package rogue.view;
 /**
  * An interface for controlling the game status bar display.
  */
-public interface StatusBarView {
+public interface StatusBarView extends View {
 
     /**
      * Sets the maximum obtainable health points.

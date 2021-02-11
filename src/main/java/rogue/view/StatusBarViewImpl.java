@@ -61,6 +61,7 @@ public final class StatusBarViewImpl implements StatusBarView {
         this.updateLabel("#experience", experience);
     }
 
+    @Override
     public Node getNode() {
         return this.root;
     }
