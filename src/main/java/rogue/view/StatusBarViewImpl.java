@@ -5,55 +5,60 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 
 /**
- * Controls the status bar.
+ * A simple class which controls the status bar.
  */
 public final class StatusBarViewImpl implements StatusBarView {
 
     private Parent root;
+    private Scene scene;
 
     public StatusBarViewImpl() {
         try {
             this.root = FXMLLoader.load(ClassLoader.getSystemResource("layout/StatusBar.fxml"));
+            this.scene = new Scene(root);
         } catch (IOException e) {
-            final Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error dialog");
-            alert.setContentText("An error occurred when trying to set the StatusBar layout");
-            alert.showAndWait();
+            e.printStackTrace();
         }
+    }
+
+    private void updateLabel(final String selector, final int value) {
+        final Label lbl = (Label) this.scene.lookup(selector);
+        System.out.println(lbl);
+        lbl.setText(Integer.toString(value));
     }
 
     @Override
     public void setMaxHealthPoints(final int max) {
-        // TODO Auto-generated method stub
+        this.updateLabel("#maxHp", max);
     }
 
     @Override
     public void setCurrentHealthPoints(final int healthPoints) {
-        // TODO Auto-generated method stub
+        this.updateLabel("#hp", healthPoints);
     }
 
     @Override
     public void setCoins(final int coins) {
-        // TODO Auto-generated method stub
+        this.updateLabel("#gold", coins);
     }
 
     @Override
     public void setLevel(final int level) {
-        // TODO Auto-generated method stub
+        this.updateLabel("#level", level);
     }
 
     @Override
     public void setStrength(final int strength) {
-        // TODO Auto-generated method stub
+        this.updateLabel("#strength", strength);
     }
 
     @Override
     public void setExperience(final int experience) {
-        // TODO Auto-generated method stub
+        this.updateLabel("#experience", experience);
     }
 
     public Node getNode() {
