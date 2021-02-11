@@ -41,16 +41,23 @@ javafx {
 	modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
-/*
-mainClassName = 'application.Main'
+sourceSets {
+  main {
+    resources {
+        srcDirs("resources")
+    }
+  }
+}
+
+mainClassName = "rogue.Launcher"
 
 jar {
 	manifest {
-		attributes 'Main-Class' : 'application.Main'
+		attributes 'Main-Class' : "rogue.Launcher"
 	}
 	
 	from {
 		configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
 	}
 }
-*/
+

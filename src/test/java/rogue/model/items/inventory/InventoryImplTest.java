@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import rogue.model.creature.Player;
 import rogue.model.creature.PlayerFactoryImpl;
-import rogue.model.creature.PlayerLifeImpl;
 import rogue.model.items.food.Food;
 import rogue.model.items.food.FoodImpl;
 import rogue.model.items.food.FoodType;

@@ -81,5 +81,8 @@ public class FoodImplTest {
        pl.getLife().increaseFood(REMOVE_AMOUNT_10);
        assertTrue(hamburger.use(pl));
        assertEquals(HUNGER_MAX, pl.getLife().getFood());
+       pl.getLife().increaseFood(REMOVE_AMOUNT_10);
+       assertTrue(hamburger.use(pl));
+       assertEquals(HUNGER_MAX, pl.getLife().getFood());
     }
 }
