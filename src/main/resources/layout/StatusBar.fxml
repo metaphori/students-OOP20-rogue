@@ -9,9 +9,9 @@
 
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="118.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox prefHeight="0.0" prefWidth="60.0">
+      <VBox prefHeight="98.0" prefWidth="87.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Level" textAlignment="CENTER" wrappingWidth="53.5439453125">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Level" textAlignment="CENTER" wrappingWidth="80.5439453125">
                <font>
                   <Font size="20.0" />
                </font>
@@ -21,7 +21,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                <children>
-                  <Label fx:id="level" alignment="CENTER" prefHeight="54.0" prefWidth="54.0" text="0" textAlignment="CENTER" textFill="#030303" textOverrun="WORD_ELLIPSIS">
+                  <Label fx:id="level" alignment="CENTER" prefHeight="54.0" prefWidth="131.0" text="0" textAlignment="CENTER" textFill="#030303" textOverrun="WORD_ELLIPSIS">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -39,9 +39,9 @@
             <Insets left="10.0" right="10.0" />
          </HBox.margin>
       </VBox>
-      <VBox prefHeight="98.0" prefWidth="41.0">
+      <VBox prefHeight="98.0" prefWidth="0.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gold" textAlignment="CENTER" wrappingWidth="49.5439453125">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gold" textAlignment="CENTER" wrappingWidth="95.5439453125">
                <font>
                   <Font size="20.0" />
                </font>
@@ -51,7 +51,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                <children>
-                  <Label fx:id="gold" alignment="CENTER" prefHeight="54.0" prefWidth="73.0" text="0" textAlignment="CENTER" textFill="#030303" textOverrun="WORD_ELLIPSIS">
+                  <Label fx:id="gold" alignment="CENTER" prefHeight="54.0" prefWidth="64.0" text="0" textAlignment="CENTER" textFill="#030303" textOverrun="WORD_ELLIPSIS">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -69,9 +69,9 @@
             <Insets left="10.0" right="10.0" />
          </HBox.margin>
       </VBox>
-      <VBox prefHeight="98.0" prefWidth="18.0">
+      <VBox prefHeight="98.0" prefWidth="52.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Hp" textAlignment="CENTER" wrappingWidth="95.5439453125">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Hp" textAlignment="CENTER" wrappingWidth="148.5439453125">
                <font>
                   <Font size="20.0" />
                </font>
@@ -81,15 +81,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                <children>
-                  <Label fx:id="hp" prefHeight="97.0" prefWidth="26.0" text="0" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
-                     <HBox.margin>
-                        <Insets left="5.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="40.0" />
-                     </font>
-                  </Label>
-                  <Label prefHeight="80.0" prefWidth="26.0" text="/" textAlignment="CENTER" textFill="#030303" textOverrun="WORD_ELLIPSIS">
+                  <Label fx:id="hp" alignment="CENTER" contentDisplay="CENTER" prefHeight="54.0" prefWidth="64.0" text="0" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -97,9 +89,17 @@
                         <Font size="40.0" />
                      </font>
                   </Label>
-                  <Label fx:id="maxHp" alignment="CENTER" prefHeight="80.0" prefWidth="26.0" text="0" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
+                  <Label alignment="CENTER" prefHeight="80.0" prefWidth="26.0" text="/" textAlignment="CENTER" textFill="#030303" textOverrun="WORD_ELLIPSIS">
                      <HBox.margin>
-                        <Insets right="5.0" />
+                        <Insets />
+                     </HBox.margin>
+                     <font>
+                        <Font size="40.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="maxHp" alignment="CENTER" prefHeight="54.0" prefWidth="64.0" text="0" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
+                     <HBox.margin>
+                        <Insets />
                      </HBox.margin>
                      <font>
                         <Font size="40.0" />
