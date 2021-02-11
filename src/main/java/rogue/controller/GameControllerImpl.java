@@ -1,33 +1,34 @@
 package rogue.controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 
-public class GameControllerImpl implements Initializable {
+public class GameControllerImpl implements GameController {
+
+    private static final String INVALID_NAME_MESSAGE = "PLEASE ENTER A VALID NAME";
 
     @FXML private Text insertNameText;
     @FXML private TextField nameTextField;
     private String playerName;
 
     /**
-     * 
-     * @param event
+     * Text area event to get player's name.
+     * @param event to check.
      */
     @FXML
     public void onNameEnter(final KeyEvent event) {
         if (event.getCode().equals(KeyCode.ENTER)) {
             if (nameTextField.getText() != null && !(nameTextField.getText().isEmpty())) {
                 this.playerName = nameTextField.getText();
-                System.out.println("Player name is: " + this.playerName);
+                /*
+                 * Valid name entered, start game.
+                 */
+                start();
             } else {
-                insertNameText.setText("PLEASE ENTER A VALID NAME");
+                insertNameText.setText(INVALID_NAME_MESSAGE);
             }
         }
     }
@@ -40,9 +41,10 @@ public class GameControllerImpl implements Initializable {
     }
 
     /**
-     * 
+     * Creates MainView.
      */
-    @Override
-    public void initialize(final URL location, final ResourceBundle resources) {
+    public void start() {
+        // TODO start method!
     }
+
 }
