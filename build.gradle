@@ -25,7 +25,7 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.13'
-    
+
     // for cross-platform jar: 
     runtimeOnly "org.openjfx:javafx-graphics:$javafx.version:win"
     runtimeOnly "org.openjfx:javafx-graphics:$javafx.version:linux"
@@ -38,11 +38,11 @@ javafx {
 }
 
 sourceSets {
-  main {
-    resources {
-        srcDirs("resources")
+    main {
+        resources {
+            srcDirs("resources")
+        }
     }
-  }
 }
 
 mainClassName = "rogue.Launcher"

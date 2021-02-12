@@ -1,12 +1,17 @@
 package rogue.model.world;
 
+import java.util.Map;
+import java.util.Random;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.HashBiMap;
+import com.google.common.collect.Table;
 
 import rogue.model.Entity;
+import rogue.model.creature.PlayerFactoryImpl;
 
 class CannotMoveException extends Exception {
     private static final long serialVersionUID = 1484670650603806971L;
@@ -31,20 +36,32 @@ class CannotRemoveException extends Exception {
 }
 
 class LevelImpl implements Level {
-    private final int height;
-    private final int width;
-    private final BiMap<Tile, Coordinates> levelMap = HashBiMap.create();
-    private final BiMap<Tile, Entity> entityMap = HashBiMap.create();
+    private static final int WIDTH = 32;
+    private static final int HEIGHT = 32;
+    private static final int VINE_PROBABILITY = 5;
+
+    private final Random random = new Random();
+    private final Table<Integer, Integer, Tile> tileMap = HashBasedTable.create();
+    private final BiMap<Entity, Tile> entityMap = HashBiMap.create();
+
+    public final int getWidth() {
+        return WIDTH;
+    }
+
+    public final int getHeight() {
+        return HEIGHT;
+    }
 
     public final Stream<Tile> getTileStream() {
-        Stream.Builder<Tile> ts = Stream.builder();
-        this.levelMap.forEach((tile, coords) -> ts.add(tile));
+        return tileMap.values().stream();
+    }
 
-        return ts.build();
+    public final Map<Entity, Tile> getEntityMap() {
+        return entityMap;
     }
 
     public final void moveEntity(final Entity e, final Tile t) throws CannotMoveException {
-        if (entityMap.get(t) != null) {
+        if (entityMap.inverse().get(t) != null) {
             throw new CannotMoveException("There's already an entity in this position!");
         }
 
@@ -53,52 +70,58 @@ class LevelImpl implements Level {
         }
 
         // remove entity if already present
-        if (entityMap.containsValue(e)) {
-            entityMap.inverse().remove(e);
+        if (entityMap.containsKey(e)) {
+            entityMap.remove(e);
         }
 
-        entityMap.put(t, e);
+        entityMap.put(e, t);
     }
 
     public final void shiftEntity(final Entity e, final Direction d, final int i) throws CannotMoveException {
-        if (!entityMap.containsValue(e)) {
+        if (!entityMap.containsKey(e)) {
             throw new CannotMoveException("There's already an entity in this position!");
         }
 
-        Tile currentTile = entityMap.inverse().get(e);
-        Coordinates currentCoordinates = levelMap.get(currentTile);
+        Tile currentTile = entityMap.get(e);
+        Coordinates currentCoordinates = new Coordinates(currentTile.getX(), currentTile.getY());
         Coordinates finalCoordinates = currentCoordinates.shift(d, i);
-        Tile finalTile = levelMap.inverse().get(finalCoordinates);
+        Tile finalTile = tileMap.get(finalCoordinates.getX(), finalCoordinates.getY());
 
         moveEntity(e, finalTile);
     }
 
     public final void removeEntity(final Entity e) throws CannotRemoveException {
-        if (!entityMap.containsValue(e)) {
+        if (!entityMap.containsKey(e)) {
             throw new CannotRemoveException("Entity already absent!");
         }
 
-        entityMap.inverse().remove(e);
+        entityMap.remove(e);
     }
 
     public final int distance(final Tile t1, final Tile t2) {
-        Coordinates c1 = levelMap.get(t1);
-        Coordinates c2 = levelMap.get(t2);
-        return Math.abs(c1.getX() - c2.getX()) + Math.abs(c1.getY() - c2.getY());
+        return Math.abs(t1.getX() - t2.getX()) + Math.abs(t1.getY() - t2.getY());
     }
 
-    // TODO
+    // TODO: REDO THIS FUCKING MESS FOR GOD'S SAKE
     private void generate() {
-        IntStream.range(0, this.height).forEach(x -> {
-            IntStream.range(0, this.width).forEach(y -> {
-                this.levelMap.put(new TileImpl(Material.BRICKS, false), new Coordinates(x, y));
+        // levelMap
+        IntStream.range(0, HEIGHT).forEach(x -> {
+            IntStream.range(0, WIDTH).forEach(y -> {
+                boolean isWall = x == 0 || x == WIDTH - 1 || y == 0 || y == HEIGHT - 1;
+                Material madeOf = x != WIDTH / 4 || y != HEIGHT / 4
+                        ? random.nextInt(VINE_PROBABILITY) != 0 ? Material.BRICKS : Material.VINES
+                        : Material.DOOR;
+
+                // redundant but not slow as fuck
+                tileMap.put(x, y, new TileImpl(this, x, y, madeOf, isWall));
             });
         });
+
+        // entities
+        entityMap.put(new PlayerFactoryImpl().create(), tileMap.get(WIDTH / 2, HEIGHT / 2));
     };
 
-    LevelImpl(final int height, final int width) {
-        this.height = height;
-        this.width = width;
+    LevelImpl() {
         this.generate();
     }
 }
