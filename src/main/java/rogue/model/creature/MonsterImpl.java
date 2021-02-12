@@ -1,7 +1,7 @@
 package rogue.model.creature;
 
 import javafx.util.Pair;
-
+import rogue.model.items.potion.PotionImpl;
 
 public class MonsterImpl implements Monster {
 
@@ -68,11 +68,39 @@ public class MonsterImpl implements Monster {
     }
 
     /**
-     *
-     * @return the damage that the monster does for that single attack 
+     * {@inheritDoc}
      */
+    @Override
+    public PotionImpl getItem() {
+        return this.type.getItem();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getItemChange() {
+        return this.type.getItemChange();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public int attackDamage() {
         return (int) (Math.random() * (this.getDamage().getValue() - this.getDamage().getKey()) + this.getDamage().getKey());
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public PotionImpl dropItem() {
+        final int casuale = (int) (Math.random() * 100) + 1;
+        if (casuale <= this.getItemChange()) {
+            return this.getItem(); 
+       } else {
+           return null;
+        }
+    }
 }
