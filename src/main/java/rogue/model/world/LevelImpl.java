@@ -103,7 +103,7 @@ class LevelImpl implements Level {
     }
 
     // TODO: REDO THIS FUCKING MESS FOR GOD'S SAKE
-    private void generate() {
+    private void generate() throws CannotMoveException {
         // levelMap
         IntStream.range(0, HEIGHT).forEach(x -> {
             IntStream.range(0, WIDTH).forEach(y -> {
@@ -118,10 +118,10 @@ class LevelImpl implements Level {
         });
 
         // entities
-        entityMap.put(new PlayerFactoryImpl().create(), tileMap.get(WIDTH / 2, HEIGHT / 2));
+        moveEntity(new PlayerFactoryImpl().create(), tileMap.get(WIDTH / 2, HEIGHT / 2));
     };
 
-    LevelImpl() {
+    LevelImpl() throws CannotMoveException {
         this.generate();
     }
 }

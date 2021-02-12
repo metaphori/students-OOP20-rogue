@@ -13,7 +13,12 @@ public class WorldImpl implements World {
 
     public WorldImpl(final int depth) {
         IntStream.range(0, depth).forEach(i -> {
-            this.levels.add(new LevelImpl());
+            try {
+                this.levels.add(new LevelImpl());
+            } catch (CannotMoveException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         });
     }
 }
