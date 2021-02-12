@@ -1,15 +1,24 @@
 package rogue.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import rogue.model.creature.Player;
+import rogue.model.creature.PlayerFactoryImpl;
+import rogue.model.items.inventory.InventoryIsFullException;
+import rogue.model.items.potion.PotionImpl;
+import rogue.model.items.potion.PotionType;
 
 public class GameControllerImpl implements GameController, Initializable {
 
@@ -37,9 +46,10 @@ public class GameControllerImpl implements GameController, Initializable {
     /**
      * Text area event to get player's name.
      * @param event to check.
+     * @throws IOException 
      */
     @FXML
-    public void onNameEnter(final KeyEvent event) {
+    public void onNameEnter(final KeyEvent event) throws IOException, InventoryIsFullException {
         if (event.getCode().equals(KeyCode.ENTER)) {
             if (nameTextField.getText() != null && !(nameTextField.getText().isEmpty())) {
                 if (validName(nameTextField.getText())) {
@@ -47,8 +57,8 @@ public class GameControllerImpl implements GameController, Initializable {
                     /*
                      * Valid name entered, start game.
                      */
-                     insertNameLabel.setText(VALID_NAME);
-                    start();
+                    insertNameLabel.setText(VALID_NAME);
+                    start(event);
                 } else {
                     insertNameLabel.setText(INVALID_NAME_MESSAGE);
                 }
@@ -67,10 +77,22 @@ public class GameControllerImpl implements GameController, Initializable {
 
     /**
      * Creates MainView.
+     * @param event that triggeres start.
+     * @throws InventoryIsFullException 
      */
-    public void start() {
-        // TODO start method!
-        System.out.println("ok!");
+    public void start(final KeyEvent event) throws IOException, InventoryIsFullException {
+        final FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource("layout/InventoryView.fxml"));
+        final Parent root = loader.load();
+
+        final Player player = new PlayerFactoryImpl().create();
+        player.getInventory().addItem(new PotionImpl(PotionType.POTION_I));
+
+        final InventoryControllerImpl controller = loader.getController();
+        controller.initPlayer(player);
+
+        final Stage stage = (Stage) nameTextField.getScene().getWindow();
+        final Scene newScene = new Scene(root, 260, 400);
+        stage.setScene(newScene);
     }
 
     /**

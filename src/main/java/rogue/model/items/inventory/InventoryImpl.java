@@ -9,26 +9,6 @@ import rogue.model.creature.Player;
 import rogue.model.items.Item;
 import rogue.model.items.scroll.Scroll;
 
-class OutOfInventoryException extends Exception {
-
-    private static final long serialVersionUID = -4154450610441652376L;
-
-    OutOfInventoryException(final String message) {
-        super(message);
-    }
-
-}
-
-class InventoryIsFullException extends Exception {
-
-    private static final long serialVersionUID = 7054497161949466512L;
-
-    InventoryIsFullException(final String message) {
-        super(message);
-    }
-
-}
-
 public class InventoryImpl implements Inventory {
 
     private static final int INVENTORY_SIZE = 20;
