@@ -134,6 +134,113 @@ public class MonsterTypeTest {
     private static final int NYMPH_DAMAGE_MAX = 0;
     private static final int NYMPH_AC = 9;
 
+    private static final int ORC_EXPERIENCE = 5;
+    private static final int ORC_MONEY = 500;
+    private static final int ORC_ITEM_CHANGE = 0;
+    private static final int ORC_HP_MIN = 1;
+    private static final int ORC_HP_MAX = 8;
+    private static final int ORC_DAMAGE_MIN = 1;
+    private static final int ORC_DAMAGE_MAX = 8;
+    private static final int ORC_AC = 6;
+
+    private static final int PHANTHOM_EXPERIENCE = 120;
+    private static final int PHANTHOM_MONEY = 0;
+    private static final int PHANTHOM_ITEM_CHANGE = 0;
+    private static final int PHANTHOM_HP_MIN = 8;
+    private static final int PHANTHOM_HP_MAX = 64;
+    private static final int PHANTHOM_DAMAGE_MIN = 4;
+    private static final int PHANTHOM_DAMAGE_MAX = 16;
+    private static final int PHANTHOM_AC = 3;
+
+    private static final int QUAQQA_EXPERIENCE = 15;
+    private static final int QUAQQA_MONEY = 0;
+    private static final int QUAQQA_ITEM_CHANGE = 0;
+    private static final int QUAQQA_HP_MIN = 3;
+    private static final int QUAQQA_HP_MAX = 24;
+    private static final int QUAQQA_DAMAGE_MIN = 2;
+    private static final int QUAQQA_DAMAGE_MAX = 10;
+    private static final int QUAQQA_AC = 3;
+
+    private static final int RATFOLK_EXPERIENCE = 9;
+    private static final int RATFOLK_MONEY = 27;
+    private static final int RATFOLK_ITEM_CHANGE = 60;
+    private static final int RATFOLK_HP_MIN = 2;
+    private static final int RATFOLK_HP_MAX = 16;
+    private static final int RATFOLK_DAMAGE_MIN = 1;
+    private static final int RATFOLK_DAMAGE_MAX = 6;
+    private static final int RATFOLK_AC = 3;
+
+    private static final int SNAKE_EXPERIENCE = 2;
+    private static final int SNAKE_MONEY = 6;
+    private static final int SNAKE_ITEM_CHANGE = 0;
+    private static final int SNAKE_HP_MIN = 1;
+    private static final int SNAKE_HP_MAX = 8;
+    private static final int SNAKE_DAMAGE_MIN = 1;
+    private static final int SNAKE_DAMAGE_MAX = 3;
+    private static final int SNAKE_AC = 5;
+
+    private static final int TROLL_EXPERIENCE = 120;
+    private static final int TROLL_MONEY = 360;
+    private static final int TROLL_ITEM_CHANGE = 70;
+    private static final int TROLL_HP_MIN = 6;
+    private static final int TROLL_HP_MAX = 48;
+    private static final int TROLL_DAMAGE_MIN = 3;
+    private static final int TROLL_DAMAGE_MAX = 24;
+    private static final int TROLL_AC = 4;
+
+    private static final int UNICORN_EXPERIENCE = 190;
+    private static final int UNICORN_MONEY = 570;
+    private static final int UNICORN_ITEM_CHANGE = 100;
+    private static final int UNICORN_HP_MIN = 7;
+    private static final int UNICORN_HP_MAX = 56;
+    private static final int UNICORN_DAMAGE_MIN = 4;
+    private static final int UNICORN_DAMAGE_MAX = 36;
+    private static final int UNICORN_AC = 3;
+
+    private static final int VAMPIRE_EXPERIENCE = 350;
+    private static final int VAMPIRE_MONEY = 1050;
+    private static final int VAMPIRE_ITEM_CHANGE = 100;
+    private static final int VAMPIRE_HP_MIN = 8;
+    private static final int VAMPIRE_HP_MAX = 64;
+    private static final int VAMPIRE_DAMAGE_MIN = 1;
+    private static final int VAMPIRE_DAMAGE_MAX = 10;
+    private static final int VAMPIRE_AC = 1;
+
+    private static final int WRAITH_EXPERIENCE = 55;
+    private static final int WRAITH_MONEY = 0;
+    private static final int WRAITH_ITEM_CHANGE = 60;
+    private static final int WRAITH_HP_MIN = 5;
+    private static final int WRAITH_HP_MAX = 40;
+    private static final int WRAITH_DAMAGE_MIN = 1;
+    private static final int WRAITH_DAMAGE_MAX = 6;
+    private static final int WRAITH_AC = 4;
+
+    private static final int XILL_EXPERIENCE = 50;
+    private static final int XILL_MONEY = 150;
+    private static final int XILL_ITEM_CHANGE = 20;
+    private static final int XILL_HP_MIN = 9;
+    private static final int XILL_HP_MAX = 72;
+    private static final int XILL_DAMAGE_MIN = 3;
+    private static final int XILL_DAMAGE_MAX = 24;
+    private static final int XILL_AC = 2;
+
+    private static final int YETI_EXPERIENCE = 100;
+    private static final int YETI_MONEY = 900;
+    private static final int YETI_ITEM_CHANGE = 40;
+    private static final int YETI_HP_MIN = 4;
+    private static final int YETI_HP_MAX = 32;
+    private static final int YETI_DAMAGE_MIN = 2;
+    private static final int YETI_DAMAGE_MAX = 12;
+    private static final int YETI_AC = 6;
+
+    private static final int ZOMBIE_EXPERIENCE = 6;
+    private static final int ZOMBIE_MONEY = 16;
+    private static final int ZOMBIE_ITEM_CHANGE = 50;
+    private static final int ZOMBIE_HP_MIN = 3;
+    private static final int ZOMBIE_HP_MAX = 24;
+    private static final int ZOMBIE_DAMAGE_MIN = 2;
+    private static final int ZOMBIE_DAMAGE_MAX = 16;
+    private static final int ZOMBIE_AC = 8;
 
     @org.junit.Test
     public void testAirElemental() {
@@ -158,7 +265,6 @@ public class MonsterTypeTest {
 
         mon.getLife().hurt(IPOTETICAL_DAMAGE);
         assertTrue(mon.getLife().isDead());
-
     }
 
     @org.junit.Test
@@ -184,7 +290,6 @@ public class MonsterTypeTest {
 
         mon.getLife().hurt(IPOTETICAL_DAMAGE);
         assertTrue(mon.getLife().isDead());
-
     }
 
     @org.junit.Test
@@ -210,7 +315,6 @@ public class MonsterTypeTest {
 
         mon.getLife().hurt(IPOTETICAL_DAMAGE);
         assertTrue(mon.getLife().isDead());
-
     }
 
     @org.junit.Test
@@ -236,8 +340,8 @@ public class MonsterTypeTest {
 
         mon.getLife().hurt(IPOTETICAL_DAMAGE);
         assertTrue(mon.getLife().isDead());
-
     }
+
         @org.junit.Test
         public void testEmu() {
             // with default configs
@@ -261,8 +365,8 @@ public class MonsterTypeTest {
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
-
     }
+
         @org.junit.Test
         public void testFireLizard() {
             // with default configs
@@ -286,7 +390,6 @@ public class MonsterTypeTest {
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
-
     }
 
         @org.junit.Test
@@ -312,7 +415,6 @@ public class MonsterTypeTest {
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
-
     }
 
         @org.junit.Test
@@ -338,7 +440,6 @@ public class MonsterTypeTest {
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
-
     }
 
         @org.junit.Test
@@ -364,7 +465,6 @@ public class MonsterTypeTest {
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
-
     }
 
         @org.junit.Test
@@ -390,8 +490,8 @@ public class MonsterTypeTest {
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
-
     }
+
         @org.junit.Test
         public void testKobold() {
             // with default configs
@@ -415,8 +515,8 @@ public class MonsterTypeTest {
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
-
     }
+
         @org.junit.Test
         public void testLycanthrope() {
             // with default configs
@@ -440,7 +540,6 @@ public class MonsterTypeTest {
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
-
     }
 
         @org.junit.Test
@@ -466,8 +565,8 @@ public class MonsterTypeTest {
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
-
     }
+
         @org.junit.Test
         public void testNymph() {
             // with default configs
@@ -491,6 +590,305 @@ public class MonsterTypeTest {
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
+    }
 
+        @org.junit.Test
+        public void testOrc() {
+            // with default configs
+            final MonsterImpl mon = new MonsterImpl(MonsterType.ORC);
+
+            assertEquals(ORC_EXPERIENCE, mon.getLife().getExperience());
+            assertEquals(ORC_MONEY, mon.getMoney());
+            assertEquals(ORC_ITEM_CHANGE, mon.getItemChange());
+            assertTrue(ORC_HP_MIN <= mon.getLife().getHealthPoints() && mon.getLife().getHealthPoints() <= ORC_HP_MAX);
+            assertTrue(ORC_DAMAGE_MIN <= mon.attackDamage() && mon.attackDamage() <= ORC_DAMAGE_MAX);
+            assertEquals(ORC_AC, mon.getAC());
+
+            assertFalse(mon.getSpecial().isDrainLife());
+            assertFalse(mon.getSpecial().isFlyingRandom());
+            assertFalse(mon.getSpecial().isFlyng());
+            assertTrue(mon.getSpecial().isGreedy());
+            assertFalse(mon.getSpecial().isHostile());
+            assertFalse(mon.getSpecial().isInvisible());
+            assertFalse(mon.getSpecial().isPoisonous());
+            assertFalse(mon.getSpecial().isWeaken());
+
+            mon.getLife().hurt(IPOTETICAL_DAMAGE);
+            assertTrue(mon.getLife().isDead());
+    }
+
+        @org.junit.Test
+        public void testPhanthom() {
+            // with default configs
+            final MonsterImpl mon = new MonsterImpl(MonsterType.PHANTHOM);
+
+            assertEquals(PHANTHOM_EXPERIENCE, mon.getLife().getExperience());
+            assertEquals(PHANTHOM_MONEY, mon.getMoney());
+            assertEquals(PHANTHOM_ITEM_CHANGE, mon.getItemChange());
+            assertTrue(PHANTHOM_HP_MIN <= mon.getLife().getHealthPoints() && mon.getLife().getHealthPoints() <= PHANTHOM_HP_MAX);
+            assertTrue(PHANTHOM_DAMAGE_MIN <= mon.attackDamage() && mon.attackDamage() <= PHANTHOM_DAMAGE_MAX);
+            assertEquals(PHANTHOM_AC, mon.getAC());
+
+            assertFalse(mon.getSpecial().isDrainLife());
+            assertFalse(mon.getSpecial().isFlyingRandom());
+            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isGreedy());
+            assertTrue(mon.getSpecial().isHostile());
+            assertTrue(mon.getSpecial().isInvisible());
+            assertFalse(mon.getSpecial().isPoisonous());
+            assertFalse(mon.getSpecial().isWeaken());
+
+            mon.getLife().hurt(IPOTETICAL_DAMAGE);
+            assertTrue(mon.getLife().isDead());
+    }
+
+        @org.junit.Test
+        public void testQuaqqa() {
+            // with default configs
+            final MonsterImpl mon = new MonsterImpl(MonsterType.QUAQQA);
+
+            assertEquals(QUAQQA_EXPERIENCE, mon.getLife().getExperience());
+            assertEquals(QUAQQA_MONEY, mon.getMoney());
+            assertEquals(QUAQQA_ITEM_CHANGE, mon.getItemChange());
+            assertTrue(QUAQQA_HP_MIN <= mon.getLife().getHealthPoints() && mon.getLife().getHealthPoints() <= QUAQQA_HP_MAX);
+            assertTrue(QUAQQA_DAMAGE_MIN <= mon.attackDamage() && mon.attackDamage() <= QUAQQA_DAMAGE_MAX);
+            assertEquals(QUAQQA_AC, mon.getAC());
+
+            assertFalse(mon.getSpecial().isDrainLife());
+            assertFalse(mon.getSpecial().isFlyingRandom());
+            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isGreedy());
+            assertFalse(mon.getSpecial().isHostile());
+            assertFalse(mon.getSpecial().isInvisible());
+            assertFalse(mon.getSpecial().isPoisonous());
+            assertFalse(mon.getSpecial().isWeaken());
+
+            mon.getLife().hurt(IPOTETICAL_DAMAGE);
+            assertTrue(mon.getLife().isDead());
+    }
+
+        @org.junit.Test
+        public void testRatfolk() {
+            // with default configs
+            final MonsterImpl mon = new MonsterImpl(MonsterType.RATFOLK);
+
+            assertEquals(RATFOLK_EXPERIENCE, mon.getLife().getExperience());
+            assertEquals(RATFOLK_MONEY, mon.getMoney());
+            assertEquals(RATFOLK_ITEM_CHANGE, mon.getItemChange());
+            assertTrue(RATFOLK_HP_MIN <= mon.getLife().getHealthPoints() && mon.getLife().getHealthPoints() <= RATFOLK_HP_MAX);
+            assertTrue(RATFOLK_DAMAGE_MIN <= mon.attackDamage() && mon.attackDamage() <= RATFOLK_DAMAGE_MAX);
+            assertEquals(RATFOLK_AC, mon.getAC());
+
+            assertFalse(mon.getSpecial().isDrainLife());
+            assertFalse(mon.getSpecial().isFlyingRandom());
+            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isGreedy());
+            assertFalse(mon.getSpecial().isHostile());
+            assertFalse(mon.getSpecial().isInvisible());
+            assertFalse(mon.getSpecial().isPoisonous());
+            assertFalse(mon.getSpecial().isWeaken());
+
+            mon.getLife().hurt(IPOTETICAL_DAMAGE);
+            assertTrue(mon.getLife().isDead());
+    }
+
+        @org.junit.Test
+        public void testSnake() {
+            // with default configs
+            final MonsterImpl mon = new MonsterImpl(MonsterType.SNAKE);
+
+            assertEquals(SNAKE_EXPERIENCE, mon.getLife().getExperience());
+            assertEquals(SNAKE_MONEY, mon.getMoney());
+            assertEquals(SNAKE_ITEM_CHANGE, mon.getItemChange());
+            assertTrue(SNAKE_HP_MIN <= mon.getLife().getHealthPoints() && mon.getLife().getHealthPoints() <= SNAKE_HP_MAX);
+            assertTrue(SNAKE_DAMAGE_MIN <= mon.attackDamage() && mon.attackDamage() <= SNAKE_DAMAGE_MAX);
+            assertEquals(SNAKE_AC, mon.getAC());
+
+            assertFalse(mon.getSpecial().isDrainLife());
+            assertFalse(mon.getSpecial().isFlyingRandom());
+            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isGreedy());
+            assertTrue(mon.getSpecial().isHostile());
+            assertFalse(mon.getSpecial().isInvisible());
+            assertTrue(mon.getSpecial().isPoisonous());
+            assertFalse(mon.getSpecial().isWeaken());
+
+            mon.getLife().hurt(IPOTETICAL_DAMAGE);
+            assertTrue(mon.getLife().isDead());
+    }
+
+        @org.junit.Test
+        public void testTroll() {
+            // with default configs
+            final MonsterImpl mon = new MonsterImpl(MonsterType.TROLL);
+
+            assertEquals(TROLL_EXPERIENCE, mon.getLife().getExperience());
+            assertEquals(TROLL_MONEY, mon.getMoney());
+            assertEquals(TROLL_ITEM_CHANGE, mon.getItemChange());
+            assertTrue(TROLL_HP_MIN <= mon.getLife().getHealthPoints() && mon.getLife().getHealthPoints() <= TROLL_HP_MAX);
+            assertTrue(TROLL_DAMAGE_MIN <= mon.attackDamage() && mon.attackDamage() <= TROLL_DAMAGE_MAX);
+            assertEquals(TROLL_AC, mon.getAC());
+
+            assertFalse(mon.getSpecial().isDrainLife());
+            assertFalse(mon.getSpecial().isFlyingRandom());
+            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isGreedy());
+            assertTrue(mon.getSpecial().isHostile());
+            assertFalse(mon.getSpecial().isInvisible());
+            assertFalse(mon.getSpecial().isPoisonous());
+            assertFalse(mon.getSpecial().isWeaken());
+
+            mon.getLife().hurt(IPOTETICAL_DAMAGE);
+            assertTrue(mon.getLife().isDead());
+    }
+
+        @org.junit.Test
+        public void testUnicorn() {
+            // with default configs
+            final MonsterImpl mon = new MonsterImpl(MonsterType.UNICORN);
+
+            assertEquals(UNICORN_EXPERIENCE, mon.getLife().getExperience());
+            assertEquals(UNICORN_MONEY, mon.getMoney());
+            assertEquals(UNICORN_ITEM_CHANGE, mon.getItemChange());
+            assertTrue(UNICORN_HP_MIN <= mon.getLife().getHealthPoints() && mon.getLife().getHealthPoints() <= UNICORN_HP_MAX);
+            assertTrue(UNICORN_DAMAGE_MIN <= mon.attackDamage() && mon.attackDamage() <= UNICORN_DAMAGE_MAX);
+            assertEquals(UNICORN_AC, mon.getAC());
+
+            assertFalse(mon.getSpecial().isDrainLife());
+            assertFalse(mon.getSpecial().isFlyingRandom());
+            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isGreedy());
+            assertFalse(mon.getSpecial().isHostile());
+            assertFalse(mon.getSpecial().isInvisible());
+            assertFalse(mon.getSpecial().isPoisonous());
+            assertFalse(mon.getSpecial().isWeaken());
+
+            mon.getLife().hurt(IPOTETICAL_DAMAGE);
+            assertTrue(mon.getLife().isDead());
+    }
+
+        @org.junit.Test
+        public void testVampire() {
+            // with default configs
+            final MonsterImpl mon = new MonsterImpl(MonsterType.VAMPIRE);
+
+            assertEquals(VAMPIRE_EXPERIENCE, mon.getLife().getExperience());
+            assertEquals(VAMPIRE_MONEY, mon.getMoney());
+            assertEquals(VAMPIRE_ITEM_CHANGE, mon.getItemChange());
+            assertTrue(VAMPIRE_HP_MIN <= mon.getLife().getHealthPoints() && mon.getLife().getHealthPoints() <= VAMPIRE_HP_MAX);
+            assertTrue(VAMPIRE_DAMAGE_MIN <= mon.attackDamage() && mon.attackDamage() <= VAMPIRE_DAMAGE_MAX);
+            assertEquals(VAMPIRE_AC, mon.getAC());
+
+            assertTrue(mon.getSpecial().isDrainLife());
+            assertFalse(mon.getSpecial().isFlyingRandom());
+            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isGreedy());
+            assertTrue(mon.getSpecial().isHostile());
+            assertFalse(mon.getSpecial().isInvisible());
+            assertFalse(mon.getSpecial().isPoisonous());
+            assertFalse(mon.getSpecial().isWeaken());
+
+            mon.getLife().hurt(IPOTETICAL_DAMAGE);
+            assertTrue(mon.getLife().isDead());
+    }
+
+        @org.junit.Test
+        public void testWraith() {
+            // with default configs
+            final MonsterImpl mon = new MonsterImpl(MonsterType.WRAITH);
+
+            assertEquals(WRAITH_EXPERIENCE, mon.getLife().getExperience());
+            assertEquals(WRAITH_MONEY, mon.getMoney());
+            assertEquals(WRAITH_ITEM_CHANGE, mon.getItemChange());
+            assertTrue(WRAITH_HP_MIN <= mon.getLife().getHealthPoints() && mon.getLife().getHealthPoints() <= WRAITH_HP_MAX);
+            assertTrue(WRAITH_DAMAGE_MIN <= mon.attackDamage() && mon.attackDamage() <= WRAITH_DAMAGE_MAX);
+            assertEquals(WRAITH_AC, mon.getAC());
+
+            assertFalse(mon.getSpecial().isDrainLife());
+            assertFalse(mon.getSpecial().isFlyingRandom());
+            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isGreedy());
+            assertFalse(mon.getSpecial().isHostile());
+            assertFalse(mon.getSpecial().isInvisible());
+            assertFalse(mon.getSpecial().isPoisonous());
+            assertFalse(mon.getSpecial().isWeaken());
+
+            mon.getLife().hurt(IPOTETICAL_DAMAGE);
+            assertTrue(mon.getLife().isDead());
+    }
+
+        @org.junit.Test
+        public void testXill() {
+            // with default configs
+            final MonsterImpl mon = new MonsterImpl(MonsterType.XILL);
+
+            assertEquals(XILL_EXPERIENCE, mon.getLife().getExperience());
+            assertEquals(XILL_MONEY, mon.getMoney());
+            assertEquals(XILL_ITEM_CHANGE, mon.getItemChange());
+            assertTrue(XILL_HP_MIN <= mon.getLife().getHealthPoints() && mon.getLife().getHealthPoints() <= XILL_HP_MAX);
+            assertTrue(XILL_DAMAGE_MIN <= mon.attackDamage() && mon.attackDamage() <= XILL_DAMAGE_MAX);
+            assertEquals(XILL_AC, mon.getAC());
+
+            assertFalse(mon.getSpecial().isDrainLife());
+            assertFalse(mon.getSpecial().isFlyingRandom());
+            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isGreedy());
+            assertTrue(mon.getSpecial().isHostile());
+            assertFalse(mon.getSpecial().isInvisible());
+            assertFalse(mon.getSpecial().isPoisonous());
+            assertFalse(mon.getSpecial().isWeaken());
+
+            mon.getLife().hurt(IPOTETICAL_DAMAGE);
+            assertTrue(mon.getLife().isDead());
+    }
+
+        @org.junit.Test
+        public void testYeti() {
+            // with default configs
+            final MonsterImpl mon = new MonsterImpl(MonsterType.YETI);
+
+            assertEquals(YETI_EXPERIENCE, mon.getLife().getExperience());
+            assertEquals(YETI_MONEY, mon.getMoney());
+            assertEquals(YETI_ITEM_CHANGE, mon.getItemChange());
+            assertTrue(YETI_HP_MIN <= mon.getLife().getHealthPoints() && mon.getLife().getHealthPoints() <= YETI_HP_MAX);
+            assertTrue(YETI_DAMAGE_MIN <= mon.attackDamage() && mon.attackDamage() <= YETI_DAMAGE_MAX);
+            assertEquals(YETI_AC, mon.getAC());
+
+            assertFalse(mon.getSpecial().isDrainLife());
+            assertFalse(mon.getSpecial().isFlyingRandom());
+            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isGreedy());
+            assertFalse(mon.getSpecial().isHostile());
+            assertFalse(mon.getSpecial().isInvisible());
+            assertFalse(mon.getSpecial().isPoisonous());
+            assertFalse(mon.getSpecial().isWeaken());
+
+            mon.getLife().hurt(IPOTETICAL_DAMAGE);
+            assertTrue(mon.getLife().isDead());
+    }
+
+        @org.junit.Test
+        public void testZombie() {
+            // with default configs
+            final MonsterImpl mon = new MonsterImpl(MonsterType.ZOMBIE);
+
+            assertEquals(ZOMBIE_EXPERIENCE, mon.getLife().getExperience());
+            assertEquals(ZOMBIE_MONEY, mon.getMoney());
+            assertEquals(ZOMBIE_ITEM_CHANGE, mon.getItemChange());
+            assertTrue(ZOMBIE_HP_MIN <= mon.getLife().getHealthPoints() && mon.getLife().getHealthPoints() <= ZOMBIE_HP_MAX);
+            assertTrue(ZOMBIE_DAMAGE_MIN <= mon.attackDamage() && mon.attackDamage() <= ZOMBIE_DAMAGE_MAX);
+            assertEquals(ZOMBIE_AC, mon.getAC());
+
+            assertFalse(mon.getSpecial().isDrainLife());
+            assertFalse(mon.getSpecial().isFlyingRandom());
+            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isGreedy());
+            assertTrue(mon.getSpecial().isHostile());
+            assertFalse(mon.getSpecial().isInvisible());
+            assertFalse(mon.getSpecial().isPoisonous());
+            assertTrue(mon.getSpecial().isWeaken());
+
+            mon.getLife().hurt(IPOTETICAL_DAMAGE);
+            assertTrue(mon.getLife().isDead());
     }
 }
