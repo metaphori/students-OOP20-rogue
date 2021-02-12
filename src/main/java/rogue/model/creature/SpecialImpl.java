@@ -1,7 +1,7 @@
 package rogue.model.creature;
 
 public class SpecialImpl implements Special {
-	
+
     private final boolean hostile;
     private final boolean flying;
     private final boolean greedy;
