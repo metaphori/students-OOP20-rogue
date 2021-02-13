@@ -6,6 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import rogue.model.world.World;
+import rogue.model.world.WorldImpl;
+import rogue.view.LevelStage;
 
 public class Launcher extends Application {
 
@@ -24,6 +27,9 @@ public class Launcher extends Application {
         primaryStage.setTitle("Rogue");
         primaryStage.setResizable(false);
         primaryStage.show();
+
+        final World w = new WorldImpl(7);
+        new LevelStage(w.getLevel(0)).show();
     }
 
     public static void main(final String[] args) {
