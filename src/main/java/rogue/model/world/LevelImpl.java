@@ -102,15 +102,14 @@ class LevelImpl implements Level {
         return Math.abs(t1.getX() - t2.getX()) + Math.abs(t1.getY() - t2.getY());
     }
 
-    // TODO: REDO THIS FUCKING MESS FOR GOD'S SAKE
     private void generate() throws CannotMoveException {
-        // levelMap
-        IntStream.range(0, HEIGHT).forEach(x -> {
-            IntStream.range(0, WIDTH).forEach(y -> {
-                boolean isWall = x == 0 || x == WIDTH - 1 || y == 0 || y == HEIGHT - 1;
-                Material madeOf = x != WIDTH / 4 || y != HEIGHT / 4
-                        ? random.nextInt(VINE_PROBABILITY) != 0 ? Material.BRICKS : Material.VINES
-                        : Material.DOOR;
+        var cave = new CaveGenerator(WIDTH, HEIGHT).getCave();
+
+        // tileMap
+        IntStream.range(0, WIDTH).forEach(x -> {
+            IntStream.range(0, HEIGHT).forEach(y -> {
+                var isWall = cave[x][y];
+                var madeOf = random.nextInt(VINE_PROBABILITY) != 0 ? Material.BRICKS : Material.VINES;
 
                 // redundant but not slow as fuck
                 tileMap.put(x, y, new TileImpl(this, x, y, madeOf, isWall));
@@ -118,7 +117,8 @@ class LevelImpl implements Level {
         });
 
         // entities
-        moveEntity(new PlayerFactoryImpl().create(), tileMap.get(WIDTH / 2, HEIGHT / 2));
+        // TODO: BROKEN PORCODIO
+        //moveEntity(new PlayerFactoryImpl().create(), tileMap.get(WIDTH / 2, HEIGHT / 2));
     };
 
     LevelImpl() throws CannotMoveException {
