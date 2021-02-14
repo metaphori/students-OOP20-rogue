@@ -93,5 +93,10 @@ public interface PlayerLife extends Life {
      * @return the player maximum health points
      */
     int getMaxHealthPoints();
+    
+    /**
+     * @return the maximum food
+     */
+    int getMaxFood();
 
 }
