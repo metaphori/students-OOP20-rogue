@@ -80,5 +80,18 @@ public interface PlayerLife extends Life {
      *          the amount of coins to subtract
      */ 
     void increaseLevel(int amount);
+    
+    /**
+     * Sets the player maximum health points.
+     * @param maxHealthPoints
+     *          the max quantity of healthPoints the player can collect
+     * @throws IllegalStateException if maxHealthPoints > healthPoints
+     */ 
+    void setMaxHealthPoints(int maxHealthPoints);
+    
+    /**
+     * @return the player maximum health points
+     */
+    int getMaxHealthPoints();
 
 }
