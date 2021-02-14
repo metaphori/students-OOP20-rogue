@@ -34,8 +34,9 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
 
     @Override
     public void powerUp(final int increment) {
-        this.checkNotExceeding(this.getHealthPoints() + increment, this.maxHealthPoints);
-        this.setHealthPoints(this.getHealthPoints() + increment);
+        final var newHp = this.getHealthPoints() + increment;
+        this.checkNotExceeding(newHp, this.maxHealthPoints);
+        this.setHealthPoints(newHp);
     }
 
     @Override
@@ -49,8 +50,9 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
     }
 
     private void updateFood(final int amount) {
-        this.leftFood = this.checkNotExceeding(this.leftFood + amount, MAX_FOOD);
-        this.leftFood = this.checkNotNegative(this.leftFood + amount);
+        final var newFood = this.leftFood + amount;
+        this.leftFood = this.checkNotExceeding(newFood, MAX_FOOD);
+        this.leftFood = this.checkNotNegative(newFood);
     }
 
     @Override
