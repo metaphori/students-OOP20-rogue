@@ -49,11 +49,11 @@ sourceSets {
   }
 }
 
-mainClassName = "rogue.Launcher"
+mainClassName = "rogue.App"
 
 jar {
 	manifest {
-		attributes 'Main-Class' : "rogue.Launcher"
+		attributes 'Main-Class' : "rogue.App"
 	}
 	
 	from {

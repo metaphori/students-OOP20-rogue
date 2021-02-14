@@ -16,7 +16,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import rogue.model.creature.Player;
 import rogue.model.creature.PlayerFactoryImpl;
+import rogue.model.items.food.FoodImpl;
+import rogue.model.items.food.FoodType;
+import rogue.model.items.inventory.Inventory;
 import rogue.model.items.inventory.InventoryIsFullException;
+import rogue.model.items.inventory.OutOfInventoryException;
+import rogue.model.items.potion.Potion;
 import rogue.model.items.potion.PotionImpl;
 import rogue.model.items.potion.PotionType;
 
@@ -79,6 +84,7 @@ public class GameControllerImpl implements GameController, Initializable {
      * Creates MainView.
      * @param event that triggeres start.
      * @throws InventoryIsFullException 
+     * @throws OutOfInventoryException 
      */
     public void start(final KeyEvent event) throws IOException, InventoryIsFullException {
         final FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource("layout/InventoryView.fxml"));
@@ -86,6 +92,10 @@ public class GameControllerImpl implements GameController, Initializable {
 
         final Player player = new PlayerFactoryImpl().create();
         player.getInventory().addItem(new PotionImpl(PotionType.POTION_I));
+        player.getInventory().addItem(new PotionImpl(PotionType.POTION_I));
+        for (int i = 0; i < 12; i++) {
+            player.getInventory().addItem(new FoodImpl(FoodType.BREAD));
+        }
 
         final InventoryControllerImpl controller = loader.getController();
         controller.initPlayer(player);

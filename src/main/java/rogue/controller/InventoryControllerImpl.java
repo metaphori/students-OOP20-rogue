@@ -18,14 +18,24 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import rogue.model.creature.Player;
+import rogue.model.items.food.FoodImpl;
+import rogue.model.items.food.FoodType;
 import rogue.model.items.inventory.OutOfInventoryException;
 import rogue.model.items.potion.PotionImpl;
+import rogue.view.ItemImageGenerator;
+import rogue.view.ItemImageGeneratorImpl;
 
 public class InventoryControllerImpl implements Initializable {
 
     private static final int NUM_COLS = 4;
-    private static final  int NUM_ROWS = 5;
+    private static final int NUM_ROWS = 5;
+    private static final int QUANTITY_SIZE = 17;
 
     @FXML private ResourceBundle resources;
     @FXML private URL location;
@@ -40,6 +50,9 @@ public class InventoryControllerImpl implements Initializable {
             BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
             BackgroundSize.DEFAULT); 
     private final BackgroundImage potionB = new BackgroundImage(new Image(ClassLoader.getSystemResource("images/potionIcon.png").toExternalForm(), 32, 32, false, true),
+            BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+            BackgroundSize.DEFAULT); 
+    private final BackgroundImage breadB = new BackgroundImage(new Image(ClassLoader.getSystemResource("images/food/bread.png").toExternalForm(), 32, 32, false, true),
             BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
             BackgroundSize.DEFAULT); 
 
@@ -85,10 +98,27 @@ public class InventoryControllerImpl implements Initializable {
         final int invIndex = indexConv(col, row);
         final Pane pane = new StackPane();
         if (!player.getInventory().getItem(invIndex).isEmpty()) {
-            if (player.getInventory().getItem(invIndex).get().getClass().equals(PotionImpl.class)) {
-                pane.setBackground(new Background(potionB));
-            }
+            /*
+             * Set quantity text options.
+             */
+            final ItemImageGenerator itemI = new ItemImageGeneratorImpl();
+            final Text quantity = new Text();
+            quantity.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, QUANTITY_SIZE));
+            quantity.setFill(Color.ORANGE);
+            quantity.setStrokeWidth(1); 
+            quantity.setStroke(Color.BLACK);
+            /*
+             * Check current item slot and update pane image and text.
+             */
+            pane.setBackground(new Background(new BackgroundImage(itemI.getImage(player.getInventory().getItem(invIndex).get()),
+                    BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+                    BackgroundSize.DEFAULT)));
+            quantity.setText(String.valueOf(player.getInventory().getAmount(invIndex)));
+            pane.getChildren().add(quantity);
         } else {
+            /*
+             * empty slot.
+             */
             pane.setBackground(new Background(emptyB));
         }
         pane.setOnMouseClicked(e -> {
