@@ -49,12 +49,6 @@ public class InventoryControllerImpl implements Initializable {
     private final BackgroundImage emptyB = new BackgroundImage(new Image(ClassLoader.getSystemResource("images/emptyIcon.png").toExternalForm(), 32, 32, false, true),
             BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
             BackgroundSize.DEFAULT); 
-    private final BackgroundImage potionB = new BackgroundImage(new Image(ClassLoader.getSystemResource("images/potionIcon.png").toExternalForm(), 32, 32, false, true),
-            BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-            BackgroundSize.DEFAULT); 
-    private final BackgroundImage breadB = new BackgroundImage(new Image(ClassLoader.getSystemResource("images/food/bread.png").toExternalForm(), 32, 32, false, true),
-            BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-            BackgroundSize.DEFAULT); 
 
     /**
      * Method to get the player from GameController.
@@ -108,7 +102,7 @@ public class InventoryControllerImpl implements Initializable {
             quantity.setStrokeWidth(1); 
             quantity.setStroke(Color.BLACK);
             /*
-             * Check current item slot and update pane image and text.
+             * Check current item slot and update pane image and quantity text.
              */
             pane.setBackground(new Background(new BackgroundImage(itemI.getImage(player.getInventory().getItem(invIndex).get()),
                     BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
@@ -121,6 +115,12 @@ public class InventoryControllerImpl implements Initializable {
              */
             pane.setBackground(new Background(emptyB));
         }
+        /*
+         * Set each slots events.
+         */
+        /*
+         * Left button click
+         */
         pane.setOnMouseClicked(e -> {
             System.out.println("Mouse clicked the cell [" + col + ", " + row + "] , inv[" + invIndex + "]");
         });
