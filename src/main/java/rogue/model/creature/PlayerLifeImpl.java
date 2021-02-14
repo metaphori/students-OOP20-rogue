@@ -50,7 +50,7 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
 
     private void updateFood(final int amount) {
         this.leftFood = this.checkNotExceeding(this.leftFood + amount, MAX_FOOD);
-        this.leftFood = this.checkNonNegative(this.leftFood + amount);
+        this.leftFood = this.checkNotNegative(this.leftFood + amount);
     }
 
     @Override
@@ -74,7 +74,7 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
     }
 
     private void updateCoins(final int amount) {
-        this.coins = this.checkNonNegative(this.coins + amount);
+        this.coins = this.checkNotNegative(this.coins + amount);
     }
 
     @Override

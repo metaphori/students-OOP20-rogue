@@ -19,7 +19,7 @@ public abstract class AbstractLife implements Life {
      *          the value to check
      * @return the value given if it is positive, 0 otherwise
      */
-    protected int checkNonNegative(final int value) {
+    protected int checkNotNegative(final int value) {
         return value < 0 ? 0 : value;
     }
 
@@ -28,7 +28,7 @@ public abstract class AbstractLife implements Life {
      */
     @Override
     public void hurt(final int damage) {
-        this.healthPoints = checkNonNegative(this.healthPoints - damage);
+        this.healthPoints = checkNotNegative(this.healthPoints - damage);
     }
 
     /**
