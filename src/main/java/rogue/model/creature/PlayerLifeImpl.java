@@ -35,8 +35,7 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
     @Override
     public void powerUp(final int increment) {
         final var newHp = this.getHealthPoints() + increment;
-        this.checkNotExceeding(newHp, this.maxHealthPoints);
-        this.setHealthPoints(newHp);
+        this.setHealthPoints(this.checkNotExceeding(newHp, this.maxHealthPoints));
     }
 
     @Override
