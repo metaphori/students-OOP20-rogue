@@ -24,6 +24,8 @@ import rogue.model.items.inventory.OutOfInventoryException;
 import rogue.model.items.potion.Potion;
 import rogue.model.items.potion.PotionImpl;
 import rogue.model.items.potion.PotionType;
+import rogue.model.items.scroll.ScrollImpl;
+import rogue.model.items.scroll.ScrollType;
 
 public class GameControllerImpl implements GameController, Initializable {
 
@@ -91,7 +93,22 @@ public class GameControllerImpl implements GameController, Initializable {
         final Parent root = loader.load();
 
         final Player player = new PlayerFactoryImpl().create();
+        player.getInventory().addItem(new PotionImpl(PotionType.POTION_I));
+        player.getInventory().addItem(new PotionImpl(PotionType.POTION_V));
+        player.getInventory().addItem(new PotionImpl(PotionType.POTION_V));
+        player.getInventory().addItem(new PotionImpl(PotionType.POTION_V));
 
+        player.getInventory().addItem(new ScrollImpl(ScrollType.SCROLL_II));
+        player.getInventory().addItem(new ScrollImpl(ScrollType.SCROLL_II));
+        player.getInventory().addItem(new ScrollImpl(ScrollType.SCROLL_II));
+
+        player.getInventory().addItem(new FoodImpl(FoodType.APPLE));
+        player.getInventory().addItem(new FoodImpl(FoodType.BREAD));
+        player.getInventory().addItem(new FoodImpl(FoodType.CAKE));
+        player.getInventory().addItem(new FoodImpl(FoodType.CHEESE));
+        player.getInventory().addItem(new FoodImpl(FoodType.HAMBURGER));
+        player.getInventory().addItem(new FoodImpl(FoodType.SOUP));
+        player.getInventory().addItem(new FoodImpl(FoodType.STEAK));
 
         final InventoryControllerImpl controller = loader.getController();
         controller.initPlayer(player);
