@@ -102,9 +102,9 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
     public int getLevel() {
         return this.level;
     }
-    
+
     @Override
-    public void setMaxHealthPoints(int maxHealthPoints) {
+    public void setMaxHealthPoints(final int maxHealthPoints) {
         if (maxHealthPoints < this.getHealthPoints()) {
             throw new IllegalStateException("The current value of hp cannot be greater than the maximum one!");
         }
@@ -133,7 +133,7 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
         private static final int STRENGTH = 16;
         private static final int COINS = 0;
         private static final int LEVEL = 0;
-        
+
         private int maxHealthPoints = MAX_HEALTH_POINTS;
         private int healthPoints = HEALTH_POINTS;
         private int food = FOOD;
@@ -175,11 +175,11 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
             this.healthPoints = healthPoints;
             return this;
         }
-        
+
         /**
-         * Initialize the player health points.
-         * @param healthPoints
-         *      the initial player health points.
+         * Initialize the player maximum health points.
+         * @param maxHealthPoints
+         *      the max hp value
          * @return this Builder for chaining
          */
         public Builder initMaxHealthPoints(final int maxHealthPoints) {
