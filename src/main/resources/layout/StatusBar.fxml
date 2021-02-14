@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="76.0" prefWidth="540.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="63.0" prefWidth="36.0">
+         <children>
+            <Text fill="#c37a28" strokeType="OUTSIDE" strokeWidth="0.0" text="Level" textAlignment="CENTER" wrappingWidth="67.5439453125">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <HBox prefHeight="74.0" prefWidth="36.0">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Label fx:id="level" alignment="CENTER" prefHeight="25.0" prefWidth="88.0" text="0" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="3.0" right="3.0" />
+         </padding>
+         <HBox.margin>
+            <Insets left="5.0" right="5.0" />
+         </HBox.margin>
+      </VBox>
+      <VBox prefHeight="98.0" prefWidth="0.0">
+         <children>
+            <Text fill="#c37a28" strokeType="OUTSIDE" strokeWidth="0.0" text="Gold" textAlignment="CENTER" wrappingWidth="67.5439453125">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="108.0">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Label fx:id="gold" alignment="CENTER" prefHeight="25.0" prefWidth="49.0" text="0" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="3.0" right="3.0" />
+         </padding>
+         <HBox.margin>
+            <Insets left="5.0" right="5.0" />
+         </HBox.margin>
+      </VBox>
+      <VBox prefHeight="98.0" prefWidth="52.0">
+         <children>
+            <Text fill="#c37a28" strokeType="OUTSIDE" strokeWidth="0.0" text="Hp" textAlignment="CENTER" wrappingWidth="123.5439453125">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <HBox prefHeight="45.0" prefWidth="98.0">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Label fx:id="hp" alignment="CENTER" contentDisplay="CENTER" prefHeight="54.0" prefWidth="64.0" text="0" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="80.0" prefWidth="26.0" text="/" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="maxHp" alignment="CENTER" prefHeight="54.0" prefWidth="64.0" text="0" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="3.0" right="3.0" />
+         </padding>
+         <HBox.margin>
+            <Insets left="5.0" right="5.0" />
+         </HBox.margin>
+      </VBox>
+      <VBox prefHeight="98.0" prefWidth="0.0">
+         <children>
+            <Text fx:id="strength" fill="#c37a28" strokeType="OUTSIDE" strokeWidth="0.0" text="Strength" textAlignment="CENTER" wrappingWidth="76.5439453125">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="108.0">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Label fx:id="gold1" alignment="CENTER" prefHeight="25.0" prefWidth="49.0" text="0" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="3.0" right="3.0" />
+         </padding>
+         <HBox.margin>
+            <Insets left="5.0" right="5.0" />
+         </HBox.margin>
+      </VBox>
+      <VBox prefHeight="98.0" prefWidth="0.0">
+         <children>
+            <Text fx:id="experience" fill="#c37a28" strokeType="OUTSIDE" strokeWidth="0.0" text="Experience" textAlignment="CENTER" wrappingWidth="99.5439453125">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="108.0">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Label fx:id="gold2" alignment="CENTER" prefHeight="25.0" prefWidth="49.0" text="0" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="3.0" right="3.0" />
+         </padding>
+         <HBox.margin>
+            <Insets left="5.0" right="5.0" />
+         </HBox.margin>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</HBox>

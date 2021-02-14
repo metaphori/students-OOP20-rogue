@@ -10,14 +10,11 @@ import rogue.model.world.World;
 import rogue.model.world.WorldImpl;
 import rogue.view.LevelStage;
 
-public class Launcher extends Application {
+public final class Launcher extends Application {
 
     private static final int SCENE_WIDTH = 800;
     private static final int SCENE_HEIGHT = 600;
 
-    /**
-     * Create Menu.
-     */
     @Override
     public void start(final Stage primaryStage) throws Exception {
         final Parent root = FXMLLoader.load(ClassLoader.getSystemResource("layout/MainMenu.fxml"));
