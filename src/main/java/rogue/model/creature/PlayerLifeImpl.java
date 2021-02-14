@@ -6,17 +6,25 @@ package rogue.model.creature;
  */
 public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
 
+    private static final int MAX_FOOD = 100; // fixed
+    private int maxHealthPoints; // changes dynamically during the game
     private int strength;
     private int leftFood;
     private int level;
     private int coins;
 
-    private PlayerLifeImpl(final int healthPoints, final int experience, final int strength, final int food, final int level, final int coins) {
+    private PlayerLifeImpl(final int healthPoints, final int maxHealthPoints, final int experience, 
+            final int strength, final int food, final int level, final int coins) {
         super(healthPoints, experience);
+        this.maxHealthPoints = maxHealthPoints;
         this.strength = strength;
         this.leftFood = food;
         this.level = level;
         this.coins = coins;
+    }
+
+    private int checkNotExceeding(final int val, final int max) {
+        return val > max ? max : val;
     }
 
     @Override
@@ -26,7 +34,8 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
 
     @Override
     public void powerUp(final int increment) {
-        this.setHealthPoints(this.getHealthPoints() + increment);
+        final var newHp = this.getHealthPoints() + increment;
+        this.setHealthPoints(this.checkNotExceeding(newHp, this.maxHealthPoints));
     }
 
     @Override
@@ -40,7 +49,9 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
     }
 
     private void updateFood(final int amount) {
-        this.leftFood = this.checkNonNegative(this.leftFood + amount);
+        final var newFood = this.leftFood + amount;
+        this.leftFood = this.checkNotExceeding(newFood, MAX_FOOD);
+        this.leftFood = this.checkNotNegative(newFood);
     }
 
     @Override
@@ -64,7 +75,7 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
     }
 
     private void updateCoins(final int amount) {
-        this.coins = this.checkNonNegative(this.coins + amount);
+        this.coins = this.checkNotNegative(this.coins + amount);
     }
 
     @Override
@@ -92,18 +103,38 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
         return this.level;
     }
 
+    @Override
+    public void setMaxHealthPoints(final int maxHealthPoints) {
+        if (maxHealthPoints < this.getHealthPoints()) {
+            throw new IllegalStateException("The current value of hp cannot be greater than the maximum one!");
+        }
+        this.maxHealthPoints = maxHealthPoints;
+    }
+
+    @Override
+    public int getMaxHealthPoints() {
+        return this.maxHealthPoints;
+    }
+
+    @Override
+    public int getMaxFood() {
+        return MAX_FOOD;
+    }
+
     public static class Builder {
 
         /**
          * Default values.
          */
+        private static final int MAX_HEALTH_POINTS = 12;
         private static final int HEALTH_POINTS = 12;
-        private static final int FOOD = 50; // TODO
+        private static final int FOOD = 50; 
         private static final int EXPERIENCE = 0;
         private static final int STRENGTH = 16;
         private static final int COINS = 0;
         private static final int LEVEL = 0;
 
+        private int maxHealthPoints = MAX_HEALTH_POINTS;
         private int healthPoints = HEALTH_POINTS;
         private int food = FOOD;
         private int experience = EXPERIENCE;
@@ -142,6 +173,17 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
          */
         public Builder initHealthPoints(final int healthPoints) {
             this.healthPoints = healthPoints;
+            return this;
+        }
+
+        /**
+         * Initialize the player maximum health points.
+         * @param maxHealthPoints
+         *      the max hp value
+         * @return this Builder for chaining
+         */
+        public Builder initMaxHealthPoints(final int maxHealthPoints) {
+            this.maxHealthPoints = maxHealthPoints;
             return this;
         }
 
@@ -186,7 +228,7 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
                 throw new IllegalStateException("The builder can only be used once");
             }
             consumed = true;
-            return new PlayerLifeImpl(healthPoints, experience, strength, food, level, coins);
+            return new PlayerLifeImpl(healthPoints, maxHealthPoints, experience, strength, food, level, coins);
         }
     }
 

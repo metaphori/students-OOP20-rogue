@@ -56,6 +56,35 @@ public class PlayerImplTest {
         pl.getLife().decreaseFood(10);
         assertEquals(0, pl.getLife().getFood());
     }
+    
+    @org.junit.Test
+    public void testMaxHealthPoints() {
+       pl = new PlayerFactoryImpl().create();
+       assertEquals(pl.getLife().getHealthPoints(), pl.getLife().getMaxHealthPoints());
+       pl.getLife().setMaxHealthPoints(100);
+       assertEquals(100, pl.getLife().getMaxHealthPoints());
+       pl.getLife().powerUp(100);
+       assertEquals(pl.getLife().getMaxHealthPoints(), pl.getLife().getHealthPoints());
+       pl.getLife().hurt(140);
+       assertEquals(0, pl.getLife().getHealthPoints());
+       assertTrue(pl.getLife().isDead());
+    }
+    
+    public void testMaxFood() {
+        pl= new PlayerFactoryImpl().create();
+        // Exceeds max food
+        pl.getLife().increaseFood(pl.getLife().getMaxFood() - pl.getLife().getFood() + 1);
+        assertEquals(pl.getLife().getMaxFood(), pl.getLife().getFood());
+        pl.getLife().decreaseFood(pl.getLife().getMaxFood() + 1);
+        assertEquals(0, pl.getLife().getFood());
+    }
+    
+    @org.junit.Test(expected = IllegalStateException.class)
+    public void testMaxHealthPoints2() {
+        // cannot made a max hp value greater than the actual hp
+        pl = new PlayerFactoryImpl().create();
+        pl.getLife().setMaxHealthPoints(pl.getLife().getHealthPoints() - 1);
+    }
 
     @org.junit.Test(expected = IllegalStateException.class)
     public void testMultipleBuild() {
