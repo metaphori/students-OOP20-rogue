@@ -106,7 +106,7 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
     
     @Override
     public void setMaxHealthPoints(int maxHealthPoints) {
-        if (maxHealthPoints > this.getHealthPoints()) {
+        if (maxHealthPoints < this.getHealthPoints()) {
             throw new IllegalStateException("The current value of hp cannot be greater than the maximum one!");
         }
         this.maxHealthPoints = maxHealthPoints;
