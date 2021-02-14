@@ -4,7 +4,6 @@ import rogue.model.creature.Player;
 
 public class PotionImpl implements Potion {
 
-    private static final int MAXIMUM_HEALTH = 50;
     private final PotionType potion;
     private final int hpValue;
 
@@ -31,13 +30,13 @@ public class PotionImpl implements Potion {
             /*
              * HEAL
              */
-            if (player.getLife().getHealthPoints() != MAXIMUM_HEALTH) {
-                if (player.getLife().getHealthPoints() + increase > MAXIMUM_HEALTH) {
+            if (player.getLife().getHealthPoints() != player.getLife().getMaxHealthPoints()) {
+                if (player.getLife().getHealthPoints() + increase > player.getLife().getMaxHealthPoints()) {
                     /*
                      * I can't increase the player's health over the MAXIMUM_HEALTH
                      * so i just set it to max.
                      */
-                    player.getLife().powerUp(MAXIMUM_HEALTH - player.getLife().getHealthPoints());
+                    player.getLife().powerUp(player.getLife().getMaxHealthPoints() - player.getLife().getHealthPoints());
                 } else {
                     /*
                      * Simply updates the player's health points.

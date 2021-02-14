@@ -10,11 +10,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
 public class PotionImplTest {
-  
+
     private static final int REMOVE_AMOUNT_40 = 40;
-    private static final int REMOVE_AMOUNT_30 = 30;
-    private static final int REMOVE_AMOUNT_20 = 20;
     private static final int REMOVE_AMOUNT_10 = 10;
+    private static final int PLAYER_START_LIFE = 12;
+    private static final int PLAYER_MAX_HEALTH = 50;
 
     private Player pl;
 
@@ -31,17 +31,6 @@ public class PotionImplTest {
     }
 
     @Test
-    public void testUseWithMaxHealth() {
-        pl = new PlayerFactoryImpl().create();
-        final PotionImpl potion = new PotionImpl(PotionType.POTION_II);
-        /*
-         * Trying to use a potion with the max health.
-         * Expecting false return.
-         */
-        assertFalse(potion.use(pl));
-    }
-
-    @Test
     public void testUseWithNormalHealth() {
         pl = new PlayerFactoryImpl().create();
         final PotionImpl potion = new PotionImpl(PotionType.POTION_II);
@@ -51,10 +40,10 @@ public class PotionImplTest {
          */
         // player health points are initially 12
         final int hp = pl.getLife().getHealthPoints();
-        assertTrue(potion.use(pl));
+        assertFalse(potion.use(pl));
         // player max health points is 12
-        assertEquals(12, pl.getLife().getHealthPoints());
-        pl.getLife().setMaxHealthPoints(50);
+        assertEquals(PLAYER_START_LIFE, pl.getLife().getHealthPoints());
+        pl.getLife().setMaxHealthPoints(PLAYER_MAX_HEALTH);
         assertTrue(potion.use(pl));
         assertEquals(hp + potion.getHpValue(), pl.getLife().getHealthPoints());
     }
@@ -64,7 +53,7 @@ public class PotionImplTest {
         pl = new PlayerFactoryImpl().create();
         final PotionImpl potion = new PotionImpl(PotionType.POTION_II);
         /*
-         * Using potion with max health, expecting false return.
+         * Using potion with max health.
          */
         assertFalse(potion.use(pl));
     }
