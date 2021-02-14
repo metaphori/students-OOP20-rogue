@@ -10,11 +10,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
 public class PotionImplTest {
-    /*
-     * TODO FIX TESTS 
-     */
-
-    private static final int MAXIMUM_HEALTH = 50;
+  
     private static final int REMOVE_AMOUNT_40 = 40;
     private static final int REMOVE_AMOUNT_30 = 30;
     private static final int REMOVE_AMOUNT_20 = 20;
@@ -53,10 +49,14 @@ public class PotionImplTest {
          * Trying to use a potion without max health.
          * Expecting true return and correct update of the health.
          */
-        pl.getLife().hurt(REMOVE_AMOUNT_30);
-        final int newAmount = pl.getLife().getHealthPoints();
+        // player health points are initially 12
+        final int hp = pl.getLife().getHealthPoints();
         assertTrue(potion.use(pl));
-        assertEquals(newAmount + potion.getHpValue(), pl.getLife().getHealthPoints());
+        // player max health points is 12
+        assertEquals(12, pl.getLife().getHealthPoints());
+        pl.getLife().setMaxHealthPoints(50);
+        assertTrue(potion.use(pl));
+        assertEquals(hp + potion.getHpValue(), pl.getLife().getHealthPoints());
     }
 
     @Test
@@ -80,7 +80,7 @@ public class PotionImplTest {
          */
         pl.getLife().hurt(REMOVE_AMOUNT_10);
         assertTrue(potion.use(pl));
-        assertEquals(MAXIMUM_HEALTH, pl.getLife().getHealthPoints());
+        assertEquals(pl.getLife().getMaxHealthPoints(), pl.getLife().getHealthPoints());
     }
 
     @Test
@@ -92,7 +92,7 @@ public class PotionImplTest {
          * Except true and correct health update.
          */
         assertTrue(potion.use(pl));
-        assertEquals(MAXIMUM_HEALTH + potion.getHpValue(), pl.getLife().getHealthPoints());
+        assertEquals(pl.getLife().getMaxHealthPoints() + potion.getHpValue(), pl.getLife().getHealthPoints());
     }
 
     @Test
@@ -103,10 +103,11 @@ public class PotionImplTest {
          * Use a corrupt potion with normal health,
          * Except true and correct health update.
          */
-        pl.getLife().hurt(REMOVE_AMOUNT_20);
-        final int newAmount = pl.getLife().getHealthPoints();
+        // player health points are initially 12
+        final int hp = pl.getLife().getHealthPoints();
         assertTrue(potion.use(pl));
-        assertEquals(newAmount + potion.getHpValue(), pl.getLife().getHealthPoints());
+        System.out.println(potion.getHpValue());
+        assertEquals(hp + potion.getHpValue(), pl.getLife().getHealthPoints());
     }
 
     @Test
