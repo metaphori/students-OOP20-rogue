@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -119,6 +120,16 @@ public class InventoryControllerImpl implements Initializable {
          * Left button click
          */
         pane.setOnMouseClicked(e -> {
+            final MouseButton button = e.getButton();
+            if (button.equals(MouseButton.PRIMARY)) {
+                System.out.println("Used item.");
+            }
+            if (button.equals(MouseButton.SECONDARY)) {
+                System.out.println("remove item.");
+            }
+            if (button.equals(MouseButton.MIDDLE)) {
+                System.out.println("swap item.");
+            }
             System.out.println("Mouse clicked the cell [" + col + ", " + row + "] , inv[" + invIndex + "]");
         });
         inventoryGrid.add(pane, col, row);
