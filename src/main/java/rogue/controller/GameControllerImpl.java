@@ -91,11 +91,7 @@ public class GameControllerImpl implements GameController, Initializable {
         final Parent root = loader.load();
 
         final Player player = new PlayerFactoryImpl().create();
-        player.getInventory().addItem(new PotionImpl(PotionType.POTION_I));
-        player.getInventory().addItem(new PotionImpl(PotionType.POTION_I));
-        for (int i = 0; i < 12; i++) {
-            player.getInventory().addItem(new FoodImpl(FoodType.BREAD));
-        }
+
 
         final InventoryControllerImpl controller = loader.getController();
         controller.initPlayer(player);

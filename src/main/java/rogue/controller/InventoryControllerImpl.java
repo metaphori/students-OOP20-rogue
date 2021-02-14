@@ -24,10 +24,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import rogue.model.creature.Player;
-import rogue.model.items.food.FoodImpl;
-import rogue.model.items.food.FoodType;
 import rogue.model.items.inventory.OutOfInventoryException;
-import rogue.model.items.potion.PotionImpl;
 import rogue.view.ItemImageGenerator;
 import rogue.view.ItemImageGeneratorImpl;
 
