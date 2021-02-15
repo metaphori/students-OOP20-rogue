@@ -1,5 +1,7 @@
 package rogue.model.world;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
@@ -16,10 +18,10 @@ import rogue.model.Entity;
 class CannotMoveException extends Exception {
     private static final long serialVersionUID = 1484670650603806971L;
 
-    public CannotMoveException() {
+    CannotMoveException() {
     }
 
-    public CannotMoveException(final String message) {
+    CannotMoveException(final String message) {
         super(message);
     }
 }
@@ -27,10 +29,21 @@ class CannotMoveException extends Exception {
 class CannotRemoveException extends Exception {
     private static final long serialVersionUID = -5155914335574994788L;
 
-    public CannotRemoveException() {
+    CannotRemoveException() {
     }
 
-    public CannotRemoveException(final String message) {
+    CannotRemoveException(final String message) {
+        super(message);
+    }
+}
+
+class CannotPlaceException extends Exception {
+    private static final long serialVersionUID = 8107685734511320286L;
+
+    CannotPlaceException() {
+    }
+
+    CannotPlaceException(final String message) {
         super(message);
     }
 }
@@ -80,7 +93,8 @@ class LevelImpl implements Level {
         return Optional.empty();
     }
 
-    public final Optional<Entity> shiftEntity(final Entity e, final Direction d, final int i) throws CannotMoveException {
+    public final Optional<Entity> shiftEntity(final Entity e, final Direction d, final int i)
+            throws CannotMoveException {
         if (!entityMap.containsKey(e)) {
             throw new CannotMoveException("Entity doesn't exist!");
         }
@@ -106,6 +120,21 @@ class LevelImpl implements Level {
         return Math.abs(t1.getX() - t2.getX()) + Math.abs(t1.getY() - t2.getY());
     }
 
+    public void placeEntities(final List<Entity> l) throws CannotPlaceException {
+        var freeTiles = new ArrayList<Tile>();
+        getTileStream().forEach(t -> {
+            if (!entityMap.containsValue(t) && !t.isWall()) {
+                freeTiles.add(t);
+            }
+        });
+
+        if (l.size() > freeTiles.size()) {
+            throw new CannotPlaceException("Too many entities");
+        }
+
+        l.forEach(e -> entityMap.put(e, freeTiles.get(random.nextInt(freeTiles.size()))));
+    }
+
     private void generate() throws CannotMoveException {
         var cave = new CaveGenerator(WIDTH, HEIGHT).getCave();
 
@@ -122,7 +151,8 @@ class LevelImpl implements Level {
 
         // entities
         // TODO: BROKEN PORCODIO
-        //moveEntity(new PlayerFactoryImpl().create(), tileMap.get(WIDTH / 2, HEIGHT / 2));
+        // moveEntity(new PlayerFactoryImpl().create(), tileMap.get(WIDTH / 2, HEIGHT /
+        // 2));
     };
 
     LevelImpl() throws CannotMoveException {
