@@ -4,7 +4,7 @@ import com.google.common.eventbus.EventBus;
 
 public abstract class AbstractEventPublisher implements EventPublisher {
 
-    private final EventBus eventBus = new EventBus("Life");
+    private final EventBus eventBus = new EventBus();
 
     /**
      * {@inheritDoc}
