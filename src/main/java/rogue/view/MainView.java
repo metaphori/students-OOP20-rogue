@@ -1,5 +1,7 @@
 package rogue.view;
 
+import java.awt.Dimension;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,17 +13,22 @@ import rogue.model.world.WorldImpl;
 
 public final class MainView extends Application {
 
-    private static final int SCENE_WIDTH = 800;
-    private static final int SCENE_HEIGHT = 600;
-
     @Override
     public void start(final Stage primaryStage) throws Exception {
+        /*
+         * Calculate scene size
+         */
+        final Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        final double width = screenSize.getWidth() / 3;
+        final double height = screenSize.getHeight() / 2.5;
+
         final Parent root = FXMLLoader.load(ClassLoader.getSystemResource("layout/MainMenu.fxml"));
-        final Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
+        final Scene scene = new Scene(root, width, height);
+
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(new Image(ClassLoader.getSystemResource("images/rogueIcon.png").toExternalForm()));
         primaryStage.setTitle("Rogue");
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
         primaryStage.show();
 
         final World w = new WorldImpl(7);
