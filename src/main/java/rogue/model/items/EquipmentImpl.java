@@ -3,6 +3,8 @@ package rogue.model.items;
 import java.util.Optional;
 
 import rogue.model.creature.Player;
+import rogue.model.events.AbstractEventPublisher;
+import rogue.model.events.EquipmentEvent;
 import rogue.model.items.armor.Armor;
 import rogue.model.items.armor.ArmorImpl;
 import rogue.model.items.armor.ArmorType;
@@ -14,7 +16,7 @@ import rogue.model.items.weapons.WeaponType;
 /**
  * An implementation for an {@link Equipment}.
  */
-public final class EquipmentImpl implements Equipment {
+public final class EquipmentImpl extends AbstractEventPublisher implements Equipment {
 
     private final Player owner;
     private Weapon weapon;
@@ -63,6 +65,7 @@ public final class EquipmentImpl implements Equipment {
         } else {
             op.doOperation();
         }
+        this.post(new EquipmentEvent(this));
     }
 
     @Override
@@ -101,6 +104,7 @@ public final class EquipmentImpl implements Equipment {
             throw new IllegalStateException("One ring per time could be worn!");
         }
         this.ring = Optional.of(ring);
+        this.post(new EquipmentEvent(this));
     }
 
     private void restore(final Memento m) {
@@ -113,6 +117,7 @@ public final class EquipmentImpl implements Equipment {
         if (this.ring.isPresent()) {
             this.ring = Optional.empty();
             this.restore(memento);
+            this.post(new EquipmentEvent(this));
             return true;
         }
         return false;
