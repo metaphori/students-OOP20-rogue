@@ -1,5 +1,7 @@
 package rogue.model.creature;
 
+import rogue.model.events.LifeEvent;
+
 /**
  * An implementation for a {@link PlayerLife}. 
  * Uses the pattern builder in order to create a new instance (even custom).
@@ -41,6 +43,7 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
     @Override
     public void addStrength(final int increment) {
         this.strength = this.strength + increment;
+        this.post(new LifeEvent<>(this));
     }
 
     @Override
@@ -52,6 +55,7 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
         final var newFood = this.leftFood + amount;
         this.leftFood = this.checkNotExceeding(newFood, MAX_FOOD);
         this.leftFood = this.checkNotNegative(newFood);
+        this.post(new LifeEvent<>(this));
     }
 
     @Override
@@ -76,6 +80,7 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
 
     private void updateCoins(final int amount) {
         this.coins = this.checkNotNegative(this.coins + amount);
+        this.post(new LifeEvent<>(this));
     }
 
     @Override
@@ -96,6 +101,7 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
     @Override
     public void increaseLevel(final int amount) {
         this.level = this.level + amount;
+        this.post(new LifeEvent<>(this));
     }
 
     @Override
