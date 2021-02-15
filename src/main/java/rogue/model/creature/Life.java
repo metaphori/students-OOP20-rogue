@@ -1,9 +1,11 @@
 package rogue.model.creature;
 
+import rogue.model.events.EventPublisher;
+
 /** 
  * An interface modeling a life for a {@link Creature}.
  */
-public interface Life {
+public interface Life extends EventPublisher {
 
     /**
      * Hurts the Creature.
