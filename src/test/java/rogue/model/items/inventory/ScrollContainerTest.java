@@ -86,4 +86,15 @@ public class ScrollContainerTest {
         assertTrue(inv.getScrollContainer().updateEffectDuration(2));
         assertEquals(before - 2, inv.getScrollContainer().getActiveScrollDuration());
     }
+
+    @Test
+    public void testUseActivateScroll() throws InventoryIsFullException, OutOfInventoryException {
+        pl = new PlayerFactoryImpl().create();
+        final Inventory inv = new InventoryImpl(pl);
+        final Scroll scroll = new ScrollImpl(ScrollType.SCROLL_II);
+
+        inv.addItem(scroll);
+        inv.useItem(1);
+        assertFalse(inv.getScrollContainer().getActiveScroll().isEmpty());
+    }
 }

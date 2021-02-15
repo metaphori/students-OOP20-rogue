@@ -8,26 +8,7 @@ import javafx.util.Pair;
 import rogue.model.creature.Player;
 import rogue.model.items.Item;
 import rogue.model.items.scroll.Scroll;
-
-class OutOfInventoryException extends Exception {
-
-    private static final long serialVersionUID = -4154450610441652376L;
-
-    OutOfInventoryException(final String message) {
-        super(message);
-    }
-
-}
-
-class InventoryIsFullException extends Exception {
-
-    private static final long serialVersionUID = 7054497161949466512L;
-
-    InventoryIsFullException(final String message) {
-        super(message);
-    }
-
-}
+import rogue.model.items.scroll.ScrollImpl;
 
 public class InventoryImpl implements Inventory {
 
@@ -75,7 +56,7 @@ public class InventoryImpl implements Inventory {
                  * Use the item, check if correctly used.
                  * if the item is scroll item, activate it.
                  */
-                if (toUse.getClass().equals(Scroll.class)) {
+                if (toUse.getClass().equals(ScrollImpl.class)) {
                     this.scrollContainer.activateScroll((Scroll) toUse);
                 }
                 if (!toUse.use(this.player)) {

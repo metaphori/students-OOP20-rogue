@@ -1,18 +1,37 @@
 package rogue.controller;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import rogue.model.creature.Player;
+import rogue.model.creature.PlayerFactoryImpl;
+import rogue.model.items.food.FoodImpl;
+import rogue.model.items.food.FoodType;
+import rogue.model.items.inventory.InventoryIsFullException;
+import rogue.model.items.potion.PotionImpl;
+import rogue.model.items.potion.PotionType;
+import rogue.model.items.scroll.ScrollImpl;
+import rogue.model.items.scroll.ScrollType;
 
-public class GameControllerImpl implements GameController {
+public class GameControllerImpl implements GameController, Initializable {
 
     private static final String NO_NAME_MESSAGE = "PLEASE ENTER A NAME";
     private static final String INVALID_NAME_MESSAGE = "PLEASE ENTER A VALID NAME";
+    private static final String VALID_NAME = "ENTERING DUNGEON ...";
     private static final int NAME_MAX_LENGTH = 15;
 
-    @FXML private Text insertNameText;
+    @FXML private Label insertNameLabel;
     @FXML private TextField nameTextField;
     private String playerName;
 
@@ -31,9 +50,10 @@ public class GameControllerImpl implements GameController {
     /**
      * Text area event to get player's name.
      * @param event to check.
+     * @throws IOException 
      */
     @FXML
-    public void onNameEnter(final KeyEvent event) {
+    public void onNameEnter(final KeyEvent event) throws IOException, InventoryIsFullException {
         if (event.getCode().equals(KeyCode.ENTER)) {
             if (nameTextField.getText() != null && !(nameTextField.getText().isEmpty())) {
                 if (validName(nameTextField.getText())) {
@@ -41,11 +61,13 @@ public class GameControllerImpl implements GameController {
                     /*
                      * Valid name entered, start game.
                      */
-                    start();
+                    insertNameLabel.setText(VALID_NAME);
+                    start(event);
+                } else {
+                    insertNameLabel.setText(INVALID_NAME_MESSAGE);
                 }
-                insertNameText.setText(INVALID_NAME_MESSAGE);
             } else {
-                insertNameText.setText(NO_NAME_MESSAGE);
+                insertNameLabel.setText(NO_NAME_MESSAGE);
             }
         }
     }
@@ -59,9 +81,45 @@ public class GameControllerImpl implements GameController {
 
     /**
      * Creates MainView.
+     * @param event that triggeres start.
+     * @throws InventoryIsFullException 
+     * @throws OutOfInventoryException 
      */
-    public void start() {
-        // TODO start method!
+    public void start(final KeyEvent event) throws IOException, InventoryIsFullException {
+        final FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource("layout/InventoryView.fxml"));
+        final Parent root = loader.load();
+
+        final Player player = new PlayerFactoryImpl().create();
+        player.getInventory().addItem(new PotionImpl(PotionType.POTION_I));
+        player.getInventory().addItem(new PotionImpl(PotionType.POTION_V));
+        player.getInventory().addItem(new PotionImpl(PotionType.POTION_V));
+        player.getInventory().addItem(new PotionImpl(PotionType.POTION_V));
+
+        player.getInventory().addItem(new ScrollImpl(ScrollType.SCROLL_II));
+        player.getInventory().addItem(new ScrollImpl(ScrollType.SCROLL_II));
+        player.getInventory().addItem(new ScrollImpl(ScrollType.SCROLL_II));
+
+        player.getInventory().addItem(new FoodImpl(FoodType.APPLE));
+        player.getInventory().addItem(new FoodImpl(FoodType.BREAD));
+        player.getInventory().addItem(new FoodImpl(FoodType.CAKE));
+        player.getInventory().addItem(new FoodImpl(FoodType.CHEESE));
+        player.getInventory().addItem(new FoodImpl(FoodType.HAMBURGER));
+        player.getInventory().addItem(new FoodImpl(FoodType.SOUP));
+        player.getInventory().addItem(new FoodImpl(FoodType.STEAK));
+
+        final InventoryControllerImpl controller = loader.getController();
+        controller.initPlayer(player);
+
+        final Stage stage = (Stage) nameTextField.getScene().getWindow();
+        final Scene newScene = new Scene(root, 260, 400);
+        stage.setScene(newScene);
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public void initialize(final URL location, final ResourceBundle resources) {
     }
 
 }

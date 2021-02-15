@@ -55,6 +55,13 @@ public class FoodImpl implements Food {
     }
 
     /**
+     * @return food
+     */
+    public FoodType getFood() {
+        return this.food;
+    }
+
+    /**
      * @return hashCode
      */
     @Override

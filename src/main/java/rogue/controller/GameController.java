@@ -1,5 +1,10 @@
 package rogue.controller;
 
+import java.io.IOException;
+
+import javafx.scene.input.KeyEvent;
+import rogue.model.items.inventory.InventoryIsFullException;
+
 public interface GameController {
 
     /**
@@ -10,6 +15,7 @@ public interface GameController {
 
     /**
      * Creates the MainView.
+     * @param event that triggered the start method.
      */
-    void start();
+    void start(KeyEvent event) throws IOException, InventoryIsFullException;
 }
