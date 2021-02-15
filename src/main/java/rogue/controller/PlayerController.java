@@ -5,7 +5,9 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.eventbus.Subscribe;
 
+import rogue.model.creature.Life;
 import rogue.model.creature.Player;
+import rogue.model.creature.PlayerLife;
 import rogue.model.events.EventSubscriber;
 import rogue.model.events.LifeEvent;
 import rogue.view.PlayerView;
@@ -27,8 +29,9 @@ public final class PlayerController extends AbstractEntityController implements 
      * @param event
      */
     @Subscribe
-    public void onLifeChange(final LifeEvent event) {
+    public void onLifeChange(final LifeEvent<PlayerLife> event) {
         LOG.info("life changed");
+        // TODO: update player view
     }
 
 }
