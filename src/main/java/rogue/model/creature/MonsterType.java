@@ -36,7 +36,7 @@ public enum MonsterType {
     /** 
       * Fire Lizard.
       */
-    FIRE_LIZARD(new MonsterLife((int) (Math.random() * (36 - 8) + 8), 80), 2, new Pair<>(3, 18), new SpecialImpl(true), 0, new PotionImpl(PotionType.POTION_III), 40),
+    FIRE_ELEMENTAL(new MonsterLife((int) (Math.random() * (36 - 8) + 8), 80), 2, new Pair<>(3, 18), new SpecialImpl(true), 0, new PotionImpl(PotionType.POTION_III), 40),
 
     /** 
      * Griffin.
