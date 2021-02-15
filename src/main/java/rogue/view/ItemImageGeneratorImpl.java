@@ -2,10 +2,13 @@ package rogue.view;
 
 import javafx.scene.image.Image;
 import rogue.model.items.Item;
+import rogue.model.items.armor.ArmorImpl;
 import rogue.model.items.food.FoodImpl;
 import rogue.model.items.food.FoodType;
 import rogue.model.items.potion.PotionImpl;
+import rogue.model.items.rings.RingImpl;
 import rogue.model.items.scroll.ScrollImpl;
+import rogue.model.items.weapons.BaseWeapon;
 
 public class ItemImageGeneratorImpl implements ItemImageGenerator {
 
@@ -81,6 +84,24 @@ public class ItemImageGeneratorImpl implements ItemImageGenerator {
              * Scroll item, all scrolls have the same icon
              */
             return new Image(ClassLoader.getSystemResource("images/scroll/scrollIcon.png").toExternalForm(), 32, 32, false, true);
+        }
+        if (item.getClass().equals(ArmorImpl.class)) {
+            /*
+             * Armor item
+             */
+            return new Image(ClassLoader.getSystemResource("images/armor/armorIcon.png").toExternalForm(), 32, 32, false, true);
+        }
+        if (item.getClass().equals(BaseWeapon.class)) {
+            /*
+             * Weapon item
+             */
+            return new Image(ClassLoader.getSystemResource("images/weapon/weaponIcon.png").toExternalForm(), 32, 32, false, true);
+        }
+        if (item.getClass().equals(RingImpl.class)) {
+            /*
+             * Ring item
+             */
+            return new Image(ClassLoader.getSystemResource("images/ring/ringIcon.png").toExternalForm(), 32, 32, false, true);
         }
         return new Image(ClassLoader.getSystemResource("images/emptyIcon.png").toExternalForm(), 32, 32, false, true);
     }

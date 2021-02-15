@@ -16,13 +16,19 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import rogue.model.creature.Player;
 import rogue.model.creature.PlayerFactoryImpl;
+import rogue.model.items.armor.ArmorImpl;
+import rogue.model.items.armor.ArmorType;
 import rogue.model.items.food.FoodImpl;
 import rogue.model.items.food.FoodType;
 import rogue.model.items.inventory.InventoryIsFullException;
 import rogue.model.items.potion.PotionImpl;
 import rogue.model.items.potion.PotionType;
+import rogue.model.items.rings.RingImpl;
+import rogue.model.items.rings.RingType;
 import rogue.model.items.scroll.ScrollImpl;
 import rogue.model.items.scroll.ScrollType;
+import rogue.model.items.weapons.BaseWeapon;
+import rogue.model.items.weapons.WeaponType;
 
 public class GameControllerImpl implements GameController, Initializable {
 
@@ -106,6 +112,11 @@ public class GameControllerImpl implements GameController, Initializable {
         player.getInventory().addItem(new FoodImpl(FoodType.HAMBURGER));
         player.getInventory().addItem(new FoodImpl(FoodType.SOUP));
         player.getInventory().addItem(new FoodImpl(FoodType.STEAK));
+
+        player.getInventory().addItem(new RingImpl(RingType.PROTECTION));
+
+        player.getInventory().addItem(new ArmorImpl(ArmorType.LEATHER));
+        player.getInventory().addItem(new BaseWeapon(WeaponType.SPEAR));
 
         final InventoryControllerImpl controller = loader.getController();
         controller.initPlayer(player);

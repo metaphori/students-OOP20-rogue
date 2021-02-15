@@ -39,7 +39,7 @@ public class InventoryControllerImpl implements Initializable {
 
     private static final int NUM_COLS = 4;
     private static final int NUM_ROWS = 5;
-    private static final int QUANTITY_SIZE = 17;
+    private static final int QUANTITY_FONT_SIZE = 17;
 
     @FXML private ResourceBundle resources;
     @FXML private URL location;
@@ -103,7 +103,7 @@ public class InventoryControllerImpl implements Initializable {
                     BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
                     BackgroundSize.DEFAULT)));
             final Text turns = new Text();
-            turns.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, QUANTITY_SIZE));
+            turns.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, QUANTITY_FONT_SIZE));
             turns.setFill(Color.ORANGE);
             turns.setStrokeWidth(1); 
             turns.setStroke(Color.BLACK);
@@ -126,7 +126,7 @@ public class InventoryControllerImpl implements Initializable {
              */
             final ItemImageGenerator itemI = new ItemImageGeneratorImpl();
             final Text quantity = new Text();
-            quantity.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, QUANTITY_SIZE));
+            quantity.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, QUANTITY_FONT_SIZE));
             quantity.setFill(Color.ORANGE);
             quantity.setStrokeWidth(1); 
             quantity.setStroke(Color.BLACK);
@@ -201,7 +201,7 @@ public class InventoryControllerImpl implements Initializable {
                     swapping = Optional.of(invIndex);
                     pane.getChildren().clear();
                     final Text swap = new Text();
-                    swap.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, QUANTITY_SIZE));
+                    swap.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, QUANTITY_FONT_SIZE));
                     swap.setFill(Color.ORANGE);
                     swap.setStrokeWidth(1);
                     swap.setStroke(Color.BLACK);
