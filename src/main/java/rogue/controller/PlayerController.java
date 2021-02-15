@@ -1,13 +1,10 @@
-/**
- * 
- */
 package rogue.controller;
 
 import rogue.model.Entity;
 import rogue.view.EntityView;
 
 /**
- *
+ * The player controller.
  */
 public final class PlayerController extends AbstractEntityController {
 
