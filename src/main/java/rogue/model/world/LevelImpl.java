@@ -12,7 +12,6 @@ import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Table;
 
 import rogue.model.Entity;
-import rogue.model.creature.PlayerFactoryImpl;
 
 class CannotMoveException extends Exception {
     private static final long serialVersionUID = 1484670650603806971L;
@@ -102,7 +101,8 @@ class LevelImpl implements Level {
         entityMap.remove(e);
     }
 
-    public final int distance(final Tile t1, final Tile t2) {
+    public final int distance(final Entity e1, final Entity e2) {
+        Tile t1 = entityMap.get(e1), t2 = entityMap.get(e2);
         return Math.abs(t1.getX() - t2.getX()) + Math.abs(t1.getY() - t2.getY());
     }
 

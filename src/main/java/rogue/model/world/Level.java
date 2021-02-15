@@ -13,4 +13,5 @@ public interface Level {
     Map<Entity, Tile> getEntityMap();
     Optional<Entity> shiftEntity(Entity e, Direction d, int i) throws CannotMoveException;
     void removeEntity(Entity e) throws CannotRemoveException;
+    int distance(Entity e1, Entity e2);
 }
