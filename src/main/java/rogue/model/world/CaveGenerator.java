@@ -68,7 +68,8 @@ class CaveGenerator {
                         newCave[x][y] = true;
                     }
                 }
-                //Otherwise, if the cell is dead now, check if it has the right number of neighbours to be 'born'
+                // Otherwise, if the cell is dead now, check if it has the right number of
+                // neighbours to be 'born'
                 else {
                     if (neighborCount > BIRTH_LIMIT) {
                         newCave[x][y] = true;

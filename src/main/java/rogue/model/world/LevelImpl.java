@@ -1,6 +1,7 @@
 package rogue.model.world;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -60,9 +61,10 @@ class LevelImpl implements Level {
         return entityMap;
     }
 
-    public final void moveEntity(final Entity e, final Tile t) throws CannotMoveException {
-        if (entityMap.inverse().get(t) != null) {
-            throw new CannotMoveException("There's already an entity in this position!");
+    private Optional<Entity> moveEntity(final Entity e, final Tile t) throws CannotMoveException {
+        Entity existingEntity = entityMap.inverse().get(t);
+        if (existingEntity != null) {
+            return Optional.of(existingEntity);
         }
 
         if (t.isWall()) {
@@ -75,11 +77,13 @@ class LevelImpl implements Level {
         }
 
         entityMap.put(e, t);
+
+        return Optional.empty();
     }
 
-    public final void shiftEntity(final Entity e, final Direction d, final int i) throws CannotMoveException {
+    public final Optional<Entity> shiftEntity(final Entity e, final Direction d, final int i) throws CannotMoveException {
         if (!entityMap.containsKey(e)) {
-            throw new CannotMoveException("There's already an entity in this position!");
+            throw new CannotMoveException("Entity doesn't exist!");
         }
 
         Tile currentTile = entityMap.get(e);
@@ -87,7 +91,7 @@ class LevelImpl implements Level {
         Coordinates finalCoordinates = currentCoordinates.shift(d, i);
         Tile finalTile = tileMap.get(finalCoordinates.getX(), finalCoordinates.getY());
 
-        moveEntity(e, finalTile);
+        return moveEntity(e, finalTile);
     }
 
     public final void removeEntity(final Entity e) throws CannotRemoveException {
