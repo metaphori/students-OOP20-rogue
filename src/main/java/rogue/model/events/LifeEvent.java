@@ -14,7 +14,7 @@ public class LifeEvent<L extends Life> implements EntityEvent {
     /**
      * Creates a new LifeEvent.
      * @param life
-     *          the life which has changed
+     *          the life which changed
      */
     public LifeEvent(final L life) {
         this.life = life;
