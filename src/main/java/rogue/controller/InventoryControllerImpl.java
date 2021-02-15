@@ -11,7 +11,6 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -31,6 +30,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import rogue.model.creature.Player;
 import rogue.model.items.inventory.OutOfInventoryException;
+import rogue.model.items.scroll.ScrollImpl;
+import rogue.model.items.scroll.ScrollType;
 import rogue.view.ItemImageGenerator;
 import rogue.view.ItemImageGeneratorImpl;
 
@@ -43,6 +44,7 @@ public class InventoryControllerImpl implements Initializable {
     @FXML private ResourceBundle resources;
     @FXML private URL location;
     @FXML private GridPane inventoryGrid;
+    @FXML  private GridPane ringAndScrollGrid;
 
     private Player player;
     private Optional<Integer> swapping = Optional.empty();
@@ -79,8 +81,10 @@ public class InventoryControllerImpl implements Initializable {
     public void update(final Player player) throws OutOfInventoryException {
         /*
          * Remove everything in the current InventoryGrid in order to update it.
+         * Also removes everything in the current ScrollContainerGrid.
          */
         inventoryGrid.getChildren().clear();
+        ringAndScrollGrid.getChildren().clear();
         /*
          * Populate the inventoryGrid
          */
@@ -89,6 +93,28 @@ public class InventoryControllerImpl implements Initializable {
                 gridInsert(i, j, player);
             }
         }
+        /*
+         * Make scrollContainer.
+         */
+        final Pane pane = new StackPane();
+        if (!player.getInventory().getScrollContainer().getActiveScroll().isEmpty()) {
+            final ItemImageGenerator itemI = new ItemImageGeneratorImpl();
+            pane.setBackground(new Background(new BackgroundImage(itemI.getImage(new ScrollImpl(ScrollType.SCROLL_I)),
+                    BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+                    BackgroundSize.DEFAULT)));
+            final Text turns = new Text();
+            turns.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, QUANTITY_SIZE));
+            turns.setFill(Color.ORANGE);
+            turns.setStrokeWidth(1); 
+            turns.setStroke(Color.BLACK);
+            turns.setText(String.valueOf(player.getInventory().getScrollContainer().getActiveScrollDuration()));
+            pane.getChildren().add(turns);
+        } else {
+            pane.setBackground(new Background(emptyB));
+        }
+        ringAndScrollGrid.add(pane, 1, 0);
+
+
     }
 
     private void gridInsert(final int col, final int row, final Player player) throws OutOfInventoryException {
@@ -208,8 +234,16 @@ public class InventoryControllerImpl implements Initializable {
     public void initialize(final URL location, final ResourceBundle resources) {
         Platform.runLater(() -> {
             /*
-             * Update inventoryGrid constraints.
+             * Update inventoryGrid and ringAndScrollGrid constraints.
              */
+            final ColumnConstraints colConstraintsRS = new ColumnConstraints();
+            colConstraintsRS.setHgrow(Priority.NEVER);
+            ringAndScrollGrid.getColumnConstraints().add(colConstraintsRS);
+
+            final RowConstraints rowConstraintsRS = new RowConstraints();
+            rowConstraintsRS.setVgrow(Priority.NEVER);
+            ringAndScrollGrid.getRowConstraints().add(rowConstraintsRS);
+
             for (int i = 0; i < NUM_COLS; i++) {
                 final ColumnConstraints colConstraints = new ColumnConstraints();
                 colConstraints.setHgrow(Priority.NEVER);
