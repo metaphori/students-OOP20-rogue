@@ -12,4 +12,18 @@ public interface EventPublisher {
      */
     void post(EntityEvent event);
 
+    /**
+     * Registers the given subscriber on {@link EventBus}.
+     * @param subscriber
+     *          the {@link EventSubscriber} to register
+     */
+    void register(EventSubscriber subscriber);
+
+    /**
+     * Unregisters the given subscriber on {@link EventBus}.
+     * @param subscriber
+     *          the {@link EventSubscriber} to unregister
+     */
+    void unregister(EventSubscriber subscriber);
+
 }
