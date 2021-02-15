@@ -1,12 +1,17 @@
 package rogue.controller;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
+
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -40,7 +45,7 @@ public class InventoryControllerImpl implements Initializable {
     @FXML private GridPane inventoryGrid;
 
     private Player player;
-
+    private Optional<Integer> swapping = Optional.empty();
     /*
      * Background images for InventoryView
      */
@@ -116,53 +121,127 @@ public class InventoryControllerImpl implements Initializable {
         /*
          * Set each slots events.
          */
-        /*
-         * Left button click
-         */
+        final EventBus eventBus = new EventBus();
+        final EventListener listener = new EventListener();
+        eventBus.register(listener);
         pane.setOnMouseClicked(e -> {
             final MouseButton button = e.getButton();
+            /*
+             * Use item
+             */
             if (button.equals(MouseButton.PRIMARY)) {
-                System.out.println("Used item.");
+                /*
+                 * Remove eventual swapping event
+                 */
+                swapping = Optional.empty();
+                try {
+                    if (!player.getInventory().useItem(invIndex)) {
+                        System.out.println("Cannot use: " + (player.getInventory().getItem(invIndex).isEmpty() ? "EMPTY ITEM" 
+                                : player.getInventory().getItem(invIndex).get()));
+                    }
+                } catch (OutOfInventoryException e1) {
+                    e1.printStackTrace();
+                }
+                eventBus.post("Update event");
             }
+            /*
+             * REMOVE ITEM
+             */
             if (button.equals(MouseButton.SECONDARY)) {
-                System.out.println("remove item.");
+                /*
+                 * Remove eventual swapping event
+                 */
+                swapping = Optional.empty();
+                /*
+                 * remove item
+                 */
+                try {
+                    if (!player.getInventory().remove(invIndex)) {
+                        System.out.println("Cannot remove empty slot.");
+                    }
+                } catch (OutOfInventoryException e1) {
+                    e1.printStackTrace();
+                }
+                eventBus.post("Update event");
             }
+            /*
+             * SWAP
+             */
             if (button.equals(MouseButton.MIDDLE)) {
-                System.out.println("swap item.");
+                if (swapping.isEmpty()) {
+                    /*
+                     * make clicked slot swapping slot.
+                     */
+                    swapping = Optional.of(invIndex);
+                    pane.getChildren().clear();
+                    final Text swap = new Text();
+                    swap.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, QUANTITY_SIZE));
+                    swap.setFill(Color.ORANGE);
+                    swap.setStrokeWidth(1);
+                    swap.setStroke(Color.BLACK);
+                    swap.setText("SWAP");
+                    pane.getChildren().add(swap);
+                } else {
+                    /*
+                     * execute swap.
+                     */
+                    try {
+                        player.getInventory().swap(invIndex, swapping.get());
+                    } catch (OutOfInventoryException e1) {
+                        e1.printStackTrace();
+                    }
+                    /*
+                     * reset swapping event and update inventory.
+                     */
+                    swapping = Optional.empty();
+                    eventBus.post("Update event");
+                }
             }
-            System.out.println("Mouse clicked the cell [" + col + ", " + row + "] , inv[" + invIndex + "]");
         });
         inventoryGrid.add(pane, col, row);
     }
+
     /**
-     * 
+     * Initialize the InventoryView.
      */
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
         Platform.runLater(() -> {
-        /*
-         * Update inventoryGrid constraints.
-         */
-        for (int i = 0; i < NUM_COLS; i++) {
-            final ColumnConstraints colConstraints = new ColumnConstraints();
-            colConstraints.setHgrow(Priority.NEVER);
-            inventoryGrid.getColumnConstraints().add(colConstraints);
-        }
+            /*
+             * Update inventoryGrid constraints.
+             */
+            for (int i = 0; i < NUM_COLS; i++) {
+                final ColumnConstraints colConstraints = new ColumnConstraints();
+                colConstraints.setHgrow(Priority.NEVER);
+                inventoryGrid.getColumnConstraints().add(colConstraints);
+            }
 
-        for (int i = 0; i < NUM_ROWS; i++) {
-            final RowConstraints rowConstraints = new RowConstraints();
-            rowConstraints.setVgrow(Priority.NEVER);
-            inventoryGrid.getRowConstraints().add(rowConstraints);
-        }
-        /*
-         * Create grid.
-         */
-        try {
-            update(this.player);
-        } catch (OutOfInventoryException e) {
-            e.printStackTrace();
-        }
+            for (int i = 0; i < NUM_ROWS; i++) {
+                final RowConstraints rowConstraints = new RowConstraints();
+                rowConstraints.setVgrow(Priority.NEVER);
+                inventoryGrid.getRowConstraints().add(rowConstraints);
+            }
+            /*
+             * Create grid.
+             */
+            try {
+                update(this.player);
+            } catch (OutOfInventoryException e) {
+                e.printStackTrace();
+            }
         });
     }
 
+    public class EventListener {
+
+        /**
+         * Update the inventory's view.
+         * @param event
+         * @throws OutOfInventoryException
+         */
+        @Subscribe
+        public void updateEvent(final String event) throws OutOfInventoryException {
+           update(player);
+        }
+    }
 }
