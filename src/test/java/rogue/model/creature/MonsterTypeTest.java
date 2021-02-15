@@ -53,14 +53,14 @@ public class MonsterTypeTest {
     private static final int EMU_DAMAGE_MAX = 2;
     private static final int EMU_AC = 7;
 
-    private static final int FIRE_LIZARD_EXPERIENCE = 80;
-    private static final int FIRE_LIZARD_MONEY = 0;
-    private static final int FIRE_LIZARD_ITEM_CHANGE = 40;
-    private static final int FIRE_LIZARD_HP_MIN = 8;
-    private static final int FIRE_LIZARD_HP_MAX = 64;
-    private static final int FIRE_LIZARD_DAMAGE_MIN = 3;
-    private static final int FIRE_LIZARD_DAMAGE_MAX = 18;
-    private static final int FIRE_LIZARD_AC = 2;
+    private static final int FIRE_ELEMENTAL_EXPERIENCE = 80;
+    private static final int FIRE_ELEMENTAL_MONEY = 0;
+    private static final int FIRE_ELEMENTAL_ITEM_CHANGE = 40;
+    private static final int FIRE_ELEMENTAL_HP_MIN = 8;
+    private static final int FIRE_ELEMENTAL_HP_MAX = 64;
+    private static final int FIRE_ELEMENTAL_DAMAGE_MIN = 3;
+    private static final int FIRE_ELEMENTAL_DAMAGE_MAX = 18;
+    private static final int FIRE_ELEMENTAL_AC = 2;
 
     private static final int GRIFFIN_EXPERIENCE = 2000;
     private static final int GRIFFIN_MONEY = 6000;
@@ -368,16 +368,16 @@ public class MonsterTypeTest {
     }
 
         @org.junit.Test
-        public void testFireLizard() {
+        public void testFireElemental() {
             // with default configs
-            final MonsterImpl mon = new MonsterImpl(MonsterType.FIRE_LIZARD);
+            final MonsterImpl mon = new MonsterImpl(MonsterType.FIRE_ELEMENTAL);
 
-            assertEquals(FIRE_LIZARD_EXPERIENCE, mon.getLife().getExperience());
-            assertEquals(FIRE_LIZARD_MONEY, mon.getMoney());
-            assertEquals(FIRE_LIZARD_ITEM_CHANGE, mon.getItemChange());
-            assertTrue(FIRE_LIZARD_HP_MIN <= mon.getLife().getHealthPoints() && mon.getLife().getHealthPoints() <= FIRE_LIZARD_HP_MAX);
-            assertTrue(FIRE_LIZARD_DAMAGE_MIN <= mon.attackDamage() && mon.attackDamage() <= FIRE_LIZARD_DAMAGE_MAX);
-            assertEquals(FIRE_LIZARD_AC, mon.getAC());
+            assertEquals(FIRE_ELEMENTAL_EXPERIENCE, mon.getLife().getExperience());
+            assertEquals(FIRE_ELEMENTAL_MONEY, mon.getMoney());
+            assertEquals(FIRE_ELEMENTAL_ITEM_CHANGE, mon.getItemChange());
+            assertTrue(FIRE_ELEMENTAL_HP_MIN <= mon.getLife().getHealthPoints() && mon.getLife().getHealthPoints() <= FIRE_ELEMENTAL_HP_MAX);
+            assertTrue(FIRE_ELEMENTAL_DAMAGE_MIN <= mon.attackDamage() && mon.attackDamage() <= FIRE_ELEMENTAL_DAMAGE_MAX);
+            assertEquals(FIRE_ELEMENTAL_AC, mon.getAC());
 
             assertFalse(mon.getSpecial().isDrainLife());
             assertFalse(mon.getSpecial().isFlyingRandom());
