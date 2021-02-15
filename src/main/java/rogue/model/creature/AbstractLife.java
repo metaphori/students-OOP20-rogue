@@ -1,17 +1,12 @@
 package rogue.model.creature;
 
-import com.google.common.eventbus.EventBus;
-
-import rogue.model.events.EntityEvent;
-import rogue.model.events.EventSubscriber;
+import rogue.model.events.AbstractEventPublisher;
 import rogue.model.events.LifeEvent;
 
 /**
  * A generic implementation for a creature {@link Life}.
  */
-public abstract class AbstractLife implements Life {
-
-    private final EventBus eventBus = new EventBus("Life");
+public abstract class AbstractLife extends AbstractEventPublisher implements Life {
 
     private int healthPoints;
     private int experience;
@@ -26,30 +21,6 @@ public abstract class AbstractLife implements Life {
     protected AbstractLife(final int healthPoints, final int experience) {
         this.healthPoints = healthPoints;
         this.experience = experience;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void post(final EntityEvent event) {
-        this.eventBus.post(event);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void register(final EventSubscriber subscriber) {
-        this.eventBus.register(subscriber);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void unregister(final EventSubscriber subscriber) {
-        this.eventBus.unregister(subscriber);
     }
 
     /**
