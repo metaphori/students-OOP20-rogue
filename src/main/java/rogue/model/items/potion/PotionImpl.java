@@ -122,4 +122,12 @@ public class PotionImpl implements Potion {
         return potion != other.potion ? false : true;
     }
 
+    /**
+     * 
+     */
+    @Override
+    public String toString() {
+        return "PotionImpl [potion=" + potion + ", hpValue=" + hpValue + "]";
+    }
+
 }

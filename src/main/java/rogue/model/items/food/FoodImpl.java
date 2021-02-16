@@ -91,4 +91,12 @@ public class FoodImpl implements Food {
         final FoodImpl other = (FoodImpl) obj;
         return food != other.food ? false : true;
     }
+
+    /**
+     * 
+     */
+    @Override
+    public String toString() {
+        return "FoodImpl [food=" + food + "]";
+    }
 }

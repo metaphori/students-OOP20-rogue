@@ -1,8 +1,8 @@
 package rogue.model.items;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface ItemFactory {
 
-    ArrayList<Item> getItems(int quantity);
+    List<Item> getItems(int quantity);
 }

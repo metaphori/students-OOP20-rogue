@@ -127,4 +127,12 @@ public class ScrollImpl implements Scroll {
         return scroll != other.scroll ? false : true;
     }
 
+    /**
+     * 
+     */
+    @Override
+    public String toString() {
+        return "ScrollImpl [scroll=" + scroll + ", effectValue=" + effectValue + "]";
+    }
+
 }
