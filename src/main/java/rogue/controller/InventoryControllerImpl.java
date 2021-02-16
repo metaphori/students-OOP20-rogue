@@ -92,5 +92,17 @@ public class InventoryControllerImpl implements InventoryController {
             LOG.info("Called swap with invalid Indexes.");
         }
         return false;
+    }
+
+    /**
+     * @return true if the ring was correctly removed, false otherwise.
+     */
+    public boolean onRingContainer() {
+        /*
+         * Remove the ring and update the inventory.
+         */
+        player.getEquipment().getRing().get().stopUsing(player);
+        player.getInventory().updateInventory();
+        return true;
     } 
 }

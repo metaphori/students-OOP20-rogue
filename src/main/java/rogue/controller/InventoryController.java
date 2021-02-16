@@ -8,4 +8,5 @@ public interface InventoryController {
 
     boolean onMiddleClick(int col, int row, int swapping);
 
+    boolean onRingContainer();
 }

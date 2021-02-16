@@ -235,4 +235,14 @@ public class InventoryImpl extends AbstractEventPublisher implements Inventory {
         throw new OutOfInventoryException(OUT_OF_INVENTORY_MESSAGE);
     }
 
+    /**
+     * Updates the inventory view.
+     */
+    public void updateInventory() {
+        /*
+         * Simply calls the subscriber method to update.
+         */
+        this.post(new InventoryEvent<>(this));
+    }
+
 }

@@ -34,9 +34,10 @@ import rogue.model.events.EventSubscriber;
 import rogue.model.events.InventoryEvent;
 import rogue.model.items.inventory.Inventory;
 import rogue.model.items.inventory.OutOfInventoryException;
+import rogue.model.items.rings.RingImpl;
+import rogue.model.items.rings.RingType;
 import rogue.model.items.scroll.ScrollImpl;
 import rogue.model.items.scroll.ScrollType;
-
 
 public class InventoryViewImpl implements Initializable, EventSubscriber {
 
@@ -53,6 +54,7 @@ public class InventoryViewImpl implements Initializable, EventSubscriber {
     private InventoryController controller;
     private Player player;
     private Optional<Integer> swapping = Optional.empty();
+    private final ItemImageGenerator itemI = new ItemImageGeneratorImpl();
 
     /*
      * Background images for InventoryView
@@ -60,7 +62,6 @@ public class InventoryViewImpl implements Initializable, EventSubscriber {
     private final BackgroundImage emptyB = new BackgroundImage(new Image(ClassLoader.getSystemResource("images/emptyIcon.png").toExternalForm(), 32, 32, false, true),
             BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
             BackgroundSize.DEFAULT); 
-
 
     /**
      * Pass the player to the controller.
@@ -70,7 +71,6 @@ public class InventoryViewImpl implements Initializable, EventSubscriber {
         this.player = player;
         this.controller = new InventoryControllerImpl(this.player);
     }
-
 
     /**
      * Gives the updated number for the Model inventory.
@@ -121,18 +121,36 @@ public class InventoryViewImpl implements Initializable, EventSubscriber {
         /*
          * Make scrollContainer.
          */
-        final Pane pane = new StackPane();
+        final Pane scrollContainer = new StackPane();
         if (!player.getInventory().getScrollContainer().getActiveScroll().isEmpty()) {
-            final ItemImageGenerator itemI = new ItemImageGeneratorImpl();
-            pane.setBackground(new Background(new BackgroundImage(itemI.getImage(new ScrollImpl(ScrollType.SCROLL_I)),
+            scrollContainer.setBackground(new Background(new BackgroundImage(itemI.getImage(new ScrollImpl(ScrollType.SCROLL_I)),
                     BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
                     BackgroundSize.DEFAULT)));
-            pane.getChildren().add(createText(String.valueOf(player.getInventory().getScrollContainer().getActiveScrollDuration())));
+            scrollContainer.getChildren().add(createText(String.valueOf(player.getInventory().getScrollContainer().getActiveScrollDuration())));
         } else {
-            pane.setBackground(new Background(emptyB));
+            scrollContainer.setBackground(new Background(emptyB));
         }
-        ringAndScrollGrid.add(pane, 1, 0);
-
+        ringAndScrollGrid.add(scrollContainer, 1, 0);
+        /*
+         * Make RingContainer
+         */
+        final Pane ringContainer = new StackPane();
+        if (!player.getEquipment().getRing().isEmpty()) {
+            /*
+             * Rings have the same icon.
+             */
+            ringContainer.setBackground(new Background(new BackgroundImage(itemI.getImage(new RingImpl(RingType.PROTECTION)),
+                    BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+                    BackgroundSize.DEFAULT)));
+            ringContainer.setOnMouseClicked(e -> {
+                if (e.getButton().equals(MouseButton.PRIMARY)) {
+                    controller.onRingContainer();
+                }
+            });
+        } else {
+            ringContainer.setBackground(new Background(emptyB));
+        }
+        ringAndScrollGrid.add(ringContainer, 0, 0);
 
     }
 
@@ -141,17 +159,12 @@ public class InventoryViewImpl implements Initializable, EventSubscriber {
         final Pane pane = new StackPane();
         if (!player.getInventory().getItem(invIndex).isEmpty()) {
             /*
-             * Set quantity text options.
-             */
-            final ItemImageGenerator itemI = new ItemImageGeneratorImpl();
-            /*
              * Check current item slot and update pane image and quantity text.
              */
             pane.setBackground(new Background(new BackgroundImage(itemI.getImage(player.getInventory().getItem(invIndex).get()),
                     BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
                     BackgroundSize.DEFAULT)));
             pane.getChildren().add(createText(String.valueOf(player.getInventory().getAmount(invIndex))));
-            //String.valueOf(player.getInventory().getAmount(invIndex))
         } else {
             /*
              * empty slot.
@@ -164,7 +177,7 @@ public class InventoryViewImpl implements Initializable, EventSubscriber {
         pane.setOnMouseClicked(e -> {
             final MouseButton button = e.getButton();
             /*
-             * Use item
+             * USE ITEM
              */
             if (button.equals(MouseButton.PRIMARY)) {
                 /*

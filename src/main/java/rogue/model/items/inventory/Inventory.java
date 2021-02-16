@@ -66,4 +66,10 @@ public interface Inventory extends EventPublisher {
      * @return true if item correctly removed, false if slot is empty.
      */
     boolean remove(int index) throws OutOfInventoryException;
+
+    /**
+     * Updates the inventory view.
+     */
+    void updateInventory();
+
 }
