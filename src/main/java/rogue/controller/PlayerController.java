@@ -10,7 +10,7 @@ import rogue.model.creature.PlayerLife;
 import rogue.model.events.EquipmentEvent;
 import rogue.model.events.EventSubscriber;
 import rogue.model.events.LifeEvent;
-import rogue.view.PlayerView;
+import rogue.view.StatusBarView;
 
 /**
  * The player controller.
@@ -19,8 +19,8 @@ public final class PlayerController extends AbstractEntityController implements 
 
     private static final Logger LOG = LoggerFactory.getLogger(PlayerController.class);
 
-    protected PlayerController(final PlayerView playerView, final Player player) {
-        super(playerView, player);
+    protected PlayerController(final StatusBarView statusBarView, final Player player) {
+        super(statusBarView, player);
         player.getLife().register(this);
         player.getEquipment().register(this);
     }

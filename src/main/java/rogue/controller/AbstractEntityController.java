@@ -1,14 +1,14 @@
 package rogue.controller;
 
 import rogue.model.Entity;
-import rogue.view.EntityView;
+import rogue.view.View;
 
 /**
  * An abstract implementation of {@link EntityController}.
  */
 public abstract class AbstractEntityController implements EntityController {
 
-    private final EntityView view;
+    private final View view;
     private final Entity entity;
 
     /**
@@ -18,7 +18,7 @@ public abstract class AbstractEntityController implements EntityController {
      * @param entity
      *          the entity which this controller refers to
      */
-    protected AbstractEntityController(final EntityView view, final Entity entity) {
+    protected AbstractEntityController(final View view, final Entity entity) {
         this.view = view;
         this.entity = entity;
     }
@@ -27,7 +27,7 @@ public abstract class AbstractEntityController implements EntityController {
      * {@inheritDoc}
      */
     @Override
-    public EntityView getView() {
+    public View getView() {
         return this.view;
     }
 

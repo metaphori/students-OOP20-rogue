@@ -1,7 +1,7 @@
 package rogue.controller;
 
 import rogue.model.Entity;
-import rogue.view.EntityView;
+import rogue.view.View;
 
 /**
  * An interface modeling the entity controller.
@@ -11,7 +11,7 @@ public interface EntityController {
     /**
      * @return the associated {@link EntityView}
      */
-    EntityView getView();
+    View getView();
 
     /**
      * @return the associated {@link Entity}
