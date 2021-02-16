@@ -2,9 +2,10 @@ package rogue.model.items.inventory;
 
 import java.util.Optional;
 
+import rogue.model.events.EventPublisher;
 import rogue.model.items.scroll.Scroll;
 
-public interface ScrollContainer {
+public interface ScrollContainer extends EventPublisher {
 
     /**
      * Activate a scroll.

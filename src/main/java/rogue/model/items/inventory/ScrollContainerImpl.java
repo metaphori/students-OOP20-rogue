@@ -4,9 +4,11 @@ import java.util.Optional;
 
 import javafx.util.Pair;
 import rogue.model.creature.Player;
+import rogue.model.events.AbstractEventPublisher;
+import rogue.model.events.InventoryEvent;
 import rogue.model.items.scroll.Scroll;
 
-public class ScrollContainerImpl implements ScrollContainer {
+public class ScrollContainerImpl extends AbstractEventPublisher implements ScrollContainer {
 
     private Pair<Optional<Scroll>, Integer> scroll;
     private final Player player;
@@ -26,6 +28,7 @@ public class ScrollContainerImpl implements ScrollContainer {
          */
         removeActiveScroll();
         this.scroll = new Pair<>(Optional.of(scroll), scroll.getEffectDuration());
+        this.post(new InventoryEvent<>(player.getInventory()));
     }
 
     /**
@@ -47,6 +50,7 @@ public class ScrollContainerImpl implements ScrollContainer {
              * Remove the scroll.
              */
             this.scroll = new Pair<>(Optional.empty(), 0);
+            this.post(new InventoryEvent<>(player.getInventory()));
             return true;
         }
     }
@@ -82,12 +86,14 @@ public class ScrollContainerImpl implements ScrollContainer {
                  * Scroll duration is over, remove scroll.
                  */
                 this.scroll = new Pair<>(Optional.empty(), 0);
+                this.post(new InventoryEvent<>(player.getInventory()));
                 return true;
             } else {
                 /*
                  * Update scroll's duration
                  */
                 this.scroll = new Pair<>(this.scroll.getKey(), this.scroll.getValue() - amount);
+                this.post(new InventoryEvent<>(player.getInventory()));
                 return true;
             }
         } else {

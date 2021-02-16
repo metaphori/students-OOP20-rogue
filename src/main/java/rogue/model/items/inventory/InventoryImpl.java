@@ -178,6 +178,7 @@ public class InventoryImpl extends AbstractEventPublisher implements Inventory {
             /*
              * Both slots are empty return false.
              */
+            this.post(new InventoryEvent<>(this));
             return false;
         } else {
             /*
