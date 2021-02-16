@@ -13,7 +13,7 @@ import rogue.model.items.rings.RingType;
 import rogue.model.items.weapons.BaseWeapon;
 import rogue.model.items.weapons.IncreaseAccuracy;
 import rogue.model.items.weapons.WeaponType;
-import rogue.view.PlayerView;
+import rogue.view.StatusBarViewImpl;
 
 public class PlayerControllerTest {
 
@@ -23,7 +23,7 @@ public class PlayerControllerTest {
     public void init() {
         // with default configs
         player = new PlayerFactoryImpl().create();
-        new PlayerController(new PlayerView() { }, player);
+        new PlayerController(new StatusBarViewImpl(), player);
     }
 
     @org.junit.Test
