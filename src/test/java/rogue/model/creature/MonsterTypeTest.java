@@ -249,6 +249,7 @@ public class MonsterTypeTest {
 
         assertEquals(AIR_ELEMENTAL_EXPERIENCE, mon.getLife().getExperience());
         assertEquals(AIR_ELEMENTAL_MONEY, mon.getMoney());
+        //assertEquals("POTION_II", mon.getItem().g);
         assertEquals(AIR_ELEMENTAL_ITEM_CHANGE, mon.getItemChange());
         assertTrue(AIR_ELEMENTAL_HP_MIN <= mon.getLife().getHealthPoints() && mon.getLife().getHealthPoints() <= AIR_ELEMENTAL_HP_MAX);
         assertTrue(AIR_ELEMENTAL_DAMAGE_MIN <= mon.attackDamage() && mon.attackDamage() <= AIR_ELEMENTAL_DAMAGE_MAX);
@@ -259,9 +260,7 @@ public class MonsterTypeTest {
         assertTrue(mon.getSpecial().isFlyng());
         assertFalse(mon.getSpecial().isGreedy());
         assertTrue(mon.getSpecial().isHostile());
-        assertFalse(mon.getSpecial().isInvisible());
         assertFalse(mon.getSpecial().isPoisonous());
-        assertFalse(mon.getSpecial().isWeaken());
 
         mon.getLife().hurt(IPOTETICAL_DAMAGE);
         assertTrue(mon.getLife().isDead());
@@ -284,9 +283,7 @@ public class MonsterTypeTest {
         assertTrue(mon.getSpecial().isFlyng());
         assertFalse(mon.getSpecial().isGreedy());
         assertFalse(mon.getSpecial().isHostile());
-        assertFalse(mon.getSpecial().isInvisible());
         assertFalse(mon.getSpecial().isPoisonous());
-        assertFalse(mon.getSpecial().isWeaken());
 
         mon.getLife().hurt(IPOTETICAL_DAMAGE);
         assertTrue(mon.getLife().isDead());
@@ -309,9 +306,7 @@ public class MonsterTypeTest {
         assertFalse(mon.getSpecial().isFlyng());
         assertFalse(mon.getSpecial().isGreedy());
         assertFalse(mon.getSpecial().isHostile());
-        assertFalse(mon.getSpecial().isInvisible());
         assertFalse(mon.getSpecial().isPoisonous());
-        assertFalse(mon.getSpecial().isWeaken());
 
         mon.getLife().hurt(IPOTETICAL_DAMAGE);
         assertTrue(mon.getLife().isDead());
@@ -334,10 +329,8 @@ public class MonsterTypeTest {
         assertFalse(mon.getSpecial().isFlyng());
         assertFalse(mon.getSpecial().isGreedy());
         assertTrue(mon.getSpecial().isHostile());
-        assertFalse(mon.getSpecial().isInvisible());
         assertFalse(mon.getSpecial().isPoisonous());
-        assertFalse(mon.getSpecial().isWeaken());
-
+ 
         mon.getLife().hurt(IPOTETICAL_DAMAGE);
         assertTrue(mon.getLife().isDead());
     }
@@ -359,9 +352,7 @@ public class MonsterTypeTest {
             assertFalse(mon.getSpecial().isFlyng());
             assertFalse(mon.getSpecial().isGreedy());
             assertTrue(mon.getSpecial().isHostile());
-            assertFalse(mon.getSpecial().isInvisible());
             assertFalse(mon.getSpecial().isPoisonous());
-            assertFalse(mon.getSpecial().isWeaken());
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
@@ -384,9 +375,8 @@ public class MonsterTypeTest {
             assertFalse(mon.getSpecial().isFlyng());
             assertFalse(mon.getSpecial().isGreedy());
             assertTrue(mon.getSpecial().isHostile());
-            assertFalse(mon.getSpecial().isInvisible());
             assertFalse(mon.getSpecial().isPoisonous());
-            assertFalse(mon.getSpecial().isWeaken());
+
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
@@ -409,9 +399,7 @@ public class MonsterTypeTest {
             assertTrue(mon.getSpecial().isFlyng());
             assertFalse(mon.getSpecial().isGreedy());
             assertTrue(mon.getSpecial().isHostile());
-            assertFalse(mon.getSpecial().isInvisible());
             assertFalse(mon.getSpecial().isPoisonous());
-            assertFalse(mon.getSpecial().isWeaken());
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
@@ -434,9 +422,7 @@ public class MonsterTypeTest {
             assertFalse(mon.getSpecial().isFlyng());
             assertFalse(mon.getSpecial().isGreedy());
             assertTrue(mon.getSpecial().isHostile());
-            assertFalse(mon.getSpecial().isInvisible());
             assertFalse(mon.getSpecial().isPoisonous());
-            assertFalse(mon.getSpecial().isWeaken());
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
@@ -459,9 +445,7 @@ public class MonsterTypeTest {
             assertFalse(mon.getSpecial().isFlyng());
             assertFalse(mon.getSpecial().isGreedy());
             assertFalse(mon.getSpecial().isHostile());
-            assertFalse(mon.getSpecial().isInvisible());
             assertFalse(mon.getSpecial().isPoisonous());
-            assertFalse(mon.getSpecial().isWeaken());
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
@@ -484,9 +468,7 @@ public class MonsterTypeTest {
             assertTrue(mon.getSpecial().isFlyng());
             assertFalse(mon.getSpecial().isGreedy());
             assertFalse(mon.getSpecial().isHostile());
-            assertFalse(mon.getSpecial().isInvisible());
             assertFalse(mon.getSpecial().isPoisonous());
-            assertFalse(mon.getSpecial().isWeaken());
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
@@ -509,9 +491,7 @@ public class MonsterTypeTest {
             assertFalse(mon.getSpecial().isFlyng());
             assertFalse(mon.getSpecial().isGreedy());
             assertTrue(mon.getSpecial().isHostile());
-            assertFalse(mon.getSpecial().isInvisible());
             assertFalse(mon.getSpecial().isPoisonous());
-            assertFalse(mon.getSpecial().isWeaken());
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
@@ -534,9 +514,7 @@ public class MonsterTypeTest {
             assertFalse(mon.getSpecial().isFlyng());
             assertFalse(mon.getSpecial().isGreedy());
             assertTrue(mon.getSpecial().isHostile());
-            assertFalse(mon.getSpecial().isInvisible());
             assertFalse(mon.getSpecial().isPoisonous());
-            assertFalse(mon.getSpecial().isWeaken());
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
@@ -559,9 +537,7 @@ public class MonsterTypeTest {
             assertFalse(mon.getSpecial().isFlyng());
             assertFalse(mon.getSpecial().isGreedy());
             assertTrue(mon.getSpecial().isHostile());
-            assertFalse(mon.getSpecial().isInvisible());
             assertTrue(mon.getSpecial().isPoisonous());
-            assertFalse(mon.getSpecial().isWeaken());
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
@@ -584,9 +560,7 @@ public class MonsterTypeTest {
             assertFalse(mon.getSpecial().isFlyng());
             assertTrue(mon.getSpecial().isGreedy());
             assertFalse(mon.getSpecial().isHostile());
-            assertFalse(mon.getSpecial().isInvisible());
             assertFalse(mon.getSpecial().isPoisonous());
-            assertFalse(mon.getSpecial().isWeaken());
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
@@ -609,9 +583,7 @@ public class MonsterTypeTest {
             assertFalse(mon.getSpecial().isFlyng());
             assertTrue(mon.getSpecial().isGreedy());
             assertFalse(mon.getSpecial().isHostile());
-            assertFalse(mon.getSpecial().isInvisible());
             assertFalse(mon.getSpecial().isPoisonous());
-            assertFalse(mon.getSpecial().isWeaken());
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
@@ -634,9 +606,7 @@ public class MonsterTypeTest {
             assertFalse(mon.getSpecial().isFlyng());
             assertFalse(mon.getSpecial().isGreedy());
             assertTrue(mon.getSpecial().isHostile());
-            assertTrue(mon.getSpecial().isInvisible());
             assertFalse(mon.getSpecial().isPoisonous());
-            assertFalse(mon.getSpecial().isWeaken());
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
@@ -659,9 +629,7 @@ public class MonsterTypeTest {
             assertFalse(mon.getSpecial().isFlyng());
             assertFalse(mon.getSpecial().isGreedy());
             assertFalse(mon.getSpecial().isHostile());
-            assertFalse(mon.getSpecial().isInvisible());
             assertFalse(mon.getSpecial().isPoisonous());
-            assertFalse(mon.getSpecial().isWeaken());
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
@@ -684,9 +652,7 @@ public class MonsterTypeTest {
             assertFalse(mon.getSpecial().isFlyng());
             assertFalse(mon.getSpecial().isGreedy());
             assertFalse(mon.getSpecial().isHostile());
-            assertFalse(mon.getSpecial().isInvisible());
             assertFalse(mon.getSpecial().isPoisonous());
-            assertFalse(mon.getSpecial().isWeaken());
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
@@ -709,9 +675,7 @@ public class MonsterTypeTest {
             assertFalse(mon.getSpecial().isFlyng());
             assertFalse(mon.getSpecial().isGreedy());
             assertTrue(mon.getSpecial().isHostile());
-            assertFalse(mon.getSpecial().isInvisible());
             assertTrue(mon.getSpecial().isPoisonous());
-            assertFalse(mon.getSpecial().isWeaken());
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
@@ -734,9 +698,7 @@ public class MonsterTypeTest {
             assertFalse(mon.getSpecial().isFlyng());
             assertFalse(mon.getSpecial().isGreedy());
             assertTrue(mon.getSpecial().isHostile());
-            assertFalse(mon.getSpecial().isInvisible());
             assertFalse(mon.getSpecial().isPoisonous());
-            assertFalse(mon.getSpecial().isWeaken());
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
@@ -759,9 +721,7 @@ public class MonsterTypeTest {
             assertFalse(mon.getSpecial().isFlyng());
             assertFalse(mon.getSpecial().isGreedy());
             assertFalse(mon.getSpecial().isHostile());
-            assertFalse(mon.getSpecial().isInvisible());
             assertFalse(mon.getSpecial().isPoisonous());
-            assertFalse(mon.getSpecial().isWeaken());
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
@@ -784,9 +744,7 @@ public class MonsterTypeTest {
             assertFalse(mon.getSpecial().isFlyng());
             assertFalse(mon.getSpecial().isGreedy());
             assertTrue(mon.getSpecial().isHostile());
-            assertFalse(mon.getSpecial().isInvisible());
             assertFalse(mon.getSpecial().isPoisonous());
-            assertFalse(mon.getSpecial().isWeaken());
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
@@ -809,9 +767,7 @@ public class MonsterTypeTest {
             assertFalse(mon.getSpecial().isFlyng());
             assertFalse(mon.getSpecial().isGreedy());
             assertFalse(mon.getSpecial().isHostile());
-            assertFalse(mon.getSpecial().isInvisible());
             assertFalse(mon.getSpecial().isPoisonous());
-            assertFalse(mon.getSpecial().isWeaken());
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
@@ -834,9 +790,7 @@ public class MonsterTypeTest {
             assertFalse(mon.getSpecial().isFlyng());
             assertFalse(mon.getSpecial().isGreedy());
             assertTrue(mon.getSpecial().isHostile());
-            assertFalse(mon.getSpecial().isInvisible());
             assertFalse(mon.getSpecial().isPoisonous());
-            assertFalse(mon.getSpecial().isWeaken());
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
@@ -859,9 +813,7 @@ public class MonsterTypeTest {
             assertFalse(mon.getSpecial().isFlyng());
             assertFalse(mon.getSpecial().isGreedy());
             assertFalse(mon.getSpecial().isHostile());
-            assertFalse(mon.getSpecial().isInvisible());
             assertFalse(mon.getSpecial().isPoisonous());
-            assertFalse(mon.getSpecial().isWeaken());
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
@@ -884,9 +836,7 @@ public class MonsterTypeTest {
             assertFalse(mon.getSpecial().isFlyng());
             assertFalse(mon.getSpecial().isGreedy());
             assertTrue(mon.getSpecial().isHostile());
-            assertFalse(mon.getSpecial().isInvisible());
             assertFalse(mon.getSpecial().isPoisonous());
-            assertTrue(mon.getSpecial().isWeaken());
 
             mon.getLife().hurt(IPOTETICAL_DAMAGE);
             assertTrue(mon.getLife().isDead());
