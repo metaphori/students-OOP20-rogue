@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Platform;
@@ -29,13 +28,17 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import rogue.model.creature.Player;
+import rogue.model.events.EventSubscriber;
+import rogue.model.events.InventoryEvent;
+import rogue.model.items.inventory.Inventory;
+import rogue.model.items.inventory.InventoryImpl;
 import rogue.model.items.inventory.OutOfInventoryException;
 import rogue.model.items.scroll.ScrollImpl;
 import rogue.model.items.scroll.ScrollType;
 import rogue.view.ItemImageGenerator;
 import rogue.view.ItemImageGeneratorImpl;
 
-public class InventoryControllerImpl implements Initializable {
+public class InventoryControllerImpl implements Initializable, EventSubscriber {
 
     private static final int NUM_COLS = 4;
     private static final int NUM_ROWS = 5;
@@ -75,10 +78,11 @@ public class InventoryControllerImpl implements Initializable {
 
     /**
      * Updates the entire View to the current inventory status.
-     * @param player that holds the inventory.
+     * @param event 
      * @throws OutOfInventoryException 
      */
-    public void update(final Player player) throws OutOfInventoryException {
+    @Subscribe
+    public void update(final InventoryEvent<Inventory> event) throws OutOfInventoryException {
         /*
          * Remove everything in the current InventoryGrid in order to update it.
          * Also removes everything in the current ScrollContainerGrid.
@@ -147,9 +151,6 @@ public class InventoryControllerImpl implements Initializable {
         /*
          * Set each slots events.
          */
-        final EventBus eventBus = new EventBus();
-        final EventListener listener = new EventListener();
-        eventBus.register(listener);
         pane.setOnMouseClicked(e -> {
             final MouseButton button = e.getButton();
             /*
@@ -168,7 +169,6 @@ public class InventoryControllerImpl implements Initializable {
                 } catch (OutOfInventoryException e1) {
                     e1.printStackTrace();
                 }
-                eventBus.post("Update event");
             }
             /*
              * REMOVE ITEM
@@ -188,7 +188,6 @@ public class InventoryControllerImpl implements Initializable {
                 } catch (OutOfInventoryException e1) {
                     e1.printStackTrace();
                 }
-                eventBus.post("Update event");
             }
             /*
              * SWAP
@@ -220,7 +219,6 @@ public class InventoryControllerImpl implements Initializable {
                      * reset swapping event and update inventory.
                      */
                     swapping = Optional.empty();
-                    eventBus.post("Update event");
                 }
             }
         });
@@ -258,24 +256,12 @@ public class InventoryControllerImpl implements Initializable {
             /*
              * Create grid.
              */
+            this.player.getInventory().register(this);
             try {
-                update(this.player);
+                update(new InventoryEvent<>(this.player.getInventory()));
             } catch (OutOfInventoryException e) {
                 e.printStackTrace();
             }
         });
-    }
-
-    public class EventListener {
-
-        /**
-         * Update the inventory's view.
-         * @param event
-         * @throws OutOfInventoryException
-         */
-        @Subscribe
-        public void updateEvent(final String event) throws OutOfInventoryException {
-           update(player);
-        }
     }
 }

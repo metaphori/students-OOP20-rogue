@@ -2,13 +2,14 @@ package rogue.model.items.inventory;
 
 import java.util.Optional;
 
+import rogue.model.events.EventPublisher;
 import rogue.model.items.Item;
 
 /**
  * An interface for modeling a game Inventory.
  *
  */
-public interface Inventory {
+public interface Inventory extends EventPublisher {
 
     /**
      * Use the item contained in the index slot.

@@ -6,11 +6,13 @@ import java.util.Optional;
 
 import javafx.util.Pair;
 import rogue.model.creature.Player;
+import rogue.model.events.AbstractEventPublisher;
+import rogue.model.events.InventoryEvent;
 import rogue.model.items.Item;
 import rogue.model.items.scroll.Scroll;
 import rogue.model.items.scroll.ScrollImpl;
 
-public class InventoryImpl implements Inventory {
+public class InventoryImpl extends AbstractEventPublisher implements Inventory {
 
     private static final int INVENTORY_SIZE = 20;
     private static final int ITEM_AMOUNT_MAX = 10;
@@ -77,6 +79,7 @@ public class InventoryImpl implements Inventory {
                     //Lower amount of item by one after use.
                     inventory.put(index, new Pair<>(Optional.of(toUse), amount - 1));
                 }
+                this.post(new InventoryEvent<>(this));
                 return true;
                 }
             } else {
@@ -129,6 +132,7 @@ public class InventoryImpl implements Inventory {
                       */
                      this.inventory.put(i, new Pair<>(this.inventory.get(i).getKey(), 
                      this.inventory.get(i).getValue() + 1));
+                     this.post(new InventoryEvent<>(this));
                      return true;
                  }
              }
@@ -143,6 +147,7 @@ public class InventoryImpl implements Inventory {
                  * Empty slot found, insert item.
                  */
                 this.inventory.put(j, new Pair<>(Optional.of(item), 1));
+                this.post(new InventoryEvent<>(this));
                 return true;
             }
         }
@@ -181,6 +186,7 @@ public class InventoryImpl implements Inventory {
             final Pair<Optional<Item>, Integer> toSwap = this.inventory.get(first);
             this.inventory.put(first, this.inventory.get(second));
             this.inventory.put(second, toSwap);
+            this.post(new InventoryEvent<>(this));
             return true;
         }
         }
@@ -210,6 +216,7 @@ public class InventoryImpl implements Inventory {
              * remove item contained in slot.
              */
             inventory.put(index, new Pair<>(Optional.empty(), 0));
+            this.post(new InventoryEvent<>(this));
             return true;
         }
         throw new OutOfInventoryException(OUT_OF_INVENTORY_MESSAGE);
