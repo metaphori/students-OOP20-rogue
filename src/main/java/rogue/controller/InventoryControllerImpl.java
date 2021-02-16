@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import rogue.model.creature.Player;
-import rogue.model.items.Item;
 import rogue.model.items.inventory.OutOfInventoryException;
 
 public class InventoryControllerImpl implements InventoryController {
@@ -37,16 +36,15 @@ public class InventoryControllerImpl implements InventoryController {
     public boolean onPrimaryClick(final int col, final int row) {
         try {
             if (player.getInventory().getItem(indexConv(col, row)).isPresent()) {
-                final Item usedItem = player.getInventory().getItem(indexConv(col, row)).get();
                 if (!player.getInventory().useItem(indexConv(col, row))) {
-                    LOG.info("Cannot use item: " + player.getInventory().getItem(indexConv(col, row)).get().toString());
+                    LOG.info("Cannot use item: " + player.getInventory().getItem(indexConv(col, row)).get().toString() + ".");
                     return false;
                 }
-                LOG.info("Used item: " + usedItem.toString());
+                LOG.info("Item correctly used.");
                 return true;
             }
         } catch (OutOfInventoryException e) {
-            LOG.info("Called useItem with invalid Index");
+            LOG.info("Called useItem with invalid Index.");
         }
         return false;
     }
@@ -60,14 +58,39 @@ public class InventoryControllerImpl implements InventoryController {
      */
     public boolean onSecondaryClick(final int col, final int row) {
         try {
-            if (!player.getInventory().remove(indexConv(col, row))) {
-                LOG.info("Cannot remove item: " + player.getInventory().getItem(indexConv(col, row)).get().toString());
-                return false;
+            if (player.getInventory().getItem(indexConv(col, row)).isPresent()) {
+                if (!player.getInventory().remove(indexConv(col, row))) {
+                    LOG.info("Cannot remove item: " + player.getInventory().getItem(indexConv(col, row)).get().toString() + ".");
+                    return false;
+                }
+                LOG.info("Item correctly removed.");
+                return true;
             }
-            LOG.info("Remove item: " + player.getInventory().getItem(indexConv(col, row)).get().toString());
         } catch (OutOfInventoryException e) {
             LOG.info("Called removeItem with invalid Index");
         }
-        return true;
+        return false;
     }
+
+    /**
+     * Event triggered when the player clicks on a inventory slot
+     * with middle mouse button.
+     * @param col of the clicked slot.
+     * @param row of the clicked slot.
+     * @param swapping index of the swapping slot.
+     * @return true if the item was correctly used, false otherwise.
+     */
+    public boolean onMiddleClick(final int col, final int row, final int swapping) {
+        try {
+            if (!player.getInventory().swap(swapping, indexConv(col, row))) {
+                LOG.info("Cannot remove item: " + player.getInventory().getItem(indexConv(col, row)).get().toString());
+                return false;
+            }
+            LOG.info("Swap correctly executed.");
+            return true;
+        } catch (OutOfInventoryException e) {
+            LOG.info("Called swap with invalid Indexes.");
+        }
+        return false;
+    } 
 }

@@ -6,4 +6,6 @@ public interface InventoryController {
 
     boolean onSecondaryClick(int col, int row);
 
+    boolean onMiddleClick(int col, int row, int swapping);
+
 }

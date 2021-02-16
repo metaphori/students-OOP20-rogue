@@ -110,13 +110,14 @@ public class InventoryViewImpl implements Initializable, EventSubscriber {
         inventoryGrid.getChildren().clear();
         ringAndScrollGrid.getChildren().clear();
         /*
-         * Populate the inventoryGrid
+         * Populate the inventoryGrid and reset swapping
          */
         for (int i = 0; i < NUM_COLS; i++) {
             for (int j = 0; j < NUM_ROWS; j++) {
                 gridInsert(i, j, player);
             }
         }
+        swapping = Optional.empty();
         /*
          * Make scrollContainer.
          */
@@ -194,17 +195,7 @@ public class InventoryViewImpl implements Initializable, EventSubscriber {
                     pane.getChildren().clear();
                     pane.getChildren().add(createText("SWAP"));
                 } else {
-                    /*
-                     * execute swap.
-                     */
-                    try {
-                        player.getInventory().swap(invIndex, swapping.get());
-                    } catch (OutOfInventoryException e1) {
-                        e1.printStackTrace();
-                    }
-                    /*
-                     * reset swapping event and update inventory.
-                     */
+                    controller.onMiddleClick(col, row, swapping.get());
                     swapping = Optional.empty();
                 }
             }
