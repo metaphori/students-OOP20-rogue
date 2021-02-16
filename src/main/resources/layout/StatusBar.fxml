@@ -117,7 +117,7 @@
       </VBox>
       <VBox prefHeight="98.0" prefWidth="0.0">
          <children>
-            <Text fx:id="strength" fill="#c37a28" strokeType="OUTSIDE" strokeWidth="0.0" text="Strength" textAlignment="CENTER" wrappingWidth="76.5439453125">
+            <Text fill="#c37a28" strokeType="OUTSIDE" strokeWidth="0.0" text="Strength" textAlignment="CENTER" wrappingWidth="76.5439453125">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -127,7 +127,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                <children>
-                  <Label fx:id="gold1" alignment="CENTER" prefHeight="25.0" prefWidth="49.0" text="0" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+                  <Label fx:id="strength" alignment="CENTER" prefHeight="25.0" prefWidth="49.0" text="0" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -147,7 +147,7 @@
       </VBox>
       <VBox prefHeight="98.0" prefWidth="0.0">
          <children>
-            <Text fx:id="experience" fill="#c37a28" strokeType="OUTSIDE" strokeWidth="0.0" text="Experience" textAlignment="CENTER" wrappingWidth="99.5439453125">
+            <Text fill="#c37a28" strokeType="OUTSIDE" strokeWidth="0.0" text="Experience" textAlignment="CENTER" wrappingWidth="99.5439453125">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -157,7 +157,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                <children>
-                  <Label fx:id="gold2" alignment="CENTER" prefHeight="25.0" prefWidth="49.0" text="0" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+                  <Label fx:id="experience" alignment="CENTER" prefHeight="25.0" prefWidth="49.0" text="0" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
