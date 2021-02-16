@@ -26,21 +26,10 @@ public interface Special {
 
     /**
      * 
-     * @return true if the monster invisible
-     */
-     boolean isInvisible();
-
-    /**
-     * 
      * @return true if the monster flies randomly
      */
      boolean isFlyingRandom();
 
-    /**
-     * 
-     * @return true if the monster can decrease the player's strength
-     */
-     boolean isWeaken();
 
     /**
      * 
