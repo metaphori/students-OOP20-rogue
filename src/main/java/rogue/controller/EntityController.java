@@ -5,13 +5,15 @@ import rogue.view.View;
 
 /**
  * An interface modeling the entity controller.
+ *
+ * @param <V>
  */
-public interface EntityController {
+public interface EntityController<V extends View> {
 
     /**
      * @return the associated {@link EntityView}
      */
-    View getView();
+    V getView();
 
     /**
      * @return the associated {@link Entity}
