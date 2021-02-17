@@ -1,35 +1,16 @@
 package rogue.view.menu;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
-import rogue.controller.inventory.InventoryController;
-import rogue.controller.inventory.InventoryControllerImpl;
 import rogue.controller.menu.MenuController;
-import rogue.model.creature.Player;
-import rogue.model.creature.PlayerFactoryImpl;
-import rogue.model.items.inventory.InventoryIsFullException;
-import rogue.model.items.potion.PotionImpl;
-import rogue.model.items.potion.PotionType;
-import rogue.model.items.rings.RingImpl;
-import rogue.model.items.rings.RingType;
-import rogue.model.items.scroll.ScrollImpl;
-import rogue.model.items.scroll.ScrollType;
-import rogue.view.inventory.InventoryViewImpl;
 
-
+/*
+ * Class that controls the Main menu's view.
+ */
 public class MenuViewImpl implements MenuView {
 
     private static final String NO_NAME_MESSAGE = "PLEASE ENTER A NAME";
@@ -45,7 +26,7 @@ public class MenuViewImpl implements MenuView {
     /**
      * @param controller for the MenuView
      */
-    public void setUser(final MenuController controller) {
+    public void init(final MenuController controller) {
         this.controller = controller;
     }
 
@@ -70,9 +51,10 @@ public class MenuViewImpl implements MenuView {
      * Text area event to get player's name.
      * @param event to check.
      * @throws IOException 
+     * @throws InventoryIsFullException 
      */
     @FXML
-    public void onNameEnter(final KeyEvent event) throws IOException, InventoryIsFullException {
+    public void onNameEnter(final KeyEvent event) throws IOException {
         if (event.getCode().equals(KeyCode.ENTER)) {
             if (nameTextField.getText() != null && !(nameTextField.getText().isEmpty())) {
                 if (validName(nameTextField.getText())) {
@@ -81,7 +63,7 @@ public class MenuViewImpl implements MenuView {
                      * Valid name entered, start game.
                      */
                     insertNameLabel.setText(VALID_NAME);
-                    start(event);
+                    this.start();
                 } else {
                     insertNameLabel.setText(INVALID_NAME_MESSAGE);
                 }
@@ -100,11 +82,9 @@ public class MenuViewImpl implements MenuView {
 
     /**
      * Creates MainView.
-     * @param event that triggeres start.
-     * @throws InventoryIsFullException 
-     * @throws OutOfInventoryException 
      */
-    public void start(final KeyEvent event) throws IOException, InventoryIsFullException {
+    public void start() {
+        //TODO
         controller.showGame();
     }
 

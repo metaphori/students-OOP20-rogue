@@ -12,8 +12,6 @@ import rogue.controller.menu.MenuController;
 import rogue.controller.menu.MenuControllerImpl;
 import rogue.model.world.World;
 import rogue.model.world.WorldImpl;
-import rogue.view.inventory.InventoryViewImpl;
-import rogue.view.menu.MenuView;
 import rogue.view.menu.MenuViewImpl;
 
 public final class MainView extends Application {
@@ -26,20 +24,17 @@ public final class MainView extends Application {
         final Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         final double width = screenSize.getWidth() / 3;
         final double height = screenSize.getHeight() / 2.5;
-
         /*
          * Load Menu fxml.
          */
         final FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource("layout/MainMenu.fxml"));
         final Parent root = loader.load();
-
         /*
          * Pass the MenuController to The view.
          */
         final MenuController menuController = new MenuControllerImpl();
         final MenuViewImpl controller = loader.getController();
-        controller.setUser(menuController);
- 
+        controller.init(menuController);
         /*
          * Create MenuView
          */
