@@ -1,4 +1,4 @@
-package rogue.controller;
+package rogue.controller.inventory;
 
 import rogue.model.items.Item;
 import rogue.model.items.inventory.Inventory;

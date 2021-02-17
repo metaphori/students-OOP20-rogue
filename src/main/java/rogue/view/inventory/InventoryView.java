@@ -1,6 +1,6 @@
-package rogue.view;
+package rogue.view.inventory;
 
-import rogue.controller.InventoryController;
+import rogue.controller.inventory.InventoryController;
 import rogue.model.events.InventoryEvent;
 import rogue.model.items.inventory.Inventory;
 import rogue.model.items.inventory.OutOfInventoryException;

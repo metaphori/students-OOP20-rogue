@@ -1,9 +1,10 @@
-package rogue.controller;
+package rogue.view.menu;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,6 +15,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import rogue.controller.inventory.InventoryController;
+import rogue.controller.inventory.InventoryControllerImpl;
+import rogue.controller.menu.MenuController;
 import rogue.model.creature.Player;
 import rogue.model.creature.PlayerFactoryImpl;
 import rogue.model.items.inventory.InventoryIsFullException;
@@ -23,9 +27,10 @@ import rogue.model.items.rings.RingImpl;
 import rogue.model.items.rings.RingType;
 import rogue.model.items.scroll.ScrollImpl;
 import rogue.model.items.scroll.ScrollType;
-import rogue.view.InventoryViewImpl;
+import rogue.view.inventory.InventoryViewImpl;
 
-public class GameControllerImpl implements GameController, Initializable {
+
+public class MenuViewImpl implements MenuView {
 
     private static final String NO_NAME_MESSAGE = "PLEASE ENTER A NAME";
     private static final String INVALID_NAME_MESSAGE = "PLEASE ENTER A VALID NAME";
@@ -35,7 +40,20 @@ public class GameControllerImpl implements GameController, Initializable {
     @FXML private Label insertNameLabel;
     @FXML private TextField nameTextField;
     private String playerName;
+    private MenuController controller;
 
+    /**
+     * @param controller for the MenuView
+     */
+    public void setUser(final MenuController controller) {
+        this.controller = controller;
+    }
+
+    /**
+     * Checks if the name given by the user is a valid name.
+     * @param name given by the user.
+     * @return true if the name is valid, false otherwise.
+     */
     private boolean validName(final String name) {
         if (name.length() <= NAME_MAX_LENGTH) {
             for (int i = 0; i < name.length(); i++) {
@@ -87,33 +105,7 @@ public class GameControllerImpl implements GameController, Initializable {
      * @throws OutOfInventoryException 
      */
     public void start(final KeyEvent event) throws IOException, InventoryIsFullException {
-        final FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource("layout/InventoryView.fxml"));
-        final Parent root = loader.load();
-
-        final Player player = new PlayerFactoryImpl().create();
-        player.getInventory().addItem(new PotionImpl(PotionType.POTION_I));
-        player.getInventory().addItem(new PotionImpl(PotionType.POTION_V));
-        player.getInventory().addItem(new PotionImpl(PotionType.POTION_V));
-        player.getInventory().addItem(new PotionImpl(PotionType.POTION_V));
-        player.getInventory().addItem(new ScrollImpl(ScrollType.SCROLL_II));
-
-        player.getInventory().addItem(new RingImpl(RingType.PROTECTION));
-
-        final InventoryController inventoryController = new InventoryControllerImpl(player);
-
-        final InventoryViewImpl controller = loader.getController();
-        controller.init(inventoryController);
-
-        final Stage stage = (Stage) nameTextField.getScene().getWindow();
-        final Scene newScene = new Scene(root, 260, 400);
-        stage.setScene(newScene);
-    }
-
-    /**
-     * 
-     */
-    @Override
-    public void initialize(final URL location, final ResourceBundle resources) {
+        controller.showGame();
     }
 
 }

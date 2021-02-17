@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="50.0" minWidth="100.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rogue.view.InventoryViewImpl">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="50.0" minWidth="100.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rogue.view.inventory.InventoryViewImpl">
    <children>
       <HBox prefHeight="64.0" prefWidth="259.0">
          <children>

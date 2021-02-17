@@ -1,4 +1,4 @@
-package rogue.controller;
+package rogue.controller.inventory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package rogue.view;
+package rogue.view.inventory;
 
 import java.net.URL;
 import java.util.Optional;
@@ -27,7 +27,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import rogue.controller.InventoryController;
+import rogue.controller.inventory.InventoryController;
 import rogue.model.events.EventSubscriber;
 import rogue.model.events.InventoryEvent;
 import rogue.model.items.inventory.Inventory;
@@ -36,6 +36,8 @@ import rogue.model.items.rings.RingImpl;
 import rogue.model.items.rings.RingType;
 import rogue.model.items.scroll.ScrollImpl;
 import rogue.model.items.scroll.ScrollType;
+import rogue.view.ItemImageGenerator;
+import rogue.view.ItemImageGeneratorImpl;
 
 /**
  * Class that controls the player's {@link Inventory} view.
