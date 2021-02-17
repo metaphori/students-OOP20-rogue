@@ -2,13 +2,14 @@ package rogue.model.items.inventory;
 
 import java.util.Optional;
 
+import rogue.model.events.EventPublisher;
 import rogue.model.items.Item;
 
 /**
  * An interface for modeling a game Inventory.
  *
  */
-public interface Inventory {
+public interface Inventory extends EventPublisher {
 
     /**
      * Use the item contained in the index slot.
@@ -65,4 +66,10 @@ public interface Inventory {
      * @return true if item correctly removed, false if slot is empty.
      */
     boolean remove(int index) throws OutOfInventoryException;
+
+    /**
+     * Updates the inventory view.
+     */
+    void updateInventory();
+
 }

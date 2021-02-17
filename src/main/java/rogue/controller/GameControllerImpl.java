@@ -16,10 +16,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import rogue.model.creature.Player;
 import rogue.model.creature.PlayerFactoryImpl;
-import rogue.model.items.armor.ArmorImpl;
-import rogue.model.items.armor.ArmorType;
-import rogue.model.items.food.FoodImpl;
-import rogue.model.items.food.FoodType;
 import rogue.model.items.inventory.InventoryIsFullException;
 import rogue.model.items.potion.PotionImpl;
 import rogue.model.items.potion.PotionType;
@@ -27,8 +23,7 @@ import rogue.model.items.rings.RingImpl;
 import rogue.model.items.rings.RingType;
 import rogue.model.items.scroll.ScrollImpl;
 import rogue.model.items.scroll.ScrollType;
-import rogue.model.items.weapons.BaseWeapon;
-import rogue.model.items.weapons.WeaponType;
+import rogue.view.InventoryViewImpl;
 
 public class GameControllerImpl implements GameController, Initializable {
 
@@ -100,26 +95,11 @@ public class GameControllerImpl implements GameController, Initializable {
         player.getInventory().addItem(new PotionImpl(PotionType.POTION_V));
         player.getInventory().addItem(new PotionImpl(PotionType.POTION_V));
         player.getInventory().addItem(new PotionImpl(PotionType.POTION_V));
-
         player.getInventory().addItem(new ScrollImpl(ScrollType.SCROLL_II));
-        player.getInventory().addItem(new ScrollImpl(ScrollType.SCROLL_II));
-        player.getInventory().addItem(new ScrollImpl(ScrollType.SCROLL_II));
-
-        player.getInventory().addItem(new FoodImpl(FoodType.APPLE));
-        player.getInventory().addItem(new FoodImpl(FoodType.BREAD));
-        player.getInventory().addItem(new FoodImpl(FoodType.CAKE));
-        player.getInventory().addItem(new FoodImpl(FoodType.CHEESE));
-        player.getInventory().addItem(new FoodImpl(FoodType.HAMBURGER));
-        player.getInventory().addItem(new FoodImpl(FoodType.SOUP));
-        player.getInventory().addItem(new FoodImpl(FoodType.STEAK));
 
         player.getInventory().addItem(new RingImpl(RingType.PROTECTION));
-
-        player.getInventory().addItem(new ArmorImpl(ArmorType.LEATHER));
-        player.getInventory().addItem(new BaseWeapon(WeaponType.SPEAR));
-
-        final InventoryControllerImpl controller = loader.getController();
-        controller.initPlayer(player);
+        final InventoryViewImpl controller = loader.getController();
+        controller.init(player);
 
         final Stage stage = (Stage) nameTextField.getScene().getWindow();
         final Scene newScene = new Scene(root, 260, 400);
