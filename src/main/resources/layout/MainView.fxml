@@ -36,7 +36,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="571.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <children>
       <HBox id="HBox" alignment="CENTER_LEFT" prefHeight="635.0" prefWidth="900.0" spacing="5.0">
          <children>
@@ -49,8 +49,7 @@
       </HBox>
     <HBox id="HBox" alignment="CENTER_LEFT" prefHeight="266.0" prefWidth="900.0" spacing="5.0" VBox.vgrow="NEVER">
       <children>
-            <HBox fx:id="status" prefHeight="110.0" prefWidth="529.0" />
-            <HBox fx:id="logger" prefHeight="110.0" prefWidth="363.0" />
+            <HBox fx:id="status" prefHeight="28.0" prefWidth="894.0" />
       </children>
       <padding>
         <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
