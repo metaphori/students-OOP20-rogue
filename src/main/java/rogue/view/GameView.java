@@ -1,6 +1,5 @@
 package rogue.view;
 
-import java.awt.Dimension;
 import java.io.IOException;
 
 import javafx.fxml.FXMLLoader;
@@ -41,15 +40,8 @@ public class GameView {
     }
 
     public GameView() throws IOException {
-        /*
-         * Calculate scene size
-         */
-        final Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        final double width = screenSize.getWidth();
-        final double height = screenSize.getHeight();
-
         final Parent root = FXMLLoader.load(ClassLoader.getSystemResource("layout/MainView.fxml"));
-        this.scene = new Scene(root, width, height);
+        this.scene = new Scene(root);
 
         this.loadStatusBar();
         this.loadInventory();
