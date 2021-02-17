@@ -20,6 +20,9 @@ import rogue.model.items.weapons.WeaponType;
 
 
 public class ItemFactoryImpl implements ItemFactory {
+    private static final int MIN_ITEMS = 5;
+    private static final int MAX_ITEMS = 7;
+    private static final int ITEM_COUNT_DIFF = MAX_ITEMS - MIN_ITEMS;
 
     private static final int ARMOR = 0;
     private static final int FOOD = 1;
@@ -64,4 +67,9 @@ public class ItemFactoryImpl implements ItemFactory {
         return items;
     }
 
+
+    public final List<Item> getItems() {
+        var itemCount = rand.nextInt(ITEM_COUNT_DIFF);
+        return getItems(MIN_ITEMS + itemCount);
+    }
 }
