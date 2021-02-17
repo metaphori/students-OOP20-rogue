@@ -63,7 +63,7 @@ public class MenuViewImpl implements MenuView {
                      * Valid name entered, start game.
                      */
                     insertNameLabel.setText(VALID_NAME);
-                    this.start();
+                    controller.showGame();
                 } else {
                     insertNameLabel.setText(INVALID_NAME_MESSAGE);
                 }
@@ -78,14 +78,6 @@ public class MenuViewImpl implements MenuView {
      */
     public String getPlayerName() {
         return this.playerName;
-    }
-
-    /**
-     * Creates MainView.
-     */
-    public void start() {
-        //TODO
-        controller.showGame();
     }
 
 }

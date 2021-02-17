@@ -23,4 +23,10 @@ public interface MenuView {
      * @throws IOException
      */
     void onNameEnter(KeyEvent event) throws IOException;
+
+    /**
+     * Get the name given by the user.
+     * @return the name entered by the user.
+     */
+    String getPlayerName();
 }
