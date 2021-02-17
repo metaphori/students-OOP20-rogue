@@ -2,19 +2,20 @@ package rogue.model.creature;
 
 public class SpecialImpl implements Special {
 
-    private final boolean hostile;
     private final boolean flying;
     private final boolean greedy;
     private final boolean flyingRandom;
     private final boolean poisonous;
     private final boolean drainLife;
+    private boolean hostile;
+
 
     public SpecialImpl(final boolean hostile, final boolean flying, final boolean greedy,
             final boolean flyingRandom, final boolean poisonous, final boolean drainLife) {
         super();
         this.hostile = hostile;
         this.flying = flying;
-        this.greedy = greedy;      
+        this.greedy = greedy;
         this.flyingRandom = flyingRandom;
         this.poisonous = poisonous;
         this.drainLife = drainLife;
@@ -24,7 +25,7 @@ public class SpecialImpl implements Special {
         super();
         this.hostile = hostile;
         this.flying = false;
-        this.greedy = false;      
+        this.greedy = false;
         this.flyingRandom = false;
         this.poisonous = false;
         this.drainLife = false;
@@ -87,6 +88,14 @@ public class SpecialImpl implements Special {
     @Override
     public boolean isDrainLife() {
         return this.drainLife;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void becomeHostile() {
+        this.hostile = true;
     }
 
 }
