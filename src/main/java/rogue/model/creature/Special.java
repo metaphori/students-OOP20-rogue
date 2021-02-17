@@ -8,39 +8,45 @@ public interface Special {
 
     /**
      * 
-     * @return true if the monster is hostile
+     * @return true if the monster is hostile.
      */
      boolean isHostile();
 
     /**
      * 
-     * @return true if the monster can fly
+     * @return true if the monster can fly.
      */
     boolean isFlyng();
 
     /**
      * 
-     * @return true if the monster attempt to pick up gold
+     * @return true if the monster attempt to pick up gold.
      */
      boolean isGreedy();
 
     /**
      * 
-     * @return true if the monster flies randomly
+     * @return true if the monster flies randomly.
      */
      boolean isFlyingRandom();
 
 
     /**
      * 
-     * @return true if the monster can poison the player
+     * @return true if the monster can poison the player.
      */
      boolean isPoisonous();
 
     /**
      * 
-     * @return true if the monster can steal life from the player
+     * @return true if the monster can steal life from the player.
      */
     boolean isDrainLife();
+
+    /**
+     * 
+     * the monster become hostile.
+     */
+    void becomeHostile();
 
 }
