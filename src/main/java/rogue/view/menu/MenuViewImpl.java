@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 import rogue.controller.menu.MenuController;
 
 /*
@@ -64,6 +65,8 @@ public class MenuViewImpl implements MenuView {
                      */
                     insertNameLabel.setText(VALID_NAME);
                     controller.showGame();
+                    final Stage stage = (Stage) nameTextField.getScene().getWindow();
+                    stage.close();
                 } else {
                     insertNameLabel.setText(INVALID_NAME_MESSAGE);
                 }
