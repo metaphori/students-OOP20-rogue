@@ -15,7 +15,7 @@ import rogue.view.StatusBarView;
 /**
  * The player controller.
  */
-public final class PlayerController extends AbstractEntityController<StatusBarView> implements EventSubscriber, PlayerInputController {
+public final class PlayerController extends AbstractEntityController<StatusBarView> implements EventSubscriber {
 
     private static final Logger LOG = LoggerFactory.getLogger(PlayerController.class);
 
@@ -35,7 +35,6 @@ public final class PlayerController extends AbstractEntityController<StatusBarVi
     }
 
     /**
-     * TODO to refactor...
      * Notifies that the {@link PlayerLife} changed.
      * @param event
      *          the {@link LifeEvent} associated to the life change
@@ -61,11 +60,6 @@ public final class PlayerController extends AbstractEntityController<StatusBarVi
     public void onEquipmentChange(final EquipmentEvent event) {
         LOG.info("Equipment changed");
         // TODO
-    }
-
-    @Override
-    public void notifyCommand(final Command cmd) {
-
     }
 
 }
