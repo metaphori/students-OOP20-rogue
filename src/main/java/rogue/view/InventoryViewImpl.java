@@ -28,8 +28,6 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import rogue.controller.InventoryController;
-import rogue.controller.InventoryControllerImpl;
-import rogue.model.creature.Player;
 import rogue.model.events.EventSubscriber;
 import rogue.model.events.InventoryEvent;
 import rogue.model.items.inventory.Inventory;
@@ -55,7 +53,6 @@ public class InventoryViewImpl implements Initializable, EventSubscriber, Invent
     @FXML  private GridPane ringAndScrollGrid;
 
     private InventoryController controller;
-    private Player player;
     private Optional<Integer> swapping = Optional.empty();
     private final ItemImageGenerator itemI = new ItemImageGeneratorImpl();
 
@@ -68,11 +65,10 @@ public class InventoryViewImpl implements Initializable, EventSubscriber, Invent
 
     /**
      * Pass the player to the controller.
-     * @param player
+     * @param controller of the InventoryView
      */
-    public void init(final Player player) {
-        this.player = player;
-        this.controller = new InventoryControllerImpl(this.player);
+    public void init(final InventoryController controller) {
+        this.controller = controller;
     }
 
     /**
@@ -125,11 +121,11 @@ public class InventoryViewImpl implements Initializable, EventSubscriber, Invent
          * Make scrollContainer.
          */
         final Pane scrollContainer = new StackPane();
-        if (!player.getInventory().getScrollContainer().getActiveScroll().isEmpty()) {
+        if (controller.getActiveScroll() != null) {
             scrollContainer.setBackground(new Background(new BackgroundImage(itemI.getImage(new ScrollImpl(ScrollType.SCROLL_I)),
                     BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
                     BackgroundSize.DEFAULT)));
-            scrollContainer.getChildren().add(createText(String.valueOf(player.getInventory().getScrollContainer().getActiveScrollDuration())));
+            scrollContainer.getChildren().add(createText(String.valueOf(controller.getActiveScrollDuration())));
         } else {
             scrollContainer.setBackground(new Background(emptyB));
         }
@@ -138,7 +134,7 @@ public class InventoryViewImpl implements Initializable, EventSubscriber, Invent
          * Make RingContainer
          */
         final Pane ringContainer = new StackPane();
-        if (!player.getEquipment().getRing().isEmpty()) {
+        if (controller.checkActiveRing()) {
             /*
              * Rings have the same icon.
              */
@@ -160,14 +156,14 @@ public class InventoryViewImpl implements Initializable, EventSubscriber, Invent
     private void gridInsert(final int col, final int row) throws OutOfInventoryException {
         final int invIndex = indexConv(col, row);
         final Pane pane = new StackPane();
-        if (!player.getInventory().getItem(invIndex).isEmpty()) {
+        if (controller.getItem(col, row) != null) {
             /*
              * Check current item slot and update pane image and quantity text.
              */
-            pane.setBackground(new Background(new BackgroundImage(itemI.getImage(player.getInventory().getItem(invIndex).get()),
+            pane.setBackground(new Background(new BackgroundImage(itemI.getImage(controller.getItem(col, row)),
                     BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
                     BackgroundSize.DEFAULT)));
-            pane.getChildren().add(createText(String.valueOf(player.getInventory().getAmount(invIndex))));
+            pane.getChildren().add(createText(String.valueOf(controller.getAmount(col, row))));
         } else {
             /*
              * empty slot.
@@ -250,10 +246,10 @@ public class InventoryViewImpl implements Initializable, EventSubscriber, Invent
             /*
              * Create grid.
              */
-            this.player.getInventory().register(this);
-            this.player.getInventory().getScrollContainer().register(this);
+            controller.getInventory().register(this);
+            controller.getScrollContainer().register(this);
             try {
-                update(new InventoryEvent<>(this.player.getInventory()));
+                update(new InventoryEvent<>(controller.getInventory()));
             } catch (OutOfInventoryException e) {
                 e.printStackTrace();
             }

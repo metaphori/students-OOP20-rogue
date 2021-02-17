@@ -98,8 +98,11 @@ public class GameControllerImpl implements GameController, Initializable {
         player.getInventory().addItem(new ScrollImpl(ScrollType.SCROLL_II));
 
         player.getInventory().addItem(new RingImpl(RingType.PROTECTION));
+
+        final InventoryController inventoryController = new InventoryControllerImpl(player);
+
         final InventoryViewImpl controller = loader.getController();
-        controller.init(player);
+        controller.init(inventoryController);
 
         final Stage stage = (Stage) nameTextField.getScene().getWindow();
         final Scene newScene = new Scene(root, 260, 400);

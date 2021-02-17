@@ -4,7 +4,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import rogue.model.creature.Player;
+import rogue.model.items.Item;
+import rogue.model.items.inventory.Inventory;
 import rogue.model.items.inventory.OutOfInventoryException;
+import rogue.model.items.inventory.ScrollContainer;
+import rogue.model.items.scroll.Scroll;
 
 public class InventoryControllerImpl implements InventoryController {
 
@@ -113,4 +117,84 @@ public class InventoryControllerImpl implements InventoryController {
         LOG.info("No active Ring to remove.");
         return false;
     } 
+
+    /**
+     * Return the item in the slot, null if empty.
+     * @param col of the clicked slot.
+     * @param row of the clicked slot.
+     * @return the item contained in the given index.
+     */
+    public Item getItem(final int col, final int row) {
+        try {
+            if (player.getInventory().getItem(indexConv(col, row)).isPresent()) {
+                return player.getInventory().getItem(indexConv(col, row)).get();
+            } 
+        } catch (OutOfInventoryException e) {
+            LOG.info("Called getItem with invalid Indexes.");
+        }
+        return null;
+    }
+
+    /**
+     * Return the item in the slot, null if empty.
+     * @param col of the clicked slot.
+     * @param row of the clicked slot.
+     * @return the item contained in the given index.
+     */
+    public int getAmount(final int col, final int row) {
+        try {
+            if (player.getInventory().getItem(indexConv(col, row)).isPresent()) {
+                return player.getInventory().getAmount(indexConv(col, row));
+            } 
+        } catch (OutOfInventoryException e) {
+            LOG.info("Called getItem with invalid Indexes.");
+        }
+        return 0;
+    }
+
+    /**
+     * Return the currently active scroll.
+     * @return active scroll, null if empty.
+     */
+    public Scroll getActiveScroll() {
+        if (player.getInventory().getScrollContainer().getActiveScroll().isPresent()) {
+            return player.getInventory().getScrollContainer().getActiveScroll().get();
+        }
+        return null;
+    }
+
+    /**
+     * Get the currently active scroll duration.
+     * @return currently active scroll remaining turns, 0 otherwise.
+     */
+    public int getActiveScrollDuration() {
+        if (player.getInventory().getScrollContainer().getActiveScroll().isPresent()) {
+            return player.getInventory().getScrollContainer().getActiveScrollDuration();
+        }
+        return 0;
+    }
+
+    /**
+     * Check if there's an active ring.
+     * @return true if there's an active ring, false otherwise.
+     */
+    public boolean checkActiveRing() {
+        return player.getEquipment().getRing().isPresent();
+    }
+
+    /**
+     * Get the player's inventory.
+     * @return the player's inventory.
+     */
+    public Inventory getInventory() {
+        return player.getInventory();
+    }
+
+    /**
+     * Get the player's scroll container.
+     * @return the player's scroll container
+     */
+    public ScrollContainer getScrollContainer() {
+        return player.getInventory().getScrollContainer();
+    }
 }

@@ -1,6 +1,6 @@
 package rogue.view;
 
-import rogue.model.creature.Player;
+import rogue.controller.InventoryController;
 import rogue.model.events.InventoryEvent;
 import rogue.model.items.inventory.Inventory;
 import rogue.model.items.inventory.OutOfInventoryException;
@@ -19,9 +19,9 @@ public interface InventoryView {
     void update(InventoryEvent<Inventory> event) throws OutOfInventoryException;
 
     /**
-     * Passes the player to the InventoryView.
-     * @param player that owns the inventory.
+     * Passes the controller to the InventoryView.
+     * @param controller of the inventoryView
      */
-    void init(Player player);
+    void init(InventoryController controller);
 
 }
