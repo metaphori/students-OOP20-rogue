@@ -83,7 +83,7 @@ public class InventoryControllerImpl implements InventoryController {
     public boolean onMiddleClick(final int col, final int row, final int swapping) {
         try {
             if (!player.getInventory().swap(swapping, indexConv(col, row))) {
-                LOG.info("Cannot remove item: " + player.getInventory().getItem(indexConv(col, row)).get().toString());
+                LOG.info("Cannot swap items");
                 return false;
             }
             LOG.info("Swap correctly executed.");
@@ -98,11 +98,19 @@ public class InventoryControllerImpl implements InventoryController {
      * @return true if the ring was correctly removed, false otherwise.
      */
     public boolean onRingContainer() {
+        if (player.getEquipment().getRing().isPresent()) {
+            /*
+             * Remove the ring and update the inventory.
+             */
+            player.getEquipment().getRing().get().stopUsing(player);
+            player.getInventory().updateInventory();
+            LOG.info("Ring correctly removed.");
+            return true;
+        }
         /*
-         * Remove the ring and update the inventory.
+         * No active ring nothing to update.
          */
-        player.getEquipment().getRing().get().stopUsing(player);
-        player.getInventory().updateInventory();
-        return true;
+        LOG.info("No active Ring to remove.");
+        return false;
     } 
 }

@@ -39,7 +39,10 @@ import rogue.model.items.rings.RingType;
 import rogue.model.items.scroll.ScrollImpl;
 import rogue.model.items.scroll.ScrollType;
 
-public class InventoryViewImpl implements Initializable, EventSubscriber {
+/**
+ * Class that controls the player's {@link Inventory} view.
+ */
+public class InventoryViewImpl implements Initializable, EventSubscriber, InventoryView {
 
     private static final int NUM_COLS = 4;
     private static final int NUM_ROWS = 5;
@@ -57,7 +60,7 @@ public class InventoryViewImpl implements Initializable, EventSubscriber {
     private final ItemImageGenerator itemI = new ItemImageGeneratorImpl();
 
     /*
-     * Background images for InventoryView
+     * Background images for empty slot.
      */
     private final BackgroundImage emptyB = new BackgroundImage(new Image(ClassLoader.getSystemResource("images/emptyIcon.png").toExternalForm(), 32, 32, false, true),
             BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
@@ -78,7 +81,7 @@ public class InventoryViewImpl implements Initializable, EventSubscriber {
      * @param row
      * @return index for the model inventory.
      */
-    public int indexConv(final int col, final int row) {
+    private int indexConv(final int col, final int row) {
         return row * 4 + col + 1;
     }
 
@@ -87,7 +90,7 @@ public class InventoryViewImpl implements Initializable, EventSubscriber {
      * @param string to put in the text
      * @return the wanted text.
      */
-    public Text createText(final String string) {
+    private Text createText(final String string) {
         final Text ret = new Text();
         ret.setFont(Font.font(FONT, FontWeight.BOLD, FontPosture.REGULAR, QUANTITY_FONT_SIZE));
         ret.setFill(Color.ORANGE);
@@ -114,7 +117,7 @@ public class InventoryViewImpl implements Initializable, EventSubscriber {
          */
         for (int i = 0; i < NUM_COLS; i++) {
             for (int j = 0; j < NUM_ROWS; j++) {
-                gridInsert(i, j, player);
+                gridInsert(i, j);
             }
         }
         swapping = Optional.empty();
@@ -142,19 +145,19 @@ public class InventoryViewImpl implements Initializable, EventSubscriber {
             ringContainer.setBackground(new Background(new BackgroundImage(itemI.getImage(new RingImpl(RingType.PROTECTION)),
                     BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
                     BackgroundSize.DEFAULT)));
-            ringContainer.setOnMouseClicked(e -> {
-                if (e.getButton().equals(MouseButton.PRIMARY)) {
-                    controller.onRingContainer();
-                }
-            });
         } else {
             ringContainer.setBackground(new Background(emptyB));
         }
+        ringContainer.setOnMouseClicked(e -> {
+            if (e.getButton().equals(MouseButton.PRIMARY)) {
+                controller.onRingContainer();
+            }
+        });
         ringAndScrollGrid.add(ringContainer, 0, 0);
 
     }
 
-    private void gridInsert(final int col, final int row, final Player player) throws OutOfInventoryException {
+    private void gridInsert(final int col, final int row) throws OutOfInventoryException {
         final int invIndex = indexConv(col, row);
         final Pane pane = new StackPane();
         if (!player.getInventory().getItem(invIndex).isEmpty()) {
@@ -217,7 +220,7 @@ public class InventoryViewImpl implements Initializable, EventSubscriber {
     }
 
     /**
-     * 
+     * Method that initializes the InventoryView.
      */
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
