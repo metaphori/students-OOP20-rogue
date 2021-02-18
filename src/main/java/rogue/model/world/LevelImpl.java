@@ -177,14 +177,14 @@ public class LevelImpl implements Level {
                     combat.attack((Creature) e, (Creature) relativeEntity);
                 } else if (e instanceof Player && relativeEntity instanceof Item) {
                     try {
+                        // pick up item
                         ((Player) e).getInventory().addItem((Item) relativeEntity);
                         removeEntity.accept(relativeEntity);
                         placeEntity.accept(e, nextTile);
                     } catch (InventoryIsFullException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
+                        // do nothing
                     }
-                } else if (relativeEntity == null) {
+                } else if (relativeEntity == null && canPlaceEntity.test(nextTile)) {
                     // move entity if tile is empty
                     placeEntity.accept(e, nextTile);
                 }
