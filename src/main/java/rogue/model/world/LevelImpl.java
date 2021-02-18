@@ -153,9 +153,10 @@ public class LevelImpl implements Level {
         entityMap.forEach((e, t) -> {
             // interact
             if (e instanceof Creature) {
+                // TODO monster movement
                 Tile nextTile = e instanceof Player
                     ? getRelativeTile.apply(e, d)
-                    : getRelativeTile.apply(e, e.getDirection(nearestDirectionToPlayer.apply(e)));
+                    : getRelativeTile.apply(e, /*e.getDirection(nearestDirectionToPlayer.apply(e))*/ Direction.NONE);
 
                 if (nextTile.getMaterial() == Material.DOOR) {
                     nextLevel.set(true);
