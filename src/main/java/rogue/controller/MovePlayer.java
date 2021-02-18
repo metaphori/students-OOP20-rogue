@@ -22,11 +22,11 @@ public class MovePlayer {
                 break;
             case UP:
             case K:
-                direction = Direction.EAST;
+                direction = Direction.NORTH;
                 break;
             case DOWN:
             case J:
-                direction = Direction.EAST;
+                direction = Direction.SOUTH;
                 break;
             default:
                 break;
