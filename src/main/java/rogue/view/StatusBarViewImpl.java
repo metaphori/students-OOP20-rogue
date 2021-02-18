@@ -7,6 +7,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import rogue.model.items.armor.Armor;
+import rogue.model.items.weapons.Weapon;
 
 /**
  * A simple class which controls the status bar where are displayed 
@@ -26,45 +28,54 @@ public final class StatusBarViewImpl implements StatusBarView {
         }
     }
 
-    private void updateLabel(final String selector, final int value) {
+    private void updateLabel(final String selector, final String value) {
         final Label lbl = (Label) this.scene.lookup(selector);
-        System.out.println(lbl);
-        lbl.setText(Integer.toString(value));
+        lbl.setText(value);
     }
 
     @Override
-    public void setMaxHealthPoints(final int max) {
-        this.updateLabel("#maxHp", max);
+    public void setMaxHealthPointsLabel(final int max) {
+        this.updateLabel("#maxHp", Integer.toString(max));
     }
 
     @Override
-    public void setCurrentHealthPoints(final int healthPoints) {
-        this.updateLabel("#hp", healthPoints);
+    public void setCurrentHealthPointsLabel(final int healthPoints) {
+        this.updateLabel("#hp", Integer.toString(healthPoints));
     }
 
     @Override
-    public void setCoins(final int coins) {
-        this.updateLabel("#gold", coins);
+    public void setCoinsLabel(final int coins) {
+        this.updateLabel("#gold", Integer.toString(coins));
     }
 
     @Override
-    public void setLevel(final int level) {
-        this.updateLabel("#level", level);
+    public void setLevelLabel(final int level) {
+        this.updateLabel("#level", Integer.toString(level));
     }
 
     @Override
-    public void setStrength(final int strength) {
-        this.updateLabel("#strength", strength);
+    public void setStrengthLabel(final int strength) {
+        this.updateLabel("#strength", Integer.toString(strength));
     }
 
     @Override
-    public void setExperience(final int experience) {
-        this.updateLabel("#experience", experience);
+    public void setExperienceLabel(final int experience) {
+        this.updateLabel("#experience", Integer.toString(experience));
     }
 
     @Override
     public Node getNode() {
         return this.root;
+    }
+
+    @Override
+    public void setWeaponLabel(final Weapon weapon) {
+        this.updateLabel("#weapon", weapon.toString());
+    }
+
+    @Override
+    public void setArmorLable(final Armor armor) {
+        this.updateLabel("#armor", armor.toString());
     }
 
 }
