@@ -17,8 +17,8 @@ import rogue.model.world.Tile;
 public class WorldScene extends Stage {
     private static final int SCALE = 25;
     private final Pane root = new Pane();
-    final Game game;
-    final Canvas c;
+    private final Game game;
+    private final Canvas c;
 
     public WorldScene(final Game game) {
         super();
@@ -29,7 +29,7 @@ public class WorldScene extends Stage {
         setScene(new Scene(initSceneUI(game), game.getWidth() * SCALE, game.getHeight() * SCALE));
     }
 
-    public Node getNode() {
+    public final Node getNode() {
         return this.root;
     }
 
@@ -39,7 +39,7 @@ public class WorldScene extends Stage {
         return root;
     }
 
-    public void drawMap() {
+    public final void drawMap() {
         final GraphicsContext gc = c.getGraphicsContext2D();
 
         // level
