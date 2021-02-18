@@ -2,6 +2,7 @@ package rogue.model.creature;
 
 import javafx.util.Pair;
 import rogue.model.items.potion.PotionImpl;
+import rogue.model.world.Direction;
 
 /**
  * An interface modeling the enemy/monster.
@@ -63,4 +64,14 @@ public interface Monster extends Creature<MonsterLife> {
      * @return or not the monster's item
      */
     PotionImpl dropItem();
+
+    /**
+     * 
+     * @param playerDirection
+     *          the direction of where the player is
+     * @param monster
+     *         who did the move
+     * @return the direction where the monster must move
+     */
+    Direction monsterMove(Direction playerDirection, Monster monster);
 }
