@@ -26,6 +26,7 @@ import rogue.model.creature.CombatImpl;
 import rogue.model.creature.Creature;
 import rogue.model.creature.Player;
 import rogue.model.items.Item;
+import rogue.model.items.inventory.InventoryIsFullException;
 
 public class LevelImpl implements Level {
     private static final int WIDTH = 32;
@@ -69,7 +70,8 @@ public class LevelImpl implements Level {
     };
 
     // useless
-    //private final BiFunction<Entity, Direction, Entity> getRelativeEntity = (e, d) -> entityMap.inverse().get(getRelativeTile.apply(e, d));
+    // private final BiFunction<Entity, Direction, Entity> getRelativeEntity = (e,
+    // d) -> entityMap.inverse().get(getRelativeTile.apply(e, d));
 
     // place entity e in a random tile
     private final Consumer<Entity> spawn = e -> placeEntity.accept(e, getRandomFreeTile.get());
@@ -114,12 +116,12 @@ public class LevelImpl implements Level {
         int south = entityMap.get(player).getY() - entityMap.get(e).getY();
         int north = entityMap.get(e).getY() - entityMap.get(player).getY();
 
-        Pair<Direction, Integer> xDirection = east > 0 ? new Pair<>(Direction.EAST, east) : new Pair<>(Direction.WEST, west);
-        Pair<Direction, Integer> yDirection = south > 0 ? new Pair<>(Direction.SOUTH, south) : new Pair<>(Direction.NORTH, north);
+        Pair<Direction, Integer> xDirection = east > 0 ? new Pair<>(Direction.EAST, east)
+                : new Pair<>(Direction.WEST, west);
+        Pair<Direction, Integer> yDirection = south > 0 ? new Pair<>(Direction.SOUTH, south)
+                : new Pair<>(Direction.NORTH, north);
 
-        return xDirection.getValue() > yDirection.getValue()
-            ? xDirection.getKey()
-            : yDirection.getKey();
+        return xDirection.getValue() > yDirection.getValue() ? xDirection.getKey() : yDirection.getKey();
     };
 
     public final int getWidth() {
@@ -154,9 +156,9 @@ public class LevelImpl implements Level {
             // interact
             if (e instanceof Creature) {
                 // TODO monster movement
-                Tile nextTile = e instanceof Player
-                    ? getRelativeTile.apply(e, d)
-                    : getRelativeTile.apply(e, /*e.getDirection(nearestDirectionToPlayer.apply(e))*/ Direction.NONE);
+                Tile nextTile = e instanceof Player ? getRelativeTile.apply(e, d)
+                        : getRelativeTile.apply(e,
+                                /* e.getDirection(nearestDirectionToPlayer.apply(e)) */ Direction.NONE);
 
                 if (nextTile.getMaterial() == Material.DOOR) {
                     nextLevel.set(true);
@@ -167,7 +169,12 @@ public class LevelImpl implements Level {
                 if (relativeEntity instanceof Creature) {
                     combat.attack((Creature) e, (Creature) relativeEntity);
                 } else if (e instanceof Player && relativeEntity instanceof Item) {
-                    ((Player) e).getInventory().addItem((Item) relativeEntity);
+                    try {
+                        ((Player) e).getInventory().addItem((Item) relativeEntity);
+                    } catch (InventoryIsFullException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
                 } else if (relativeEntity == null) {
                     // move entity if tile is empty
                     placeEntity.accept(e, nextTile);
