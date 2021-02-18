@@ -74,7 +74,7 @@ public final class StatusBarViewImpl implements StatusBarView {
     }
 
     @Override
-    public void setArmorLable(final Armor armor) {
+    public void setArmorLabel(final Armor armor) {
         this.updateLabel("#armor", armor.toString());
     }
 

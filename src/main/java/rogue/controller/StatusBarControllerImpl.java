@@ -61,7 +61,7 @@ public final class StatusBarControllerImpl extends AbstractPanelController<Statu
     @Subscribe
     public void onEquipmentChange(final EquipmentEvent event) {
         LOG.info("Equipment changed");
-        this.getView().setArmorLable(event.getEquipment().getArmor());
+        this.getView().setArmorLabel(event.getEquipment().getArmor());
         this.getView().setWeaponLabel(event.getEquipment().getWeapon());
     }
 

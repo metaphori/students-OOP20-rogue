@@ -62,6 +62,6 @@ public interface StatusBarView extends View {
      * @param armor
      *          the armor currently in use
      */
-    void setArmorLable(Armor armor);
+    void setArmorLabel(Armor armor);
 
 }

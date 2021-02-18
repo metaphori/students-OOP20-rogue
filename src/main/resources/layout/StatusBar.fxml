@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="79.0" prefWidth="933.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="73.0" prefWidth="933.0" style="-fx-background-color: #808080;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="713.0" minWidth="10.0" prefWidth="552.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="599.0" minWidth="10.0" prefWidth="381.0" />
@@ -37,7 +37,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                <children>
-                  <Label fx:id="level" alignment="CENTER" prefHeight="22.0" prefWidth="81.0" text="0" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" HBox.hgrow="ALWAYS">
+                  <Label fx:id="level" alignment="CENTER" prefHeight="22.0" prefWidth="81.0" text="0" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -52,7 +52,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                <children>
-                  <Label fx:id="gold" alignment="CENTER" prefHeight="25.0" prefWidth="145.0" text="0" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" HBox.hgrow="ALWAYS">
+                  <Label fx:id="gold" alignment="CENTER" prefHeight="25.0" prefWidth="145.0" text="0" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -67,7 +67,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                <children>
-                  <Label fx:id="strength" alignment="CENTER" prefHeight="22.0" prefWidth="208.0" text="0" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" HBox.hgrow="ALWAYS">
+                  <Label fx:id="strength" alignment="CENTER" prefHeight="22.0" prefWidth="208.0" text="0" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -82,7 +82,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                <children>
-                  <Label fx:id="experience" alignment="CENTER" prefHeight="25.0" prefWidth="183.0" text="0" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" HBox.hgrow="ALWAYS">
+                  <Label fx:id="experience" alignment="CENTER" prefHeight="25.0" prefWidth="183.0" text="0" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -97,7 +97,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                <children>
-                  <Label fx:id="hp" alignment="CENTER" prefHeight="25.0" prefWidth="43.0" text="0" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" HBox.hgrow="ALWAYS">
+                  <Label fx:id="hp" alignment="CENTER" prefHeight="25.0" prefWidth="43.0" text="0" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -105,12 +105,12 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="gold121" alignment="CENTER" prefHeight="25.0" prefWidth="43.0" text="/" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
+                  <Label fx:id="gold121" alignment="CENTER" prefHeight="25.0" prefWidth="43.0" text="/" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="maxHp" alignment="CENTER" prefHeight="25.0" prefWidth="43.0" text="0" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
+                  <Label fx:id="maxHp" alignment="CENTER" prefHeight="25.0" prefWidth="43.0" text="0" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -119,7 +119,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="20.0" prefWidth="105.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                <children>
-                  <Text fill="#c37a28" strokeType="OUTSIDE" strokeWidth="0.0" text="Level" textAlignment="CENTER" wrappingWidth="45.5439453125">
+                  <Text fill="#ffbc40" strokeType="OUTSIDE" strokeWidth="0.0" text="Level" textAlignment="CENTER" wrappingWidth="45.5439453125">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -128,7 +128,7 @@
             </HBox>
             <HBox alignment="CENTER" GridPane.columnIndex="1">
                <children>
-                  <Text fill="#c37a28" strokeType="OUTSIDE" strokeWidth="0.0" text="Gold" textAlignment="CENTER" wrappingWidth="53.5439453125">
+                  <Text fill="#ffbc40" strokeType="OUTSIDE" strokeWidth="0.0" text="Gold" textAlignment="CENTER" wrappingWidth="53.5439453125">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -137,7 +137,7 @@
             </HBox>
             <HBox alignment="CENTER" GridPane.columnIndex="2">
                <children>
-                  <Text fill="#c37a28" strokeType="OUTSIDE" strokeWidth="0.0" text="Hp" textAlignment="CENTER" wrappingWidth="39.5439453125">
+                  <Text fill="#ffbc40" strokeType="OUTSIDE" strokeWidth="0.0" text="Hp" textAlignment="CENTER" wrappingWidth="39.5439453125">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -146,7 +146,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="20.0" prefWidth="0.0" GridPane.columnIndex="3">
                <children>
-                  <Text fx:id="strength" fill="#c37a28" strokeType="OUTSIDE" strokeWidth="0.0" text="Strength" textAlignment="CENTER" wrappingWidth="94.5439453125">
+                  <Text fx:id="strength" fill="#ffbc40" strokeType="OUTSIDE" strokeWidth="0.0" text="Strength" textAlignment="CENTER" wrappingWidth="94.5439453125">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -155,7 +155,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="20.0" prefWidth="0.0" GridPane.columnIndex="4">
                <children>
-                  <Text fx:id="strength1" fill="#c37a28" strokeType="OUTSIDE" strokeWidth="0.0" text="Experience" textAlignment="CENTER" wrappingWidth="104.5439453125">
+                  <Text fx:id="strength1" fill="#ffbc40" strokeType="OUTSIDE" strokeWidth="0.0" text="Experience" textAlignment="CENTER" wrappingWidth="104.5439453125">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -174,7 +174,7 @@
          <children>
             <HBox prefHeight="33.0" prefWidth="381.0">
                <children>
-                  <Label prefHeight="50.0" prefWidth="75.0" text="Weapon: " textFill="#c37a28">
+                  <Label prefHeight="50.0" prefWidth="75.0" text="Weapon: " textFill="#ffbc40">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -182,19 +182,19 @@
                         <Insets />
                      </HBox.margin>
                   </Label>
-                  <Label fx:id="weapon" prefHeight="43.0" prefWidth="302.0" text="nope">
+                  <Label fx:id="weapon" prefHeight="43.0" prefWidth="302.0" text="nope" textFill="#fffffff2">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold Italic" size="14.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
             <HBox prefHeight="35.0" prefWidth="381.0">
                <children>
-                  <Label prefHeight="34.0" text="Armor: " textFill="#c37a28">
+                  <Label prefHeight="34.0" text="Armor: " textFill="#ffbc40">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -202,12 +202,12 @@
                         <Insets />
                      </HBox.margin>
                   </Label>
-                  <Label fx:id="armor" prefHeight="34.0" text="nope">
+                  <Label fx:id="armor" prefHeight="34.0" prefWidth="314.0" text="nope" textFill="#fffffff2">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold Italic" size="14.0" />
                      </font>
                   </Label>
                </children>
