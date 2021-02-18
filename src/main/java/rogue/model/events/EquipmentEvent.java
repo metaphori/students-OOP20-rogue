@@ -5,7 +5,7 @@ import rogue.model.items.Equipment;
 /**
  * A class representing an equipment change event.
  */
-public class EquipmentEvent implements EntityEvent {
+public final class EquipmentEvent implements EntityEvent {
 
     private final Equipment equipment;
 
@@ -23,6 +23,11 @@ public class EquipmentEvent implements EntityEvent {
      */
     public Equipment getEquipment() {
         return this.equipment;
+    }
+
+    @Override
+    public String toString() {
+        return this.equipment.toString();
     }
 
 }
