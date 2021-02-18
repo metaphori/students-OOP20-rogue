@@ -1,7 +1,6 @@
 package rogue.model.creature;
 
 import rogue.model.events.AbstractEventPublisher;
-import rogue.model.events.LifeEvent;
 
 /**
  * A generic implementation for a creature {@link Life}.
@@ -39,7 +38,6 @@ public abstract class AbstractLife extends AbstractEventPublisher implements Lif
     @Override
     public void hurt(final int damage) {
         this.healthPoints = checkNotNegative(this.healthPoints - damage);
-        this.post(new LifeEvent<>(this));
     }
 
     /**
@@ -57,7 +55,6 @@ public abstract class AbstractLife extends AbstractEventPublisher implements Lif
      */
     protected void setHealthPoints(final int healthPoints) {
         this.healthPoints = healthPoints;
-        this.post(new LifeEvent<>(this));
     }
 
     /**
@@ -75,7 +72,6 @@ public abstract class AbstractLife extends AbstractEventPublisher implements Lif
      */
     protected void setExperience(final int experience) {
         this.experience = experience;
-        this.post(new LifeEvent<>(this));
     }
 
     /**
@@ -84,6 +80,14 @@ public abstract class AbstractLife extends AbstractEventPublisher implements Lif
     @Override
     public boolean isDead() {
         return this.healthPoints == 0;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return "AbstractLife [healthPoints=" + healthPoints + ", experience=" + experience + "]";
     }
 
 }

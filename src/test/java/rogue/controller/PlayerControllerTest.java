@@ -1,57 +1,47 @@
 package rogue.controller;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
 
 import rogue.model.creature.Player;
 import rogue.model.creature.PlayerFactoryImpl;
-import rogue.model.items.armor.ArmorImpl;
-import rogue.model.items.armor.ArmorType;
-import rogue.model.items.rings.Ring;
-import rogue.model.items.rings.RingImpl;
-import rogue.model.items.rings.RingType;
-import rogue.model.items.weapons.BaseWeapon;
-import rogue.model.items.weapons.IncreaseAccuracy;
-import rogue.model.items.weapons.WeaponType;
-import rogue.view.PlayerView;
 
 public class PlayerControllerTest {
 
     private Player player;
+    private StatusBarControllerImpl controller;
 
     @org.junit.Before
     public void init() {
-        // with default configs
         player = new PlayerFactoryImpl().create();
-        new PlayerController(new PlayerView() { }, player);
+        controller = new StatusBarControllerImpl(null, player);
     }
 
-    @org.junit.Test
-    public void testChangeLife() {
-        final int val = 10;
-        final int hp = player.getLife().getHealthPoints();
-        player.getLife().hurt(val);
-        assertEquals(hp - val, player.getLife().getHealthPoints());
-        player.getLife().powerUp(val);
-        assertEquals(hp, player.getLife().getHealthPoints());
-    }
+    @Test
+    public void test() {
+        player.getLife().hurt(10);
+        assertEquals(2, player.getLife().getHealthPoints());
+        player.getLife().powerUp(10);
+        assertEquals(12, player.getLife().getHealthPoints());
+        player.getLife().setMaxHealthPoints(50);
+        assertEquals(50, player.getLife().getMaxHealthPoints());
 
-    @org.junit.Test
-    public void testChangeEquipment() {
-        final Ring ring = new RingImpl(RingType.DEXTERITY);
-        player.getEquipment().setWeapon(new BaseWeapon(WeaponType.SHURIKEN));
-        player.getEquipment().setArmor(new ArmorImpl(ArmorType.SPLINT_MAIL));
-        assertTrue(ring.use(player));
-        assertEquals(new IncreaseAccuracy(new BaseWeapon(WeaponType.SHURIKEN)), player.getEquipment().getWeapon());
-        assertEquals(new ArmorImpl(ArmorType.SPLINT_MAIL), player.getEquipment().getArmor());
-        player.getEquipment().setWeapon(new BaseWeapon(WeaponType.SHORT_BOW));
-        player.getEquipment().setWeapon(new BaseWeapon(WeaponType.DAGGER));
-        assertEquals(new IncreaseAccuracy(new BaseWeapon(WeaponType.DAGGER)), player.getEquipment().getWeapon());
-        player.getEquipment().setArmor(new ArmorImpl(ArmorType.PLATE_MAIL));
-        assertEquals(new ArmorImpl(ArmorType.PLATE_MAIL), player.getEquipment().getArmor());
-        ring.stopUsing(player);
-        assertEquals(new ArmorImpl(ArmorType.PLATE_MAIL), player.getEquipment().getArmor());
-        assertEquals(new BaseWeapon(WeaponType.DAGGER), player.getEquipment().getWeapon());
+        player.getLife().addStrength(2);
+        assertEquals(18, player.getLife().getStrength());
+
+        player.getLife().addCoins(5);
+        assertEquals(5, player.getLife().getCoins());
+        player.getLife().subCoins(5);
+        assertEquals(0, player.getLife().getCoins());
+
+        assertEquals(0, player.getLife().getExperience());
+        player.getLife().increaseExperience(10);
+        assertEquals(10, player.getLife().getExperience());
+        assertEquals(2, player.getLife().getLevel());
+        player.getLife().increaseExperience(11_990);
+        assertEquals(12_000, player.getLife().getExperience());
+        assertEquals(20, player.getLife().getLevel());
     }
 
 }

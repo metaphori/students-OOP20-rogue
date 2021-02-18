@@ -8,6 +8,8 @@ import rogue.model.events.LifeEvent;
  */
 public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
 
+    private final LevelIncreaseStrategy levelStrategy;
+
     private static final int MAX_FOOD = 100; // fixed
     private int maxHealthPoints; // changes dynamically during the game
     private int strength;
@@ -15,9 +17,10 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
     private int level;
     private int coins;
 
-    private PlayerLifeImpl(final int healthPoints, final int maxHealthPoints, final int experience, 
-            final int strength, final int food, final int level, final int coins) {
+    private PlayerLifeImpl(final LevelIncreaseStrategy levelStrategy, final int healthPoints, final int maxHealthPoints,
+            final int experience, final int strength, final int food, final int level, final int coins) {
         super(healthPoints, experience);
+        this.levelStrategy = levelStrategy;
         this.maxHealthPoints = maxHealthPoints;
         this.strength = strength;
         this.leftFood = food;
@@ -30,14 +33,26 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
     }
 
     @Override
-    public void increaseExperience(final int increment) {
-        this.setExperience(this.getExperience() + increment);
+    public void hurt(final int damage) {
+        super.hurt(damage);
+        this.post(new LifeEvent<>(this));
     }
 
     @Override
     public void powerUp(final int increment) {
         final var newHp = this.getHealthPoints() + increment;
         this.setHealthPoints(this.checkNotExceeding(newHp, this.maxHealthPoints));
+        this.post(new LifeEvent<>(this));
+    }
+
+    @Override
+    public void increaseExperience(final int increment) {
+        this.setExperience(this.getExperience() + increment);
+        final var newLevel = this.levelStrategy.level(this.getExperience());
+        if (newLevel.isPresent()) {
+            this.setLevel(newLevel.get());
+        }
+        this.post(new LifeEvent<>(this));
     }
 
     @Override
@@ -98,10 +113,8 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
         return this.coins;
     }
 
-    @Override
-    public void increaseLevel(final int amount) {
-        this.level = this.level + amount;
-        this.post(new LifeEvent<>(this));
+    private void setLevel(final int level) {
+        this.level = level;
     }
 
     @Override
@@ -115,6 +128,7 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
             throw new IllegalStateException("The current value of hp cannot be greater than the maximum one!");
         }
         this.maxHealthPoints = maxHealthPoints;
+        this.post(new LifeEvent<>(this));
     }
 
     @Override
@@ -125,6 +139,13 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
     @Override
     public int getMaxFood() {
         return MAX_FOOD;
+    }
+
+    @Override
+    public String toString() {
+        return "PlayerLifeImpl [maxHealthPoints=" + maxHealthPoints + ", strength="
+        + strength + ", leftFood=" + leftFood + ", level=" + level + ", coins=" + coins + ", toString()="
+        + super.toString() + "]";
     }
 
     public static class Builder {
@@ -140,6 +161,7 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
         private static final int COINS = 0;
         private static final int LEVEL = 0;
 
+        private LevelIncreaseStrategy levelStrategy = new StandardLevelIncreaseStrategy();
         private int maxHealthPoints = MAX_HEALTH_POINTS;
         private int healthPoints = HEALTH_POINTS;
         private int food = FOOD;
@@ -148,6 +170,17 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
         private int level = LEVEL;
         private int coins = COINS;
         private boolean consumed;
+
+        /**
+         * Initialize the food.
+         * @param levelStrategy
+         *      the {@link LevelIncreaseStrategy} to use
+         * @return this Builder for chaining
+         */
+        public Builder initLevelStrategy(final LevelIncreaseStrategy levelStrategy) {
+            this.levelStrategy = levelStrategy;
+            return this;
+        }
 
         /**
          * Initialize the food.
@@ -234,7 +267,7 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
                 throw new IllegalStateException("The builder can only be used once");
             }
             consumed = true;
-            return new PlayerLifeImpl(healthPoints, maxHealthPoints, experience, strength, food, level, coins);
+            return new PlayerLifeImpl(levelStrategy, healthPoints, maxHealthPoints, experience, strength, food, level, coins);
         }
     }
 

@@ -9,7 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 
 /**
- * A simple class which controls the status bar.
+ * A simple class which controls the status bar where are displayed 
+ * the player's life statistics.
  */
 public final class StatusBarViewImpl implements StatusBarView {
 

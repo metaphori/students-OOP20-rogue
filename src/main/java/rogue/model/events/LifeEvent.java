@@ -7,7 +7,7 @@ import rogue.model.creature.Life;
  *
  * @param <L> the type of life affected by the change
  */
-public class LifeEvent<L extends Life> implements EntityEvent {
+public final class LifeEvent<L extends Life> implements EntityEvent {
 
     private final L life;
 
@@ -26,6 +26,11 @@ public class LifeEvent<L extends Life> implements EntityEvent {
      */
     public L getLife() {
         return this.life;
+    }
+
+    @Override
+    public String toString() {
+        return life.toString();
     }
 
 }
