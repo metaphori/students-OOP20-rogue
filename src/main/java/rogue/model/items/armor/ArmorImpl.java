@@ -43,7 +43,7 @@ public final class ArmorImpl implements Armor {
 
     @Override
     public void increaseAC(final int value) {
-        this.ac += value;
+        this.ac = this.ac + value;
     }
 
     @Override
@@ -68,7 +68,7 @@ public final class ArmorImpl implements Armor {
 
     @Override
     public String toString() {
-        return this.armor.getName() + " (" + armor.getAC() + ")";
+        return this.armor.getName() + " (" + this.ac + ")";
     }
 
 }
