@@ -1,9 +1,5 @@
 package rogue.model.world;
 
-enum Direction {
-    NORTH, EAST, SOUTH, WEST
-}
-
 class Coordinates {
     private int x, y;
 
@@ -23,21 +19,21 @@ class Coordinates {
         this.y = y;
     }
 
-    public final Coordinates shift(final Direction direction, final int howMuch) {
+    public final Coordinates shift(final Direction direction) {
         Coordinates c = new Coordinates(this.x, this.y);
 
         switch (direction) {
             case NORTH:
-                c.y -= howMuch;
+                c.y--;
                 break;
             case EAST:
-                c.x += howMuch;
+                c.x++;
                 break;
             case SOUTH:
-                c.y += howMuch;
+                c.y++;
                 break;
             case WEST:
-                c.y -= howMuch;
+                c.y--;
                 break;
             default:
                 break;

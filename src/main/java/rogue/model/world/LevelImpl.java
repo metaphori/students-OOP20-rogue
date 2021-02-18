@@ -3,8 +3,14 @@ package rogue.model.world;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -13,49 +19,105 @@ import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Table;
 
+import javafx.util.Pair;
 import rogue.model.Entity;
+import rogue.model.creature.Creature;
+import rogue.model.creature.Player;
+import rogue.model.items.Item;
 
-class CannotMoveException extends Exception {
-    private static final long serialVersionUID = 1484670650603806971L;
-
-    CannotMoveException() {
-    }
-
-    CannotMoveException(final String message) {
-        super(message);
-    }
-}
-
-class CannotRemoveException extends Exception {
-    private static final long serialVersionUID = -5155914335574994788L;
-
-    CannotRemoveException() {
-    }
-
-    CannotRemoveException(final String message) {
-        super(message);
-    }
-}
-
-class CannotPlaceException extends Exception {
-    private static final long serialVersionUID = 8107685734511320286L;
-
-    CannotPlaceException() {
-    }
-
-    CannotPlaceException(final String message) {
-        super(message);
-    }
-}
-
-class LevelImpl implements Level {
+public class LevelImpl implements Level {
     private static final int WIDTH = 32;
     private static final int HEIGHT = 32;
     private static final int VINE_PROBABILITY = 5;
 
     private final Random random = new Random();
     private final Table<Integer, Integer, Tile> tileMap = HashBasedTable.create();
+    private Entity player = null;
     private final BiMap<Entity, Tile> entityMap = HashBiMap.create();
+
+    // freeTiles cache
+    private final List<Tile> freeTiles = new ArrayList<>();
+
+    // get a random tile from the freeTiles list
+    private final Supplier<Tile> getRandomFreeTile = () -> freeTiles.get(random.nextInt(freeTiles.size()));
+
+    // can place an entity in tile t?
+    private final Predicate<Tile> canPlaceEntity = t -> !t.isWall() && !entityMap.containsValue(t);
+
+    // remove entity from the map
+    private final Consumer<Entity> removeEntity = e -> {
+        freeTiles.add(entityMap.get(e));
+        entityMap.remove(e);
+    };
+
+    // place entity e in tile t
+    private final BiConsumer<Entity, Tile> placeEntity = (e, t) -> {
+        removeEntity.accept(e);
+        entityMap.put(e, t);
+    };
+
+    private final BiFunction<Entity, Direction, Tile> getRelativeTile = (e, d) -> {
+        Tile currentTile = entityMap.get(e);
+        Coordinates currentCoordinates = new Coordinates(currentTile.getX(), currentTile.getY());
+        Coordinates finalCoordinates = currentCoordinates.shift(d);
+        Tile finalTile = tileMap.get(finalCoordinates.getX(), finalCoordinates.getY());
+
+        return finalTile;
+    };
+
+    // useless
+    //private final BiFunction<Entity, Direction, Entity> getRelativeEntity = (e, d) -> entityMap.inverse().get(getRelativeTile.apply(e, d));
+
+    // place entity e in a random tile
+    private final Consumer<Entity> spawn = e -> placeEntity.accept(e, getRandomFreeTile.get());
+
+    // move an entity e in direction d
+    private final BiConsumer<Entity, Direction> shiftEntity = (e, d) -> {
+        Tile currentTile = entityMap.get(e);
+        Coordinates currentCoordinates = new Coordinates(currentTile.getX(), currentTile.getY());
+        Coordinates finalCoordinates = currentCoordinates.shift(d);
+        Tile finalTile = tileMap.get(finalCoordinates.getX(), finalCoordinates.getY());
+
+        placeEntity.accept(e, finalTile);
+    };
+
+    // generate the level map
+    private final Runnable generate = () -> {
+        var cave = new CaveGenerator(WIDTH, HEIGHT).getCave();
+
+        // tileMap
+        IntStream.range(0, WIDTH).forEach(x -> {
+            IntStream.range(0, HEIGHT).forEach(y -> {
+                var isWall = cave[x][y];
+                var madeOf = random.nextInt(VINE_PROBABILITY) != 0 ? Material.BRICKS : Material.VINES;
+
+                var t = new TileImpl(this, x, y, madeOf, isWall);
+
+                // redundant but not slow as fuck
+                tileMap.put(x, y, t);
+
+                // cache free tiles
+                if (canPlaceEntity.test(t)) {
+                    freeTiles.add(t);
+                }
+            });
+        });
+    };
+
+    // nearest direction to player
+    private Function<Entity, Direction> nearestDirectionToPlayer = e -> {
+        int east = entityMap.get(player).getX() - entityMap.get(e).getX();
+        int west = entityMap.get(e).getX() - entityMap.get(player).getX();
+        int south = entityMap.get(player).getY() - entityMap.get(e).getY();
+        int north = entityMap.get(e).getY() - entityMap.get(player).getY();
+
+        Pair<Direction, Integer> xDirection = east > 0 ? new Pair<>(Direction.EAST, east) : new Pair<>(Direction.WEST, west);
+        Pair<Direction, Integer> yDirection = south > 0 ? new Pair<>(Direction.SOUTH, south) : new Pair<>(Direction.NORTH, north);
+
+        return xDirection.getValue() > yDirection.getValue()
+            ? xDirection.getKey()
+            : yDirection.getKey();
+    };
 
     public final int getWidth() {
         return WIDTH;
@@ -73,89 +135,51 @@ class LevelImpl implements Level {
         return entityMap;
     }
 
-    private Optional<Entity> moveEntity(final Entity e, final Tile t) throws CannotMoveException {
-        Entity existingEntity = entityMap.inverse().get(t);
-        if (existingEntity != null) {
-            return Optional.of(existingEntity);
-        }
-
-        if (t.isWall()) {
-            throw new CannotMoveException("Wall!");
-        }
-
-        // remove entity if already present
-        if (entityMap.containsKey(e)) {
-            entityMap.remove(e);
-        }
-
-        entityMap.put(e, t);
-
-        return Optional.empty();
+    public final void spawnEntity(final Entity e) {
+        spawn.accept(e);
     }
 
-    public final Optional<Entity> shiftEntity(final Entity e, final Direction d, final int i)
-            throws CannotMoveException {
-        if (!entityMap.containsKey(e)) {
-            throw new CannotMoveException("Entity doesn't exist!");
-        }
-
-        Tile currentTile = entityMap.get(e);
-        Coordinates currentCoordinates = new Coordinates(currentTile.getX(), currentTile.getY());
-        Coordinates finalCoordinates = currentCoordinates.shift(d, i);
-        Tile finalTile = tileMap.get(finalCoordinates.getX(), finalCoordinates.getY());
-
-        return moveEntity(e, finalTile);
+    public final void spawnEntities(final List<Entity> l) {
+        l.forEach(spawn);
     }
 
-    public final void removeEntity(final Entity e) throws CannotRemoveException {
-        if (!entityMap.containsKey(e)) {
-            throw new CannotRemoveException("Entity already absent!");
-        }
+    public final boolean moveEntities(final Direction d) {
+        // we can edit this from inside lambdas
+        var nextLevel = new AtomicBoolean(false);
 
-        entityMap.remove(e);
-    }
+        /* TODO integrare con fabio
+        entityMap.forEach((e, t) -> {
 
-    public final int distance(final Entity e1, final Entity e2) {
-        Tile t1 = entityMap.get(e1), t2 = entityMap.get(e2);
-        return Math.abs(t1.getX() - t2.getX()) + Math.abs(t1.getY() - t2.getY());
-    }
+            // interact
+            if (e instanceof Creature) {
+                Tile nextTile = e instanceof Player
+                    ? getRelativeTile.apply(e, d)
+                    : getRelativeTile.apply(e, e.getDirection(nearestDirectionToPlayer.apply(e)));
 
-    public void placeEntities(final List<Entity> l) throws CannotPlaceException {
-        var freeTiles = new ArrayList<Tile>();
-        getTileStream().forEach(t -> {
-            if (!entityMap.containsValue(t) && !t.isWall()) {
-                freeTiles.add(t);
+                if (nextTile.getMaterial() == Material.DOOR) {
+                    nextLevel.set(true);
+                }
+
+                Entity relativeEntity = entityMap.inverse().get(nextTile);
+
+                if (relativeEntity instanceof Creature) {
+                    new CombatImpl(e, relativeEntity); // FABIO
+                } else if (e instanceof Player && relativeEntity instanceof Item) {
+                    ((Player) e).getInventory().addItem((Item) relativeEntity);
+                } else if (relativeEntity == null) {
+                    // move entity if tile is empty
+                    placeEntity.accept(e, nextTile);
+                }
             }
         });
+        */
 
-        if (l.size() > freeTiles.size()) {
-            throw new CannotPlaceException("Too many entities");
-        }
-
-        l.forEach(e -> entityMap.put(e, freeTiles.get(random.nextInt(freeTiles.size()))));
+        return nextLevel.get();
     }
 
-    private void generate() throws CannotMoveException {
-        var cave = new CaveGenerator(WIDTH, HEIGHT).getCave();
-
-        // tileMap
-        IntStream.range(0, WIDTH).forEach(x -> {
-            IntStream.range(0, HEIGHT).forEach(y -> {
-                var isWall = cave[x][y];
-                var madeOf = random.nextInt(VINE_PROBABILITY) != 0 ? Material.BRICKS : Material.VINES;
-
-                // redundant but not slow as fuck
-                tileMap.put(x, y, new TileImpl(this, x, y, madeOf, isWall));
-            });
-        });
-
-        // entities
-        // TODO: BROKEN PORCODIO
-        // moveEntity(new PlayerFactoryImpl().create(), tileMap.get(WIDTH / 2, HEIGHT /
-        // 2));
-    };
-
-    LevelImpl() throws CannotMoveException {
-        this.generate();
+    public LevelImpl(final List<Entity> list, final Player player) {
+        this.player = player;
+        generate.run();
+        spawnEntities(list);
     }
 }

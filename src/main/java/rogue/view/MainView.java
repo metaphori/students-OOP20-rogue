@@ -10,8 +10,10 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import rogue.controller.menu.MenuController;
 import rogue.controller.menu.MenuControllerImpl;
-import rogue.model.world.World;
-import rogue.model.world.WorldImpl;
+import rogue.model.Game;
+import rogue.model.GameImpl;
+import rogue.model.creature.Player;
+import rogue.model.creature.PlayerFactoryImpl;
 import rogue.view.menu.MenuViewImpl;
 
 public final class MainView extends Application {
@@ -45,8 +47,10 @@ public final class MainView extends Application {
         primaryStage.setResizable(true);
         primaryStage.show();
 
-        final World w = new WorldImpl(7);
-        new LevelStage(w.getLevel(0)).show();
+        // TODO
+        Player player = new PlayerFactoryImpl().create();
+        Game game = new GameImpl(5, player);
+        new WorldScene(game).show();
     }
 
     public static void main(final String[] args) {

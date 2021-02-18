@@ -8,29 +8,29 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import rogue.model.Entity;
+import rogue.model.Game;
 import rogue.model.creature.Player;
-import rogue.model.world.Level;
 import rogue.model.world.Tile;
 
-public class LevelStage extends Stage {
+public class WorldScene extends Stage {
     private static final int SCALE = 32;
 
-    public LevelStage(final Level level) {
+    public WorldScene(final Game game) {
         super();
 
         setTitle("Mondo di merda");
 
-        setScene(new Scene(initSceneUI(level), level.getWidth() * SCALE, level.getHeight() * SCALE));
+        setScene(new Scene(initSceneUI(game), game.getWidth() * SCALE, game.getHeight() * SCALE));
     }
 
-    private Parent initSceneUI(final Level level) {
+    private Parent initSceneUI(final Game game) {
         final Pane root = new Pane();
 
-        final Canvas c = new Canvas(level.getWidth() * SCALE, level.getHeight() * SCALE);
+        final Canvas c = new Canvas(game.getWidth() * SCALE, game.getHeight() * SCALE);
         final GraphicsContext gc = c.getGraphicsContext2D();
 
         // level
-        level.getTileStream().forEach(tile -> {
+        game.getTiles().forEach(tile -> {
             Image img = getImage(tile);
 
             //// 1024 fucking threads
@@ -39,11 +39,13 @@ public class LevelStage extends Stage {
             // }).start();
         });
 
-        // entity
-        level.getEntityMap().forEach((entity, tile) -> {
+        // TODO entiteis
+        /*
+        game.getEntityMap().forEach((entity, tile) -> {
             Image img = getImage(entity);
             gc.drawImage(img, tile.getX() * SCALE, tile.getY() * SCALE, SCALE, SCALE);
         });
+        */
 
         root.getChildren().add(c);
         return root;

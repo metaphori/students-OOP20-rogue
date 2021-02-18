@@ -9,7 +9,7 @@ import rogue.model.world.WorldImpl;
 
 public class WorldTest {
     @Test public void testWorldCreation() {
-        World w = new WorldImpl(5);
+        Game w = new GameImpl(5);
         assertNotNull(w.getLevel(0).getTileStream().findFirst());
     }
 }
