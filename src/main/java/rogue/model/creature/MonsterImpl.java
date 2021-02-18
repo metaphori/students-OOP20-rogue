@@ -1,5 +1,7 @@
 package rogue.model.creature;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import javafx.util.Pair;
 import rogue.model.items.potion.PotionImpl;
 import rogue.model.world.Direction;
@@ -89,7 +91,7 @@ public class MonsterImpl implements Monster {
      */
     @Override
     public int attackDamage() {
-        return (int) (Math.random() * (this.getDamage().getValue() - this.getDamage().getKey()) + this.getDamage().getKey());
+        return ThreadLocalRandom.current().nextInt(this.getDamage().getKey(), this.getDamage().getValue() - this.getDamage().getKey() + 1);
     }
 
     /**
@@ -97,7 +99,7 @@ public class MonsterImpl implements Monster {
      */
     @Override
     public PotionImpl dropItem() {
-        final int casuale = (int) (Math.random() * 100) + 1;
+        final int casuale = ThreadLocalRandom.current().nextInt(0, 100);
         if (casuale <= this.getItemChange()) {
             return this.getItem(); 
        } else {
@@ -106,7 +108,7 @@ public class MonsterImpl implements Monster {
     }
 
     private Direction randomMove() {
-        final int direction = (int) (Math.random() * 4);
+        final int direction = ThreadLocalRandom.current().nextInt(0, 4);
         switch (direction) {
         case 1:
             return Direction.NORTH;
