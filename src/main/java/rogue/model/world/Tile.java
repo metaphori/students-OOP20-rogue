@@ -5,5 +5,6 @@ public interface Tile {
     int getX();
     int getY();
     Material getMaterial();
+    void setDoor();
     boolean isWall();
 }

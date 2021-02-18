@@ -107,6 +107,11 @@ public class LevelImpl implements Level {
                 }
             });
         });
+
+        // door to next level
+        var door = getRandomFreeTile.get();
+        freeTiles.remove(door);
+        door.setDoor();
     };
 
     // nearest direction to player

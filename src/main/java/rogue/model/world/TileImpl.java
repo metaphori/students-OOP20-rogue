@@ -3,7 +3,7 @@ package rogue.model.world;
 class TileImpl implements Tile {
     private final Level level;
     private final int x, y;
-    private final Material material;
+    private Material material;
     private final boolean isWall;
 
     public final Level getLevel() {
@@ -24,6 +24,10 @@ class TileImpl implements Tile {
 
     public final boolean isWall() {
         return isWall;
+    }
+
+    public final void setDoor() {
+        material = Material.DOOR;
     }
 
     TileImpl(final Level level, final int x, final int y, final Material madeOf, final boolean isWall) {
