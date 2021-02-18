@@ -10,12 +10,12 @@ import rogue.model.creature.PlayerFactoryImpl;
 public class PlayerControllerTest {
 
     private Player player;
-    private PlayerController controller;
+    private StatusBarControllerImpl controller;
 
     @org.junit.Before
     public void init() {
         player = new PlayerFactoryImpl().create();
-        controller = new PlayerController(null, player);
+        controller = new StatusBarControllerImpl(null, player);
     }
 
     @Test
