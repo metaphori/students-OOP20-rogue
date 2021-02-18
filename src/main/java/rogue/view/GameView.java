@@ -1,24 +1,19 @@
 package rogue.view;
 
-import java.awt.Dimension;
 import java.io.IOException;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import rogue.controller.WorldController;
 import rogue.controller.StatusBarControllerImpl;
+import rogue.controller.WorldController;
 import rogue.controller.inventory.InventoryController;
 import rogue.controller.inventory.InventoryControllerImpl;
-import rogue.model.Game;
-import rogue.model.GameImpl;
 import rogue.model.creature.Player;
 import rogue.model.creature.PlayerFactoryImpl;
 import rogue.view.inventory.InventoryViewImpl;
