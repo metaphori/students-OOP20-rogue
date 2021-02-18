@@ -58,6 +58,7 @@ public class LevelImpl implements Level {
     private final BiConsumer<Entity, Tile> placeEntity = (e, t) -> {
         removeEntity.accept(e);
         entityMap.put(e, t);
+        freeTiles.remove(t);
     };
 
     private final BiFunction<Entity, Direction, Tile> getRelativeTile = (e, d) -> {
