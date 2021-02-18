@@ -8,7 +8,7 @@ import rogue.view.View;
  *
  * @param <V>
  */
-public abstract class AbstractEntityController<V extends View> implements EntityController<V> {
+public abstract class AbstractPanelController<V extends View> implements PanelController<V> {
 
     private final V view;
     private final Entity entity;
@@ -20,7 +20,7 @@ public abstract class AbstractEntityController<V extends View> implements Entity
      * @param entity
      *          the entity which this controller refers to
      */
-    protected AbstractEntityController(final V view, final Entity entity) {
+    protected AbstractPanelController(final V view, final Entity entity) {
         this.view = view;
         this.entity = entity;
     }

@@ -15,9 +15,9 @@ import rogue.view.StatusBarView;
 /**
  * The player controller.
  */
-public final class PlayerController extends AbstractEntityController<StatusBarView> implements EventSubscriber {
+public final class StatusBarControllerImpl extends AbstractPanelController<StatusBarView> implements EventSubscriber {
 
-    private static final Logger LOG = LoggerFactory.getLogger(PlayerController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(StatusBarControllerImpl.class);
 
     /**
      * Creates a new PlayerController.
@@ -26,7 +26,7 @@ public final class PlayerController extends AbstractEntityController<StatusBarVi
      * @param player
      *          the {@link Player} entity
      */
-    public PlayerController(final StatusBarView statusBarView, final Player player) {
+    public StatusBarControllerImpl(final StatusBarView statusBarView, final Player player) {
         super(statusBarView, player);
         player.getLife().register(this);
         player.getEquipment().register(this);
@@ -35,6 +35,7 @@ public final class PlayerController extends AbstractEntityController<StatusBarVi
     }
 
     /**
+     * TODO to refactor...
      * Notifies that the {@link PlayerLife} changed.
      * @param event
      *          the {@link LifeEvent} associated to the life change

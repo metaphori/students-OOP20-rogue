@@ -8,7 +8,7 @@ import rogue.view.View;
  *
  * @param <V>
  */
-public interface EntityController<V extends View> {
+public interface PanelController<V extends View> {
 
     /**
      * @return the associated {@link EntityView}
