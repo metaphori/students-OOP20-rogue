@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class StandardLevelIncreaseStrategyTest {
 
-    private static final int EXP_NO_LEVEL = 12_003;
+    private static final int EXP_MIDDLE_LEVEL = 789;
     private static final int EXP_LEVEL_20 = 12_000;
     private static final int EXP_LEVEL_2 = 7;
     private LevelIncreaseStrategy strategy;
@@ -22,7 +22,8 @@ public class StandardLevelIncreaseStrategyTest {
     public void test() {
         assertEquals(Optional.of(2), strategy.level(EXP_LEVEL_2));
         assertEquals(Optional.of(20), strategy.level(EXP_LEVEL_20));
-        assertEquals(Optional.empty(), strategy.level(EXP_NO_LEVEL));
+        assertEquals(Optional.of(12), strategy.level(EXP_MIDDLE_LEVEL));
+
     }
 
 }
