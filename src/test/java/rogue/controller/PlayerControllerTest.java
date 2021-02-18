@@ -35,7 +35,13 @@ public class PlayerControllerTest {
         player.getLife().subCoins(5);
         assertEquals(0, player.getLife().getCoins());
 
+        assertEquals(0, player.getLife().getExperience());
         player.getLife().increaseExperience(10);
+        assertEquals(10, player.getLife().getExperience());
+        assertEquals(2, player.getLife().getLevel());
+        player.getLife().increaseExperience(11_990);
+        assertEquals(12_000, player.getLife().getExperience());
+        assertEquals(20, player.getLife().getLevel());
     }
 
 }
