@@ -70,9 +70,7 @@ public final class EquipmentImpl extends AbstractEventPublisher implements Equip
 
     @Override
     public void setArmor(final Armor armor) {
-        System.out.println(armor);
         this.set(() -> this.armor = armor);
-        System.out.println(this.armor);
     }
 
     @Override
