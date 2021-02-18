@@ -21,6 +21,8 @@ import com.google.common.collect.Table;
 
 import javafx.util.Pair;
 import rogue.model.Entity;
+import rogue.model.creature.Combat;
+import rogue.model.creature.CombatImpl;
 import rogue.model.creature.Creature;
 import rogue.model.creature.Player;
 import rogue.model.items.Item;
@@ -31,6 +33,7 @@ public class LevelImpl implements Level {
     private static final int VINE_PROBABILITY = 5;
 
     private final Random random = new Random();
+    private final Combat combat = new CombatImpl();
     private final Table<Integer, Integer, Tile> tileMap = HashBasedTable.create();
     private Entity player = null;
     private final BiMap<Entity, Tile> entityMap = HashBiMap.create();
@@ -147,9 +150,7 @@ public class LevelImpl implements Level {
         // we can edit this from inside lambdas
         var nextLevel = new AtomicBoolean(false);
 
-        /* TODO integrare con fabio
         entityMap.forEach((e, t) -> {
-
             // interact
             if (e instanceof Creature) {
                 Tile nextTile = e instanceof Player
@@ -163,7 +164,7 @@ public class LevelImpl implements Level {
                 Entity relativeEntity = entityMap.inverse().get(nextTile);
 
                 if (relativeEntity instanceof Creature) {
-                    new CombatImpl(e, relativeEntity); // FABIO
+                    combat.attack((Creature) e, (Creature) relativeEntity);
                 } else if (e instanceof Player && relativeEntity instanceof Item) {
                     ((Player) e).getInventory().addItem((Item) relativeEntity);
                 } else if (relativeEntity == null) {
@@ -172,7 +173,6 @@ public class LevelImpl implements Level {
                 }
             }
         });
-        */
 
         return nextLevel.get();
     }
