@@ -33,7 +33,7 @@ class Coordinates {
                 c.y++;
                 break;
             case WEST:
-                c.y--;
+                c.x--;
                 break;
             default:
                 break;
