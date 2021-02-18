@@ -1,5 +1,7 @@
 package rogue.model.world;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +36,7 @@ public class LevelImpl implements Level {
     private static final int HEIGHT = 32;
     private static final int VINE_PROBABILITY = 5;
 
+    private static final Logger LOG = LoggerFactory.getLogger(Level.class);
     private final Random random = new Random();
     private final Combat combat = new CombatImpl();
     private final Table<Integer, Integer, Tile> tileMap = HashBasedTable.create();
@@ -178,7 +181,7 @@ public class LevelImpl implements Level {
                         removeEntity.accept(relativeEntity);
                         placeEntity.accept(e, nextTile);
                     } catch (InventoryIsFullException e1) {
-                        // do nothing
+                        LOG.info("Inventory full!");
                     }
                 } else if (relativeEntity == null && canPlaceEntity.test(nextTile)) {
                     // move entity if tile is empty
