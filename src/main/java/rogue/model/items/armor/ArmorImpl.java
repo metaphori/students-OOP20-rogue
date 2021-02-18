@@ -68,7 +68,7 @@ public final class ArmorImpl implements Armor {
 
     @Override
     public String toString() {
-        return "ArmorImpl [armor=" + armor + ", " + armor.getAC() + "]";
+        return this.armor.getName() + " (" + armor.getAC() + ")";
     }
 
 }

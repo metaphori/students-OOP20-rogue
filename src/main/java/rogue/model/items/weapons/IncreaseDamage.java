@@ -18,7 +18,7 @@ public final class IncreaseDamage extends WeaponDecorator {
 
     @Override
     public String toString() {
-        return "IncreaseDamage [" + super.toString() + "]";
+        return super.toString() + " increased damage";
     }
 
 }
