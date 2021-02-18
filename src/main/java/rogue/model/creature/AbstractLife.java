@@ -82,4 +82,12 @@ public abstract class AbstractLife extends AbstractEventPublisher implements Lif
         return this.healthPoints == 0;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return "AbstractLife [healthPoints=" + healthPoints + ", experience=" + experience + "]";
+    }
+
 }

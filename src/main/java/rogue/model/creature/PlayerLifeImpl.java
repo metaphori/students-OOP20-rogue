@@ -142,6 +142,13 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
         return MAX_FOOD;
     }
 
+    @Override
+    public String toString() {
+        return "PlayerLifeImpl [maxHealthPoints=" + maxHealthPoints + ", strength="
+        + strength + ", leftFood=" + leftFood + ", level=" + level + ", coins=" + coins + ", toString()="
+        + super.toString() + "]";
+    }
+
     public static class Builder {
 
         /**
