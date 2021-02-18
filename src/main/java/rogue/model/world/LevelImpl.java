@@ -172,6 +172,7 @@ public class LevelImpl implements Level {
 
                 if (nextTile.getMaterial() == Material.DOOR) {
                     nextLevel.set(true);
+                    removeEntity.accept(e);
                 }
 
                 Entity relativeEntity = entityMap.inverse().get(nextTile);
