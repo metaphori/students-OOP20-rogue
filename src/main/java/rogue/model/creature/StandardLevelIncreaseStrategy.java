@@ -55,9 +55,9 @@ public final class StandardLevelIncreaseStrategy implements LevelIncreaseStrateg
     @Override
     public Optional<Integer> level(final int experience) {
         return this.values.stream()
-            .filter(p -> p.getKey().equals(experience))
+            .filter(p -> p.getKey() <= experience)
             .map(p -> p.getValue())
-            .findFirst();
+            .reduce((l1, l2) -> l2);
     }
 
 }

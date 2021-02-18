@@ -115,7 +115,6 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
 
     private void setLevel(final int level) {
         this.level = level;
-        this.post(new LifeEvent<>(this));
     }
 
     @Override
