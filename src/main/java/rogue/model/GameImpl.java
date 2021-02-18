@@ -44,6 +44,9 @@ public class GameImpl implements Game {
         if (getCurrentLevel.get().moveEntities(direction)) {
             nextLevel.run(); // change level
         }
+        if (player.getInventory().getScrollContainer().getActiveScroll().isPresent()) {
+            player.getInventory().getScrollContainer().updateEffectDuration(1);
+        }
     }
 
     public final int getWidth() {
