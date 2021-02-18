@@ -103,7 +103,7 @@ public class LevelImpl implements Level {
                 tileMap.put(x, y, t);
 
                 // cache free tiles
-                if (canPlaceEntity.test(t)) {
+                if (!isWall) {
                     freeTiles.add(t);
                 }
             });
