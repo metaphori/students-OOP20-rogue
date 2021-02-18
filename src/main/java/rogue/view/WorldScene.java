@@ -17,11 +17,14 @@ import rogue.model.world.Tile;
 public class WorldScene extends Stage {
     private static final int SCALE = 25;
     private final Pane root = new Pane();
+    final Game game;
+    final Canvas c;
 
     public WorldScene(final Game game) {
         super();
 
-        setTitle("Mondo di merda");
+        this.game = game;
+        c = new Canvas(game.getWidth() * SCALE, game.getHeight() * SCALE);
 
         setScene(new Scene(initSceneUI(game), game.getWidth() * SCALE, game.getHeight() * SCALE));
     }
@@ -31,8 +34,12 @@ public class WorldScene extends Stage {
     }
 
     private Parent initSceneUI(final Game game) {
+        drawMap();
+        root.getChildren().add(c);
+        return root;
+    }
 
-        final Canvas c = new Canvas(game.getWidth() * SCALE, game.getHeight() * SCALE);
+    public void drawMap() {
         final GraphicsContext gc = c.getGraphicsContext2D();
 
         // level
@@ -49,9 +56,6 @@ public class WorldScene extends Stage {
             Image img = getImage(entity);
             gc.drawImage(img, tile.getX() * SCALE, tile.getY() * SCALE, SCALE, SCALE);
         });
-
-        root.getChildren().add(c);
-        return root;
     }
 
     private Image getImage(final Tile tile) {

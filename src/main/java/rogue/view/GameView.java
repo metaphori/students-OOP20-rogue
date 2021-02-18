@@ -4,13 +4,16 @@ import java.awt.Dimension;
 import java.io.IOException;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import rogue.controller.MovePlayer;
 import rogue.controller.StatusBarControllerImpl;
 import rogue.controller.inventory.InventoryController;
 import rogue.controller.inventory.InventoryControllerImpl;
@@ -25,6 +28,9 @@ public class GameView {
     private final Stage stage = new Stage();
     private final Scene scene;
     private final Player player = new PlayerFactoryImpl().create();
+    private Game game;
+    private WorldScene worldScene;
+
     private void loadStatusBar() {
         final HBox box = (HBox) this.scene.lookup("#top");
         // TODO temporary --> to test!
@@ -45,8 +51,9 @@ public class GameView {
 
     private void loadWorld() {
         final VBox box = (VBox) this.scene.lookup("#world");
-        final Game game = new GameImpl(4, player);
-        box.getChildren().add(new WorldScene(game).getNode());
+        game = new GameImpl(4, player);
+        worldScene = new WorldScene(game);
+        box.getChildren().add(worldScene.getNode());
     }
 
     public GameView() throws IOException {
@@ -61,7 +68,10 @@ public class GameView {
         stage.getIcons().add(new Image(ClassLoader.getSystemResource("images/rogueIcon.png").toExternalForm()));
         stage.setTitle("Rogue");
         stage.setResizable(true);
+        stage.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            MovePlayer.movePlayer(event, game);
+            worldScene.drawMap();
+        });
         stage.show();
     }
-
 }
