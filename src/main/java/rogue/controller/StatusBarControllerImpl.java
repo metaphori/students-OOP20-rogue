@@ -30,8 +30,9 @@ public final class StatusBarControllerImpl extends AbstractPanelController<Statu
         super(statusBarView, player);
         player.getLife().register(this);
         player.getEquipment().register(this);
-        // Sets the initial score view!
+        // Sets the initial score and equipment view!
         this.onLifeChange(new LifeEvent<>(player.getLife()));
+        this.onEquipmentChange(new EquipmentEvent(player.getEquipment()));
     }
 
     /**
@@ -43,12 +44,12 @@ public final class StatusBarControllerImpl extends AbstractPanelController<Statu
     @Subscribe
     public void onLifeChange(final LifeEvent<PlayerLife> event) {
         LOG.info("Life changed " + event);
-        this.getView().setCoins(event.getLife().getCoins());
-        this.getView().setCurrentHealthPoints(event.getLife().getHealthPoints());
-        this.getView().setMaxHealthPoints(event.getLife().getMaxHealthPoints());
-        this.getView().setExperience(event.getLife().getExperience());
-        this.getView().setLevel(event.getLife().getLevel());
-        this.getView().setStrength(event.getLife().getStrength());
+        this.getView().setCoinsLabel(event.getLife().getCoins());
+        this.getView().setCurrentHealthPointsLabel(event.getLife().getHealthPoints());
+        this.getView().setMaxHealthPointsLabel(event.getLife().getMaxHealthPoints());
+        this.getView().setExperienceLabel(event.getLife().getExperience());
+        this.getView().setLevelLabel(event.getLife().getLevel());
+        this.getView().setStrengthLabel(event.getLife().getStrength());
     }
 
     /**
@@ -60,7 +61,8 @@ public final class StatusBarControllerImpl extends AbstractPanelController<Statu
     @Subscribe
     public void onEquipmentChange(final EquipmentEvent event) {
         LOG.info("Equipment changed");
-        // TODO
+        this.getView().setArmorLable(event.getEquipment().getArmor());
+        this.getView().setWeaponLabel(event.getEquipment().getWeapon());
     }
 
 }
