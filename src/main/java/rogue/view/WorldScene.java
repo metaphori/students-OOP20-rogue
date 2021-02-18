@@ -1,5 +1,6 @@
 package rogue.view;
 
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -13,7 +14,8 @@ import rogue.model.creature.Player;
 import rogue.model.world.Tile;
 
 public class WorldScene extends Stage {
-    private static final int SCALE = 32;
+    private static final int SCALE = 25;
+    private final Pane root = new Pane();
 
     public WorldScene(final Game game) {
         super();
@@ -23,8 +25,11 @@ public class WorldScene extends Stage {
         setScene(new Scene(initSceneUI(game), game.getWidth() * SCALE, game.getHeight() * SCALE));
     }
 
+    public Node getNode() {
+        return this.root;
+    }
+
     private Parent initSceneUI(final Game game) {
-        final Pane root = new Pane();
 
         final Canvas c = new Canvas(game.getWidth() * SCALE, game.getHeight() * SCALE);
         final GraphicsContext gc = c.getGraphicsContext2D();

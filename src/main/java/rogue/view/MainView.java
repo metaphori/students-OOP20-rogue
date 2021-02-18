@@ -48,9 +48,9 @@ public final class MainView extends Application {
         primaryStage.show();
 
         // TODO
-        Player player = new PlayerFactoryImpl().create();
+       /* Player player = new PlayerFactoryImpl().create();
         Game game = new GameImpl(5, player);
-        new WorldScene(game).show();
+        new WorldScene(game).show();*/
     }
 
     public static void main(final String[] args) {
