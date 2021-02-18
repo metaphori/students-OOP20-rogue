@@ -1,5 +1,7 @@
 package rogue.model.creature;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import javafx.util.Pair;
 import rogue.model.items.potion.PotionImpl;
 import rogue.model.items.potion.PotionType;
@@ -9,147 +11,147 @@ public enum MonsterType {
    /** 
     * Air Elemental.
     */
-    AIR_ELEMENTAL(new MonsterLife((int) (Math.random() * (32 - 4) + 4), 20), 2, new Pair<>(4, 24),
+    AIR_ELEMENTAL(new MonsterLife(ThreadLocalRandom.current().nextInt(4, 32 - 4), 20), 2, new Pair<>(4, 24),
             new SpecialImpl(true, true, false, false, false, false), 0, new PotionImpl(PotionType.POTION_III), 20),
 
    /** 
-    * Bat.
+    * Bat. 
     */
-    BAT(new MonsterLife((int) (Math.random() * (8 - 1) + 1), 1), 3, new Pair<>(1, 2),
+    BAT(new MonsterLife(ThreadLocalRandom.current().nextInt(1, 8 - 1), 1), 3, new Pair<>(1, 2),
             new SpecialImpl(false, true, false, true, false, false), 0),
 
    /** 
     * Centaur.
     */
-    CENTAUR(new MonsterLife((int) (Math.random() * (32 - 4) + 4), 17), 4, new Pair<>(4, 32), new SpecialImpl(), 51, new PotionImpl(PotionType.POTION_III), 10),
+    CENTAUR(new MonsterLife(ThreadLocalRandom.current().nextInt(4, 32 - 4), 17), 4, new Pair<>(4, 32), new SpecialImpl(), 51, new PotionImpl(PotionType.POTION_III), 10),
 
    /** 
     * Dragon.
     */
-    DRAGON(new MonsterLife((int) (Math.random() * (80 - 10) + 10), 5000), -1, new Pair<>(4, 40), new SpecialImpl(true), 15_000, new PotionImpl(PotionType.POTION_V), 100),
+    DRAGON(new MonsterLife(ThreadLocalRandom.current().nextInt(10, 80 - 10), 5000), -1, new Pair<>(4, 40), new SpecialImpl(true), 15_000, new PotionImpl(PotionType.POTION_V), 100),
 
    /** 
-    * Emu.
+    * Emu. 
     */
-    EMU(new MonsterLife((int) (Math.random() * (8 - 1) + 1), 2), 7, new Pair<>(1, 2), new SpecialImpl(true), 0),
+    EMU(new MonsterLife(ThreadLocalRandom.current().nextInt(1, 8 - 1), 2), 7, new Pair<>(1, 2), new SpecialImpl(true), 0),
 
    /** 
-    * Fire Elemental.
+    * Fire Elemental. 
     */
-    FIRE_ELEMENTAL(new MonsterLife((int) (Math.random() * (36 - 8) + 8), 80), 2, new Pair<>(3, 18), new SpecialImpl(true), 0, new PotionImpl(PotionType.POTION_III), 40),
+    FIRE_ELEMENTAL(new MonsterLife(ThreadLocalRandom.current().nextInt(8, 36 - 8), 80), 2, new Pair<>(3, 18), new SpecialImpl(true), 0, new PotionImpl(PotionType.POTION_III), 40),
 
    /** 
     * Griffin.
     */
-    GRIFFIN(new MonsterLife((int) (Math.random() * (104 - 13) + 13), 2000), 2, new Pair<>(5, 25),
+    GRIFFIN(new MonsterLife(ThreadLocalRandom.current().nextInt(13, 104 - 13), 2000), 2, new Pair<>(5, 25),
              new SpecialImpl(true, true, false, false, false, false), 6000, new PotionImpl(PotionType.POTION_IV), 80),
 
    /** 
-    * Hobgoblin.
+    * Hobgoblin. 
     */
-    HOBGOBLIN(new MonsterLife((int) (Math.random() * (8 - 1) + 1), 3), 5, new Pair<>(1, 8), new SpecialImpl(true), 9, new PotionImpl(PotionType.POTION_I), 30),
+    HOBGOBLIN(new MonsterLife(ThreadLocalRandom.current().nextInt(1, 8 - 1), 3), 5, new Pair<>(1, 8), new SpecialImpl(true), 9, new PotionImpl(PotionType.POTION_I), 30),
 
    /** 
     * Ice cube.
     */
-    ICE_CUBE(new MonsterLife((int) (Math.random() * (8 - 1) + 1), 5), 9, new Pair<>(2, 12), new SpecialImpl(), 15, new PotionImpl(PotionType.POTION_II), 60),
+    ICE_CUBE(new MonsterLife(ThreadLocalRandom.current().nextInt(1, 8 - 1), 5), 9, new Pair<>(2, 12), new SpecialImpl(), 15, new PotionImpl(PotionType.POTION_II), 60),
 
    /** 
-    * Jabberwock.
+    * Jabberwock. 
     */
-    JABBERWOCK(new MonsterLife((int) (Math.random() * (120 - 15) + 15), 3000), 6,  new Pair<>(3, 24),
+    JABBERWOCK(new MonsterLife(ThreadLocalRandom.current().nextInt(15, 120 - 15), 3000), 6,  new Pair<>(3, 24),
             new SpecialImpl(false, true, false, false, false, false), 9000, new PotionImpl(PotionType.POTION_V), 60),
 
    /** 
     * Kobold.
     */
-    KOBOLD(new MonsterLife((int) (Math.random() * (8 - 1) + 1), 1), 6,  new Pair<>(2, 12), new SpecialImpl(true), 3),
+    KOBOLD(new MonsterLife(ThreadLocalRandom.current().nextInt(1, 8 - 1), 1), 6,  new Pair<>(2, 12), new SpecialImpl(true), 3),
 
    /** 
-    * Lycanthrope.
+    * Lycanthrope. 
     */
-    LYCANTHROPE(new MonsterLife((int) (Math.random() * (16 - 2) + 2), 10), 3,  new Pair<>(2, 12), new SpecialImpl(true), 30, new PotionImpl(PotionType.CORRUPT_POTION_I), 30),
+    LYCANTHROPE(new MonsterLife(ThreadLocalRandom.current().nextInt(2, 16 - 2), 10), 3,  new Pair<>(2, 12), new SpecialImpl(true), 30, new PotionImpl(PotionType.CORRUPT_POTION_I), 30),
 
    /** 
-    * Medusa.
+    * Medusa. 
     */
-    MEDUSA(new MonsterLife((int) (Math.random() * (64 - 8) + 8), 200), 2,  new Pair<>(4, 32),
+    MEDUSA(new MonsterLife(ThreadLocalRandom.current().nextInt(8, 64 - 8), 200), 2,  new Pair<>(4, 32),
             new SpecialImpl(true, false, false, false, true, false), 600, new PotionImpl(PotionType.CORRUPT_POTION_I), 70),
 
    /** 
-    * Nymph.
+    * Nymph. 
     */
-    NYMPH(new MonsterLife((int) (Math.random() * (24 - 3) + 3), 37), 9,  new Pair<>(0, 0),
+    NYMPH(new MonsterLife(ThreadLocalRandom.current().nextInt(3, 24 - 3), 37), 9,  new Pair<>(0, 0),
             new SpecialImpl(false, false, true, false, false, false), 111,  new PotionImpl(PotionType.POTION_V), 50),
 
    /** 
     * Orc.
     */
-    ORC(new MonsterLife((int) (Math.random() * (8 - 1) + 1), 5), 6,  new Pair<>(1, 8),
+    ORC(new MonsterLife(ThreadLocalRandom.current().nextInt(1, 8 - 1), 5), 6,  new Pair<>(1, 8),
             new SpecialImpl(false, false, true, false, false, false), 500),
 
    /** 
-    * Phanthom.
+    * Phanthom. 
     */
-    PHANTHOM(new MonsterLife((int) (Math.random() * (64 - 8) + 8), 120), 3,  new Pair<>(4, 16),
+    PHANTHOM(new MonsterLife(ThreadLocalRandom.current().nextInt(8, 64 - 8), 120), 3,  new Pair<>(4, 16),
             new SpecialImpl(true, false, false, false, false, false), 0),
 
    /** 
     * Quaqqa.
     */
-    QUAQQA(new MonsterLife((int) (Math.random() * (24 - 3) + 3), 15), 3,  new Pair<>(2, 10),
+    QUAQQA(new MonsterLife(ThreadLocalRandom.current().nextInt(3, 24 - 3), 15), 3,  new Pair<>(2, 10),
             new SpecialImpl(), 0),
 
    /** 
     * Ratfolk.
     */
-    RATFOLK(new MonsterLife((int) (Math.random() * (16 - 2) + 2), 9), 3,  new Pair<>(1, 6), new SpecialImpl(), 27, new PotionImpl(PotionType.POTION_II), 60),
+    RATFOLK(new MonsterLife(ThreadLocalRandom.current().nextInt(2, 16 - 2), 9), 3,  new Pair<>(1, 6), new SpecialImpl(), 27, new PotionImpl(PotionType.POTION_II), 60),
 
    /** 
     * Snake.
     */
-    SNAKE(new MonsterLife((int) (Math.random() * (8 - 1) + 1), 2), 5,  new Pair<>(1, 3),
+    SNAKE(new MonsterLife(ThreadLocalRandom.current().nextInt(1, 8 - 1), 2), 5,  new Pair<>(1, 3),
             new SpecialImpl(true, false, false, false, true, false), 6),
 
    /** 
-    * Troll.
+    * Troll. 
     */
-    TROLL(new MonsterLife((int) (Math.random() * (48 - 6) + 6), 120), 4,  new Pair<>(3, 24),
+    TROLL(new MonsterLife(ThreadLocalRandom.current().nextInt(6, 48 - 6), 120), 4,  new Pair<>(3, 24),
             new SpecialImpl(true), 360,  new PotionImpl(PotionType.POTION_IV), 70),
 
    /** 
     * Unicorn.
     */
-    UNICORN(new MonsterLife((int) (Math.random() * (56 - 7) + 7), 190), 3,  new Pair<>(4, 36),
+    UNICORN(new MonsterLife(ThreadLocalRandom.current().nextInt(7, 56 - 7), 190), 3,  new Pair<>(4, 36),
             new SpecialImpl(), 570,  new PotionImpl(PotionType.CORRUPT_POTION_II), 100),
 
    /** 
     * Vampire.
-    */
-    VAMPIRE(new MonsterLife((int) (Math.random() * (64 - 8) + 8), 350), 1,  new Pair<>(1, 10),
+    */ 
+    VAMPIRE(new MonsterLife(ThreadLocalRandom.current().nextInt(8, 64 - 8), 350), 1,  new Pair<>(1, 10),
            new SpecialImpl(true, false, false, false, false, true), 1050,  new PotionImpl(PotionType.POTION_IV), 100),
 
    /** 
-    * Wraith.
+    * Wraith. 
     */
-    WRAITH(new MonsterLife((int) (Math.random() * (40 - 5) + 5), 55), 4,  new Pair<>(1, 6), new SpecialImpl(), 0,  new PotionImpl(PotionType.CORRUPT_POTION_I), 60),
+    WRAITH(new MonsterLife(ThreadLocalRandom.current().nextInt(5, 40 - 5), 55), 4,  new Pair<>(1, 6), new SpecialImpl(), 0,  new PotionImpl(PotionType.CORRUPT_POTION_I), 60),
 
    /** 
-    * Xill.
+    * Xill. 
     */
-    XILL(new MonsterLife((int) (Math.random() * (72 - 8) + 8), 50), 2,  new Pair<>(3, 24),
+    XILL(new MonsterLife(ThreadLocalRandom.current().nextInt(8, 72 - 8), 50), 2,  new Pair<>(3, 24),
             new SpecialImpl(true), 150,  new PotionImpl(PotionType.POTION_IV), 20),
 
    /** 
-    * Yeti.
+    * Yeti. 
     */
-    YETI(new MonsterLife((int) (Math.random() * (32 - 4) + 4), 100), 6,  new Pair<>(2, 12),
+    YETI(new MonsterLife(ThreadLocalRandom.current().nextInt(4, 32 - 4), 100), 6,  new Pair<>(2, 12),
            new SpecialImpl(), 900,  new PotionImpl(PotionType.POTION_III), 40),
 
    /** 
     * Zombie.
     */
-    ZOMBIE(new MonsterLife((int) (Math.random() * (24 - 3) + 3), 6), 8,  new Pair<>(2, 16),
+    ZOMBIE(new MonsterLife(ThreadLocalRandom.current().nextInt(3, 24 - 3), 6), 8,  new Pair<>(2, 16),
             new SpecialImpl(true, false, false, false, false, false), 16,  new PotionImpl(PotionType.CORRUPT_POTION_II), 50);
 
 
