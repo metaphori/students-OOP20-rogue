@@ -104,6 +104,7 @@ public final class EquipmentImpl extends AbstractEventPublisher implements Equip
             throw new IllegalStateException("One ring per time could be worn!");
         }
         this.ring = Optional.of(ring);
+        this.post(new EquipmentEvent(this));
     }
 
     private void restore(final Memento m) {
@@ -116,9 +117,15 @@ public final class EquipmentImpl extends AbstractEventPublisher implements Equip
         if (this.ring.isPresent()) {
             this.ring = Optional.empty();
             this.restore(memento);
+            this.post(new EquipmentEvent(this));
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "EquipmentImpl [weapon=" + weapon + ", armor=" + armor + ", ring=" + ring + "]";
     }
 
 }
