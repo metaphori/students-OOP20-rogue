@@ -66,10 +66,10 @@ public class LevelImpl implements Level {
     };
 
     private final BiFunction<Entity, Direction, Tile> getRelativeTile = (e, d) -> {
-        Tile currentTile = entityMap.get(e);
-        Coordinates currentCoordinates = new Coordinates(currentTile.getX(), currentTile.getY());
-        Coordinates finalCoordinates = currentCoordinates.shift(d);
-        Tile finalTile = tileMap.get(finalCoordinates.getX(), finalCoordinates.getY());
+        final Tile currentTile = entityMap.get(e);
+        final Coordinates currentCoordinates = new Coordinates(currentTile.getX(), currentTile.getY());
+        final Coordinates finalCoordinates = currentCoordinates.shift(d);
+        final Tile finalTile = tileMap.get(finalCoordinates.getX(), finalCoordinates.getY());
 
         return finalTile;
     };
@@ -81,29 +81,19 @@ public class LevelImpl implements Level {
     // place entity e in a random tile
     private final Consumer<Entity> spawn = e -> placeEntity.accept(e, getRandomFreeTile.get());
 
-    // move an entity e in direction d
-    private final BiConsumer<Entity, Direction> shiftEntity = (e, d) -> {
-        Tile currentTile = entityMap.get(e);
-        Coordinates currentCoordinates = new Coordinates(currentTile.getX(), currentTile.getY());
-        Coordinates finalCoordinates = currentCoordinates.shift(d);
-        Tile finalTile = tileMap.get(finalCoordinates.getX(), finalCoordinates.getY());
-
-        placeEntity.accept(e, finalTile);
-    };
-
     // generate the level map
     private final Runnable generate = () -> {
-        var cave = new CaveGenerator(WIDTH, HEIGHT).getCave();
+        final var cave = new CaveGenerator(WIDTH, HEIGHT).getCave();
 
         // tileMap
         IntStream.range(0, WIDTH).forEach(x -> {
             IntStream.range(0, HEIGHT).forEach(y -> {
-                var isWall = cave[x][y];
-                var madeOf = random.nextInt(VINE_PROBABILITY) != 0 ? Material.BRICKS : Material.VINES;
+                final var isWall = cave[x][y];
+                final var madeOf = random.nextInt(VINE_PROBABILITY) != 0 ? Material.BRICKS : Material.VINES;
 
-                var t = new TileImpl(this, x, y, madeOf, isWall);
+                final var t = new TileImpl(this, x, y, madeOf, isWall);
 
-                // redundant but not slow as fuck
+                // redundant but not slow
                 tileMap.put(x, y, t);
 
                 // cache free tiles
@@ -114,22 +104,24 @@ public class LevelImpl implements Level {
         });
 
         // door to next level
-        var door = getRandomFreeTile.get();
+        final var door = getRandomFreeTile.get();
         freeTiles.remove(door);
         door.setDoor();
     };
 
     // nearest direction to player
     private final Function<Entity, Direction> nearestDirectionToPlayer = e -> {
-        int east = entityMap.get(player).getX() - entityMap.get(e).getX();
-        int west = entityMap.get(e).getX() - entityMap.get(player).getX();
-        int south = entityMap.get(player).getY() - entityMap.get(e).getY();
-        int north = entityMap.get(e).getY() - entityMap.get(player).getY();
+        final int east = entityMap.get(player).getX() - entityMap.get(e).getX();
+        final int west = entityMap.get(e).getX() - entityMap.get(player).getX();
+        final int south = entityMap.get(player).getY() - entityMap.get(e).getY();
+        final int north = entityMap.get(e).getY() - entityMap.get(player).getY();
 
-        Pair<Direction, Integer> xDirection = east > 0 ? new Pair<>(Direction.EAST, east)
-                : new Pair<>(Direction.WEST, west);
-        Pair<Direction, Integer> yDirection = south > 0 ? new Pair<>(Direction.SOUTH, south)
-                : new Pair<>(Direction.NORTH, north);
+        final Pair<Direction, Integer> xDirection = east > 0
+            ? new Pair<>(Direction.EAST, east)
+            : new Pair<>(Direction.WEST, west);
+        final Pair<Direction, Integer> yDirection = south > 0
+            ? new Pair<>(Direction.SOUTH, south)
+            : new Pair<>(Direction.NORTH, north);
 
         return xDirection.getValue() > yDirection.getValue() ? xDirection.getKey() : yDirection.getKey();
     };
@@ -160,13 +152,13 @@ public class LevelImpl implements Level {
 
     public final boolean moveEntities(final Direction d) {
         // we can edit this from inside lambdas
-        var nextLevel = new AtomicBoolean(false);
+        final var nextLevel = new AtomicBoolean(false);
 
         entityMap.forEach((e, t) -> {
             // interact
             if (e instanceof Creature) {
                 // TODO monster movement
-                Tile nextTile = e instanceof Player
+                final Tile nextTile = e instanceof Player
                     ? getRelativeTile.apply(e, d)
                     : getRelativeTile.apply(e, ((Monster) e).monsterMove(nearestDirectionToPlayer.apply(e)));
 
@@ -175,7 +167,7 @@ public class LevelImpl implements Level {
                     removeEntity.accept(e);
                 }
 
-                Entity relativeEntity = entityMap.inverse().get(nextTile);
+                final Entity relativeEntity = entityMap.inverse().get(nextTile);
 
                 if (relativeEntity instanceof Creature) {
                     combat.attack((Creature) e, (Creature) relativeEntity);
