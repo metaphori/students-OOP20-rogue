@@ -20,8 +20,8 @@ import rogue.model.items.weapons.WeaponType;
 
 
 public class ItemFactoryImpl implements ItemFactory {
-    private static final int MIN_ITEMS = 5;
-    private static final int MAX_ITEMS = 7;
+    private static final int MIN_ITEMS = 15;
+    private static final int MAX_ITEMS = 20;
     private static final int ITEM_COUNT_DIFF = MAX_ITEMS - MIN_ITEMS;
 
     private static final int ARMOR = 0;
