@@ -1,6 +1,7 @@
 package rogue.model.world;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import rogue.model.Entity;
@@ -18,4 +19,5 @@ public interface Level {
 
     boolean moveEntities(Direction d);
 
+    Map<Entity, Tile> getEntityMap();
 }

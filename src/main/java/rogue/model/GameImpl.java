@@ -2,6 +2,7 @@ package rogue.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
@@ -30,6 +31,10 @@ public class GameImpl implements Game {
 
     public final Stream<Tile> getTiles() {
         return getCurrentLevel.get().getTileStream();
+    }
+
+    public final Map<Entity, Tile> getEntityMap() {
+        return getCurrentLevel.get().getEntityMap();
     }
 
     /** round.

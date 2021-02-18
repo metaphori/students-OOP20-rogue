@@ -39,13 +39,10 @@ public class WorldScene extends Stage {
             // }).start();
         });
 
-        // TODO entiteis
-        /*
         game.getEntityMap().forEach((entity, tile) -> {
             Image img = getImage(entity);
             gc.drawImage(img, tile.getX() * SCALE, tile.getY() * SCALE, SCALE, SCALE);
         });
-        */
 
         root.getChildren().add(c);
         return root;
@@ -59,7 +56,7 @@ public class WorldScene extends Stage {
     }
 
     private Image getImage(final Entity entity) {
-        String name = "";
+        String name = "emptyIcon";
 
         if (entity instanceof Player) {
             name = "Player";
