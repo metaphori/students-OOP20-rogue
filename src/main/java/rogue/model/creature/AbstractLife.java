@@ -49,11 +49,12 @@ public abstract class AbstractLife extends AbstractEventPublisher implements Lif
     }
 
     /**
-     * {@inheritDoc}
+     * Set the health points to the given value.
+     * @param healthPoints
+     *          the healthPoints
      */
-    @Override
-    public void powerUp(final int heal) {
-        this.healthPoints = this.healthPoints + heal;
+    protected void setHealthPoints(final int healthPoints) {
+        this.healthPoints = healthPoints;
     }
 
     /**
