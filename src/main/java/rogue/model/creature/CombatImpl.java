@@ -1,11 +1,18 @@
 package rogue.model.creature;
 
+import java.util.concurrent.ThreadLocalRandom;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import rogue.model.items.inventory.InventoryIsFullException;
 import rogue.model.items.weapons.Weapon.Use;
 
 public class CombatImpl implements Combat {
 
-    private static final int DICE = 19;
+    private static final Logger LOG = LoggerFactory.getLogger(CombatImpl.class);
+
+    private static final int DICE = 20;
     private static final int POISON_DAMAGE_MAX = 2;
     private static final int FLYING_MONSTER_MALUS = 2;
 
@@ -14,11 +21,11 @@ public class CombatImpl implements Combat {
     }
 
     private int playerAttackRoll(final Player player) {
-        return (int) (Math.random() * DICE) + 1 + player.getEquipment().getWeapon().getAccuracy() + this.getModStrength(player);
+        return ThreadLocalRandom.current().nextInt(0, DICE) + player.getEquipment().getWeapon().getAccuracy() + this.getModStrength(player);
     }
 
     private int monsterAttackRoll() {
-        return (int) (Math.random() * DICE) + 1;
+        return ThreadLocalRandom.current().nextInt(0, DICE);
     }
 
     private boolean hit(final int attackRoll, final int enemyAC) {
@@ -35,7 +42,7 @@ public class CombatImpl implements Combat {
         try {
             player.getInventory().addItem(monster.dropItem());
         } catch (InventoryIsFullException e) {
-           //TODO di al logger che non raccogliere l'oggetto perchè l'inntario è pieno
+          LOG.info("The Inventory was full you can't pick up the item");
         }
     }
 
