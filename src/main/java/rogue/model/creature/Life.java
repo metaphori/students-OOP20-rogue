@@ -15,6 +15,13 @@ public interface Life extends EventPublisher {
     void hurt(int damage);
 
     /**
+     * Increase the player health points.
+     * @param heal
+     *          the quantity to add to the player health points
+     */
+    void powerUp(int heal);
+
+    /**
      * @return the amount of health points
      */
     int getHealthPoints();
