@@ -1,5 +1,6 @@
 package rogue.model.creature;
 
+import rogue.model.items.inventory.InventoryIsFullException;
 import rogue.model.items.weapons.Weapon.Use;
 
 public class CombatImpl implements Combat {
@@ -28,28 +29,54 @@ public class CombatImpl implements Combat {
         return (int) (Math.random() * POISON_DAMAGE_MAX);
     }
 
-    private void playerAttack(final Player player, final Monster monster) {
-        monster.getSpecial().becomeHostile();
-        if (monster.getSpecial().isFlyng()) {
-            if (this.hit(playerAttackRoll(player) - FLYING_MONSTER_MALUS, monster.getAC())) {
-                monster.getLife().hurt(player.getEquipment().getWeapon().getDamage(Use.HANDLED));
-            }
-        } else {
-            if (this.hit(playerAttackRoll(player), monster.getAC())) {
-                monster.getLife().hurt(player.getEquipment().getWeapon().getDamage(Use.HANDLED));
-            }
+    private void drop(final Player player, final Monster monster) {
+        player.getLife().addCoins(monster.getMoney());
+        player.getLife().increaseExperience(monster.getLife().getExperience());
+        try {
+            player.getInventory().addItem(monster.dropItem());
+        } catch (InventoryIsFullException e) {
+           //TODO di al logger che non raccogliere l'oggetto perchè l'inntario è pieno
         }
     }
 
-    private void monsterAttack(final Monster monster, final Player player) {
+
+    private Result playerAttack(final Player player, final Monster monster) {
+        monster.getSpecial().becomeHostile();
+        int malus = 0;
+        if (monster.getSpecial().isFlyng()) {
+            malus = FLYING_MONSTER_MALUS;
+        }
+        if (this.hit(playerAttackRoll(player) - malus, monster.getAC())) {
+                monster.getLife().hurt(player.getEquipment().getWeapon().getDamage(Use.HANDLED));
+                if (monster.getLife().isDead()) {
+                    this.drop(player, monster);
+                    return Result.DEAD;
+                } else {
+                    return Result.HIT;
+                }
+       }
+        return Result.MISS;
+    }
+
+    private Result monsterAttack(final Monster monster, final Player player) {
         if (this.hit(monsterAttackRoll(), player.getEquipment().getArmor().getAC())) {
             player.getLife().hurt(monster.attackDamage());
             if (monster.getSpecial().isDrainLife()) {
                 monster.getLife().setHealthPoints(monster.getLife().getHealthPoints() + monster.attackDamage());
-            } else if (monster.getSpecial().isPoisonous()) {
+                return Result.DRAINLIFE;
+            }
+            if (monster.getSpecial().isPoisonous()) {
                 player.getLife().hurt(this.poisonDamage());
+                return Result.POISON;
+            }
+            if (monster.getLife().isDead()) {
+                this.drop(player, monster);
+                return Result.DEAD;
+            } else {
+                return Result.HIT;
             }
         }
+        return Result.MISS;
     }
 
     /**
@@ -60,11 +87,11 @@ public class CombatImpl implements Combat {
      *         who defends himself from the attack
      */
     @Override
-    public void attack(final Creature<?> attacker, final Creature<?> defender) {
+    public Result attack(final Creature<?> attacker, final Creature<?> defender) {
         if (attacker instanceof Player) {
-            playerAttack((Player) attacker, (Monster) defender);
+            return this.playerAttack((Player) attacker, (Monster) defender);
         } else {
-            monsterAttack((Monster) attacker, (Player) defender);
+            return this.monsterAttack((Monster) attacker, (Player) defender);
         }
     }
 }
