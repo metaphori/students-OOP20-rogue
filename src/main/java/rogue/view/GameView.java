@@ -11,6 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import rogue.controller.StatusBarControllerImpl;
 import rogue.controller.inventory.InventoryController;
 import rogue.controller.inventory.InventoryControllerImpl;
 import rogue.model.Game;
@@ -26,19 +27,18 @@ public class GameView {
     private final Player player = new PlayerFactoryImpl().create();
     private void loadStatusBar() {
         final HBox box = (HBox) this.scene.lookup("#top");
-        System.out.print(box);
-
-        box.getChildren().add(new StatusBarViewImpl().getNode());
+        // TODO temporary --> to test!
+        final StatusBarViewImpl sbv = new StatusBarViewImpl();
+        new StatusBarControllerImpl(sbv, player);
+        box.getChildren().add(sbv.getNode());
     }
 
     private void loadInventory() throws IOException {
         final VBox box = (VBox) this.scene.lookup("#inventory");
-        System.out.println(box);
         final FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource("layout/InventoryView.fxml"));
         box.getChildren().add(loader.load());
-
+        // TODO temporary --> to test!
         final InventoryController inventoryController = new InventoryControllerImpl(player);
-
         final InventoryViewImpl controller = loader.getController();
         controller.init(inventoryController);
     }

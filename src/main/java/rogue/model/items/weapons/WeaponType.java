@@ -20,58 +20,62 @@ import rogue.model.items.weapons.Weapon.Use;
  * The damage is an {@link Integer} obtained taking key random numbers from 1 to value
  * and then summing them.
  * 
+ * The third field keeps track the armor's name.
  */
 public enum WeaponType {
 
     /**
      * Mace.
      */
-    MACE(new Pair<>(2, 4), new Pair<>(1, 3)), 
+    MACE(new Pair<>(2, 4), new Pair<>(1, 3), "Mace"), 
     /**
      * Long sword.
      */
-    LONG_SWORD(new Pair<>(3, 4), new Pair<>(1, 2)), 
+    LONG_SWORD(new Pair<>(3, 4), new Pair<>(1, 2), "Long sword"), 
     /**
      * Short bow.
      */
-    SHORT_BOW(new Pair<>(1, 1), new Pair<>(1, 1)),
+    SHORT_BOW(new Pair<>(1, 1), new Pair<>(1, 1), "Short Bow"),
     /**
      * Arrow.
      */
-    ARROW(new Pair<>(1, 1), new Pair<>(2, 3)), 
+    ARROW(new Pair<>(1, 1), new Pair<>(2, 3), "Arrow"), 
     /**
      * Dagger.
      */
-    DAGGER(new Pair<>(1, 6), new Pair<>(1, 4)), 
+    DAGGER(new Pair<>(1, 6), new Pair<>(1, 4), "Dagger"), 
     /**
      * Two handed sword.
      */
-    TWO_HAND_SWORD(new Pair<>(4, 4), new Pair<>(1, 2)),
+    TWO_HAND_SWORD(new Pair<>(4, 4), new Pair<>(1, 2), "2 hand sword"),
     /**
      * Dart.
      */
-    DART(new Pair<>(1, 1), new Pair<>(1, 3)),
+    DART(new Pair<>(1, 1), new Pair<>(1, 3), "Dart"),
     /**
      * Crossbow.
      */
-    CROSSBOW(new Pair<>(1, 1), new Pair<>(1, 1)), 
+    CROSSBOW(new Pair<>(1, 1), new Pair<>(1, 1), "Crossbow"), 
     /**
      * Shuriken, a hidden hand blade.
      */
-    SHURIKEN(new Pair<>(1, 2), new Pair<>(2, 5)),
+    SHURIKEN(new Pair<>(1, 2), new Pair<>(2, 5), "Shuriken"),
     /**
      * Spear.
      */
-    SPEAR(new Pair<>(2, 3), new Pair<>(1, 6));
+    SPEAR(new Pair<>(2, 3), new Pair<>(1, 6), "Spear");
 
     /**
      * The accuracy is the same for each weapon.
      */
     private static final int ACCURACY = 0;
     private final Map<Weapon.Use, Pair<Integer, Integer>> damageMap;
+    private final String name;
     private final Random rnd = new Random();
 
-    WeaponType(final Pair<Integer, Integer> handledDamage, final Pair<Integer, Integer> throwableDamage) {
+    WeaponType(final Pair<Integer, Integer> handledDamage, 
+            final Pair<Integer, Integer> throwableDamage, final String name) {
+        this.name = name;
         this.damageMap = new EnumMap<>(Use.class);
         this.damageMap.put(Use.HANDLED, handledDamage);
         this.damageMap.put(Use.THROWABLE, throwableDamage);
@@ -93,6 +97,13 @@ public enum WeaponType {
      */
     protected int getAccuracy() {
         return ACCURACY;
+    }
+
+    /**
+     * @return a String representing the weapon name
+     */
+    protected String getName() {
+        return this.name;
     }
 
 }

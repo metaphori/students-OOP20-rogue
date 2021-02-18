@@ -18,7 +18,7 @@ public final class IncreaseAccuracy extends WeaponDecorator {
 
     @Override
     public String toString() {
-        return "IncreaseAccuracy [" + super.toString() + "]";
+        return super.toString() + " increased accuracy";
     }
 
 }

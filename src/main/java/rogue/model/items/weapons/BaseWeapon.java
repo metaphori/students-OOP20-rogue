@@ -61,7 +61,7 @@ public final class BaseWeapon implements Weapon {
 
     @Override
     public String toString() {
-        return "Weapon [weapon=" + weapon + "]";
+        return this.weapon.getName();
     }
 
 }
