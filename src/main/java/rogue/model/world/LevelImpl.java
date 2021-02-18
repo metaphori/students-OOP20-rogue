@@ -110,7 +110,7 @@ public class LevelImpl implements Level {
     };
 
     // nearest direction to player
-    private Function<Entity, Direction> nearestDirectionToPlayer = e -> {
+    private final Function<Entity, Direction> nearestDirectionToPlayer = e -> {
         int east = entityMap.get(player).getX() - entityMap.get(e).getX();
         int west = entityMap.get(e).getX() - entityMap.get(player).getX();
         int south = entityMap.get(player).getY() - entityMap.get(e).getY();
