@@ -12,29 +12,43 @@ import javafx.util.Pair;
  */
 public final class StandardLevelIncreaseStrategy implements LevelIncreaseStrategy {
 
+    /**
+     * This enumeration represents the association between the experience value,
+     * kept in the first field, and the level one, kept in the second field.
+     */
     enum ExpLevel {
-        ONE(0), TWO(7), THREE(16), FOUR(30), FIVE(50), SIX(75), SEVEN(115), 
-        EIGHT(170), NINE(250), TEN(355), ELEVEN(525), TWELVE(725), THIRTEEN(1050),
-        FOURTEEN(1475), FIFTEEN(2125), SIXTEEN(3000), SEVENTEEN(4250), 
-        EIGHTEEN(6000), NINETEEN(8500), TWENTY(12_000);
+        L1(0, 1),      L2(7, 2),      L3(16, 3),     L4(30, 4), 
+        L5(50, 5),     L6(75, 6),     L7(115, 7),    L8(170, 8),
+        L9(250, 9),    L10(355, 10),  L11(525, 11),  L12(725, 12),
+        L13(1050, 13), L14(1475, 14), L15(2125, 15), L16(3000, 16), 
+        L17(4250, 17), L18(6000, 18), L19(8500, 19), L20(12_000, 20);
 
         private final int expValue;
+        private final int levelValue;
 
-        ExpLevel(final int expValue) {
+        ExpLevel(final int expValue, final int levelValue) {
             this.expValue = expValue;
+            this.levelValue = levelValue;
         }
 
         private int getExpValue() {
             return this.expValue;
         }
 
+        private int getLevelValue() {
+            return this.levelValue;
+        }
+
     }
 
     private List<Pair<Integer, Integer>> values;
 
+    /**
+     * Creates a new standard strategy for level increase.
+     */
     public StandardLevelIncreaseStrategy() {
         this.values = Arrays.asList(ExpLevel.values()).stream()
-            .map(i -> new Pair<>(i.getExpValue(), i.ordinal() + 1))
+            .map(i -> new Pair<>(i.getExpValue(), i.getLevelValue()))
             .collect(Collectors.toList());
     }
 
