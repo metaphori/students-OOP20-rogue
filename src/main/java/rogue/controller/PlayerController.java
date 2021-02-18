@@ -42,12 +42,12 @@ public final class PlayerController extends AbstractEntityController<StatusBarVi
     @Subscribe
     public void onLifeChange(final LifeEvent<PlayerLife> event) {
         LOG.info("Life changed " + event);
-//        this.getView().setCoins(event.getLife().getCoins());
-//        this.getView().setCurrentHealthPoints(event.getLife().getHealthPoints());
-//        this.getView().setMaxHealthPoints(event.getLife().getMaxHealthPoints());
-//        this.getView().setExperience(event.getLife().getExperience());
-//        this.getView().setLevel(event.getLife().getLevel());
-//        this.getView().setStrength(event.getLife().getStrength());
+        this.getView().setCoins(event.getLife().getCoins());
+        this.getView().setCurrentHealthPoints(event.getLife().getHealthPoints());
+        this.getView().setMaxHealthPoints(event.getLife().getMaxHealthPoints());
+        this.getView().setExperience(event.getLife().getExperience());
+        this.getView().setLevel(event.getLife().getLevel());
+        this.getView().setStrength(event.getLife().getStrength());
     }
 
     /**
