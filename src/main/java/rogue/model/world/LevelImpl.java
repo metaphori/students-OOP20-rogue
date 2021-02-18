@@ -178,6 +178,8 @@ public class LevelImpl implements Level {
                 } else if (e instanceof Player && relativeEntity instanceof Item) {
                     try {
                         ((Player) e).getInventory().addItem((Item) relativeEntity);
+                        removeEntity.accept(relativeEntity);
+                        placeEntity.accept(e, nextTile);
                     } catch (InventoryIsFullException e1) {
                         // TODO Auto-generated catch block
                         e1.printStackTrace();
