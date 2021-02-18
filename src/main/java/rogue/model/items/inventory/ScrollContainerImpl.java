@@ -85,9 +85,7 @@ public class ScrollContainerImpl extends AbstractEventPublisher implements Scrol
                 /*
                  * Scroll duration is over, remove scroll.
                  */
-                this.scroll = new Pair<>(Optional.empty(), 0);
-                this.post(new InventoryEvent<>(player.getInventory()));
-                return true;
+                return removeActiveScroll();
             } else {
                 /*
                  * Update scroll's duration
