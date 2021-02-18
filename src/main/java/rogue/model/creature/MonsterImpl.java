@@ -2,6 +2,7 @@ package rogue.model.creature;
 
 import javafx.util.Pair;
 import rogue.model.items.potion.PotionImpl;
+import rogue.model.world.Direction;
 
 public class MonsterImpl implements Monster {
 
@@ -103,4 +104,35 @@ public class MonsterImpl implements Monster {
            return null;
         }
     }
+
+    private Direction randomMove() {
+        final int direction = (int) (Math.random() * 4);
+        switch (direction) {
+        case 1:
+            return Direction.NORTH;
+        case 2:
+            return Direction.EAST;
+        case 3:
+            return Direction.SOUTH;
+        case 4:
+            return Direction.WEST;
+        default:
+            return Direction.NONE;
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Direction monsterMove(final Direction playerDirection, final Monster monster) {
+        if (monster.getSpecial().isFlyingRandom()) {
+            return this.randomMove();
+        } else if (monster.getSpecial().isHostile()) {
+            return playerDirection;
+        } else {
+            return Direction.NONE;
+        }
+    }
+
 }
