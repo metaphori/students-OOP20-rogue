@@ -75,13 +75,6 @@ public interface PlayerLife extends Life {
     int getLevel();
 
     /**
-     * Increase the player level of the given amount.
-     * @param amount
-     *          the amount of coins to subtract
-     */ 
-    void increaseLevel(int amount);
-
-    /**
      * Sets the player maximum health points.
      * @param maxHealthPoints
      *          the max quantity of healthPoints the player can collect
