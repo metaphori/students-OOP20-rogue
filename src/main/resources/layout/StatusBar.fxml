@@ -2,181 +2,218 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="76.0" prefWidth="540.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="79.0" prefWidth="933.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="713.0" minWidth="10.0" prefWidth="552.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="599.0" minWidth="10.0" prefWidth="381.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="127.0" minHeight="7.0" prefHeight="65.0" vgrow="SOMETIMES" />
+  </rowConstraints>
    <children>
-      <VBox prefHeight="63.0" prefWidth="36.0">
+      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="556.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="NEVER" maxWidth="327.0" minWidth="10.0" prefWidth="246.0" />
+            <ColumnConstraints hgrow="NEVER" maxWidth="508.0" minWidth="10.0" prefWidth="240.0" />
+            <ColumnConstraints hgrow="NEVER" maxWidth="508.0" minWidth="10.0" prefWidth="240.0" />
+            <ColumnConstraints hgrow="NEVER" maxWidth="508.0" minWidth="10.0" prefWidth="240.0" />
+            <ColumnConstraints hgrow="NEVER" maxWidth="508.0" minWidth="10.0" prefWidth="240.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="53.0" minHeight="0.0" prefHeight="20.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
-            <Text fill="#c37a28" strokeType="OUTSIDE" strokeWidth="0.0" text="Level" textAlignment="CENTER" wrappingWidth="67.5439453125">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </Text>
-            <HBox prefHeight="74.0" prefWidth="36.0">
+            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="108.0" GridPane.rowIndex="1">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
                <children>
-                  <Label fx:id="level" alignment="CENTER" prefHeight="25.0" prefWidth="88.0" text="0" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+                  <Label fx:id="level" alignment="CENTER" prefHeight="22.0" prefWidth="81.0" text="0" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                      <font>
-                        <Font size="20.0" />
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="42.0" prefWidth="67.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Label fx:id="gold" alignment="CENTER" prefHeight="25.0" prefWidth="145.0" text="0" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="108.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Label fx:id="strength" alignment="CENTER" prefHeight="22.0" prefWidth="208.0" text="0" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="108.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Label fx:id="experience" alignment="CENTER" prefHeight="25.0" prefWidth="183.0" text="0" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="108.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Label fx:id="hp" alignment="CENTER" prefHeight="25.0" prefWidth="43.0" text="0" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="gold121" alignment="CENTER" prefHeight="25.0" prefWidth="43.0" text="/" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="maxHp" alignment="CENTER" prefHeight="25.0" prefWidth="43.0" text="0" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="20.0" prefWidth="105.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+               <children>
+                  <Text fill="#c37a28" strokeType="OUTSIDE" strokeWidth="0.0" text="Level" textAlignment="CENTER" wrappingWidth="45.5439453125">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" GridPane.columnIndex="1">
+               <children>
+                  <Text fill="#c37a28" strokeType="OUTSIDE" strokeWidth="0.0" text="Gold" textAlignment="CENTER" wrappingWidth="53.5439453125">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" GridPane.columnIndex="2">
+               <children>
+                  <Text fill="#c37a28" strokeType="OUTSIDE" strokeWidth="0.0" text="Hp" textAlignment="CENTER" wrappingWidth="39.5439453125">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="20.0" prefWidth="0.0" GridPane.columnIndex="3">
+               <children>
+                  <Text fx:id="strength" fill="#c37a28" strokeType="OUTSIDE" strokeWidth="0.0" text="Strength" textAlignment="CENTER" wrappingWidth="94.5439453125">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="20.0" prefWidth="0.0" GridPane.columnIndex="4">
+               <children>
+                  <Text fx:id="strength1" fill="#c37a28" strokeType="OUTSIDE" strokeWidth="0.0" text="Experience" textAlignment="CENTER" wrappingWidth="104.5439453125">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets right="20.0" />
+         </padding>
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+      </GridPane>
+      <VBox prefHeight="85.0" prefWidth="500.0" GridPane.columnIndex="1">
+         <children>
+            <HBox prefHeight="33.0" prefWidth="381.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="75.0" text="Weapon: " textFill="#c37a28">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="weapon" prefHeight="43.0" prefWidth="302.0" text="nope">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="35.0" prefWidth="381.0">
+               <children>
+                  <Label prefHeight="34.0" text="Armor: " textFill="#c37a28">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="armor" prefHeight="34.0" text="nope">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
          </children>
-         <padding>
-            <Insets left="3.0" right="3.0" />
-         </padding>
-         <HBox.margin>
-            <Insets left="5.0" right="5.0" />
-         </HBox.margin>
       </VBox>
-      <VBox prefHeight="98.0" prefWidth="0.0">
-         <children>
-            <Text fill="#c37a28" strokeType="OUTSIDE" strokeWidth="0.0" text="Gold" textAlignment="CENTER" wrappingWidth="67.5439453125">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </Text>
-            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="108.0">
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-               <children>
-                  <Label fx:id="gold" alignment="CENTER" prefHeight="25.0" prefWidth="49.0" text="0" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-         </children>
-         <padding>
-            <Insets left="3.0" right="3.0" />
-         </padding>
-         <HBox.margin>
-            <Insets left="5.0" right="5.0" />
-         </HBox.margin>
-      </VBox>
-      <VBox prefHeight="98.0" prefWidth="52.0">
-         <children>
-            <Text fill="#c37a28" strokeType="OUTSIDE" strokeWidth="0.0" text="Hp" textAlignment="CENTER" wrappingWidth="123.5439453125">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </Text>
-            <HBox prefHeight="45.0" prefWidth="98.0">
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-               <children>
-                  <Label fx:id="hp" alignment="CENTER" contentDisplay="CENTER" prefHeight="54.0" prefWidth="64.0" text="0" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" prefHeight="80.0" prefWidth="26.0" text="/" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="maxHp" alignment="CENTER" prefHeight="54.0" prefWidth="64.0" text="0" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-         </children>
-         <padding>
-            <Insets left="3.0" right="3.0" />
-         </padding>
-         <HBox.margin>
-            <Insets left="5.0" right="5.0" />
-         </HBox.margin>
-      </VBox>
-      <VBox prefHeight="98.0" prefWidth="0.0">
-         <children>
-            <Text fx:id="strength" fill="#c37a28" strokeType="OUTSIDE" strokeWidth="0.0" text="Strength" textAlignment="CENTER" wrappingWidth="76.5439453125">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </Text>
-            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="108.0">
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-               <children>
-                  <Label fx:id="gold1" alignment="CENTER" prefHeight="25.0" prefWidth="49.0" text="0" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-         </children>
-         <padding>
-            <Insets left="3.0" right="3.0" />
-         </padding>
-         <HBox.margin>
-            <Insets left="5.0" right="5.0" />
-         </HBox.margin>
-      </VBox>
-      <VBox prefHeight="98.0" prefWidth="0.0">
-         <children>
-            <Text fx:id="experience" fill="#c37a28" strokeType="OUTSIDE" strokeWidth="0.0" text="Experience" textAlignment="CENTER" wrappingWidth="99.5439453125">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </Text>
-            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="108.0">
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-               <children>
-                  <Label fx:id="gold2" alignment="CENTER" prefHeight="25.0" prefWidth="49.0" text="0" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-         </children>
-         <padding>
-            <Insets left="3.0" right="3.0" />
-         </padding>
-         <HBox.margin>
-            <Insets left="5.0" right="5.0" />
-         </HBox.margin>
-      </VBox>
+      <VBox prefHeight="85.0" prefWidth="545.0" />
    </children>
-   <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-   </padding>
-</HBox>
+</GridPane>

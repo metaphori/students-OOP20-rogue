@@ -20,7 +20,7 @@
               </rowConstraints>
             </GridPane>
          </children></HBox>
-      <GridPane fx:id="inventoryGrid" prefHeight="280.0" prefWidth="206.0" VBox.vgrow="ALWAYS">
+      <GridPane fx:id="inventoryGrid" prefHeight="400.0" prefWidth="206.0" VBox.vgrow="ALWAYS">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
