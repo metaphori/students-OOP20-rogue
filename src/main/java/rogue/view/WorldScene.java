@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import rogue.model.Entity;
 import rogue.model.Game;
 import rogue.model.creature.Player;
+import rogue.model.items.Item;
 import rogue.model.world.Tile;
 
 public class WorldScene extends Stage {
@@ -65,6 +66,8 @@ public class WorldScene extends Stage {
 
         if (entity instanceof Player) {
             name = "Player";
+        } else if (entity instanceof Item) {
+            return new ItemImageGeneratorImpl().getImage((Item) entity);
         }
 
         return new Image(ClassLoader.getSystemResource("images/" + name + ".png").toExternalForm());
