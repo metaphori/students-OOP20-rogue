@@ -125,10 +125,10 @@ public class MonsterImpl implements Monster {
      * {@inheritDoc}
      */
     @Override
-    public Direction monsterMove(final Direction playerDirection, final Monster monster) {
-        if (monster.getSpecial().isFlyingRandom()) {
+    public Direction monsterMove(final Direction playerDirection) {
+        if (this.getSpecial().isFlyingRandom()) {
             return this.randomMove();
-        } else if (monster.getSpecial().isHostile()) {
+        } else if (this.getSpecial().isHostile()) {
             return playerDirection;
         } else {
             return Direction.NONE;

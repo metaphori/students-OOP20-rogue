@@ -73,5 +73,5 @@ public interface Monster extends Creature<MonsterLife> {
      *         who did the move
      * @return the direction where the monster must move
      */
-    Direction monsterMove(Direction playerDirection, Monster monster);
+    Direction monsterMove(Direction playerDirection);
 }

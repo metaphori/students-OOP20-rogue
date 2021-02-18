@@ -24,6 +24,7 @@ import rogue.model.Entity;
 import rogue.model.creature.Combat;
 import rogue.model.creature.CombatImpl;
 import rogue.model.creature.Creature;
+import rogue.model.creature.Monster;
 import rogue.model.creature.Player;
 import rogue.model.items.Item;
 import rogue.model.items.inventory.InventoryIsFullException;
@@ -162,9 +163,9 @@ public class LevelImpl implements Level {
             // interact
             if (e instanceof Creature) {
                 // TODO monster movement
-                Tile nextTile = e instanceof Player ? getRelativeTile.apply(e, d)
-                        : getRelativeTile.apply(e,
-                                /* e.getDirection(nearestDirectionToPlayer.apply(e)) */ Direction.NONE);
+                Tile nextTile = e instanceof Player
+                    ? getRelativeTile.apply(e, d)
+                    : getRelativeTile.apply(e, ((Monster) e).monsterMove(nearestDirectionToPlayer.apply(e)));
 
                 if (nextTile.getMaterial() == Material.DOOR) {
                     nextLevel.set(true);
