@@ -2,19 +2,19 @@ package rogue.controller;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import rogue.model.Game;
-import rogue.model.GameImpl;
+import rogue.model.World;
+import rogue.model.WorldImpl;
 import rogue.model.creature.Player;
 import rogue.model.world.Direction;
 import rogue.view.WorldScene;
 
 public class WorldController {
     private static final int DEPTH = 5;
-    private final Game game;
+    private final World game;
     private final WorldScene worldScene;
 
     public WorldController(final Player player) {
-        this.game = new GameImpl(DEPTH, player);
+        this.game = new WorldImpl(DEPTH, player);
         this.worldScene = new WorldScene(game);
     }
 

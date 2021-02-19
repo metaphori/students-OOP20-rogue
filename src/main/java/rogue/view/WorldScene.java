@@ -10,7 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import rogue.model.Entity;
-import rogue.model.Game;
+import rogue.model.World;
 import rogue.model.creature.Player;
 import rogue.model.items.Item;
 import rogue.model.world.Tile;
@@ -18,10 +18,10 @@ import rogue.model.world.Tile;
 public class WorldScene extends Stage {
     private static final int SCALE = 25;
     private final Pane root = new Pane();
-    private final Game game;
+    private final World game;
     private final Canvas tileCanvas, entityCanvas;
 
-    public WorldScene(final Game game) {
+    public WorldScene(final World game) {
         super();
 
         this.game = game;
@@ -35,7 +35,7 @@ public class WorldScene extends Stage {
         return this.root;
     }
 
-    private Parent initSceneUI(final Game game) {
+    private Parent initSceneUI(final World game) {
         drawTiles();
         drawEntities();
 

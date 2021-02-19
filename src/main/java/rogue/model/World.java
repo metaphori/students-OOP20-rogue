@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 import rogue.model.world.Direction;
 import rogue.model.world.Tile;
 
-public interface Game {
+public interface World {
     int getWidth();
     int getHeight();
     Stream<Tile> getTiles();

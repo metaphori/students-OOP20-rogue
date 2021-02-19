@@ -14,7 +14,7 @@ import rogue.model.world.Level;
 import rogue.model.world.LevelImpl;
 import rogue.model.world.Tile;
 
-public class GameImpl implements Game {
+public class WorldImpl implements World {
     private static final MonsterFactory MONSTER_FACTORY = new MonsterFactoryImpl();
     private static final ItemFactory ITEM_FACTORY = new ItemFactoryImpl();
 
@@ -65,7 +65,7 @@ public class GameImpl implements Game {
         return currentLevel.getHeight();
     }
 
-    public GameImpl(final int depth, final Player player) {
+    public WorldImpl(final int depth, final Player player) {
         this.player = player;
         // spawn player
         nextLevel.run();
