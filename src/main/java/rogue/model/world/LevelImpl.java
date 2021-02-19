@@ -169,6 +169,9 @@ public class LevelImpl implements Level {
      */
     private Predicate<Direction> movePlayer = d -> {
         final var nextTile = getRelativeTile.apply(player, d);
+        if (nextTile == null) {
+            return false;
+        }
         final var nextEntity = entityMap.inverse().get(nextTile);
 
         if (nextTile.getMaterial() == Material.DOOR) {
@@ -199,6 +202,9 @@ public class LevelImpl implements Level {
     private Consumer<Entity> moveMonster = e -> {
         final Monster m = (Monster) e;
         final var nextTile = getRelativeTile.apply(m, m.monsterMove(nearestDirectionToPlayer.apply(m)));
+        if (nextTile == null) {
+            return;
+        }
         final var nextEntity = entityMap.inverse().get(nextTile);
 
         if (canPlaceEntity.test(nextTile)) {
