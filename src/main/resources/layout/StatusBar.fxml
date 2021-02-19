@@ -10,22 +10,23 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="73.0" prefWidth="933.0" style="-fx-background-color: #808080;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="73.0" prefWidth="1006.0" style="-fx-background-color: #808080;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="713.0" minWidth="10.0" prefWidth="552.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="599.0" minWidth="10.0" prefWidth="381.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="713.0" minWidth="10.0" prefWidth="569.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="599.0" minWidth="10.0" prefWidth="437.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints maxHeight="127.0" minHeight="7.0" prefHeight="65.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="556.0">
+      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="600.0">
          <columnConstraints>
-            <ColumnConstraints hgrow="NEVER" maxWidth="327.0" minWidth="10.0" prefWidth="246.0" />
-            <ColumnConstraints hgrow="NEVER" maxWidth="508.0" minWidth="10.0" prefWidth="240.0" />
-            <ColumnConstraints hgrow="NEVER" maxWidth="508.0" minWidth="10.0" prefWidth="240.0" />
-            <ColumnConstraints hgrow="NEVER" maxWidth="508.0" minWidth="10.0" prefWidth="240.0" />
-            <ColumnConstraints hgrow="NEVER" maxWidth="508.0" minWidth="10.0" prefWidth="240.0" />
+            <ColumnConstraints hgrow="NEVER" maxWidth="327.0" minWidth="10.0" prefWidth="79.0" />
+            <ColumnConstraints hgrow="NEVER" maxWidth="508.0" minWidth="10.0" prefWidth="80.0" />
+            <ColumnConstraints hgrow="NEVER" maxWidth="508.0" minWidth="10.0" prefWidth="108.0" />
+            <ColumnConstraints hgrow="NEVER" maxWidth="508.0" minWidth="10.0" prefWidth="108.0" />
+            <ColumnConstraints hgrow="NEVER" maxWidth="508.0" minWidth="10.0" prefWidth="94.0" />
+            <ColumnConstraints hgrow="NEVER" maxWidth="508.0" minWidth="0.0" prefWidth="175.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints maxHeight="53.0" minHeight="0.0" prefHeight="20.0" vgrow="SOMETIMES" />
@@ -77,7 +78,7 @@
                   </Label>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="108.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+            <HBox alignment="CENTER" prefHeight="42.0" prefWidth="142.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
@@ -105,7 +106,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="gold121" alignment="CENTER" prefHeight="25.0" prefWidth="43.0" text="/" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="43.0" text="/" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -146,20 +147,50 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="20.0" prefWidth="0.0" GridPane.columnIndex="3">
                <children>
-                  <Text fx:id="strength" fill="#ffbc40" strokeType="OUTSIDE" strokeWidth="0.0" text="Strength" textAlignment="CENTER" wrappingWidth="94.5439453125">
+                  <Text fill="#ffbc40" strokeType="OUTSIDE" strokeWidth="0.0" text="Strength" textAlignment="CENTER" wrappingWidth="94.5439453125">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Text>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="20.0" prefWidth="0.0" GridPane.columnIndex="4">
+            <HBox alignment="CENTER" prefHeight="20.0" prefWidth="0.0" GridPane.columnIndex="5">
                <children>
-                  <Text fx:id="strength1" fill="#ffbc40" strokeType="OUTSIDE" strokeWidth="0.0" text="Experience" textAlignment="CENTER" wrappingWidth="104.5439453125">
+                  <Text fill="#ffbc40" strokeType="OUTSIDE" strokeWidth="0.0" text="Experience" textAlignment="CENTER" wrappingWidth="163.5439453125">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Text>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="20.0" prefWidth="105.0">
+               <children>
+                  <Text fill="#ffbc40" strokeType="OUTSIDE" strokeWidth="0.0" text="Level" textAlignment="CENTER" wrappingWidth="45.5439453125">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="20.0" prefWidth="34.0" GridPane.columnIndex="4">
+               <children>
+                  <Text fill="#ffbc40" strokeType="OUTSIDE" strokeWidth="0.0" text="Food" textAlignment="CENTER" wrappingWidth="83.5439453125">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox fx:id="food" alignment="CENTER" prefHeight="42.0" prefWidth="67.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Label fx:id="strength1" alignment="CENTER" prefHeight="22.0" prefWidth="208.0" text="0" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </HBox>
          </children>
@@ -182,7 +213,7 @@
                         <Insets />
                      </HBox.margin>
                   </Label>
-                  <Label fx:id="weapon" prefHeight="43.0" prefWidth="302.0" text="nope" textFill="#fffffff2">
+                  <Label fx:id="weapon" prefHeight="33.0" prefWidth="356.0" text="nope" textFill="#fffffff2">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
@@ -202,7 +233,7 @@
                         <Insets />
                      </HBox.margin>
                   </Label>
-                  <Label fx:id="armor" prefHeight="34.0" prefWidth="314.0" text="nope" textFill="#fffffff2">
+                  <Label fx:id="armor" prefHeight="34.0" prefWidth="372.0" text="nope" textFill="#fffffff2">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
@@ -214,6 +245,5 @@
             </HBox>
          </children>
       </VBox>
-      <VBox prefHeight="85.0" prefWidth="545.0" />
    </children>
 </GridPane>
