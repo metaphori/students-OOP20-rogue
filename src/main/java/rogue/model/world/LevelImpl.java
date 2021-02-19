@@ -211,6 +211,9 @@ public class LevelImpl implements Level {
             if (combat.attack((Creature<?>) e, (Creature<?>) nextEntity) == Result.DEAD) {
                 removeEntity.accept(nextEntity);
             }
+        } else if (nextEntity instanceof Item) {
+            // crush item
+            removeEntity.accept(nextEntity);
         }
     };
 
