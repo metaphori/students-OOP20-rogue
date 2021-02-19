@@ -8,19 +8,32 @@ import rogue.model.creature.Player;
 import rogue.model.world.Direction;
 import rogue.view.WorldScene;
 
+/**
+ * the {@link World} controller.
+ */
 public class WorldController {
-    private final World game;
+    private final World world;
     private final WorldScene worldScene;
 
+    /**
+     * @param player the player instance
+     */
     public WorldController(final Player player) {
-        this.game = new WorldImpl(player);
-        this.worldScene = new WorldScene(game);
+        this.world = new WorldImpl(player);
+        this.worldScene = new WorldScene(world);
     }
 
+    /**
+     * @return the current level view
+     */
     public final WorldScene getWorldScene() {
         return worldScene;
     }
 
+    /**
+     * move player and perform a game round.
+     * @param event the key press event
+     */
     public final void movePlayer(final KeyEvent event) {
         final KeyCode key = event.getCode();
 
@@ -48,7 +61,7 @@ public class WorldController {
         }
 
         // update tiles only if level is changed
-        if (game.round(direction)) {
+        if (world.round(direction)) {
             worldScene.drawTiles();
         }
 
