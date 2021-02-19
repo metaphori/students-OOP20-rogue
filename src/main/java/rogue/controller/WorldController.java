@@ -9,12 +9,11 @@ import rogue.model.world.Direction;
 import rogue.view.WorldScene;
 
 public class WorldController {
-    private static final int DEPTH = 5;
     private final World game;
     private final WorldScene worldScene;
 
     public WorldController(final Player player) {
-        this.game = new WorldImpl(DEPTH, player);
+        this.game = new WorldImpl(player);
         this.worldScene = new WorldScene(game);
     }
 

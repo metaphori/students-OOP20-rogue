@@ -66,10 +66,9 @@ public class WorldImpl implements World {
     }
 
     /**
-     * @param depth the level count
      * @param player the player instance
      */
-    public WorldImpl(final int depth, final Player player) {
+    public WorldImpl(final Player player) {
         this.player = player;
         nextLevel.run();
     }
