@@ -63,7 +63,7 @@ public interface Monster extends Creature<MonsterLife> {
      * 
      * @return or not the monster's item
      */
-    PotionImpl dropItem();
+    int dropItem();
 
     /**
      * 
