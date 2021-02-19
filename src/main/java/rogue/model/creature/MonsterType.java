@@ -40,7 +40,7 @@ public enum MonsterType {
    /** 
     * Dragon.
     */
-    DRAGON(new MonsterLife(ThreadLocalRandom.current().nextInt(10, 80 - 10), 5000), -1, new Pair<>(4, 40), new SpecialImpl(/*true*/), 15_000, new PotionImpl(PotionType.POTION_V), 100),
+    DRAGON(new MonsterLife(ThreadLocalRandom.current().nextInt(10, 80 - 10), 5000), -1, new Pair<>(4, 40), new SpecialImpl(true), 15_000, new PotionImpl(PotionType.POTION_V), 100),
 
    /** 
     * Emu. 
@@ -61,7 +61,7 @@ public enum MonsterType {
    /** 
     * Hobgoblin. 
     */
-    HOBGOBLIN(new MonsterLife(ThreadLocalRandom.current().nextInt(1, 8 - 1), 3), 5, new Pair<>(1, 8), new SpecialImpl(/*true*/), 9, new PotionImpl(PotionType.POTION_I), 30),
+    HOBGOBLIN(new MonsterLife(ThreadLocalRandom.current().nextInt(1, 8 - 1), 3), 5, new Pair<>(1, 8), new SpecialImpl(true), 9, new PotionImpl(PotionType.POTION_I), 30),
 
    /** 
     * Ice cube.
@@ -77,7 +77,7 @@ public enum MonsterType {
    /** 
     * Kobold.
     */
-    KOBOLD(new MonsterLife(ThreadLocalRandom.current().nextInt(1, 8 - 1), 1), 6,  new Pair<>(2, 12), new SpecialImpl(/*true*/), 3),
+    KOBOLD(new MonsterLife(ThreadLocalRandom.current().nextInt(1, 8 - 1), 1), 6,  new Pair<>(2, 12), new SpecialImpl(true), 3),
 
    /** 
     * Lycanthrope. 
