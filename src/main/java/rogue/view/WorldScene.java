@@ -46,6 +46,7 @@ public class WorldScene extends Stage {
         p.getChildren().add(entityCanvas);
         bp.setCenter(p);
 
+        root.setStyle("-fx-background-color: #808080;");
         root.getChildren().add(bp);
         return root;
     }
