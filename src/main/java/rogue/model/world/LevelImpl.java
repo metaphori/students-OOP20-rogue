@@ -29,7 +29,6 @@ import rogue.model.creature.CombatImpl;
 import rogue.model.creature.Creature;
 import rogue.model.creature.Monster;
 import rogue.model.creature.Player;
-import rogue.model.creature.PlayerFactoryImpl;
 import rogue.model.items.Item;
 import rogue.model.items.inventory.InventoryIsFullException;
 
@@ -45,7 +44,7 @@ public class LevelImpl implements Level {
     private final Random random = new Random();
     private final Combat combat = new CombatImpl();
     private final Table<Integer, Integer, Tile> tileMap = HashBasedTable.create();
-    private Entity player = new PlayerFactoryImpl().create(); // to be overwritten on level creation
+    private Entity player;
     private Direction currentPlayerDirection = Direction.NONE;
     private boolean areWeChangingLevel = false;
     private final BiMap<Entity, Tile> entityMap = HashBiMap.create();
