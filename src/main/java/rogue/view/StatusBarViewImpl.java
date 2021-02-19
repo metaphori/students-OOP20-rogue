@@ -78,4 +78,9 @@ public final class StatusBarViewImpl implements StatusBarView {
         this.updateLabel("#armor", armor.toString());
     }
 
+    @Override
+    public void setFoodLabel(final int food) {
+        this.updateLabel("#food", Integer.toString(food));
+    }
+
 }
