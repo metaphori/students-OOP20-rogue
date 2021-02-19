@@ -39,11 +39,13 @@ public class CombatImpl implements Combat {
     private void drop(final Player player, final Monster monster) {
         player.getLife().addCoins(monster.getMoney());
         player.getLife().increaseExperience(monster.getLife().getExperience());
-       /* try {
-            player.getInventory().addItem(monster.getItem());
-        } catch (InventoryIsFullException e) {
-          LOG.info("The Inventory was full you can't pick up the item");
-        }*/
+        if (monster.getItemChange() <= monster.dropItem() && monster.getItemChange() != 0) {
+            try {
+                player.getInventory().addItem(monster.getItem());
+            } catch (InventoryIsFullException e) {
+                LOG.info("The Inventory was full you can't pick up the item");
+            }
+        }
     }
 
 
