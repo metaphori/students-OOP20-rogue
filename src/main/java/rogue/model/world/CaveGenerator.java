@@ -9,7 +9,7 @@ class CaveGenerator {
     private static final int CHANCE_TO_START_ALIVE = 20;
     private static final int BIRTH_LIMIT = 3;
     private static final int DEATH_LIMIT = 2;
-    private static final int STEP_COUNT = 5;
+    private static final int STEP_COUNT = 10;
     private static final Random RANDOM = new Random();
     private boolean[][] cave;
 
