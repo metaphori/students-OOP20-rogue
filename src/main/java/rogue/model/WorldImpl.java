@@ -14,6 +14,9 @@ import rogue.model.world.Level;
 import rogue.model.world.LevelImpl;
 import rogue.model.world.Tile;
 
+/**
+ * the default world implemetation.
+ */
 public class WorldImpl implements World {
     private static final MonsterFactory MONSTER_FACTORY = new MonsterFactoryImpl();
     private static final ItemFactory ITEM_FACTORY = new ItemFactoryImpl();
@@ -21,6 +24,9 @@ public class WorldImpl implements World {
     private Level currentLevel;
     private Player player;
 
+    /**
+     * change to the next level.
+     */
     private final Runnable nextLevel = () -> {
         var entityList = new ArrayList<Entity>();
         entityList.add(player);
@@ -38,12 +44,6 @@ public class WorldImpl implements World {
         return currentLevel.getEntityMap();
     }
 
-    /**
-     * round.
-     * 
-     * @param direction player movement direction
-     * @return nextLevel?
-     */
     public final boolean round(final Direction direction) {
         boolean nextlvl = false;
         if (currentLevel.moveEntities(direction)) {
@@ -65,9 +65,12 @@ public class WorldImpl implements World {
         return currentLevel.getHeight();
     }
 
+    /**
+     * @param depth the level count
+     * @param player the player instance
+     */
     public WorldImpl(final int depth, final Player player) {
         this.player = player;
-        // spawn player
         nextLevel.run();
     }
 }
