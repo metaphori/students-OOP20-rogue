@@ -6,7 +6,7 @@ import javafx.scene.input.KeyEvent;
 import rogue.controller.GameController;
 
 /**
- * An interface for controlling the game's Menu.
+ * An interface for the game's Menu view.
  *
  */
 public interface MenuView {
@@ -24,9 +24,4 @@ public interface MenuView {
      */
     void onNameEnter(KeyEvent event) throws IOException;
 
-    /**
-     * Get the name given by the user.
-     * @return the name entered by the user.
-     */
-    String getPlayerName();
 }

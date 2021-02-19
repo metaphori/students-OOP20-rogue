@@ -10,6 +10,10 @@ import rogue.view.GameView;
 import rogue.view.StatusBarView;
 import rogue.view.StatusBarViewImpl;
 
+/**
+ * An implementation of a {@link GameController}.
+ *
+ */
 public class GameControllerImpl implements GameController {
 
     private final StatusBarView statusBarView;
@@ -33,7 +37,7 @@ public class GameControllerImpl implements GameController {
     }
 
     /**
-     * 
+     * Show the game view.
      */
     public void showGame() {
         try {

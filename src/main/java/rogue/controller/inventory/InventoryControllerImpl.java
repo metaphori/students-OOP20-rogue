@@ -10,6 +10,10 @@ import rogue.model.items.inventory.OutOfInventoryException;
 import rogue.model.items.inventory.ScrollContainer;
 import rogue.model.items.scroll.Scroll;
 
+/**
+ * An implementation of a {@link InventoryController}.
+ *
+ */
 public class InventoryControllerImpl implements InventoryController {
 
     private static final Logger LOG = LoggerFactory.getLogger(InventoryController.class);
