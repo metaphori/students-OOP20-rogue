@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 
 public class FoodImplTest {
 
-    private static final int HUNGER_MAX = 50;
+    private static final int HUNGER_MAX = 100;
     private static final int REMOVE_AMOUNT_20 = -20;
     private static final int REMOVE_AMOUNT_10 = -10;
 
@@ -31,6 +31,7 @@ public class FoodImplTest {
          * Consume food with full hunger.
          * expecting false return.
          */
+        pl.getLife().increaseFood(HUNGER_MAX - pl.getLife().getFood());
         assertEquals(HUNGER_MAX, pl.getLife().getFood());
         assertFalse(apple.use(pl));
         assertFalse(cake.use(pl));
@@ -78,7 +79,7 @@ public class FoodImplTest {
          * Consume food that would exceed the MAX_FOOD_AMOUNT.
          * Remove 10, hamburger gives 12, expecting 50 anyway.
          */
-       pl.getLife().increaseFood(REMOVE_AMOUNT_10);
+       pl.getLife().increaseFood(HUNGER_MAX - pl.getLife().getFood() - 10);
        assertTrue(hamburger.use(pl));
        assertEquals(HUNGER_MAX, pl.getLife().getFood());
        pl.getLife().increaseFood(REMOVE_AMOUNT_10);
