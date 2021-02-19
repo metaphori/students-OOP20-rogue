@@ -6,6 +6,11 @@ import javafx.util.Pair;
 import rogue.model.items.potion.PotionImpl;
 import rogue.model.world.Direction;
 
+/**
+ * An implementation for a {@link Monster}. 
+ *
+ */
+
 public class MonsterImpl implements Monster {
 
     private final MonsterType type;
