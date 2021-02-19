@@ -1,41 +1,30 @@
 package rogue.view;
 
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import rogue.model.Entity;
 import rogue.model.World;
 import rogue.model.creature.Player;
 import rogue.model.items.Item;
 import rogue.model.world.Tile;
 
-public class WorldScene extends Stage {
+public class WorldBox extends HBox {
     private static final int SCALE = 25;
-    private final Pane root = new Pane();
     private final World game;
     private final Canvas tileCanvas, entityCanvas;
 
-    public WorldScene(final World game) {
+    public WorldBox(final World game) {
         super();
 
         this.game = game;
         this.tileCanvas = new Canvas(game.getWidth() * SCALE, game.getHeight() * SCALE);
         this.entityCanvas = new Canvas(game.getWidth() * SCALE, game.getHeight() * SCALE);
 
-        setScene(new Scene(initSceneUI(game), game.getWidth() * SCALE, game.getHeight() * SCALE));
-    }
-
-    public final Node getNode() {
-        return this.root;
-    }
-
-    private Parent initSceneUI(final World game) {
         drawTiles();
         drawEntities();
 
@@ -46,9 +35,9 @@ public class WorldScene extends Stage {
         p.getChildren().add(entityCanvas);
         bp.setCenter(p);
 
-        root.setStyle("-fx-background-color: #808080;");
-        root.getChildren().add(bp);
-        return root;
+        this.setStyle("-fx-background-color: #808080;");
+        this.setAlignment(Pos.CENTER);
+        this.getChildren().add(bp);
     }
 
     public final void drawTiles() {

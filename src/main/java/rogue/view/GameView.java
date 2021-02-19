@@ -34,7 +34,7 @@ public class GameView {
 
     private void loadWorld(final WorldController world) {
         final VBox box = (VBox) this.scene.lookup("#world");
-        box.getChildren().add(world.getWorldScene().getNode());
+        box.getChildren().add(world.getWorldBox());
     }
 
     public GameView(final StatusBarView status, final InventoryController inventory, final WorldController world) throws IOException {

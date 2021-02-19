@@ -6,28 +6,28 @@ import rogue.model.World;
 import rogue.model.WorldImpl;
 import rogue.model.creature.Player;
 import rogue.model.world.Direction;
-import rogue.view.WorldScene;
+import rogue.view.WorldBox;
 
 /**
  * the {@link World} controller.
  */
 public class WorldController {
     private final World world;
-    private final WorldScene worldScene;
+    private final WorldBox worldBox;
 
     /**
      * @param player the player instance
      */
     public WorldController(final Player player) {
         this.world = new WorldImpl(player);
-        this.worldScene = new WorldScene(world);
+        this.worldBox = new WorldBox(world);
     }
 
     /**
      * @return the current level view
      */
-    public final WorldScene getWorldScene() {
-        return worldScene;
+    public final WorldBox getWorldBox() {
+        return worldBox;
     }
 
     /**
@@ -62,10 +62,10 @@ public class WorldController {
 
         // update tiles only if level is changed
         if (world.round(direction)) {
-            worldScene.drawTiles();
+            worldBox.drawTiles();
         }
 
         // always update entities
-        worldScene.drawEntities();
+        worldBox.drawEntities();
     }
 }
