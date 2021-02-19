@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -25,11 +24,12 @@ import org.slf4j.LoggerFactory;
 import javafx.util.Pair;
 import rogue.model.Entity;
 import rogue.model.creature.Combat;
+import rogue.model.creature.Combat.Result;
 import rogue.model.creature.CombatImpl;
 import rogue.model.creature.Creature;
 import rogue.model.creature.Monster;
 import rogue.model.creature.Player;
-import rogue.model.creature.Combat.Result;
+import rogue.model.creature.PlayerFactoryImpl;
 import rogue.model.items.Item;
 import rogue.model.items.inventory.InventoryIsFullException;
 
@@ -42,7 +42,7 @@ public class LevelImpl implements Level {
     private final Random random = new Random();
     private final Combat combat = new CombatImpl();
     private final Table<Integer, Integer, Tile> tileMap = HashBasedTable.create();
-    private Entity player = null;
+    private Entity player = new PlayerFactoryImpl().create(); // to be overwritten on level creation
     private Direction currentPlayerDirection = Direction.NONE;
     private boolean areWeChangingLevel = false;
     private final BiMap<Entity, Tile> entityMap = HashBiMap.create();
@@ -50,19 +50,31 @@ public class LevelImpl implements Level {
     // freeTiles cache
     private final List<Tile> freeTiles = new ArrayList<>();
 
-    // get a random tile from the freeTiles list
+    /**
+     * @return a random tile from the freeTiles list
+     */
     private final Supplier<Tile> getRandomFreeTile = () -> freeTiles.get(random.nextInt(freeTiles.size()));
 
-    // can place an entity in tile t?
+    /**
+     * @param t the tile
+     * @return can place an entity in tile t?
+     */
     private final Predicate<Tile> canPlaceEntity = t -> !t.isWall() && !entityMap.containsValue(t);
 
-    // remove entity from the map
+    /**
+     * remove the entity and update the free tiles list.
+     * 
+     * @param e the entity to be removed
+     */
     private final Consumer<Entity> removeEntity = e -> {
         freeTiles.add(entityMap.get(e));
         entityMap.remove(e);
     };
 
-    // place entity e in tile t
+    /**
+     * @param e the entity to be placed
+     * @param t the tile for the entity to be placed in
+     */
     private final BiConsumer<Entity, Tile> placeEntity = (e, t) -> {
         if (entityMap.containsKey(e)) {
             removeEntity.accept(e);
@@ -72,6 +84,13 @@ public class LevelImpl implements Level {
         freeTiles.remove(t);
     };
 
+    /**
+     * gets the tile next to an entity.
+     * 
+     * @param e the entity
+     * @param d the direction used to determine the tile
+     * @return the tile next to e
+     */
     private final BiFunction<Entity, Direction, Tile> getRelativeTile = (e, d) -> {
         final Tile currentTile = entityMap.get(e);
         final Coordinates currentCoordinates = new Coordinates(currentTile.getX(), currentTile.getY());
@@ -81,14 +100,26 @@ public class LevelImpl implements Level {
         return finalTile;
     };
 
-    // useless
-    // private final BiFunction<Entity, Direction, Entity> getRelativeEntity = (e,
-    // d) -> entityMap.inverse().get(getRelativeTile.apply(e, d));
+    /**
+     * gets the entity next to another entity.
+     * 
+     * @param e the entity
+     * @param d the direction used to determine the next entity
+     * @return the entity next to e
+     */
+    private final BiFunction<Entity, Direction, Entity> getRelativeEntity = (e, d) -> entityMap.inverse()
+            .get(getRelativeTile.apply(e, d));
 
-    // place entity e in a random tile
+    /**
+     * place an entity in a random tile.
+     * 
+     * @param e the entity to be spawned
+     */
     private final Consumer<Entity> spawn = e -> placeEntity.accept(e, getRandomFreeTile.get());
 
-    // generate the level map
+    /**
+     * generate the level map using {@link CaveGenerator}.
+     */
     private final Runnable generate = () -> {
         final var cave = new CaveGenerator(WIDTH, HEIGHT).getCave();
 
@@ -116,7 +147,10 @@ public class LevelImpl implements Level {
         door.setDoor();
     };
 
-    // nearest direction to player
+    /**
+     * @param e the entity
+     * @return the best direction for reaching the player
+     */
     private final Function<Entity, Direction> nearestDirectionToPlayer = e -> {
         final int east = entityMap.get(player).getX() - entityMap.get(e).getX();
         final int west = entityMap.get(e).getX() - entityMap.get(player).getX();
@@ -131,15 +165,20 @@ public class LevelImpl implements Level {
         return xDirection.getValue() > yDirection.getValue() ? xDirection.getKey() : yDirection.getKey();
     };
 
+    /**
+     * moves an entity and performs the entity's actions.
+     * 
+     * @param e the entity to move
+     * @param t the tile for the entity to move on
+     */
     private final BiConsumer<Entity, Tile> moveEntity = (e, t) -> {
         // do nothing if item
         if (e instanceof Item) {
             return;
         }
 
-        final Tile nextTile = e instanceof Player
-            ? getRelativeTile.apply(e, this.currentPlayerDirection)
-            : getRelativeTile.apply(e, ((Monster) e).monsterMove(nearestDirectionToPlayer.apply(e)));
+        final Tile nextTile = e instanceof Player ? getRelativeTile.apply(e, this.currentPlayerDirection)
+                : getRelativeTile.apply(e, ((Monster) e).monsterMove(nearestDirectionToPlayer.apply(e)));
 
         // next level
         if (e instanceof Player && nextTile.getMaterial() == Material.DOOR) {
@@ -152,7 +191,7 @@ public class LevelImpl implements Level {
 
         // attack
         if (relativeEntity instanceof Creature) {
-            if (combat.attack((Creature) e, (Creature) relativeEntity) == Result.DEAD) {
+            if (combat.attack((Creature<?>) e, (Creature<?>) relativeEntity) == Result.DEAD) {
                 // kill entity
                 removeEntity.accept(relativeEntity);
             }
@@ -207,6 +246,12 @@ public class LevelImpl implements Level {
         return this.areWeChangingLevel;
     }
 
+    /**
+     * Create a new level.
+     * 
+     * @param list   the entity list (player included)
+     * @param player the player instance
+     */
     public LevelImpl(final List<Entity> list, final Player player) {
         this.player = player;
         generate.run();
