@@ -3,7 +3,7 @@ package rogue.model.items;
 import java.util.List;
 
 /**
- * An interface modeling an ItemFactory.
+ * An interface modeling an {@link Item} Factory.
  *
  */
 public interface ItemFactory {

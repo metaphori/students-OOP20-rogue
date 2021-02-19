@@ -18,7 +18,10 @@ import rogue.model.items.scroll.ScrollType;
 import rogue.model.items.weapons.BaseWeapon;
 import rogue.model.items.weapons.WeaponType;
 
-
+/**
+ * An implementation for an {@link ItemFactory}.
+ *
+ */
 public class ItemFactoryImpl implements ItemFactory {
 
     private static final int MIN_ITEMS = 15;
