@@ -158,7 +158,7 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
         private static final int EXPERIENCE = 0;
         private static final int STRENGTH = 16;
         private static final int COINS = 0;
-        private static final int LEVEL = 0;
+        private static final int LEVEL = 1;
 
         private LevelIncreaseStrategy levelStrategy = new StandardLevelIncreaseStrategy();
         private int maxHealthPoints = MAX_HEALTH_POINTS;
