@@ -43,6 +43,8 @@ public class LevelImpl implements Level {
     private final Combat combat = new CombatImpl();
     private final Table<Integer, Integer, Tile> tileMap = HashBasedTable.create();
     private Entity player = null;
+    private Direction currentPlayerDirection = Direction.NONE;
+    private boolean areWeChangingLevel = false;
     private final BiMap<Entity, Tile> entityMap = HashBiMap.create();
 
     // freeTiles cache
@@ -121,14 +123,58 @@ public class LevelImpl implements Level {
         final int south = entityMap.get(player).getY() - entityMap.get(e).getY();
         final int north = entityMap.get(e).getY() - entityMap.get(player).getY();
 
-        final Pair<Direction, Integer> xDirection = east > 0
-            ? new Pair<>(Direction.EAST, east)
-            : new Pair<>(Direction.WEST, west);
-        final Pair<Direction, Integer> yDirection = south > 0
-            ? new Pair<>(Direction.SOUTH, south)
-            : new Pair<>(Direction.NORTH, north);
+        final Pair<Direction, Integer> xDirection = east > 0 ? new Pair<>(Direction.EAST, east)
+                : new Pair<>(Direction.WEST, west);
+        final Pair<Direction, Integer> yDirection = south > 0 ? new Pair<>(Direction.SOUTH, south)
+                : new Pair<>(Direction.NORTH, north);
 
         return xDirection.getValue() > yDirection.getValue() ? xDirection.getKey() : yDirection.getKey();
+    };
+
+    private final BiConsumer<Entity, Tile> moveEntity = (e, t) -> {
+        // do nothing if item
+        if (e instanceof Item) {
+            return;
+        }
+
+        final Tile nextTile = e instanceof Player
+            ? getRelativeTile.apply(e, this.currentPlayerDirection)
+            : getRelativeTile.apply(e, ((Monster) e).monsterMove(nearestDirectionToPlayer.apply(e)));
+
+        // next level
+        if (e instanceof Player && nextTile.getMaterial() == Material.DOOR) {
+            areWeChangingLevel = true;
+            removeEntity.accept(e);
+            return;
+        }
+
+        final Entity relativeEntity = entityMap.inverse().get(nextTile);
+
+        // attack
+        if (relativeEntity instanceof Creature) {
+            if (combat.attack((Creature) e, (Creature) relativeEntity) == Result.DEAD) {
+                // kill entity
+                removeEntity.accept(relativeEntity);
+            }
+            return;
+        }
+
+        // pick up item
+        if (e instanceof Player && relativeEntity instanceof Item) {
+            try {
+                ((Player) e).getInventory().addItem((Item) relativeEntity);
+                removeEntity.accept(relativeEntity);
+                placeEntity.accept(e, nextTile);
+            } catch (InventoryIsFullException e1) {
+                LOG.info("Inventory full!");
+            }
+            return;
+        }
+
+        // move entity if tile is empty
+        if (relativeEntity == null && canPlaceEntity.test(nextTile)) {
+            placeEntity.accept(e, nextTile);
+        }
     };
 
     public final int getWidth() {
@@ -156,46 +202,9 @@ public class LevelImpl implements Level {
     }
 
     public final boolean moveEntities(final Direction d) {
-        // we can edit this from inside lambdas
-        final var nextLevel = new AtomicBoolean(false);
-
-        entityMap.forEach((e, t) -> {
-            // interact
-            if (e instanceof Creature) {
-                // TODO monster movement
-                final Tile nextTile = e instanceof Player
-                    ? getRelativeTile.apply(e, d)
-                    : getRelativeTile.apply(e, ((Monster) e).monsterMove(nearestDirectionToPlayer.apply(e)));
-
-                if (nextTile.getMaterial() == Material.DOOR) {
-                    nextLevel.set(true);
-                    removeEntity.accept(e);
-                }
-
-                final Entity relativeEntity = entityMap.inverse().get(nextTile);
-
-                if (relativeEntity instanceof Creature) {
-                    if (combat.attack((Creature) e, (Creature) relativeEntity) == Result.DEAD) {
-                        // kill entity
-                        removeEntity.accept(relativeEntity);
-                    }
-                } else if (e instanceof Player && relativeEntity instanceof Item) {
-                    try {
-                        // pick up item
-                        ((Player) e).getInventory().addItem((Item) relativeEntity);
-                        removeEntity.accept(relativeEntity);
-                        placeEntity.accept(e, nextTile);
-                    } catch (InventoryIsFullException e1) {
-                        LOG.info("Inventory full!");
-                    }
-                } else if (relativeEntity == null && canPlaceEntity.test(nextTile)) {
-                    // move entity if tile is empty
-                    placeEntity.accept(e, nextTile);
-                }
-            }
-        });
-
-        return nextLevel.get();
+        this.currentPlayerDirection = d;
+        entityMap.forEach(moveEntity);
+        return this.areWeChangingLevel;
     }
 
     public LevelImpl(final List<Entity> list, final Player player) {
