@@ -180,7 +180,9 @@ public class LevelImpl implements Level {
         } else if (canPlaceEntity.test(nextTile)) {
             placeEntity.accept(player, nextTile);
         } else if (nextEntity instanceof Creature) {
-            combat.attack(player, (Creature<?>) nextEntity);
+            if (combat.attack(player, (Creature<?>) nextEntity) == Result.DEAD) {
+                removeEntity.accept(nextEntity);
+            }
         } else if (nextEntity instanceof Item) {
             try {
                 player.getInventory().addItem((Item) nextEntity);
@@ -204,7 +206,9 @@ public class LevelImpl implements Level {
         if (canPlaceEntity.test(nextTile)) {
             placeEntity.accept(e, nextTile);
         } else if (nextEntity instanceof Creature) {
-            combat.attack((Creature<?>) e, (Creature<?>) nextEntity);
+            if (combat.attack((Creature<?>) e, (Creature<?>) nextEntity) == Result.DEAD) {
+                removeEntity.accept(nextEntity);
+            }
         }
     };
 
