@@ -14,6 +14,6 @@ public interface MonsterFactory  {
     *          the player's level
     * @return a list of monsters based on the player's level
     */
-    List<MonsterImpl> createMonsterList(int playerLevel);
+    List<Monster> createMonsterList(int playerLevel);
 
 }
