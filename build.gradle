@@ -24,8 +24,6 @@ dependencies {
     runtimeOnly "org.openjfx:javafx-fxml:$javafx.version:win"
     runtimeOnly "org.openjfx:javafx-fxml:$javafx.version:linux"
     runtimeOnly "org.openjfx:javafx-fxml:$javafx.version:mac"
-
-    spotbugs 'com.github.spotbugs:spotbugs:4.0.0'
 }
 
 javafx {
