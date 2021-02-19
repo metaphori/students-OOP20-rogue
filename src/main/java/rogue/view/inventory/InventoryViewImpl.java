@@ -206,8 +206,6 @@ public class InventoryViewImpl implements Initializable, EventSubscriber, Invent
                      * make clicked slot swapping slot.
                      */
                     swapping = Optional.of(invIndex);
-                    pane.getChildren().clear();
-                    pane.getChildren().add(createText("SWAP"));
                 } else {
                     controller.onMiddleClick(col, row, swapping.get());
                     swapping = Optional.empty();

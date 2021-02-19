@@ -43,22 +43,22 @@ public class ItemFactoryImpl implements ItemFactory {
             final int itemIndex = rand.nextInt(6);
             switch (itemIndex) {
                 case ARMOR:
-                    items.add(new ArmorImpl(Arrays.asList(ArmorType.values()).stream().skip((int) (Arrays.asList(ArmorType.values()).size() * Math.random())).findAny().get()));
+                    items.add(new ArmorImpl(Arrays.asList(ArmorType.values()).get(rand.nextInt(Arrays.asList(ArmorType.values()).size()))));
                     break;
                 case FOOD:
-                    items.add(new FoodImpl(Arrays.asList(FoodType.values()).stream().skip((int) (Arrays.asList(FoodType.values()).size() * Math.random())).findAny().get()));
+                    items.add(new FoodImpl(Arrays.asList(FoodType.values()).get(rand.nextInt(Arrays.asList(FoodType.values()).size()))));
                     break;
                 case POTION:
-                    items.add(new PotionImpl(Arrays.asList(PotionType.values()).stream().skip((int) (Arrays.asList(PotionType.values()).size() * Math.random())).findAny().get()));
+                    items.add(new PotionImpl(Arrays.asList(PotionType.values()).get(rand.nextInt(Arrays.asList(PotionType.values()).size()))));
                     break;
                 case RING:
-                    items.add(new RingImpl(Arrays.asList(RingType.values()).stream().skip((int) (Arrays.asList(RingType.values()).size() * Math.random())).findAny().get()));
+                    items.add(new RingImpl(Arrays.asList(RingType.values()).get(rand.nextInt(Arrays.asList(RingType.values()).size()))));
                     break;
                 case SCROLL:
-                    items.add(new ScrollImpl(Arrays.asList(ScrollType.values()).stream().skip((int) (Arrays.asList(ScrollType.values()).size() * Math.random())).findAny().get()));
+                    items.add(new ScrollImpl(Arrays.asList(ScrollType.values()).get(rand.nextInt(Arrays.asList(ScrollType.values()).size()))));
                     break;
                 case WEAPON:
-                    items.add(new BaseWeapon(Arrays.asList(WeaponType.values()).stream().skip((int) (Arrays.asList(WeaponType.values()).size() * Math.random())).findAny().get()));
+                    items.add(new BaseWeapon(Arrays.asList(WeaponType.values()).get(rand.nextInt(Arrays.asList(WeaponType.values()).size()))));
                     break;
                 default:
                     throw new IllegalStateException();
