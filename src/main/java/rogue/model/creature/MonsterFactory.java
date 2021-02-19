@@ -16,10 +16,4 @@ public interface MonsterFactory  {
     */
     List<MonsterImpl> createMonsterList(int playerLevel);
 
-   /**
-    *
-    * @return the final boss(the final monster)
-    */
-    MonsterImpl createBoss();
-
 }
