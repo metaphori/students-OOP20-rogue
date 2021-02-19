@@ -2,6 +2,10 @@ package rogue.model.items.scroll;
 
 import rogue.model.creature.Player;
 
+/**
+ * Represents an implementation for a game {@link Scroll}.
+ *
+ */
 public class ScrollImpl implements Scroll {
 
     private final ScrollType scroll;
@@ -128,7 +132,7 @@ public class ScrollImpl implements Scroll {
     }
 
     /**
-     * 
+     * Scroll's toString method.
      */
     @Override
     public String toString() {

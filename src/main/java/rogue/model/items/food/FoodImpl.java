@@ -54,7 +54,8 @@ public class FoodImpl implements Food {
     }
 
     /**
-     * @return food
+     * Get the food' FoodType.
+     * @return food's FoodType.
      */
     public FoodType getFood() {
         return this.food;
@@ -72,7 +73,7 @@ public class FoodImpl implements Food {
     }
 
     /**
-     * equals.
+     * Equals.
      * @param obj to apply the equals.
      * @return true if equal, false otherwise.
      */
@@ -92,7 +93,7 @@ public class FoodImpl implements Food {
     }
 
     /**
-     * 
+     * Food's toString method.
      */
     @Override
     public String toString() {

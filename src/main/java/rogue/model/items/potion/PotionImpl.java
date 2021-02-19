@@ -2,6 +2,10 @@ package rogue.model.items.potion;
 
 import rogue.model.creature.Player;
 
+/**
+ * Represents an implementation for a game {@link Potion}.
+ *
+ */
 public class PotionImpl implements Potion {
 
     private final PotionType potion;
@@ -33,7 +37,7 @@ public class PotionImpl implements Potion {
             if (player.getLife().getHealthPoints() != player.getLife().getMaxHealthPoints()) {
                 if (player.getLife().getHealthPoints() + increase > player.getLife().getMaxHealthPoints()) {
                     /*
-                     * I can't increase the player's health over the MAXIMUM_HEALTH
+                     * I can't increase the player's health over the maximum health points
                      * so i just set it to max.
                      */
                     player.getLife().powerUp(player.getLife().getMaxHealthPoints() - player.getLife().getHealthPoints());
@@ -100,7 +104,7 @@ public class PotionImpl implements Potion {
     }
 
     /**
-     * equals.
+     * Equals.
      * @param obj to apply the equals.
      * @return true if equal, false otherwise.
      */
@@ -123,7 +127,7 @@ public class PotionImpl implements Potion {
     }
 
     /**
-     * 
+     * Potion's toString method.
      */
     @Override
     public String toString() {
