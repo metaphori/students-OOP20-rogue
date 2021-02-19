@@ -171,7 +171,7 @@ public class LevelImpl implements Level {
      * moves an entity and performs the entity's actions.
      * 
      * @param e the entity to move
-     * @param t the tile for the entity to move on
+     * @param t the entity's tile
      */
     private final BiConsumer<Entity, Tile> moveEntity = (e, t) -> {
         // do nothing if item
