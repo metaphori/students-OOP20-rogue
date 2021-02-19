@@ -2,6 +2,18 @@ package rogue.model.creature;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Represents an enumeration for declaring monster types.
+ * 
+ * The first field keeps track of the {@link MonsterLife}. which contains its health points and how much experience he gives once defeated. 
+ * The second field is the armor class of the monster.
+ * The third field contains the minimum and maximum damage the monster can do.
+ * The fourth field contains {@link Special} that the monster possesses. 
+ * The fifth field contains the coins that the monster drops when it dies.
+ * The sixth field contains the {@link PotionType} the monster drop when it dies.
+ * The seventh field contains the possibility that the object will be drop.
+ */
+
 import javafx.util.Pair;
 import rogue.model.items.potion.PotionImpl;
 import rogue.model.items.potion.PotionType;
@@ -28,7 +40,7 @@ public enum MonsterType {
    /** 
     * Dragon.
     */
-    DRAGON(new MonsterLife(ThreadLocalRandom.current().nextInt(10, 80 - 10), 5000), -1, new Pair<>(4, 40), new SpecialImpl(true), 15_000, new PotionImpl(PotionType.POTION_V), 100),
+    DRAGON(new MonsterLife(ThreadLocalRandom.current().nextInt(10, 80 - 10), 5000), -1, new Pair<>(4, 40), new SpecialImpl(/*true*/), 15_000, new PotionImpl(PotionType.POTION_V), 100),
 
    /** 
     * Emu. 
@@ -49,7 +61,7 @@ public enum MonsterType {
    /** 
     * Hobgoblin. 
     */
-    HOBGOBLIN(new MonsterLife(ThreadLocalRandom.current().nextInt(1, 8 - 1), 3), 5, new Pair<>(1, 8), new SpecialImpl(true), 9, new PotionImpl(PotionType.POTION_I), 30),
+    HOBGOBLIN(new MonsterLife(ThreadLocalRandom.current().nextInt(1, 8 - 1), 3), 5, new Pair<>(1, 8), new SpecialImpl(/*true*/), 9, new PotionImpl(PotionType.POTION_I), 30),
 
    /** 
     * Ice cube.
@@ -65,7 +77,7 @@ public enum MonsterType {
    /** 
     * Kobold.
     */
-    KOBOLD(new MonsterLife(ThreadLocalRandom.current().nextInt(1, 8 - 1), 1), 6,  new Pair<>(2, 12), new SpecialImpl(true), 3),
+    KOBOLD(new MonsterLife(ThreadLocalRandom.current().nextInt(1, 8 - 1), 1), 6,  new Pair<>(2, 12), new SpecialImpl(/*true*/), 3),
 
    /** 
     * Lycanthrope. 
