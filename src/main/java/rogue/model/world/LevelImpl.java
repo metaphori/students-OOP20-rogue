@@ -1,6 +1,7 @@
 package rogue.model.world;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -46,7 +47,6 @@ public class LevelImpl implements Level {
     private final Combat combat = new CombatImpl();
     private final Table<Integer, Integer, Tile> tileMap = HashBasedTable.create();
     private Player player;
-    private boolean areWeChangingLevel = false;
     private final BiMap<Entity, Tile> entityMap = HashBiMap.create();
 
     // freeTiles cache
@@ -171,12 +171,12 @@ public class LevelImpl implements Level {
      * moves the player.
      * @d the player's movement direction
      */
-    private Consumer<Direction> movePlayer = d -> {
+    private Predicate<Direction> movePlayer = d -> {
         final var nextTile = getRelativeTile.apply(player, d);
         final var nextEntity = entityMap.inverse().get(nextTile);
 
         if (nextTile.getMaterial() == Material.DOOR) {
-            this.areWeChangingLevel = true;
+            return true;
         } else if (canPlaceEntity.test(nextTile)) {
             placeEntity.accept(player, nextTile);
         } else if (nextEntity instanceof Creature) {
@@ -192,6 +192,8 @@ public class LevelImpl implements Level {
                 LOG.info("Inventory full!");
             }
         }
+
+        return false;
     };
 
     /**
@@ -239,8 +241,7 @@ public class LevelImpl implements Level {
     public final boolean moveEntities(final Direction d) {
         final var monsters = entityMap.keySet().stream().filter(e -> e instanceof Monster).collect(Collectors.toList());
         monsters.forEach(moveMonster);
-        movePlayer.accept(d);
-        return this.areWeChangingLevel;
+        return movePlayer.test(d);
     }
 
     /**

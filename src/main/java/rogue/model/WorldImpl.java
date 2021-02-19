@@ -1,6 +1,7 @@
 package rogue.model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -28,7 +29,7 @@ public class WorldImpl implements World {
      * change to the next level.
      */
     private final Runnable nextLevel = () -> {
-        var entityList = new ArrayList<Entity>();
+        final List<Entity> entityList = new ArrayList<>();
         entityList.add(player);
         entityList.addAll(MONSTER_FACTORY.createMonsterList(player.getLife().getLevel()));
         entityList.addAll(ITEM_FACTORY.getItems());
