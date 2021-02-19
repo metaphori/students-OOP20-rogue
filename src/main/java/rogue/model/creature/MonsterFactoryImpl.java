@@ -2,7 +2,12 @@ package rogue.model.creature;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * An implementation for a {@link MonsterFactory}. 
+ *
+ */
 public class MonsterFactoryImpl implements MonsterFactory {
 
     private static final int HIGH_SPAWN_RATE = 60;
@@ -19,6 +24,16 @@ public class MonsterFactoryImpl implements MonsterFactory {
     private static final int PLAYER_LEVEL_8 = 8;
     private static final int PLAYER_LEVEL_9 = 9;
     private static final int PLAYER_LEVEL_10 = 10;
+    private static final int PLAYER_LEVEL_11 = 11;
+    private static final int PLAYER_LEVEL_12 = 12;
+    private static final int PLAYER_LEVEL_13 = 13;
+    private static final int PLAYER_LEVEL_14 = 14;
+    private static final int PLAYER_LEVEL_15 = 15;
+    private static final int PLAYER_LEVEL_16 = 16;
+    private static final int PLAYER_LEVEL_17 = 17;
+    private static final int PLAYER_LEVEL_18 = 18;
+    private static final int PLAYER_LEVEL_19 = 19;
+    private static final int PLAYER_LEVEL_20 = 20;
 
     private final List<MonsterImpl> monsterList = new ArrayList<>();
 
@@ -27,7 +42,7 @@ public class MonsterFactoryImpl implements MonsterFactory {
     }
 
     private boolean isSpanwned(final int spawnRate) {
-        final int casuale = (int) (Math.random() * 100) + 1;
+        final int casuale = ThreadLocalRandom.current().nextInt(0, 100);
         return casuale <= spawnRate;
     }
 
@@ -174,6 +189,146 @@ public class MonsterFactoryImpl implements MonsterFactory {
                 }
                 if (this.isSpanwned(LOW_SPAWN_RATE)) {
                     monsterList.add(new MonsterImpl(MonsterType.YETI));
+                }
+                return this.getMonsterList();
+
+            case PLAYER_LEVEL_11:
+                monsterList.add(new MonsterImpl(MonsterType.AIR_ELEMENTAL));
+                monsterList.add(new MonsterImpl(MonsterType.NYMPH));
+                if (this.isSpanwned(HIGH_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.YETI));
+                }
+                if (this.isSpanwned(MEDIUM_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.NYMPH));
+                }
+                if (this.isSpanwned(LOW_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.WRAITH));
+                }
+                return this.getMonsterList();
+
+            case PLAYER_LEVEL_12:
+                monsterList.add(new MonsterImpl(MonsterType.NYMPH));
+                monsterList.add(new MonsterImpl(MonsterType.YETI));
+                if (this.isSpanwned(HIGH_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.WRAITH));
+                }
+                if (this.isSpanwned(MEDIUM_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.YETI));
+                }
+                if (this.isSpanwned(LOW_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.FIRE_ELEMENTAL));
+                }
+                return this.getMonsterList();
+
+            case PLAYER_LEVEL_13:
+                monsterList.add(new MonsterImpl(MonsterType.YETI));
+                monsterList.add(new MonsterImpl(MonsterType.WRAITH));
+                if (this.isSpanwned(HIGH_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.FIRE_ELEMENTAL));
+                }
+                if (this.isSpanwned(MEDIUM_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.WRAITH));
+                }
+                if (this.isSpanwned(LOW_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.XILL));
+                }
+                return this.getMonsterList();
+
+            case PLAYER_LEVEL_14:
+                monsterList.add(new MonsterImpl(MonsterType.WRAITH));
+                monsterList.add(new MonsterImpl(MonsterType.FIRE_ELEMENTAL));
+                if (this.isSpanwned(HIGH_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.XILL));
+                }
+                if (this.isSpanwned(MEDIUM_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.FIRE_ELEMENTAL));
+                }
+                if (this.isSpanwned(LOW_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.TROLL));
+                }
+                return this.getMonsterList();
+
+            case PLAYER_LEVEL_15:
+                monsterList.add(new MonsterImpl(MonsterType.FIRE_ELEMENTAL));
+                monsterList.add(new MonsterImpl(MonsterType.XILL));
+                if (this.isSpanwned(HIGH_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.TROLL));
+                }
+                if (this.isSpanwned(MEDIUM_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.XILL));
+                }
+                if (this.isSpanwned(LOW_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.UNICORN));
+                }
+                return this.getMonsterList();
+
+            case PLAYER_LEVEL_16:
+                monsterList.add(new MonsterImpl(MonsterType.XILL));
+                monsterList.add(new MonsterImpl(MonsterType.TROLL));
+                if (this.isSpanwned(HIGH_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.UNICORN));
+                }
+                if (this.isSpanwned(MEDIUM_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.TROLL));
+                }
+                if (this.isSpanwned(LOW_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.PHANTHOM));
+                }
+                return this.getMonsterList();
+
+            case PLAYER_LEVEL_17:
+                monsterList.add(new MonsterImpl(MonsterType.TROLL));
+                monsterList.add(new MonsterImpl(MonsterType.PHANTHOM));
+                if (this.isSpanwned(HIGH_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.MEDUSA));
+                }
+                if (this.isSpanwned(MEDIUM_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.UNICORN));
+                }
+                if (this.isSpanwned(LOW_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.VAMPIRE));
+                }
+                return this.getMonsterList();
+
+            case PLAYER_LEVEL_18:
+                monsterList.add(new MonsterImpl(MonsterType.MEDUSA));
+                monsterList.add(new MonsterImpl(MonsterType.PHANTHOM));
+                if (this.isSpanwned(HIGH_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.VAMPIRE));
+                }
+                if (this.isSpanwned(MEDIUM_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.MEDUSA));
+                }
+                if (this.isSpanwned(LOW_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.GRIFFIN));
+                }
+                return this.getMonsterList();
+
+            case PLAYER_LEVEL_19:
+                monsterList.add(new MonsterImpl(MonsterType.VAMPIRE));
+                monsterList.add(new MonsterImpl(MonsterType.MEDUSA));
+                if (this.isSpanwned(HIGH_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.GRIFFIN));
+                }
+                if (this.isSpanwned(MEDIUM_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.VAMPIRE));
+                }
+                if (this.isSpanwned(LOW_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.JABBERWOCK));
+                }
+                return this.getMonsterList();
+
+            case PLAYER_LEVEL_20:
+                monsterList.add(new MonsterImpl(MonsterType.VAMPIRE));
+                monsterList.add(new MonsterImpl(MonsterType.GRIFFIN));
+                if (this.isSpanwned(HIGH_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.JABBERWOCK));
+                }
+                if (this.isSpanwned(MEDIUM_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.GRIFFIN));
+                }
+                if (this.isSpanwned(LOW_SPAWN_RATE)) {
+                    monsterList.add(new MonsterImpl(MonsterType.DRAGON));
                 }
                 return this.getMonsterList();
 

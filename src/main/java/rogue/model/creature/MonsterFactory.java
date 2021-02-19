@@ -3,7 +3,7 @@ package rogue.model.creature;
 import java.util.List;
 
 /**
- * An interface modeling the enemy/monster.
+ * An interface modeling a list of {@link Monster}.
  *
  */
 public interface MonsterFactory  {

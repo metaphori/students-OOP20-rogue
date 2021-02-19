@@ -2,7 +2,7 @@ package rogue.model.creature;
 
 /**
  * 
- *   An interface modeling the combat between two creature.
+ *   An interface modeling the combat between the {@link Player} and the {@link Monster}.
  */
 public interface Combat {
 
