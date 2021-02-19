@@ -35,13 +35,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #808080;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #808080;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox fx:id="top" alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #808080;" />
-      <HBox fx:id="bottom" alignment="CENTER" prefHeight="302.0" prefWidth="600.0" style="-fx-background-color: #808080;" VBox.vgrow="ALWAYS">
+      <HBox fx:id="top" alignment="TOP_CENTER" style="-fx-background-color: #808080;" />
+      <HBox fx:id="bottom" alignment="CENTER" style="-fx-background-color: #808080;" VBox.vgrow="ALWAYS">
          <children>
-            <VBox fx:id="world" alignment="CENTER" prefHeight="301.0" prefWidth="176.0" style="-fx-background-color: #808080;" HBox.hgrow="ALWAYS" />
-            <VBox fx:id="inventory" alignment="CENTER_LEFT" prefHeight="301.0" prefWidth="201.0" style="-fx-background-color: #808080;" />
+            <VBox fx:id="world" alignment="CENTER" style="-fx-background-color: #808080;" HBox.hgrow="ALWAYS" />
+            <VBox fx:id="inventory" alignment="CENTER_LEFT" style="-fx-background-color: #808080;" />
          </children></HBox>
    </children>
 </VBox>
