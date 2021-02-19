@@ -174,47 +174,42 @@ public class LevelImpl implements Level {
      * @param t the entity's tile
      */
     private final BiConsumer<Entity, Tile> moveEntity = (e, t) -> {
-        // do nothing if item
-        if (e instanceof Item) {
-            return;
-        }
-
-        final Tile nextTile = e instanceof Player ? getRelativeTile.apply(e, this.currentPlayerDirection)
+        if (e instanceof Creature) {
+            final Tile nextTile = e instanceof Player
+                ? getRelativeTile.apply(e, this.currentPlayerDirection)
                 : getRelativeTile.apply(e, ((Monster) e).monsterMove(nearestDirectionToPlayer.apply(e)));
 
-        // next level
-        if (e instanceof Player && nextTile.getMaterial() == Material.DOOR) {
-            areWeChangingLevel = true;
-            removeEntity.accept(e);
-            return;
-        }
+            final Entity relativeEntity = entityMap.inverse().get(nextTile);
 
-        final Entity relativeEntity = entityMap.inverse().get(nextTile);
+            // next level
+            if (e instanceof Player && nextTile.getMaterial() == Material.DOOR) {
+                areWeChangingLevel = true;
+                removeEntity.accept(e);
+            } else
 
-        // attack
-        if (relativeEntity instanceof Creature) {
-            if (combat.attack((Creature<?>) e, (Creature<?>) relativeEntity) == Result.DEAD) {
-                // kill entity
-                removeEntity.accept(relativeEntity);
-            }
-            return;
-        }
-
-        // pick up item
-        if (e instanceof Player && relativeEntity instanceof Item) {
-            try {
-                ((Player) e).getInventory().addItem((Item) relativeEntity);
-                removeEntity.accept(relativeEntity);
+            // move entity if tile is empty
+            if (canPlaceEntity.test(nextTile)) {
                 placeEntity.accept(e, nextTile);
-            } catch (InventoryIsFullException e1) {
-                LOG.info("Inventory full!");
-            }
-            return;
-        }
+            } else
 
-        // move entity if tile is empty
-        if (canPlaceEntity.test(nextTile)) {
-            placeEntity.accept(e, nextTile);
+            // attack
+            if (relativeEntity instanceof Creature) {
+                if (combat.attack((Creature<?>) e, (Creature<?>) relativeEntity) == Result.DEAD) {
+                    // kill entity
+                    removeEntity.accept(relativeEntity);
+                }
+            } else
+
+            // pick up item
+            if (e instanceof Player && relativeEntity instanceof Item) {
+                try {
+                    ((Player) e).getInventory().addItem((Item) relativeEntity);
+                    removeEntity.accept(relativeEntity);
+                    placeEntity.accept(e, nextTile);
+                } catch (InventoryIsFullException e1) {
+                    LOG.info("Inventory full!");
+                }
+            }
         }
     };
 
