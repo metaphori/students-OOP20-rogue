@@ -1,5 +1,8 @@
 package rogue.model.world;
 
+/**
+ * the default tile implementation.
+ */
 class TileImpl implements Tile {
     private final int x, y;
     private Material material;
@@ -25,6 +28,12 @@ class TileImpl implements Tile {
         material = Material.DOOR;
     }
 
+    /**
+     * @param x the x coordinate
+     * @param y the y coordinate
+     * @param madeOf the tile's material
+     * @param isWall if the tile is a wall
+     */
     TileImpl(final int x, final int y, final Material madeOf, final boolean isWall) {
         this.x = x;
         this.y = y;
