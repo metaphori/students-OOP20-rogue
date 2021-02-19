@@ -2,9 +2,15 @@ package rogue.model.world;
 
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BiFunction;
+import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
 
-// https://gamedevelopment.tutsplus.com/tutorials/generate-random-cave-levels-using-cellular-automata--gamedev-9664
+/**
+ * Generates a cave (duh).
+ * 
+ * @see <a href="https://gamedevelopment.tutsplus.com/tutorials/generate-random-cave-levels-using-cellular-automata--gamedev-9664">inspiration</a>
+ */
 class CaveGenerator {
     private static final int CHANCE_TO_START_ALIVE = 20;
     private static final int BIRTH_LIMIT = 3;
@@ -13,25 +19,26 @@ class CaveGenerator {
     private static final Random RANDOM = new Random();
     private boolean[][] cave;
 
-    public boolean[][] getCave() {
-        return cave;
-    }
-
-    private void initialize() {
+    /**
+     * Initializes a basic random map.
+     */
+    private final Runnable initialize = () -> {
         IntStream.range(0, cave.length).forEach(x -> {
             IntStream.range(0, cave[0].length).forEach(y -> {
                 cave[x][y] = RANDOM.nextInt(100) < CHANCE_TO_START_ALIVE;
             });
         });
-    }
+    };
 
-    // Returns the number of cells in a ring around (x, y) that are alive.
-    private int countAliveNeighbors(final int x, final int y) {
-        AtomicInteger count = new AtomicInteger(0); // we can edit this from lambdas
+    /**
+     * @return the number of cells in a ring around (x, y) that are alive
+     */
+    private BiFunction<Integer, Integer, Integer> countAliveNeighbors = (x, y) -> {
+        final AtomicInteger count = new AtomicInteger(0); // we can edit this from lambdas
 
         IntStream.range(-1, 2).forEach(i -> {
             IntStream.range(-1, 2).forEach(j -> {
-                int neighborX = x + i, neighborY = y + j;
+                final int neighborX = x + i, neighborY = y + j;
 
                 // If we're looking at the middle point
                 if (i == 0 && j == 0) {
@@ -49,15 +56,18 @@ class CaveGenerator {
         });
 
         return count.get();
-    }
+    };
 
-    private void doSimulationStep() {
-        boolean[][] newCave = new boolean[cave.length][cave[0].length];
+    /**
+     * Cave adjustments.
+     */
+    private final IntConsumer doSimulationStep = i -> {
+        final boolean[][] newCave = new boolean[cave.length][cave[0].length];
 
         // Loop over each row and column of the map
         IntStream.range(0, cave.length).forEach(x -> {
             IntStream.range(0, cave[0].length).forEach(y -> {
-                int neighborCount = countAliveNeighbors(x, y);
+                final int neighborCount = countAliveNeighbors.apply(x, y);
 
                 // The new value is based on our simulation rules
                 // First, if a cell is alive but has too few neighbors, kill it.
@@ -81,11 +91,18 @@ class CaveGenerator {
         });
 
         cave = newCave;
+    };
+
+    /**
+     * @return a bool matrix
+     */
+    public boolean[][] getCave() {
+        return cave;
     }
 
     CaveGenerator(final int width, final int height) {
         cave = new boolean[width][height];
-        initialize();
-        IntStream.range(0, STEP_COUNT).forEach(i -> doSimulationStep());
+        initialize.run();
+        IntStream.range(0, STEP_COUNT).forEach(doSimulationStep);
     }
 }
