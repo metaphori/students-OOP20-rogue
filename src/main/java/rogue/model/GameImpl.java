@@ -39,14 +39,19 @@ public class GameImpl implements Game {
 
     /** round.
      * @param direction player movement direction
+     * @return nextLevel?
      */
-    public final void round(final Direction direction) {
+    public final boolean round(final Direction direction) {
+        boolean nextlvl = false;
         if (getCurrentLevel.get().moveEntities(direction)) {
             nextLevel.run(); // change level
+            nextlvl = true;
         }
         if (player.getInventory().getScrollContainer().getActiveScroll().isPresent()) {
             player.getInventory().getScrollContainer().updateEffectDuration(1);
         }
+
+        return nextlvl;
     }
 
     public final int getWidth() {

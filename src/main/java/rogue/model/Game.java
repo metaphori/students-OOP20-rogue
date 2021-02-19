@@ -11,5 +11,5 @@ public interface Game {
     int getHeight();
     Stream<Tile> getTiles();
     Map<Entity, Tile> getEntityMap();
-    void round(Direction direction);
+    boolean round(Direction direction);
 }

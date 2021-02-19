@@ -1,6 +1,5 @@
 package rogue.controller;
 
-import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import rogue.model.Game;
@@ -14,16 +13,16 @@ public class WorldController {
     private final Game game;
     private final WorldScene worldScene;
 
-    public WorldController(Player player) {
+    public WorldController(final Player player) {
         this.game = new GameImpl(DEPTH, player);
         this.worldScene = new WorldScene(game);
     }
 
-    public WorldScene getWorldScene() {
+    public final WorldScene getWorldScene() {
         return worldScene;
     }
 
-    public void movePlayer(KeyEvent event) {
+    public final void movePlayer(final KeyEvent event) {
         final KeyCode key = event.getCode();
 
         Direction direction = Direction.NONE;
@@ -49,7 +48,12 @@ public class WorldController {
                 break;
         }
 
-        game.round(direction);
-        worldScene.drawMap();
+        // update tiles only if level is changed
+        if (game.round(direction)) {
+            worldScene.drawTiles();
+        }
+
+        // always update entities
+        worldScene.drawEntities();
     }
 }
