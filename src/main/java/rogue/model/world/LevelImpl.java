@@ -213,7 +213,7 @@ public class LevelImpl implements Level {
         }
 
         // move entity if tile is empty
-        if (relativeEntity == null && canPlaceEntity.test(nextTile)) {
+        if (canPlaceEntity.test(nextTile)) {
             placeEntity.accept(e, nextTile);
         }
     };
