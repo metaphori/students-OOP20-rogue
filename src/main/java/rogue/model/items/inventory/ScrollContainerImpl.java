@@ -8,6 +8,10 @@ import rogue.model.events.AbstractEventPublisher;
 import rogue.model.events.InventoryEvent;
 import rogue.model.items.scroll.Scroll;
 
+/**
+ * An implementation of a {@link ScrollContainer}.
+ *
+ */
 public class ScrollContainerImpl extends AbstractEventPublisher implements ScrollContainer {
 
     private Pair<Optional<Scroll>, Integer> scroll;

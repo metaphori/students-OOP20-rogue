@@ -25,13 +25,15 @@ public interface Inventory extends EventPublisher {
      * @param index of the wanted slot.
      * @return Optional.empty if given slot is empty, Optional.of(Item)
      * otherwise.
+     * @throws OutOfInventoryException if given an invalid index.
      */
     Optional<Item> getItem(int index) throws OutOfInventoryException;
 
     /**
-     * 
+     * Get the amount of an Item in a given slot.
      * @param index
      * @return amount of item in index, 0 if empty slot.
+     * @throws OutOfInventoryException if given an invalid index.
      */
     int getAmount(int index) throws OutOfInventoryException;
 
@@ -50,6 +52,7 @@ public interface Inventory extends EventPublisher {
      * @param second slot to swap.
      * @return true if the two slots have been correctly swapped, false
      * if given two empty slots indexes.
+     * @throws OutOfInventoryException if given an invalid index.
      */
     boolean swap(int first, int second) throws OutOfInventoryException;
 
@@ -64,6 +67,7 @@ public interface Inventory extends EventPublisher {
      * Remove the item in the given slot.
      * @param index of the slot to remove the contained item.
      * @return true if item correctly removed, false if slot is empty.
+     * @throws OutOfInventoryException if given an invalid index.
      */
     boolean remove(int index) throws OutOfInventoryException;
 
