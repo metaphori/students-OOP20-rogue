@@ -151,7 +151,7 @@ public class LevelImpl implements Level {
 
     /**
      * @param e the entity
-     * @return the best direction for reaching the player
+     * @return the best direction to reach the player
      */
     private final Function<Entity, Direction> nearestDirectionToPlayer = e -> {
         final int east = entityMap.get(player).getX() - entityMap.get(e).getX();
