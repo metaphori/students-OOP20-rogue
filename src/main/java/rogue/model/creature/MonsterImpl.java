@@ -103,13 +103,8 @@ public class MonsterImpl implements Monster {
      * {@inheritDoc}
      */
     @Override
-    public PotionImpl dropItem() {
-        final int casuale = ThreadLocalRandom.current().nextInt(0, 100);
-        if (casuale <= this.getItemChange()) {
-            return this.getItem(); 
-       } else {
-           return null;
-        }
+    public int dropItem() {
+       return ThreadLocalRandom.current().nextInt(0, 100);
     }
 
     private Direction randomMove() {
