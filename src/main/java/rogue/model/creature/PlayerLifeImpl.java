@@ -68,8 +68,7 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
 
     private void updateFood(final int amount) {
         final var newFood = this.leftFood + amount;
-        this.leftFood = this.checkNotExceeding(newFood, MAX_FOOD);
-        this.leftFood = this.checkNotNegative(newFood);
+        this.leftFood = this.checkNotNegative(this.checkNotExceeding(newFood, MAX_FOOD));
         this.post(new LifeEvent<>(this));
     }
 
