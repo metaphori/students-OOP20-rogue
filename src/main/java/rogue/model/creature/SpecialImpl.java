@@ -1,5 +1,9 @@
 package rogue.model.creature;
 
+/**
+ * An implementation for a {@link Special}. 
+ *
+ */
 public class SpecialImpl implements Special {
 
     private final boolean flying;
