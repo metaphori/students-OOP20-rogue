@@ -80,7 +80,7 @@ public final class StatusBarViewImpl implements StatusBarView {
 
     @Override
     public void setFoodLabel(final int food) {
-        this.updateLabel("#test", Integer.toString(food));
+        this.updateLabel("#food", Integer.toString(food));
     }
 
 }
