@@ -29,6 +29,7 @@ import rogue.model.creature.CombatImpl;
 import rogue.model.creature.Creature;
 import rogue.model.creature.Monster;
 import rogue.model.creature.Player;
+import rogue.model.creature.Combat.Result;
 import rogue.model.items.Item;
 import rogue.model.items.inventory.InventoryIsFullException;
 
@@ -174,7 +175,10 @@ public class LevelImpl implements Level {
                 final Entity relativeEntity = entityMap.inverse().get(nextTile);
 
                 if (relativeEntity instanceof Creature) {
-                    combat.attack((Creature) e, (Creature) relativeEntity);
+                    if (combat.attack((Creature) e, (Creature) relativeEntity) == Result.DEAD) {
+                        // kill entity
+                        removeEntity.accept(relativeEntity);
+                    }
                 } else if (e instanceof Player && relativeEntity instanceof Item) {
                     try {
                         // pick up item
