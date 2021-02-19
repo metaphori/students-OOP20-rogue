@@ -129,7 +129,7 @@ public class LevelImpl implements Level {
                 final var isWall = cave[x][y];
                 final var madeOf = random.nextInt(VINE_PROBABILITY) != 0 ? Material.BRICKS : Material.VINES;
 
-                final var t = new TileImpl(this, x, y, madeOf, isWall);
+                final var t = new TileImpl(x, y, madeOf, isWall);
 
                 // redundant but not slow
                 tileMap.put(x, y, t);
