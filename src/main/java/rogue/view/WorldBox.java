@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import rogue.model.Entity;
 import rogue.model.World;
+import rogue.model.creature.Monster;
 import rogue.model.creature.Player;
 import rogue.model.items.Item;
 import rogue.model.world.Tile;
@@ -72,6 +73,8 @@ public class WorldBox extends HBox {
             name = "Player";
         } else if (entity instanceof Item) {
             return new ItemImageGeneratorImpl().getImage((Item) entity);
+        } else if (entity instanceof Monster) {
+            return new MonsterImageGeneratorImpl().getImage((Monster) entity);
         }
 
         return new Image(ClassLoader.getSystemResource("images/" + name + ".png").toExternalForm());
