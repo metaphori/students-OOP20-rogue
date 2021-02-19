@@ -100,6 +100,10 @@ class CaveGenerator {
         return cave;
     }
 
+    /**
+     * @param width the cave's width (max x)
+     * @param height the cave's height (max y)
+     */
     CaveGenerator(final int width, final int height) {
         cave = new boolean[width][height];
         initialize.run();

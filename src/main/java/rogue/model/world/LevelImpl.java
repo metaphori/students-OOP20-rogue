@@ -33,6 +33,9 @@ import rogue.model.creature.PlayerFactoryImpl;
 import rogue.model.items.Item;
 import rogue.model.items.inventory.InventoryIsFullException;
 
+/**
+ * the default level implementation.
+ */
 public class LevelImpl implements Level {
     private static final int WIDTH = 32;
     private static final int HEIGHT = 32;
