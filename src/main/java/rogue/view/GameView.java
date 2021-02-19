@@ -10,59 +10,46 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import rogue.controller.StatusBarControllerImpl;
 import rogue.controller.WorldController;
 import rogue.controller.inventory.InventoryController;
-import rogue.controller.inventory.InventoryControllerImpl;
-import rogue.model.creature.Player;
-import rogue.model.creature.PlayerFactoryImpl;
 import rogue.view.inventory.InventoryViewImpl;
 
 public class GameView {
 
     private final Stage stage = new Stage();
     private final Scene scene;
-    private final Player player = new PlayerFactoryImpl().create();
-    private WorldController worldController;
 
-    private void loadStatusBar() {
+    private void loadStatusBar(final StatusBarView status) {
         final HBox box = (HBox) this.scene.lookup("#top");
-        // TODO temporary --> to test!
-        final StatusBarViewImpl sbv = new StatusBarViewImpl();
-        new StatusBarControllerImpl(sbv, player);
-        box.getChildren().add(sbv.getNode());
+        box.getChildren().add(status.getNode());
     }
 
-    private void loadInventory() throws IOException {
+    private void loadInventory(final InventoryController inventory) throws IOException {
         final VBox box = (VBox) this.scene.lookup("#inventory");
         final FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource("layout/InventoryView.fxml"));
         box.getChildren().add(loader.load());
-        // TODO temporary --> to test!
-        final InventoryController inventoryController = new InventoryControllerImpl(player);
         final InventoryViewImpl controller = loader.getController();
-        controller.init(inventoryController);
+        controller.init(inventory);
     }
 
-    // TODO mettere nel controller
-    private void loadWorld() {
+    private void loadWorld(final WorldController world) {
         final VBox box = (VBox) this.scene.lookup("#world");
-        worldController = new WorldController(this.player);
-        box.getChildren().add(worldController.getWorldScene().getNode());
+        box.getChildren().add(world.getWorldScene().getNode());
     }
 
-    public GameView() throws IOException {
+    public GameView(final StatusBarView status, final InventoryController inventory, final WorldController world) throws IOException {
         final Parent root = FXMLLoader.load(ClassLoader.getSystemResource("layout/MainView.fxml"));
         this.scene = new Scene(root);
 
-        this.loadStatusBar();
-        this.loadWorld();
-        this.loadInventory();
+        this.loadStatusBar(status);
+        this.loadWorld(world);
+        this.loadInventory(inventory);
 
         stage.setScene(this.scene);
         stage.getIcons().add(new Image(ClassLoader.getSystemResource("images/rogueIcon.png").toExternalForm()));
         stage.setTitle("Rogue");
         stage.setResizable(true);
-        stage.addEventHandler(KeyEvent.KEY_PRESSED, worldController::movePlayer);
+        stage.addEventHandler(KeyEvent.KEY_PRESSED, world::movePlayer);
         stage.show();
     }
 }

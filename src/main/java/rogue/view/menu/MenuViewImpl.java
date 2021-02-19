@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import rogue.controller.menu.MenuController;
+import rogue.controller.GameController;
 
 /*
  * Class that controls the Main menu's view.
@@ -22,12 +22,12 @@ public class MenuViewImpl implements MenuView {
     @FXML private Label insertNameLabel;
     @FXML private TextField nameTextField;
     private String playerName;
-    private MenuController controller;
+    private GameController controller;
 
     /**
      * @param controller for the MenuView
      */
-    public void init(final MenuController controller) {
+    public void init(final GameController controller) {
         this.controller = controller;
     }
 

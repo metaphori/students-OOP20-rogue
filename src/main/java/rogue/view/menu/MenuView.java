@@ -3,7 +3,7 @@ package rogue.view.menu;
 import java.io.IOException;
 
 import javafx.scene.input.KeyEvent;
-import rogue.controller.menu.MenuController;
+import rogue.controller.GameController;
 
 /**
  * An interface for controlling the game's Menu.
@@ -15,7 +15,7 @@ public interface MenuView {
      * Pass the MenuController to the MenuView.
      * @param controller for the MenuView
      */
-    void init(MenuController controller);
+    void init(GameController controller);
 
     /**
      * Method that let's the user enter his name.

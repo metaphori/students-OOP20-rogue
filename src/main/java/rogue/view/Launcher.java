@@ -8,15 +8,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import rogue.controller.menu.MenuController;
-import rogue.controller.menu.MenuControllerImpl;
-import rogue.model.Game;
-import rogue.model.GameImpl;
-import rogue.model.creature.Player;
-import rogue.model.creature.PlayerFactoryImpl;
+import rogue.controller.GameController;
+import rogue.controller.GameControllerImpl;
 import rogue.view.menu.MenuViewImpl;
 
-public final class MainView extends Application {
+public final class Launcher extends Application {
 
     @Override
     public void start(final Stage primaryStage) throws Exception {
@@ -34,9 +30,9 @@ public final class MainView extends Application {
         /*
          * Pass the MenuController to The view.
          */
-        final MenuController menuController = new MenuControllerImpl();
-        final MenuViewImpl controller = loader.getController();
-        controller.init(menuController);
+        final GameController gameController = new GameControllerImpl();
+        final MenuViewImpl menuView = loader.getController();
+        menuView.init(gameController);
         /*
          * Create MenuView
          */
@@ -46,11 +42,6 @@ public final class MainView extends Application {
         primaryStage.setTitle("Rogue");
         primaryStage.setResizable(true);
         primaryStage.show();
-
-        // TODO
-       /* Player player = new PlayerFactoryImpl().create();
-        Game game = new GameImpl(5, player);
-        new WorldScene(game).show();*/
     }
 
     public static void main(final String[] args) {

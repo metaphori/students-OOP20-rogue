@@ -1,13 +1,15 @@
 package rogue;
 
-import rogue.view.MainView;
+import java.io.IOException;
+
+import rogue.view.Launcher;
 
 public final class App {
 
     private App() { }
 
-    public static void main(final String[] args) {
-        MainView.main(args);
+    public static void main(final String[] args) throws IOException {
+        Launcher.main(args);
     }
 
 }
