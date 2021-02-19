@@ -10,6 +10,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -44,8 +45,7 @@ public class LevelImpl implements Level {
     private final Random random = new Random();
     private final Combat combat = new CombatImpl();
     private final Table<Integer, Integer, Tile> tileMap = HashBasedTable.create();
-    private Entity player;
-    private Direction currentPlayerDirection = Direction.NONE;
+    private Player player;
     private boolean areWeChangingLevel = false;
     private final BiMap<Entity, Tile> entityMap = HashBiMap.create();
 
@@ -168,48 +168,43 @@ public class LevelImpl implements Level {
     };
 
     /**
-     * moves an entity and performs the entity's actions.
-     * 
-     * @param e the entity to move
-     * @param t the entity's tile
+     * moves the player.
+     * @d the player's movement direction
      */
-    private final BiConsumer<Entity, Tile> moveEntity = (e, t) -> {
-        if (e instanceof Creature) {
-            final Tile nextTile = e instanceof Player
-                ? getRelativeTile.apply(e, this.currentPlayerDirection)
-                : getRelativeTile.apply(e, ((Monster) e).monsterMove(nearestDirectionToPlayer.apply(e)));
+    private Consumer<Direction> movePlayer = d -> {
+        final var nextTile = getRelativeTile.apply(player, d);
+        final var nextEntity = entityMap.inverse().get(nextTile);
 
-            final Entity relativeEntity = entityMap.inverse().get(nextTile);
-
-            // next level
-            if (e instanceof Player && nextTile.getMaterial() == Material.DOOR) {
-                areWeChangingLevel = true;
-                removeEntity.accept(e);
-            } else
-
-            // move entity if tile is empty
-            if (canPlaceEntity.test(nextTile)) {
-                placeEntity.accept(e, nextTile);
-            } else
-
-            // attack
-            if (relativeEntity instanceof Creature) {
-                if (combat.attack((Creature<?>) e, (Creature<?>) relativeEntity) == Result.DEAD) {
-                    // kill entity
-                    removeEntity.accept(relativeEntity);
-                }
-            } else
-
-            // pick up item
-            if (e instanceof Player && relativeEntity instanceof Item) {
-                try {
-                    ((Player) e).getInventory().addItem((Item) relativeEntity);
-                    removeEntity.accept(relativeEntity);
-                    placeEntity.accept(e, nextTile);
-                } catch (InventoryIsFullException e1) {
-                    LOG.info("Inventory full!");
-                }
+        if (nextTile.getMaterial() == Material.DOOR) {
+            this.areWeChangingLevel = true;
+        } else if (canPlaceEntity.test(nextTile)) {
+            placeEntity.accept(player, nextTile);
+        } else if (nextEntity instanceof Creature) {
+            combat.attack(player, (Creature<?>) nextEntity);
+        } else if (nextEntity instanceof Item) {
+            try {
+                player.getInventory().addItem((Item) nextEntity);
+                removeEntity.accept(nextEntity);
+                placeEntity.accept(player, nextTile);
+            } catch (InventoryIsFullException e1) {
+                LOG.info("Inventory full!");
             }
+        }
+    };
+
+    /**
+     * moves a monster.
+     * @param e the monster
+     */
+    private Consumer<Entity> moveMonster = e -> {
+        final Monster m = (Monster) e;
+        final var nextTile = getRelativeTile.apply(m, m.monsterMove(nearestDirectionToPlayer.apply(m)));
+        final var nextEntity = entityMap.inverse().get(nextTile);
+
+        if (canPlaceEntity.test(nextTile)) {
+            placeEntity.accept(e, nextTile);
+        } else if (nextEntity instanceof Creature) {
+            combat.attack((Creature<?>) e, (Creature<?>) nextEntity);
         }
     };
 
@@ -238,8 +233,9 @@ public class LevelImpl implements Level {
     }
 
     public final boolean moveEntities(final Direction d) {
-        this.currentPlayerDirection = d;
-        entityMap.forEach(moveEntity);
+        final var monsters = entityMap.keySet().stream().filter(e -> e instanceof Monster).collect(Collectors.toList());
+        monsters.forEach(moveMonster);
+        movePlayer.accept(d);
         return this.areWeChangingLevel;
     }
 
