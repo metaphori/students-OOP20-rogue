@@ -51,6 +51,13 @@ public interface StatusBarView extends View {
     void setExperienceLabel(int experience);
 
     /**
+     * Sets the current food label.
+     * @param food
+     *          the current food value
+     */
+    void setFoodLabel(int food);
+
+    /**
      * Sets the weapon label.
      * @param weapon
      *          the weapon currently in use

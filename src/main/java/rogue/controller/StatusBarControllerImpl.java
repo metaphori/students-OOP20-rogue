@@ -50,6 +50,7 @@ public final class StatusBarControllerImpl extends AbstractPanelController<Statu
         this.getView().setExperienceLabel(event.getLife().getExperience());
         this.getView().setLevelLabel(event.getLife().getLevel());
         this.getView().setStrengthLabel(event.getLife().getStrength());
+        this.getView().setFoodLabel(event.getLife().getFood());
     }
 
     /**
