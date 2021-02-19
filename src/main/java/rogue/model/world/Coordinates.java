@@ -1,5 +1,8 @@
 package rogue.model.world;
 
+/**
+ * Coordinate management.
+ */
 class Coordinates {
     private int x, y;
 
@@ -7,20 +10,16 @@ class Coordinates {
         return x;
     }
 
-    public final void setX(final int x) {
-        this.x = x;
-    }
-
     public final int getY() {
         return y;
     }
 
-    public final void setY(final int y) {
-        this.y = y;
-    }
-
+    /**
+     * @param direction
+     * @return the relative tile
+     */
     public final Coordinates shift(final Direction direction) {
-        Coordinates c = new Coordinates(this.x, this.y);
+        final Coordinates c = new Coordinates(this.x, this.y);
 
         switch (direction) {
             case NORTH:
@@ -42,6 +41,10 @@ class Coordinates {
         return c;
     }
 
+    /**
+     * @param x the x coordinate
+     * @param y the y coordinate
+     */
     Coordinates(final int x, final int y) {
         this.x = x;
         this.y = y;
