@@ -51,6 +51,7 @@ public class MonsterFactoryImpl implements MonsterFactory {
      */ 
     @Override
     public List<MonsterImpl> createMonsterList(final int playerLevel) {
+        monsterList.clear();
         switch (playerLevel) {
             case PLAYER_LEVEL_1:
                 monsterList.add(new MonsterImpl(MonsterType.BAT));
