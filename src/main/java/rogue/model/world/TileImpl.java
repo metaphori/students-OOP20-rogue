@@ -5,8 +5,8 @@ package rogue.model.world;
  */
 class TileImpl implements Tile {
     private final int x, y;
-    private Material material;
     private final boolean isWall;
+    private boolean isDoor;
 
     public int getX() {
         return x;
@@ -16,16 +16,16 @@ class TileImpl implements Tile {
         return y;
     }
 
-    public final Material getMaterial() {
-        return material;
-    }
-
     public final boolean isWall() {
         return isWall;
     }
 
     public final void setDoor() {
-        material = Material.DOOR;
+        isDoor = true;
+    }
+
+    public boolean isDoor() {
+        return isDoor;
     }
 
     /**
@@ -34,10 +34,9 @@ class TileImpl implements Tile {
      * @param madeOf the tile's material
      * @param isWall if the tile is a wall
      */
-    TileImpl(final int x, final int y, final Material madeOf, final boolean isWall) {
+    TileImpl(final int x, final int y, final boolean isWall) {
         this.x = x;
         this.y = y;
-        this.material = madeOf;
         this.isWall = isWall;
     }
 }

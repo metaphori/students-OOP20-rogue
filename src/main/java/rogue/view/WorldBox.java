@@ -1,8 +1,11 @@
 package rogue.view;
 
+import java.util.Random;
+
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -15,6 +18,8 @@ import rogue.model.items.Item;
 import rogue.model.world.Tile;
 
 public class WorldBox extends HBox {
+    private static final Random RANDOM = new Random();
+    private static final int VINE_VARIANT_COUNT = 7;
     private static final int SCALE = 25;
     private final World game;
     private final Canvas tileCanvas, entityCanvas;
@@ -45,6 +50,12 @@ public class WorldBox extends HBox {
         final GraphicsContext gc = tileCanvas.getGraphicsContext2D();
         game.getTiles().forEach(tile -> {
             Image img = getImage(tile);
+
+            // darker if floor
+            final ColorAdjust ca = new ColorAdjust();
+            ca.setBrightness(tile.isWall() ? 0 : -0.5);
+            gc.setEffect(ca);
+
             gc.drawImage(img, tile.getX() * SCALE, tile.getY() * SCALE, SCALE, SCALE);
         });
     }
@@ -60,10 +71,8 @@ public class WorldBox extends HBox {
     }
 
     private Image getImage(final Tile tile) {
-        final String variant = tile.isWall() ? "WALL" : "FLOOR";
-        final String material = tile.getMaterial().toString();
-
-        return new Image(ClassLoader.getSystemResource("images/" + variant + "-" + material + ".png").toExternalForm());
+        final String fileName = tile.isDoor() ? "dngn_closed_door" : "wall_vines" + RANDOM.nextInt(VINE_VARIANT_COUNT);
+        return new Image(ClassLoader.getSystemResource("images/tiles/" + fileName + ".png").toExternalForm());
     }
 
     private Image getImage(final Entity entity) {

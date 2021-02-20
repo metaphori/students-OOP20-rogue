@@ -32,7 +32,6 @@ import rogue.model.creature.Monster;
 import rogue.model.creature.Player;
 import rogue.model.items.Item;
 import rogue.model.items.inventory.InventoryIsFullException;
-import rogue.model.world.Tile.Material;
 
 /**
  * the default level implementation.
@@ -40,7 +39,6 @@ import rogue.model.world.Tile.Material;
 public class LevelImpl implements Level {
     private static final int WIDTH = 32;
     private static final int HEIGHT = 32;
-    private static final int VINE_PROBABILITY = 5;
 
     private static final Logger LOG = LoggerFactory.getLogger(Level.class);
     private final Random random = new Random();
@@ -142,9 +140,8 @@ public class LevelImpl implements Level {
         IntStream.range(0, WIDTH).forEach(x -> {
             IntStream.range(0, HEIGHT).forEach(y -> {
                 final var isWall = cave[x][y];
-                final var madeOf = random.nextInt(VINE_PROBABILITY) != 0 ? Material.BRICKS : Material.VINES;
 
-                final var t = new TileImpl(x, y, madeOf, isWall);
+                final var t = new TileImpl(x, y, isWall);
 
                 // redundant but not slow
                 tileMap.put(x, y, t);
@@ -191,7 +188,7 @@ public class LevelImpl implements Level {
         }
         final var nextEntity = entityMap.inverse().get(nextTile);
 
-        if (nextTile.getMaterial() == Material.DOOR) {
+        if (nextTile.isDoor()) {
             return true;
         } else if (canPlaceEntity.test(nextTile)) {
             placeEntity.accept(player, nextTile);
