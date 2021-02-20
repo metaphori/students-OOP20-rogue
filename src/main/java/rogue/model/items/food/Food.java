@@ -14,4 +14,9 @@ public interface Food extends Item {
      */
     int getStarvationValue();
 
+    /**
+     * Get the food' FoodType.
+     * @return food's FoodType.
+     */
+    FoodType getFood();
 }

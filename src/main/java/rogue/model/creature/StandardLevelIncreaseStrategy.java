@@ -31,13 +31,13 @@ public final class StandardLevelIncreaseStrategy implements LevelIncreaseStrateg
             this.levelValue = levelValue;
         }
 
-        private int getExpValue() {
-            return this.expValue;
-        }
+        // private int getExpValue() {
+        //     return this.expValue;
+        // }
 
-        private int getLevelValue() {
-            return this.levelValue;
-        }
+        // private int getLevelValue() {
+        //     return this.levelValue;
+        // }
 
     }
 
@@ -48,7 +48,7 @@ public final class StandardLevelIncreaseStrategy implements LevelIncreaseStrateg
      */
     public StandardLevelIncreaseStrategy() {
         this.values = Arrays.asList(ExpLevel.values()).stream()
-            .map(i -> new Pair<>(i.getExpValue(), i.getLevelValue()))
+            .map(i -> new Pair<>(i.expValue, i.levelValue))
             .collect(Collectors.toList());
     }
 

@@ -40,13 +40,13 @@ public final class EquipmentImpl extends AbstractEventPublisher implements Equip
             this.armor  = armor;
         }
 
-        private Weapon getWeapon() {
-            return this.weapon;
-        }
+        // private Weapon getWeapon() {
+        //     return this.weapon;
+        // }
 
-        private Armor getArmor() {
-            return this.armor;
-        }
+        // private Armor getArmor() {
+        //     return this.armor;
+        // }
     }
 
     public EquipmentImpl(final Player player) {
@@ -108,8 +108,8 @@ public final class EquipmentImpl extends AbstractEventPublisher implements Equip
     }
 
     private void restore(final Memento m) {
-        this.weapon = m.getWeapon();
-        this.armor = m.getArmor();
+        this.weapon = m.weapon;
+        this.armor = m.armor;
     }
 
     @Override

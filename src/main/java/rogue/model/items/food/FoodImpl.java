@@ -53,11 +53,7 @@ public class FoodImpl implements Food {
         return this.food.getStarvationValue();
     }
 
-    /**
-     * Get the food' FoodType.
-     * @return food's FoodType.
-     */
-    public FoodType getFood() {
+    public final FoodType getFood() {
         return this.food;
     }
 

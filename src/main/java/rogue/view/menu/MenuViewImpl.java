@@ -1,6 +1,7 @@
 package rogue.view.menu;
 
 import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -8,6 +9,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import rogue.controller.GameController;
+import rogue.model.items.inventory.InventoryIsFullException;
 
 /**
  * An implementation for a {@link MenuView}.
@@ -63,8 +65,10 @@ public class MenuViewImpl implements MenuView {
                      */
                     insertNameLabel.setText(VALID_NAME);
                     controller.showGame();
-                    final Stage stage = (Stage) nameTextField.getScene().getWindow();
-                    stage.close();
+                    final var window = nameTextField.getScene().getWindow();
+                    if (window instanceof Stage) {
+                        ((Stage) window).close();
+                    }
                 } else {
                     insertNameLabel.setText(INVALID_NAME_MESSAGE);
                 }
