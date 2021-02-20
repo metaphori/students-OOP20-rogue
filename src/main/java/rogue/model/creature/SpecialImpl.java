@@ -57,7 +57,7 @@ public class SpecialImpl implements Special {
      * {@inheritDoc}
      */
     @Override
-    public boolean isFlyng() {
+    public boolean isFlying() {
         return this.flying;
     }
 
