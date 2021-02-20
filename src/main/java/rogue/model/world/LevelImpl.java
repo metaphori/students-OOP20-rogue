@@ -91,9 +91,26 @@ public class LevelImpl implements Level {
      */
     private final BiFunction<Entity, Direction, Tile> getRelativeTile = (e, d) -> {
         final Tile currentTile = entityMap.get(e);
-        final Coordinates currentCoordinates = new Coordinates(currentTile.getX(), currentTile.getY());
-        final Coordinates finalCoordinates = currentCoordinates.shift(d);
-        final Tile finalTile = tileMap.get(finalCoordinates.getX(), finalCoordinates.getY());
+        int nextX = currentTile.getX(), nextY = currentTile.getY();
+
+        switch (d) {
+            case NORTH:
+                nextY--;
+                break;
+            case EAST:
+                nextX++;
+                break;
+            case SOUTH:
+                nextY++;
+                break;
+            case WEST:
+                nextX--;
+                break;
+            default:
+                break;
+        }
+
+        final Tile finalTile = tileMap.get(nextX, nextY);
 
         return finalTile;
     };
