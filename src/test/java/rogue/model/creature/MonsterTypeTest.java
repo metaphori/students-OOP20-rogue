@@ -257,7 +257,7 @@ public class MonsterTypeTest {
 
         assertFalse(mon.getSpecial().isDrainLife());
         assertFalse(mon.getSpecial().isFlyingRandom());
-        assertTrue(mon.getSpecial().isFlyng());
+        assertTrue(mon.getSpecial().isFlying());
         assertFalse(mon.getSpecial().isGreedy());
         assertTrue(mon.getSpecial().isHostile());
         assertFalse(mon.getSpecial().isPoisonous());
@@ -280,7 +280,7 @@ public class MonsterTypeTest {
 
         assertFalse(mon.getSpecial().isDrainLife());
         assertTrue(mon.getSpecial().isFlyingRandom());
-        assertTrue(mon.getSpecial().isFlyng());
+        assertTrue(mon.getSpecial().isFlying());
         assertFalse(mon.getSpecial().isGreedy());
         assertFalse(mon.getSpecial().isHostile());
         assertFalse(mon.getSpecial().isPoisonous());
@@ -303,7 +303,7 @@ public class MonsterTypeTest {
 
         assertFalse(mon.getSpecial().isDrainLife());
         assertFalse(mon.getSpecial().isFlyingRandom());
-        assertFalse(mon.getSpecial().isFlyng());
+        assertFalse(mon.getSpecial().isFlying());
         assertFalse(mon.getSpecial().isGreedy());
         assertFalse(mon.getSpecial().isHostile());
         assertFalse(mon.getSpecial().isPoisonous());
@@ -326,7 +326,7 @@ public class MonsterTypeTest {
 
         assertFalse(mon.getSpecial().isDrainLife());
         assertFalse(mon.getSpecial().isFlyingRandom());
-        assertFalse(mon.getSpecial().isFlyng());
+        assertFalse(mon.getSpecial().isFlying());
         assertFalse(mon.getSpecial().isGreedy());
         assertTrue(mon.getSpecial().isHostile());
         assertFalse(mon.getSpecial().isPoisonous());
@@ -349,7 +349,7 @@ public class MonsterTypeTest {
 
             assertFalse(mon.getSpecial().isDrainLife());
             assertFalse(mon.getSpecial().isFlyingRandom());
-            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isFlying());
             assertFalse(mon.getSpecial().isGreedy());
             assertTrue(mon.getSpecial().isHostile());
             assertFalse(mon.getSpecial().isPoisonous());
@@ -372,7 +372,7 @@ public class MonsterTypeTest {
 
             assertFalse(mon.getSpecial().isDrainLife());
             assertFalse(mon.getSpecial().isFlyingRandom());
-            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isFlying());
             assertFalse(mon.getSpecial().isGreedy());
             assertTrue(mon.getSpecial().isHostile());
             assertFalse(mon.getSpecial().isPoisonous());
@@ -396,7 +396,7 @@ public class MonsterTypeTest {
 
             assertFalse(mon.getSpecial().isDrainLife());
             assertFalse(mon.getSpecial().isFlyingRandom());
-            assertTrue(mon.getSpecial().isFlyng());
+            assertTrue(mon.getSpecial().isFlying());
             assertFalse(mon.getSpecial().isGreedy());
             assertTrue(mon.getSpecial().isHostile());
             assertFalse(mon.getSpecial().isPoisonous());
@@ -419,7 +419,7 @@ public class MonsterTypeTest {
 
             assertFalse(mon.getSpecial().isDrainLife());
             assertFalse(mon.getSpecial().isFlyingRandom());
-            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isFlying());
             assertFalse(mon.getSpecial().isGreedy());
             assertTrue(mon.getSpecial().isHostile());
             assertFalse(mon.getSpecial().isPoisonous());
@@ -442,7 +442,7 @@ public class MonsterTypeTest {
 
             assertFalse(mon.getSpecial().isDrainLife());
             assertFalse(mon.getSpecial().isFlyingRandom());
-            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isFlying());
             assertFalse(mon.getSpecial().isGreedy());
             assertFalse(mon.getSpecial().isHostile());
             assertFalse(mon.getSpecial().isPoisonous());
@@ -465,7 +465,7 @@ public class MonsterTypeTest {
 
             assertFalse(mon.getSpecial().isDrainLife());
             assertFalse(mon.getSpecial().isFlyingRandom());
-            assertTrue(mon.getSpecial().isFlyng());
+            assertTrue(mon.getSpecial().isFlying());
             assertFalse(mon.getSpecial().isGreedy());
             assertFalse(mon.getSpecial().isHostile());
             assertFalse(mon.getSpecial().isPoisonous());
@@ -488,7 +488,7 @@ public class MonsterTypeTest {
 
             assertFalse(mon.getSpecial().isDrainLife());
             assertFalse(mon.getSpecial().isFlyingRandom());
-            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isFlying());
             assertFalse(mon.getSpecial().isGreedy());
             assertTrue(mon.getSpecial().isHostile());
             assertFalse(mon.getSpecial().isPoisonous());
@@ -511,7 +511,7 @@ public class MonsterTypeTest {
 
             assertFalse(mon.getSpecial().isDrainLife());
             assertFalse(mon.getSpecial().isFlyingRandom());
-            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isFlying());
             assertFalse(mon.getSpecial().isGreedy());
             assertTrue(mon.getSpecial().isHostile());
             assertFalse(mon.getSpecial().isPoisonous());
@@ -534,7 +534,7 @@ public class MonsterTypeTest {
 
             assertFalse(mon.getSpecial().isDrainLife());
             assertFalse(mon.getSpecial().isFlyingRandom());
-            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isFlying());
             assertFalse(mon.getSpecial().isGreedy());
             assertTrue(mon.getSpecial().isHostile());
             assertTrue(mon.getSpecial().isPoisonous());
@@ -557,7 +557,7 @@ public class MonsterTypeTest {
 
             assertFalse(mon.getSpecial().isDrainLife());
             assertFalse(mon.getSpecial().isFlyingRandom());
-            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isFlying());
             assertTrue(mon.getSpecial().isGreedy());
             assertFalse(mon.getSpecial().isHostile());
             assertFalse(mon.getSpecial().isPoisonous());
@@ -580,7 +580,7 @@ public class MonsterTypeTest {
 
             assertFalse(mon.getSpecial().isDrainLife());
             assertFalse(mon.getSpecial().isFlyingRandom());
-            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isFlying());
             assertTrue(mon.getSpecial().isGreedy());
             assertFalse(mon.getSpecial().isHostile());
             assertFalse(mon.getSpecial().isPoisonous());
@@ -603,7 +603,7 @@ public class MonsterTypeTest {
 
             assertFalse(mon.getSpecial().isDrainLife());
             assertFalse(mon.getSpecial().isFlyingRandom());
-            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isFlying());
             assertFalse(mon.getSpecial().isGreedy());
             assertTrue(mon.getSpecial().isHostile());
             assertFalse(mon.getSpecial().isPoisonous());
@@ -626,7 +626,7 @@ public class MonsterTypeTest {
 
             assertFalse(mon.getSpecial().isDrainLife());
             assertFalse(mon.getSpecial().isFlyingRandom());
-            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isFlying());
             assertFalse(mon.getSpecial().isGreedy());
             assertFalse(mon.getSpecial().isHostile());
             assertFalse(mon.getSpecial().isPoisonous());
@@ -649,7 +649,7 @@ public class MonsterTypeTest {
 
             assertFalse(mon.getSpecial().isDrainLife());
             assertFalse(mon.getSpecial().isFlyingRandom());
-            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isFlying());
             assertFalse(mon.getSpecial().isGreedy());
             assertFalse(mon.getSpecial().isHostile());
             assertFalse(mon.getSpecial().isPoisonous());
@@ -672,7 +672,7 @@ public class MonsterTypeTest {
 
             assertFalse(mon.getSpecial().isDrainLife());
             assertFalse(mon.getSpecial().isFlyingRandom());
-            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isFlying());
             assertFalse(mon.getSpecial().isGreedy());
             assertTrue(mon.getSpecial().isHostile());
             assertTrue(mon.getSpecial().isPoisonous());
@@ -695,7 +695,7 @@ public class MonsterTypeTest {
 
             assertFalse(mon.getSpecial().isDrainLife());
             assertFalse(mon.getSpecial().isFlyingRandom());
-            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isFlying());
             assertFalse(mon.getSpecial().isGreedy());
             assertTrue(mon.getSpecial().isHostile());
             assertFalse(mon.getSpecial().isPoisonous());
@@ -718,7 +718,7 @@ public class MonsterTypeTest {
 
             assertFalse(mon.getSpecial().isDrainLife());
             assertFalse(mon.getSpecial().isFlyingRandom());
-            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isFlying());
             assertFalse(mon.getSpecial().isGreedy());
             assertFalse(mon.getSpecial().isHostile());
             assertFalse(mon.getSpecial().isPoisonous());
@@ -741,7 +741,7 @@ public class MonsterTypeTest {
 
             assertTrue(mon.getSpecial().isDrainLife());
             assertFalse(mon.getSpecial().isFlyingRandom());
-            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isFlying());
             assertFalse(mon.getSpecial().isGreedy());
             assertTrue(mon.getSpecial().isHostile());
             assertFalse(mon.getSpecial().isPoisonous());
@@ -764,7 +764,7 @@ public class MonsterTypeTest {
 
             assertFalse(mon.getSpecial().isDrainLife());
             assertFalse(mon.getSpecial().isFlyingRandom());
-            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isFlying());
             assertFalse(mon.getSpecial().isGreedy());
             assertFalse(mon.getSpecial().isHostile());
             assertFalse(mon.getSpecial().isPoisonous());
@@ -787,7 +787,7 @@ public class MonsterTypeTest {
 
             assertFalse(mon.getSpecial().isDrainLife());
             assertFalse(mon.getSpecial().isFlyingRandom());
-            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isFlying());
             assertFalse(mon.getSpecial().isGreedy());
             assertTrue(mon.getSpecial().isHostile());
             assertFalse(mon.getSpecial().isPoisonous());
@@ -810,7 +810,7 @@ public class MonsterTypeTest {
 
             assertFalse(mon.getSpecial().isDrainLife());
             assertFalse(mon.getSpecial().isFlyingRandom());
-            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isFlying());
             assertFalse(mon.getSpecial().isGreedy());
             assertFalse(mon.getSpecial().isHostile());
             assertFalse(mon.getSpecial().isPoisonous());
@@ -833,7 +833,7 @@ public class MonsterTypeTest {
 
             assertFalse(mon.getSpecial().isDrainLife());
             assertFalse(mon.getSpecial().isFlyingRandom());
-            assertFalse(mon.getSpecial().isFlyng());
+            assertFalse(mon.getSpecial().isFlying());
             assertFalse(mon.getSpecial().isGreedy());
             assertTrue(mon.getSpecial().isHostile());
             assertFalse(mon.getSpecial().isPoisonous());
