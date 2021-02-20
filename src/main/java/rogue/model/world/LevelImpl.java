@@ -59,7 +59,7 @@ public class LevelImpl implements Level {
      * @param t the tile
      * @return can place an entity in tile t?
      */
-    private final Predicate<Tile> canPlaceEntity = t -> !t.isWall() && !entityMap.containsValue(t);
+    private final Predicate<Tile> canPlaceEntity = t -> freeTiles.contains(t);
 
     /**
      * remove the entity and update the free tiles list.
@@ -155,7 +155,6 @@ public class LevelImpl implements Level {
 
         // door to next level
         final var door = getRandomFreeTile.get();
-        freeTiles.remove(door);
         door.setDoor();
     };
 
