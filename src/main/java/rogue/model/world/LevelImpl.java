@@ -178,7 +178,7 @@ public class LevelImpl implements Level {
     /**
      * moves the player.
      * 
-     * @d the player's movement direction
+     * @param d the player's movement direction
      */
     private Predicate<Direction> movePlayer = d -> {
         final var nextTile = getRelativeTile.apply(player, d);
