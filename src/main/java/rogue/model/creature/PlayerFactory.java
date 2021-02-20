@@ -15,7 +15,7 @@ public interface PlayerFactory {
      * Creates a new {@link Player} with the given life.
      * @param life
      *          the player life
-     * @return a PLayer
+     * @return a Player
      */
     Player createByLife(PlayerLife life);
 
