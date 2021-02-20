@@ -1,7 +1,7 @@
 package rogue.model.creature;
 
 import javafx.util.Pair;
-import rogue.model.items.potion.PotionImpl;
+import rogue.model.items.potion.Potion;
 import rogue.model.world.Direction;
 
 /**
@@ -45,7 +45,7 @@ public interface Monster extends Creature<MonsterLife> {
      * 
      * @return the monster's item
      */
-    PotionImpl getItem();
+    Potion getItem();
 
     /**
      * 
@@ -61,7 +61,7 @@ public interface Monster extends Creature<MonsterLife> {
 
     /**
      * 
-     * @return a random number for the item drop
+     * @return a random number of the item drop
      */
     int dropItem();
 
