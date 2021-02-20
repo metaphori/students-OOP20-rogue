@@ -272,7 +272,7 @@ public class LevelImpl implements Level {
 
         // if player is killed
         if (player.getLife().isDead()) {
-            entityMap.remove(player);
+            entityMap.clear();
             LOG.info("Player dead");
         }
         return nextLevel;
