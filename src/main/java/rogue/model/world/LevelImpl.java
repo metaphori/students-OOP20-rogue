@@ -246,7 +246,16 @@ public class LevelImpl implements Level {
     public final boolean moveEntities(final Direction d) {
         final var monsters = entityMap.keySet().stream().filter(e -> e instanceof Monster).collect(Collectors.toList());
         monsters.forEach(moveMonster);
-        return movePlayer.test(d);
+
+        // if player is entering a door
+        var nextLevel = movePlayer.test(d);
+
+        // if player is killed
+        if (player.getLife().isDead()) {
+            entityMap.remove(player);
+            LOG.info("Player dead");
+        }
+        return nextLevel;
     }
 
     /**
