@@ -61,7 +61,7 @@ public interface Monster extends Creature<MonsterLife> {
 
     /**
      * 
-     * @return or not the monster's item
+     * @return a random number for the item drop
      */
     int dropItem();
 
