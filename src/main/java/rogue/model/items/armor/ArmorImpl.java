@@ -17,7 +17,7 @@ public final class ArmorImpl implements Armor {
      */
     public ArmorImpl(final ArmorType armor) {
         this.armor = armor;
-        this.ac = this.armor.getAC();
+        this.ac = this.armor.getDefaultAC();
     }
 
     @Override
