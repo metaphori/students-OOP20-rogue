@@ -16,10 +16,10 @@ public class PotionTypeTest {
     private static final int POTION_IV_MAX = 50;
     private static final int POTION_IV_MIN = 40;
     private static final int POTION_V_VALUE = 100;
-    private static final int CORRUPT_POTION_I_MAX = -10;
-    private static final int CORRUPT_POTION_I_MIN = -5;
-    private static final int CORRUPT_POTION_II_MAX = -20;
-    private static final int CORRUPT_POTION_II_MIN = -15;
+    private static final int CORRUPT_POTION_I_MAX = -3;
+    private static final int CORRUPT_POTION_I_MIN = -1;
+    private static final int CORRUPT_POTION_II_MAX = -5;
+    private static final int CORRUPT_POTION_II_MIN = -3;
 
     private static final String TOO_HIGH = "too high";
     private static final String TOO_LOW = "too low";
