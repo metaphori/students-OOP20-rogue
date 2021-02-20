@@ -10,7 +10,7 @@ import rogue.view.GameView;
 import rogue.view.StatusBarView;
 import rogue.view.StatusBarViewImpl;
 
-public class GameControllerImpl implements GameController {
+public final class GameControllerImpl implements GameController {
 
     private final StatusBarController statusBarController;
     private final InventoryController inventoryController;
