@@ -32,6 +32,7 @@ import rogue.model.creature.Monster;
 import rogue.model.creature.Player;
 import rogue.model.items.Item;
 import rogue.model.items.inventory.InventoryIsFullException;
+import rogue.model.world.Tile.Material;
 
 /**
  * the default level implementation.
