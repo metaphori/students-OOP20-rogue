@@ -187,8 +187,8 @@ public class MonsterImageGeneratorImpl implements MonsterImageGenerator {
           }
 
         /*
-         * Phanthom return null becuase is invisible
+         * Phanthom
          */
-        return null;
+        return new Image(ClassLoader.getSystemResource("images/monster/Phantom.png").toExternalForm(), 32, 32, false, true);
     }
 }
