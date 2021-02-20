@@ -52,7 +52,7 @@ public class CombatImpl implements Combat {
     private Result playerAttack(final Player player, final Monster monster) {
         monster.getSpecial().becomeHostile();
         int malus = 0;
-        if (monster.getSpecial().isFlyng()) {
+        if (monster.getSpecial().isFlying()) {
             malus = FLYING_MONSTER_MALUS;
         }
         if (this.hit(playerAttackRoll(player) - malus, monster.getAC())) {
