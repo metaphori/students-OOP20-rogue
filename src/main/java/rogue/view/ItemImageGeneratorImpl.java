@@ -10,9 +10,14 @@ import rogue.model.items.rings.RingImpl;
 import rogue.model.items.scroll.ScrollImpl;
 import rogue.model.items.weapons.BaseWeapon;
 
+/**
+ * An implementation for an {@link ItemImageGenerator}.
+ *
+ */
 public class ItemImageGeneratorImpl implements ItemImageGenerator {
 
     /**
+     * Get the corresponding of the given item.
      * @param item to get image of.
      * @return the image of the requested item.
      */

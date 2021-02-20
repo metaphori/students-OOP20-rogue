@@ -5,6 +5,9 @@ import java.util.Optional;
 import rogue.model.events.EventPublisher;
 import rogue.model.items.scroll.Scroll;
 
+/**
+ * An interface for a Scroll container.
+ */
 public interface ScrollContainer extends EventPublisher {
 
     /**

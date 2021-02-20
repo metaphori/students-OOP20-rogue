@@ -9,8 +9,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import rogue.controller.GameController;
 
-/*
- * Class that controls the Main menu's view.
+/**
+ * An implementation for a {@link MenuView}.
  */
 public class MenuViewImpl implements MenuView {
 
@@ -21,7 +21,6 @@ public class MenuViewImpl implements MenuView {
 
     @FXML private Label insertNameLabel;
     @FXML private TextField nameTextField;
-    private String playerName;
     private GameController controller;
 
     /**
@@ -59,7 +58,6 @@ public class MenuViewImpl implements MenuView {
         if (event.getCode().equals(KeyCode.ENTER)) {
             if (nameTextField.getText() != null && !(nameTextField.getText().isEmpty())) {
                 if (validName(nameTextField.getText())) {
-                    this.playerName = nameTextField.getText();
                     /*
                      * Valid name entered, start game.
                      */
@@ -74,13 +72,6 @@ public class MenuViewImpl implements MenuView {
                 insertNameLabel.setText(NO_NAME_MESSAGE);
             }
         }
-    }
-
-    /**
-     * @return player's name
-     */
-    public String getPlayerName() {
-        return this.playerName;
     }
 
 }

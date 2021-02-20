@@ -3,6 +3,10 @@ package rogue.view;
 import javafx.scene.image.Image;
 import rogue.model.items.Item;
 
+/**
+ * An interface for an ItemImageGenerator.
+ * 
+ */
 public interface ItemImageGenerator {
 
     /**

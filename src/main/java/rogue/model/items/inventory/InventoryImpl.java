@@ -12,6 +12,10 @@ import rogue.model.items.Item;
 import rogue.model.items.scroll.Scroll;
 import rogue.model.items.scroll.ScrollImpl;
 
+/**
+ * An implementation for an {@link Inventory}.
+ *
+ */
 public class InventoryImpl extends AbstractEventPublisher implements Inventory {
 
     private static final int INVENTORY_SIZE = 20;
@@ -46,6 +50,7 @@ public class InventoryImpl extends AbstractEventPublisher implements Inventory {
      * @param index of the inventory slot to select.
      * @return true if the inventory was correctly updated, false if there
      * was no inventory update (Item's use returned false).
+     * @throws OutOfInventoryException if given index is out of the inventory.
      */
     public boolean useItem(final int index) throws OutOfInventoryException {
         if (inventory.containsKey(index)) {
@@ -90,8 +95,10 @@ public class InventoryImpl extends AbstractEventPublisher implements Inventory {
     }
 
     /**
+     * Get the item in the given slot.
      * @param index of the inventory slot to select.
      * @return the item contained in the given inventory slot.
+     * @throws OutOfInventoryException if given index is out of the inventory.
      */
     public Optional<Item> getItem(final int index) throws OutOfInventoryException {
         if (this.inventory.containsKey(index)) {
@@ -101,10 +108,12 @@ public class InventoryImpl extends AbstractEventPublisher implements Inventory {
     }
 
     /**
+     * Adds an item to the Inventory.
      * @param item to add to the inventory.
      * @return true if the item was correctly added to the inventory, 
      * false if the inventory is full or if the inventory contains the
      * limit amount for the item.
+     * @throws InventoryIsFullException if the inventory is full.
      */
     public boolean addItem(final Item item) throws InventoryIsFullException {
         /*
@@ -158,10 +167,12 @@ public class InventoryImpl extends AbstractEventPublisher implements Inventory {
     }
 
     /**
+     * Swaps two items in the inventory.
      * @param first slot to swap.
      * @param second slot to swap.
      * @return true if correctly swapped, false if given
      * two empty slots.
+     * @throws OutOfInventoryException if the given index is out of the inventory.
      */
     public boolean swap(final int first, final int second) throws OutOfInventoryException {
         /*
@@ -195,6 +206,7 @@ public class InventoryImpl extends AbstractEventPublisher implements Inventory {
     }
 
     /**
+     * Get the inventory's Scroll Container.
      * @return ScrollContainer associated with inventory.
      */
     public ScrollContainer getScrollContainer() {
@@ -202,8 +214,10 @@ public class InventoryImpl extends AbstractEventPublisher implements Inventory {
     }
 
     /**
+     * Remove an item in the inventory.
      * @param index of the slot to remove.
      * @return true if correctly used, false 
+     * @throws OutOfInventoryException if given index is out of the inventory.
      */
     public boolean remove(final int index) throws OutOfInventoryException {
         if (this.inventory.containsKey(index)) {
@@ -224,9 +238,11 @@ public class InventoryImpl extends AbstractEventPublisher implements Inventory {
     }
 
     /**
+     * Get the amount of an Item in a given slot.
      * @param index of the wanted slot.
      * @return amount of the item in the slot, 0 if
      * empty slot.
+     * @throws OutOfInventoryException if given index is out of the inventory.
      */
     public int getAmount(final int index) throws OutOfInventoryException {
         if (this.inventory.containsKey(index)) {

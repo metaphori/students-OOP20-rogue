@@ -38,12 +38,12 @@ public enum PotionType {
      * Corrupt Potion I, hurts the player for a small
      * amount of HP.
      */
-    CORRUPT_POTION_I(Potion.PotionEffect.HURT, new Pair<Integer, Integer>(5, 10)),
+    CORRUPT_POTION_I(Potion.PotionEffect.HURT, new Pair<Integer, Integer>(1, 3)),
     /**
      * Corrupt Potion II, hurts the player for a medium
      * amount of HP.
      */
-    CORRUPT_POTION_II(Potion.PotionEffect.HURT, new Pair<Integer, Integer>(15, 20));
+    CORRUPT_POTION_II(Potion.PotionEffect.HURT, new Pair<Integer, Integer>(3, 5));
 
     /**
      * The amount of HP added or removed to the player from
