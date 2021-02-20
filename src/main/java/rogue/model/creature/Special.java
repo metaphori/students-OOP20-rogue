@@ -16,7 +16,7 @@ public interface Special {
      * 
      * @return true if the monster can fly.
      */
-    boolean isFlyng();
+    boolean isFlying();
 
     /**
      * 
