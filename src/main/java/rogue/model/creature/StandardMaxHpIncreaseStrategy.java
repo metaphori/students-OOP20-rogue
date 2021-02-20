@@ -1,6 +1,6 @@
 package rogue.model.creature;
 
-public final class StandardMahHpIncreaseStrategy implements MaxHpIncreaseStrategy {
+public final class StandardMaxHpIncreaseStrategy implements MaxHpIncreaseStrategy {
 
     private static final int DELTA = 12;
 
