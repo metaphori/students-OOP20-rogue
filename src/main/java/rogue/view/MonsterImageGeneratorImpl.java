@@ -19,7 +19,7 @@ public class MonsterImageGeneratorImpl implements MonsterImageGenerator {
          * Air Elemental
          */
         if (monster.getMonsterType().name().equals(MonsterType.AIR_ELEMENTAL.name())) {
-            return new Image(ClassLoader.getSystemResource("images/monster/Air_Elemental").toExternalForm(), 32, 32, false, true);
+            return new Image(ClassLoader.getSystemResource("images/monster/Air_Elemental.png").toExternalForm(), 32, 32, false, true);
         }
 
         /*
