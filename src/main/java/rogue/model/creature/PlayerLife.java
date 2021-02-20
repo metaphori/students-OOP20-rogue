@@ -75,14 +75,6 @@ public interface PlayerLife extends Life {
     int getLevel();
 
     /**
-     * Sets the player maximum health points.
-     * @param maxHealthPoints
-     *          the max quantity of healthPoints the player can collect
-     * @throws IllegalStateException if maxHealthPoints > healthPoints
-     */ 
-    void setMaxHealthPoints(int maxHealthPoints);
-
-    /**
      * @return the player maximum health points
      */
     int getMaxHealthPoints();
