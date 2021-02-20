@@ -88,34 +88,31 @@ public class LevelImpl implements Level {
      * @return the tile next to e
      */
     private final BiFunction<Entity, Direction, Tile> getRelativeTile = (e, d) -> {
-        try {
-            final Tile currentTile = entityMap.get(e);
-            int nextX = currentTile.getX(), nextY = currentTile.getY();
-
-            switch (d) {
-                case NORTH:
-                    nextY--;
-                    break;
-                case EAST:
-                    nextX++;
-                    break;
-                case SOUTH:
-                    nextY++;
-                    break;
-                case WEST:
-                    nextX--;
-                    break;
-                default:
-                    break;
-            }
-
-            return tileMap.get(nextX, nextY);
-
-        } catch (NullPointerException npe) {
-            LOG.info("Entity not present in Level");
+        final Tile currentTile = entityMap.get(e);
+        if (currentTile == null) {
+            return null;
         }
 
-        return null;
+        int nextX = currentTile.getX(), nextY = currentTile.getY();
+
+        switch (d) {
+            case NORTH:
+                nextY--;
+                break;
+            case EAST:
+                nextX++;
+                break;
+            case SOUTH:
+                nextY++;
+                break;
+            case WEST:
+                nextX--;
+                break;
+            default:
+                break;
+        }
+
+        return tileMap.get(nextX, nextY);
     };
 
     /**
@@ -158,23 +155,23 @@ public class LevelImpl implements Level {
      * @return the best direction to reach the player
      */
     private final Function<Entity, Direction> nearestDirectionToPlayer = e -> {
-        try {
-            final int east = entityMap.get(player).getX() - entityMap.get(e).getX();
-            final int west = entityMap.get(e).getX() - entityMap.get(player).getX();
-            final int south = entityMap.get(player).getY() - entityMap.get(e).getY();
-            final int north = entityMap.get(e).getY() - entityMap.get(player).getY();
-
-            final Pair<Direction, Integer> xDirection = east > 0 ? new Pair<>(Direction.EAST, east)
-                    : new Pair<>(Direction.WEST, west);
-            final Pair<Direction, Integer> yDirection = south > 0 ? new Pair<>(Direction.SOUTH, south)
-                    : new Pair<>(Direction.NORTH, north);
-
-            return xDirection.getValue() > yDirection.getValue() ? xDirection.getKey() : yDirection.getKey();
-        } catch (NullPointerException npe) {
-            LOG.info("entity or player not present in Level");
+        final Tile playerTile = entityMap.get(player);
+        final Tile entityTile = entityMap.get(e);
+        if (playerTile == null || entityTile == null) {
+            return Direction.NONE;
         }
 
-        return Direction.NONE;
+        final int east = playerTile.getX() - entityTile.getX();
+        final int west = entityTile.getX() - playerTile.getX();
+        final int south = playerTile.getY() - entityTile.getY();
+        final int north = entityTile.getY() - playerTile.getY();
+
+        final Pair<Direction, Integer> xDirection = east > 0 ? new Pair<>(Direction.EAST, east)
+                : new Pair<>(Direction.WEST, west);
+        final Pair<Direction, Integer> yDirection = south > 0 ? new Pair<>(Direction.SOUTH, south)
+                : new Pair<>(Direction.NORTH, north);
+
+        return xDirection.getValue() > yDirection.getValue() ? xDirection.getKey() : yDirection.getKey();
     };
 
     /**
