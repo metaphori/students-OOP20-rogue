@@ -3,7 +3,7 @@ package rogue.model.creature;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javafx.util.Pair;
-import rogue.model.items.potion.PotionImpl;
+import rogue.model.items.potion.Potion;
 import rogue.model.world.Direction;
 
 /**
@@ -79,7 +79,7 @@ public class MonsterImpl implements Monster {
      * {@inheritDoc}
      */
     @Override
-    public PotionImpl getItem() {
+    public Potion getItem() {
         return this.type.getItem();
     }
 
