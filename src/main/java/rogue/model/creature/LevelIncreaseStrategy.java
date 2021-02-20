@@ -8,7 +8,7 @@ public interface LevelIncreaseStrategy {
 
     /**
      * @param experience
-     *          the actual experience value
+     *          the current experience value
      * @return the level value corresponding to the given experience
      */
     int getLevel(int experience);
