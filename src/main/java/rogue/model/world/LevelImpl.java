@@ -88,40 +88,35 @@ public class LevelImpl implements Level {
      * @return the tile next to e
      */
     private final BiFunction<Entity, Direction, Tile> getRelativeTile = (e, d) -> {
-        final Tile currentTile = entityMap.get(e);
-        int nextX = currentTile.getX(), nextY = currentTile.getY();
+        try {
+            final Tile currentTile = entityMap.get(e);
+            int nextX = currentTile.getX(), nextY = currentTile.getY();
 
-        switch (d) {
-            case NORTH:
-                nextY--;
-                break;
-            case EAST:
-                nextX++;
-                break;
-            case SOUTH:
-                nextY++;
-                break;
-            case WEST:
-                nextX--;
-                break;
-            default:
-                break;
+            switch (d) {
+                case NORTH:
+                    nextY--;
+                    break;
+                case EAST:
+                    nextX++;
+                    break;
+                case SOUTH:
+                    nextY++;
+                    break;
+                case WEST:
+                    nextX--;
+                    break;
+                default:
+                    break;
+            }
+
+            return tileMap.get(nextX, nextY);
+
+        } catch (NullPointerException npe) {
+            LOG.info("Entity not present in Level");
         }
 
-        final Tile finalTile = tileMap.get(nextX, nextY);
-
-        return finalTile;
+        return null;
     };
-
-    /**
-     * gets the entity next to another entity.
-     * 
-     * @param e the entity
-     * @param d the direction used to determine the next entity
-     * @return the entity next to e
-     */
-    private final BiFunction<Entity, Direction, Entity> getRelativeEntity = (e, d) -> entityMap.inverse()
-            .get(getRelativeTile.apply(e, d));
 
     /**
      * place an entity in a random tile.
@@ -163,21 +158,28 @@ public class LevelImpl implements Level {
      * @return the best direction to reach the player
      */
     private final Function<Entity, Direction> nearestDirectionToPlayer = e -> {
-        final int east = entityMap.get(player).getX() - entityMap.get(e).getX();
-        final int west = entityMap.get(e).getX() - entityMap.get(player).getX();
-        final int south = entityMap.get(player).getY() - entityMap.get(e).getY();
-        final int north = entityMap.get(e).getY() - entityMap.get(player).getY();
+        try {
+            final int east = entityMap.get(player).getX() - entityMap.get(e).getX();
+            final int west = entityMap.get(e).getX() - entityMap.get(player).getX();
+            final int south = entityMap.get(player).getY() - entityMap.get(e).getY();
+            final int north = entityMap.get(e).getY() - entityMap.get(player).getY();
 
-        final Pair<Direction, Integer> xDirection = east > 0 ? new Pair<>(Direction.EAST, east)
-                : new Pair<>(Direction.WEST, west);
-        final Pair<Direction, Integer> yDirection = south > 0 ? new Pair<>(Direction.SOUTH, south)
-                : new Pair<>(Direction.NORTH, north);
+            final Pair<Direction, Integer> xDirection = east > 0 ? new Pair<>(Direction.EAST, east)
+                    : new Pair<>(Direction.WEST, west);
+            final Pair<Direction, Integer> yDirection = south > 0 ? new Pair<>(Direction.SOUTH, south)
+                    : new Pair<>(Direction.NORTH, north);
 
-        return xDirection.getValue() > yDirection.getValue() ? xDirection.getKey() : yDirection.getKey();
+            return xDirection.getValue() > yDirection.getValue() ? xDirection.getKey() : yDirection.getKey();
+        } catch (NullPointerException npe) {
+            LOG.info("entity or player not present in Level");
+        }
+
+        return Direction.NONE;
     };
 
     /**
      * moves the player.
+     * 
      * @d the player's movement direction
      */
     private Predicate<Direction> movePlayer = d -> {
@@ -210,6 +212,7 @@ public class LevelImpl implements Level {
 
     /**
      * moves a monster.
+     * 
      * @param e the monster
      */
     private Consumer<Entity> moveMonster = e -> {
