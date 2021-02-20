@@ -39,13 +39,13 @@ public final class StatusBarControllerImpl implements StatusBarController, Event
     @Subscribe
     public void onLifeChange(final LifeEvent<PlayerLife> event) {
         LOG.info("Life changed " + event);
-        view.set(BarLabel.COINS, event.getLife().getCoins());
-        view.set(BarLabel.HP, event.getLife().getHealthPoints());
-        view.set(BarLabel.MAX_HP, event.getLife().getMaxHealthPoints());
-        view.set(BarLabel.EXPERIENCE, event.getLife().getExperience());
-        view.set(BarLabel.LEVEL, event.getLife().getLevel());
-        view.set(BarLabel.STRENGTH, event.getLife().getStrength());
-        view.set(BarLabel.FOOD, event.getLife().getFood());
+        view.setLifeLabel(BarLabel.COINS, event.getLife().getCoins());
+        view.setLifeLabel(BarLabel.HP, event.getLife().getHealthPoints());
+        view.setLifeLabel(BarLabel.MAX_HP, event.getLife().getMaxHealthPoints());
+        view.setLifeLabel(BarLabel.EXPERIENCE, event.getLife().getExperience());
+        view.setLifeLabel(BarLabel.LEVEL, event.getLife().getLevel());
+        view.setLifeLabel(BarLabel.STRENGTH, event.getLife().getStrength());
+        view.setLifeLabel(BarLabel.FOOD, event.getLife().getFood());
     }
 
     @Subscribe

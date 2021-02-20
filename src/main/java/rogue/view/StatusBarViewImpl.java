@@ -34,13 +34,8 @@ public final class StatusBarViewImpl implements StatusBarView {
     }
 
     @Override
-    public void setLifeLabel(final rogue.view.BarLabel label, final int value) {
+    public void setLifeLabel(final BarLabel label, final int value) {
         this.updateLabel(label.getNameLabel(), Integer.toString(value));
-    }
-
-    @Override
-    public Node getNode() {
-        return this.root;
     }
 
     @Override
@@ -51,6 +46,11 @@ public final class StatusBarViewImpl implements StatusBarView {
     @Override
     public void setArmorLabel(final Armor armor) {
         this.updateLabel("#armor", armor.toString());
+    }
+
+    @Override
+    public Node getNode() {
+        return this.root;
     }
 
 }
