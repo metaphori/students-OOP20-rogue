@@ -78,7 +78,7 @@ public enum WeaponType {
         this.name = name;
         this.damageMap = new EnumMap<>(Use.class);
         this.damageMap.put(Use.HANDLED, handledDamage);
-        this.damageMap.put(Use.THROWABLE, throwableDamage);
+        this.damageMap.put(Use.THROWN, throwableDamage);
     }
 
     /**
