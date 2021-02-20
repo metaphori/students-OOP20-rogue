@@ -10,7 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * The third field contains the minimum and maximum damage the monster can do.
  * The fourth field contains {@link Special} that the monster possesses. 
  * The fifth field contains the coins that the monster drops when it dies.
- * The sixth field contains the {@link PotionType} the monster drop when it dies.
+ * The sixth field contains the {@link PotionType} the monster drops when it dies.
  * The seventh field contains the possibility that the object will be drop.
  */
 
