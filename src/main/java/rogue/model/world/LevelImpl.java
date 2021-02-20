@@ -76,7 +76,10 @@ public class LevelImpl implements Level {
      * @param t the tile for the entity to be placed in
      */
     private final BiConsumer<Entity, Tile> placeEntity = (e, t) -> {
-        removeEntity.accept(e);
+        if (entityMap.containsKey(e)) {
+            removeEntity.accept(e);
+        }
+
         entityMap.put(e, t);
         freeTiles.remove(t);
     };
