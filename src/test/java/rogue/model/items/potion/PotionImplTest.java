@@ -14,7 +14,6 @@ public class PotionImplTest {
     private static final int REMOVE_AMOUNT_40 = 40;
     private static final int REMOVE_AMOUNT_10 = 10;
     private static final int PLAYER_START_LIFE = 12;
-    private static final int PLAYER_MAX_HEALTH = 50;
 
     private Player pl;
 

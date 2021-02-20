@@ -101,7 +101,8 @@ public class RingsTest {
         assertEquals(10, player.getEquipment().getArmor().getAC());
         // change the armor currently in use, so i expect the protection ring is now applied to the new armor 
         player.getEquipment().setArmor(new ArmorImpl(ArmorType.CHAIN_MAIL));
-        assertEquals(7, player.getEquipment().getArmor().getAC());
+        final var expected = 7;
+        assertEquals(expected, player.getEquipment().getArmor().getAC());
     }
 
     @Test
