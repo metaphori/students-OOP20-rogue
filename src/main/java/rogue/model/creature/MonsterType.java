@@ -15,6 +15,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 
 import javafx.util.Pair;
+import rogue.model.items.potion.Potion;
 import rogue.model.items.potion.PotionImpl;
 import rogue.model.items.potion.PotionType;
 
@@ -172,11 +173,11 @@ public enum MonsterType {
     private final Pair<Integer, Integer> damage;
     private final Special special;
     private final int money;
-    private final PotionImpl item;
+    private final Potion item;
     private final int itemChange;
 
     MonsterType(final MonsterLife life, final int ac, final Pair<Integer, Integer> damage, final SpecialImpl special, final int money,
-        final PotionImpl item, final int itemChange) {
+        final Potion item, final int itemChange) {
         this.life = life;
         this.ac = ac;
         this.damage = damage;
@@ -216,7 +217,7 @@ public enum MonsterType {
         return this.money;
     }
 
-    protected PotionImpl getItem() {
+    protected Potion getItem() {
         return this.item;
     }
 
