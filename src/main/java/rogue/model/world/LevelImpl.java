@@ -1,7 +1,6 @@
 package rogue.model.world;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -209,10 +208,8 @@ public class LevelImpl implements Level {
 
         if (canPlaceEntity.test(nextTile)) {
             placeEntity.accept(e, nextTile);
-        } else if (nextEntity instanceof Creature) {
-            if (combat.attack((Creature<?>) e, (Creature<?>) nextEntity) == Result.DEAD) {
-                removeEntity.accept(nextEntity);
-            }
+        } else if (nextEntity instanceof Player) {
+            combat.attack((Creature<?>) e, (Player) nextEntity);
         } else if (nextEntity instanceof Item) {
             // crush item
             removeEntity.accept(nextEntity);
