@@ -5,7 +5,7 @@ import rogue.model.items.Equipment;
 /**
  * A class representing an equipment change event.
  */
-public final class EquipmentEvent implements EntityEvent {
+public final class EquipmentEvent implements Event {
 
     private final Equipment equipment;
 

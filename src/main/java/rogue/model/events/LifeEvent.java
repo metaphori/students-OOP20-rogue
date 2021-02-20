@@ -7,7 +7,7 @@ import rogue.model.creature.Life;
  *
  * @param <L> the type of life affected by the change
  */
-public final class LifeEvent<L extends Life> implements EntityEvent {
+public final class LifeEvent<L extends Life> implements Event {
 
     private final L life;
 
