@@ -11,7 +11,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * The fourth field contains {@link Special} that the monster possesses. 
  * The fifth field contains the coins that the monster drops when it dies.
  * The sixth field contains the {@link PotionType} the monster drops when it dies.
- * The seventh field contains the possibility that the object will be drop.
+ * The seventh field contains the probability that the object will be drop.
  */
 
 import javafx.util.Pair;
