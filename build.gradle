@@ -24,6 +24,10 @@ dependencies {
     runtimeOnly "org.openjfx:javafx-fxml:$javafx.version:win"
     runtimeOnly "org.openjfx:javafx-fxml:$javafx.version:linux"
     runtimeOnly "org.openjfx:javafx-fxml:$javafx.version:mac"
+
+    // spotbugs plugins
+    //spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.11.0'
+    //spotbugsPlugins 'com.mebigfatguy.fb-contrib:fb-contrib:7.4.7'
 }
 
 javafx {
@@ -47,6 +51,11 @@ jar {
 	from {
 		configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
 	}
+}
+
+spotbugs {
+    effort = 'max'
+    reportLevel = 'low'
 }
 
 spotbugsMain {
