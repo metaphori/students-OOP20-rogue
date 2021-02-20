@@ -5,12 +5,12 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.eventbus.Subscribe;
 
+import rogue.model.creature.LifeParameter;
 import rogue.model.creature.Player;
 import rogue.model.creature.PlayerLife;
 import rogue.model.events.EquipmentEvent;
 import rogue.model.events.EventSubscriber;
 import rogue.model.events.LifeEvent;
-import rogue.view.BarLabel;
 import rogue.view.StatusBarView;
 import rogue.view.StatusBarViewImpl;
 
@@ -39,13 +39,13 @@ public final class StatusBarControllerImpl implements StatusBarController, Event
     @Subscribe
     public void onLifeChange(final LifeEvent<PlayerLife> event) {
         LOG.info("Life changed " + event);
-        view.setLifeLabel(BarLabel.COINS, event.getLife().getCoins());
-        view.setLifeLabel(BarLabel.HP, event.getLife().getHealthPoints());
-        view.setLifeLabel(BarLabel.MAX_HP, event.getLife().getMaxHealthPoints());
-        view.setLifeLabel(BarLabel.EXPERIENCE, event.getLife().getExperience());
-        view.setLifeLabel(BarLabel.LEVEL, event.getLife().getLevel());
-        view.setLifeLabel(BarLabel.STRENGTH, event.getLife().getStrength());
-        view.setLifeLabel(BarLabel.FOOD, event.getLife().getFood());
+        view.setLifeLabel(LifeParameter.COINS, event.getLife().getCoins());
+        view.setLifeLabel(LifeParameter.HP, event.getLife().getHealthPoints());
+        view.setLifeLabel(LifeParameter.MAX_HP, event.getLife().getMaxHealthPoints());
+        view.setLifeLabel(LifeParameter.EXPERIENCE, event.getLife().getExperience());
+        view.setLifeLabel(LifeParameter.LEVEL, event.getLife().getLevel());
+        view.setLifeLabel(LifeParameter.STRENGTH, event.getLife().getStrength());
+        view.setLifeLabel(LifeParameter.FOOD, event.getLife().getFood());
     }
 
     @Subscribe
