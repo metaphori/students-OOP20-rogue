@@ -24,6 +24,13 @@ public class InventoryControllerImpl implements InventoryController {
     }
  
     /**
+     * Checks if the player is dead.
+     * @return true if the player is dead, false otherwise.
+     */
+    private boolean isDead() {
+        return this.player.getLife().getHealthPoints() == 0;
+    }
+    /**
      * Gives the updated number for the Model inventory.
      * @param col 
      * @param row
@@ -42,17 +49,19 @@ public class InventoryControllerImpl implements InventoryController {
      * @return true if the item was correctly used, false otherwise.
      */
     public boolean onPrimaryClick(final int col, final int row) {
-        try {
-            if (player.getInventory().getItem(indexConv(col, row)).isPresent()) {
-                if (!player.getInventory().useItem(indexConv(col, row))) {
-                    LOG.info("Cannot use item: " + player.getInventory().getItem(indexConv(col, row)).get().toString() + ".");
-                    return false;
+        if (!isDead()) {
+            try {
+                if (player.getInventory().getItem(indexConv(col, row)).isPresent()) {
+                    if (!player.getInventory().useItem(indexConv(col, row))) {
+                        LOG.info("Cannot use item: " + player.getInventory().getItem(indexConv(col, row)).get().toString() + ".");
+                        return false;
+                    }
+                    LOG.info("Item correctly used.");
+                    return true;
                 }
-                LOG.info("Item correctly used.");
-                return true;
+            } catch (OutOfInventoryException e) {
+                LOG.info("Called useItem with invalid Index.");
             }
-        } catch (OutOfInventoryException e) {
-            LOG.info("Called useItem with invalid Index.");
         }
         return false;
     }
@@ -65,17 +74,19 @@ public class InventoryControllerImpl implements InventoryController {
      * @return true if the item was correctly used, false otherwise.
      */
     public boolean onSecondaryClick(final int col, final int row) {
-        try {
-            if (player.getInventory().getItem(indexConv(col, row)).isPresent()) {
-                if (!player.getInventory().remove(indexConv(col, row))) {
-                    LOG.info("Cannot remove item: " + player.getInventory().getItem(indexConv(col, row)).get().toString() + ".");
-                    return false;
+        if (!isDead()) {
+            try {
+                if (player.getInventory().getItem(indexConv(col, row)).isPresent()) {
+                    if (!player.getInventory().remove(indexConv(col, row))) {
+                        LOG.info("Cannot remove item: " + player.getInventory().getItem(indexConv(col, row)).get().toString() + ".");
+                        return false;
+                    }
+                    LOG.info("Item correctly removed.");
+                    return true;
                 }
-                LOG.info("Item correctly removed.");
-                return true;
+            } catch (OutOfInventoryException e) {
+                LOG.info("Called removeItem with invalid Index");
             }
-        } catch (OutOfInventoryException e) {
-            LOG.info("Called removeItem with invalid Index");
         }
         return false;
     }
@@ -89,15 +100,17 @@ public class InventoryControllerImpl implements InventoryController {
      * @return true if the item was correctly used, false otherwise.
      */
     public boolean onMiddleClick(final int col, final int row, final int swapping) {
-        try {
-            if (!player.getInventory().swap(swapping, indexConv(col, row))) {
-                LOG.info("Cannot swap items");
-                return false;
+        if (!isDead()) {
+            try {
+                if (!player.getInventory().swap(swapping, indexConv(col, row))) {
+                    LOG.info("Cannot swap items");
+                    return false;
+                }
+                LOG.info("Swap correctly executed.");
+                return true;
+            } catch (OutOfInventoryException e) {
+                LOG.info("Called swap with invalid Indexes.");
             }
-            LOG.info("Swap correctly executed.");
-            return true;
-        } catch (OutOfInventoryException e) {
-            LOG.info("Called swap with invalid Indexes.");
         }
         return false;
     }
@@ -106,19 +119,21 @@ public class InventoryControllerImpl implements InventoryController {
      * @return true if the ring was correctly removed, false otherwise.
      */
     public boolean onRingContainer() {
-        if (player.getEquipment().getRing().isPresent()) {
+        if (!isDead()) {
+            if (player.getEquipment().getRing().isPresent()) {
+                /*
+                 * Remove the ring and update the inventory.
+                 */
+                player.getEquipment().getRing().get().stopUsing(player);
+                player.getInventory().updateInventory();
+                LOG.info("Ring correctly removed.");
+                return true;
+            }
             /*
-             * Remove the ring and update the inventory.
+             * No active ring nothing to update.
              */
-            player.getEquipment().getRing().get().stopUsing(player);
-            player.getInventory().updateInventory();
-            LOG.info("Ring correctly removed.");
-            return true;
+            LOG.info("No active Ring to remove.");
         }
-        /*
-         * No active ring nothing to update.
-         */
-        LOG.info("No active Ring to remove.");
         return false;
     } 
 
