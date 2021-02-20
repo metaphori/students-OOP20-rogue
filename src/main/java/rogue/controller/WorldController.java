@@ -13,6 +13,7 @@ import rogue.view.WorldBox;
  */
 public class WorldController {
     private final World world;
+    private final Player player;
     private final WorldBox worldBox;
 
     /**
@@ -20,6 +21,7 @@ public class WorldController {
      */
     public WorldController(final Player player) {
         this.world = new WorldImpl(player);
+        this.player = player;
         this.worldBox = new WorldBox(world);
     }
 
@@ -58,6 +60,11 @@ public class WorldController {
                 break;
             default:
                 break;
+        }
+
+        // do nothing if player is dead
+        if (player.getLife().isDead()) {
+            return;
         }
 
         // update tiles only if level is changed
