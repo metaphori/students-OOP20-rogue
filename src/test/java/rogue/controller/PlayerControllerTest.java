@@ -1,6 +1,7 @@
 package rogue.controller;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
@@ -10,11 +11,12 @@ import rogue.model.creature.PlayerFactoryImpl;
 public class PlayerControllerTest {
 
     private Player player;
-    private StatusBarControllerImpl controller;
+    //private StatusBarControllerImpl controller;
 
     @org.junit.Before
     public void init() {
         player = new PlayerFactoryImpl().create();
+        assertNotNull(player);
         // pass a real implementation of StatusBarView!!!
         // controller = new StatusBarControllerImpl(null, player);
     }
