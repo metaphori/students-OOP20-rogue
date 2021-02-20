@@ -130,7 +130,8 @@ public class LevelImpl implements Level {
      * generate the level map using {@link CaveGenerator}.
      */
     private final Runnable generate = () -> {
-        final var cave = new CaveGenerator(WIDTH, HEIGHT).getCave();
+        final CaveGenerator cg = new CaveGeneratorImpl(WIDTH, HEIGHT);
+        final boolean[][] cave = cg.getCave();
 
         // tileMap
         IntStream.range(0, WIDTH).forEach(x -> {
