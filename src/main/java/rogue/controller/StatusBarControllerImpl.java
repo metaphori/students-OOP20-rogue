@@ -10,6 +10,7 @@ import rogue.model.creature.PlayerLife;
 import rogue.model.events.EquipmentEvent;
 import rogue.model.events.EventSubscriber;
 import rogue.model.events.LifeEvent;
+import rogue.view.BarLabel;
 import rogue.view.StatusBarView;
 import rogue.view.StatusBarViewImpl;
 
@@ -38,13 +39,13 @@ public final class StatusBarControllerImpl implements StatusBarController, Event
     @Subscribe
     public void onLifeChange(final LifeEvent<PlayerLife> event) {
         LOG.info("Life changed " + event);
-        view.setCoinsLabel(event.getLife().getCoins());
-        view.setCurrentHealthPointsLabel(event.getLife().getHealthPoints());
-        view.setMaxHealthPointsLabel(event.getLife().getMaxHealthPoints());
-        view.setExperienceLabel(event.getLife().getExperience());
-        view.setLevelLabel(event.getLife().getLevel());
-        view.setStrengthLabel(event.getLife().getStrength());
-        view.setFoodLabel(event.getLife().getFood());
+        view.set(BarLabel.COINS, event.getLife().getCoins());
+        view.set(BarLabel.HP, event.getLife().getHealthPoints());
+        view.set(BarLabel.MAX_HP, event.getLife().getMaxHealthPoints());
+        view.set(BarLabel.EXPERIENCE, event.getLife().getExperience());
+        view.set(BarLabel.LEVEL, event.getLife().getLevel());
+        view.set(BarLabel.STRENGTH, event.getLife().getStrength());
+        view.set(BarLabel.FOOD, event.getLife().getFood());
     }
 
     @Subscribe

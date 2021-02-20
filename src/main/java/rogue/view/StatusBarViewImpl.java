@@ -34,33 +34,8 @@ public final class StatusBarViewImpl implements StatusBarView {
     }
 
     @Override
-    public void setMaxHealthPointsLabel(final int max) {
-        this.updateLabel("#maxHp", Integer.toString(max));
-    }
-
-    @Override
-    public void setCurrentHealthPointsLabel(final int healthPoints) {
-        this.updateLabel("#hp", Integer.toString(healthPoints));
-    }
-
-    @Override
-    public void setCoinsLabel(final int coins) {
-        this.updateLabel("#gold", Integer.toString(coins));
-    }
-
-    @Override
-    public void setLevelLabel(final int level) {
-        this.updateLabel("#level", Integer.toString(level));
-    }
-
-    @Override
-    public void setStrengthLabel(final int strength) {
-        this.updateLabel("#strength", Integer.toString(strength));
-    }
-
-    @Override
-    public void setExperienceLabel(final int experience) {
-        this.updateLabel("#experience", Integer.toString(experience));
+    public void setLifeLabel(final rogue.view.BarLabel label, final int value) {
+        this.updateLabel(label.getNameLabel(), Integer.toString(value));
     }
 
     @Override
@@ -76,11 +51,6 @@ public final class StatusBarViewImpl implements StatusBarView {
     @Override
     public void setArmorLabel(final Armor armor) {
         this.updateLabel("#armor", armor.toString());
-    }
-
-    @Override
-    public void setFoodLabel(final int food) {
-        this.updateLabel("#food", Integer.toString(food));
     }
 
 }
