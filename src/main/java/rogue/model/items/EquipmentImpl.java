@@ -28,8 +28,7 @@ public final class EquipmentImpl extends AbstractEventPublisher implements Equip
     }
 
     /**
-     * Memento pattern: used to save and restore the previous state
-     * after detaching of a ring.
+     * Memento pattern: used to save and restore the previous state after detaching a ring.
      */
     public static final class Memento {
         private final Weapon weapon;
