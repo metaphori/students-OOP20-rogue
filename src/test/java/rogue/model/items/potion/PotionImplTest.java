@@ -43,7 +43,8 @@ public class PotionImplTest {
         assertFalse(potion.use(pl));
         // player max health points is 12
         assertEquals(PLAYER_START_LIFE, pl.getLife().getHealthPoints());
-        pl.getLife().setMaxHealthPoints(PLAYER_MAX_HEALTH);
+        final var exp = 50;
+        pl.getLife().increaseExperience(exp);
         assertTrue(potion.use(pl));
         assertEquals(hp + potion.getHpValue(), pl.getLife().getHealthPoints());
     }
