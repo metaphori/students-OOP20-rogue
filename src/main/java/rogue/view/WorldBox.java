@@ -90,7 +90,7 @@ public class WorldBox extends HBox {
 
     private Image getImage(final Entity entity) {
         if (entity instanceof Player) {
-            Image(ClassLoader.getSystemResource("images/Player.png").toExternalForm());
+            return new Image(ClassLoader.getSystemResource("images/Player.png").toExternalForm());
         } else if (entity instanceof Item) {
             return new ItemImageGeneratorImpl().getImage((Item) entity);
         } else if (entity instanceof Monster) {
