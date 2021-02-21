@@ -9,7 +9,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import rogue.controller.GameController;
-import rogue.model.items.inventory.InventoryIsFullException;
 
 /**
  * An implementation for a {@link MenuView}.
