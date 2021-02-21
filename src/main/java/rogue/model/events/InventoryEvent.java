@@ -7,7 +7,7 @@ import rogue.model.items.inventory.Inventory;
  *
  * @param <L> the type of Inventory affected by the change.
  */
-public class InventoryEvent<L extends Inventory> implements EntityEvent {
+public class InventoryEvent<L extends Inventory> implements Event {
 
     private final L inventory;
 

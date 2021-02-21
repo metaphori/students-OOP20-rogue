@@ -10,12 +10,6 @@ import rogue.model.Entity;
 public interface Creature<L extends Life> extends Entity {
 
     /**
-     * TODO to finish.
-     * @return true if the movement was successful, false otherwise
-     */
-    boolean move();
-
-    /**
      * 
      * @return the creature's life
      */

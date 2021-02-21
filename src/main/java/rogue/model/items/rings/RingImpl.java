@@ -13,11 +13,6 @@ public final class RingImpl implements Ring {
     }
 
     @Override
-    public int getChance() {
-        return this.ring.getChance();
-    }
-
-    @Override
     public boolean use(final Player player) {
         if (player.getEquipment().getRing().isEmpty()) {
             /**

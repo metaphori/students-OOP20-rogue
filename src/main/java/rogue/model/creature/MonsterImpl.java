@@ -23,14 +23,6 @@ public class MonsterImpl implements Monster {
      * {@inheritDoc}
      */
     @Override
-    public boolean move() {
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public MonsterLife getLife() {
         return this.type.getLife();
     }

@@ -8,9 +8,9 @@ public interface EventPublisher {
     /**
      * Posts a new event.
      * @param event
-     *          the {@link EntityEvent} to publish
+     *          the {@link Event} to publish
      */
-    void post(EntityEvent event);
+    void post(Event event);
 
     /**
      * Registers the given subscriber on {@link EventBus}.

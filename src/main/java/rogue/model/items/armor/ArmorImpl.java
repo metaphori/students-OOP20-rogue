@@ -17,7 +17,7 @@ public final class ArmorImpl implements Armor {
      */
     public ArmorImpl(final ArmorType armor) {
         this.armor = armor;
-        this.ac = this.armor.getAC();
+        this.ac = this.armor.getDefaultAC();
     }
 
     @Override
@@ -42,8 +42,8 @@ public final class ArmorImpl implements Armor {
     }
 
     @Override
-    public void increaseAC(final int value) {
-        this.ac = this.ac + value;
+    public void increaseAC(final int amount) {
+        this.ac = this.ac + amount;
     }
 
     @Override

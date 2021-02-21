@@ -10,7 +10,7 @@ public abstract class AbstractEventPublisher implements EventPublisher {
      * {@inheritDoc}
      */
     @Override
-    public void post(final EntityEvent event) {
+    public void post(final Event event) {
         this.eventBus.post(event);
     }
 

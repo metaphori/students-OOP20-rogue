@@ -56,34 +56,32 @@ public class PlayerImplTest {
         pl.getLife().decreaseFood(10);
         assertEquals(0, pl.getLife().getFood());
     }
-    
+
     @org.junit.Test
     public void testMaxHealthPoints() {
-       pl = new PlayerFactoryImpl().create();
+       pl = new PlayerFactoryImpl().create(); // default values and configs
        assertEquals(pl.getLife().getHealthPoints(), pl.getLife().getMaxHealthPoints());
-       pl.getLife().setMaxHealthPoints(100);
-       assertEquals(100, pl.getLife().getMaxHealthPoints());
-       pl.getLife().powerUp(100);
+       final int delta = 355; // integer to obtain: level = 10 and maxHp = 120
+       pl.getLife().increaseExperience(delta);
+       final int actualLevel = 10;
+       final int actualMaxHp = 120;
+       assertEquals(actualLevel, pl.getLife().getLevel());
+       assertEquals(actualMaxHp, pl.getLife().getMaxHealthPoints());
+       pl.getLife().powerUp(actualMaxHp);
        assertEquals(pl.getLife().getMaxHealthPoints(), pl.getLife().getHealthPoints());
-       pl.getLife().hurt(140);
+       pl.getLife().hurt(actualMaxHp);
        assertEquals(0, pl.getLife().getHealthPoints());
        assertTrue(pl.getLife().isDead());
     }
-    
+
+    @org.junit.Test
     public void testMaxFood() {
-        pl= new PlayerFactoryImpl().create();
+        pl = new PlayerFactoryImpl().create();
         // Exceeds max food
         pl.getLife().increaseFood(pl.getLife().getMaxFood() - pl.getLife().getFood() + 1);
         assertEquals(pl.getLife().getMaxFood(), pl.getLife().getFood());
         pl.getLife().decreaseFood(pl.getLife().getMaxFood() + 1);
         assertEquals(0, pl.getLife().getFood());
-    }
-    
-    @org.junit.Test(expected = IllegalStateException.class)
-    public void testMaxHealthPoints2() {
-        // cannot made a max hp value greater than the actual hp
-        pl = new PlayerFactoryImpl().create();
-        pl.getLife().setMaxHealthPoints(pl.getLife().getHealthPoints() - 1);
     }
 
     @org.junit.Test(expected = IllegalStateException.class)

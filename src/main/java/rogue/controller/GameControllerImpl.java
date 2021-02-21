@@ -7,8 +7,6 @@ import rogue.controller.inventory.InventoryControllerImpl;
 import rogue.model.creature.Player;
 import rogue.model.creature.PlayerFactoryImpl;
 import rogue.view.GameView;
-import rogue.view.StatusBarView;
-import rogue.view.StatusBarViewImpl;
 
 /**
  * An implementation of a {@link GameController}.
@@ -16,7 +14,7 @@ import rogue.view.StatusBarViewImpl;
  */
 public class GameControllerImpl implements GameController {
 
-    private final StatusBarView statusBarView;
+    private final StatusBarController statusBarController;
     private final InventoryController inventoryController;
     private final WorldController worldController;
 
@@ -28,11 +26,8 @@ public class GameControllerImpl implements GameController {
         /*
          * Create controllers/views.
          */
-        this.statusBarView = new StatusBarViewImpl();
-        new StatusBarControllerImpl(statusBarView, player);
-
+        this.statusBarController = new StatusBarControllerImpl(player);
         this.inventoryController = new InventoryControllerImpl(player);
-
         this.worldController = new WorldController(player);
     }
 
@@ -41,7 +36,7 @@ public class GameControllerImpl implements GameController {
      */
     public void showGame() {
         try {
-            new GameView(statusBarView, inventoryController, worldController);
+            new GameView(statusBarController, inventoryController, worldController);
         } catch (IOException e) {
             e.printStackTrace();
         }

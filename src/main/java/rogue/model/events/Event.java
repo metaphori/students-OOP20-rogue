@@ -3,6 +3,6 @@ package rogue.model.events;
 /**
  * An {@link Entity} event.
  */
-public interface EntityEvent {
+public interface Event {
 
 }

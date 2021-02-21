@@ -1,5 +1,6 @@
 package rogue.view;
 
+import rogue.model.creature.LifeParameter;
 import rogue.model.items.armor.Armor;
 import rogue.model.items.weapons.Weapon;
 
@@ -9,53 +10,13 @@ import rogue.model.items.weapons.Weapon;
 public interface StatusBarView extends View {
 
     /**
-     * Sets the maximum obtainable health points label.
-     * @param max
-     *          the maximum health points value
+     * Sets the life label.
+     * @param label
+     *          the {@link LifeParameter} to update
+     * @param value
+     *          the value to replace
      */
-    void setMaxHealthPointsLabel(int max);
-
-    /**
-     * Sets the current health points label.
-     * @param healthPoints
-     *          the current health points value
-     */
-    void setCurrentHealthPointsLabel(int healthPoints);
-
-    /**
-     * Sets the current coins.
-     * @param coins
-     *          the current amount of coins
-     */
-    void setCoinsLabel(int coins);
-
-    /**
-     * Sets the current level label.
-     * @param level
-     *          the current level value
-     */
-    void setLevelLabel(int level);
-
-    /**
-     * Sets the current strength label.
-     * @param strength
-     *          the current strength value
-     */
-    void setStrengthLabel(int strength);
-
-    /**
-     * Sets the current experience label.
-     * @param experience
-     *          the current experience value
-     */
-    void setExperienceLabel(int experience);
-
-    /**
-     * Sets the current food label.
-     * @param food
-     *          the current food value
-     */
-    void setFoodLabel(int food);
+    void setLifeLabel(LifeParameter label, int value);
 
     /**
      * Sets the weapon label.

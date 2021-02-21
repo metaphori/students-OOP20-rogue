@@ -10,18 +10,19 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import rogue.controller.StatusBarController;
 import rogue.controller.WorldController;
 import rogue.controller.inventory.InventoryController;
 import rogue.view.inventory.InventoryViewImpl;
 
-public class GameView {
+public final class GameView {
 
     private final Stage stage = new Stage();
     private final Scene scene;
 
-    private void loadStatusBar(final StatusBarView status) {
+    private void loadStatusBar(final StatusBarController status) {
         final HBox box = (HBox) this.scene.lookup("#top");
-        box.getChildren().add(status.getNode());
+        box.getChildren().add(status.getView().getNode());
     }
 
     private void loadInventory(final InventoryController inventory) throws IOException {
@@ -37,7 +38,7 @@ public class GameView {
         box.getChildren().add(world.getWorldBox());
     }
 
-    public GameView(final StatusBarView status, final InventoryController inventory, final WorldController world) throws IOException {
+    public GameView(final StatusBarController status, final InventoryController inventory, final WorldController world) throws IOException {
         final Parent root = FXMLLoader.load(ClassLoader.getSystemResource("layout/MainView.fxml"));
         this.scene = new Scene(root);
 

@@ -18,15 +18,6 @@ public abstract class AbstractCreature<L extends Life> implements Creature<L> {
      * {@inheritDoc}
      */
     @Override
-    public boolean move() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public L getLife() {
         return this.life;
     }

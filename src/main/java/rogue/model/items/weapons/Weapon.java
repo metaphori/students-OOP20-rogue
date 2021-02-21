@@ -12,7 +12,7 @@ public interface Weapon extends Item {
      */
     enum Use {
         HANDLED, 
-        THROWABLE;
+        THROWN;
     }
 
     /**

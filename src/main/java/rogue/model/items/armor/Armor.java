@@ -14,10 +14,10 @@ public interface Armor extends Item {
 
     /**
      * Increases the armor's AC of the given value.
-     * @param value
+     * @param amount
      *          the value to add to the armor's AC
      */
-    void increaseAC(int value);
+    void increaseAC(int amount);
 
     /**
      * @return the armor type

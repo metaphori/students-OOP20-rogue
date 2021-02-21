@@ -11,7 +11,7 @@ import rogue.model.items.EquipmentImpl;
  * An implementation for {@link PlayerFactory} which encapsulates the 
  * implementation of {@link Player}.
  */
-public class PlayerFactoryImpl implements PlayerFactory {
+public final class PlayerFactoryImpl implements PlayerFactory {
 
     private static class PlayerImpl extends AbstractCreature<PlayerLife> implements Player {
 
