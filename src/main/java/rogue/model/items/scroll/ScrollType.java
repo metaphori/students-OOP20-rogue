@@ -66,7 +66,7 @@ public enum ScrollType {
      * Get the scroll's effect.
      * @return the scroll's effect.
      */
-    public Scroll.ScrollEffect getEffect() {
+    protected Scroll.ScrollEffect getEffect() {
         return effect;
     }
     /**
