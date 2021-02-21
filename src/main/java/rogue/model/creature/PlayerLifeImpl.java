@@ -1,5 +1,6 @@
 package rogue.model.creature;
 
+import javafx.util.Pair;
 import rogue.model.events.LifeEvent;
 
 /**
@@ -37,14 +38,14 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
     @Override
     public void hurt(final int damage) {
         super.hurt(damage);
-        this.post(new LifeEvent<>(this));
+        this.post(new LifeEvent<>(this, new Pair<>(LifeParameter.HP, this.getHealthPoints())));
     }
 
     @Override
     public void powerUp(final int increment) {
         final var newHp = this.getHealthPoints() + increment;
         this.setHealthPoints(this.checkNotExceeding(newHp, this.maxHealthPoints));
-        this.post(new LifeEvent<>(this));
+        this.post(new LifeEvent<>(this, new Pair<>(LifeParameter.HP, this.getHealthPoints())));
     }
 
     @Override
@@ -55,13 +56,13 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
             this.setLevel(newLevel);
             this.setMaxHealthPoints(this.maxHpStrategy.getMaxHp(this.level));
         }
-        this.post(new LifeEvent<>(this));
+        this.post(new LifeEvent<>(this, new Pair<>(LifeParameter.EXPERIENCE, this.getExperience())));
     }
 
     @Override
     public void addStrength(final int increment) {
         this.strength = this.strength + increment;
-        this.post(new LifeEvent<>(this));
+        this.post(new LifeEvent<>(this, new Pair<>(LifeParameter.STRENGTH, this.strength)));
     }
 
     @Override
@@ -72,7 +73,7 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
     private void updateFood(final int amount) {
         final var newFood = this.leftFood + amount;
         this.leftFood = this.checkNotNegative(this.checkNotExceeding(newFood, MAX_FOOD));
-        this.post(new LifeEvent<>(this));
+        this.post(new LifeEvent<>(this, new Pair<>(LifeParameter.FOOD, this.leftFood)));
     }
 
     @Override
@@ -97,7 +98,7 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
 
     private void updateCoins(final int amount) {
         this.coins = this.checkNotNegative(this.coins + amount);
-        this.post(new LifeEvent<>(this));
+        this.post(new LifeEvent<>(this, new Pair<>(LifeParameter.COINS, this.coins)));
     }
 
     @Override
@@ -126,7 +127,7 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
 
     private void setMaxHealthPoints(final int maxHealthPoints) {
         this.maxHealthPoints = maxHealthPoints;
-        this.post(new LifeEvent<>(this));
+        this.post(new LifeEvent<>(this, new Pair<>(LifeParameter.MAX_HP, this.maxHealthPoints)));
     }
 
     @Override

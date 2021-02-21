@@ -32,20 +32,14 @@ public final class StatusBarControllerImpl implements StatusBarController, Event
         player.getLife().register(this);
         player.getEquipment().register(this);
         // Sets the initial score and equipment view!
-        this.onLifeChange(new LifeEvent<>(player.getLife()));
+        // this.onLifeChange(new LifeEvent<>(player.getLife()));
         this.onEquipmentChange(new EquipmentEvent(player.getEquipment()));
     }
 
     @Subscribe
     public void onLifeChange(final LifeEvent<PlayerLife> event) {
         LOG.info("Life changed " + event);
-        view.setLifeLabel(LifeParameter.COINS, event.getLife().getCoins());
-        view.setLifeLabel(LifeParameter.HP, event.getLife().getHealthPoints());
-        view.setLifeLabel(LifeParameter.MAX_HP, event.getLife().getMaxHealthPoints());
-        view.setLifeLabel(LifeParameter.EXPERIENCE, event.getLife().getExperience());
-        view.setLifeLabel(LifeParameter.LEVEL, event.getLife().getLevel());
-        view.setLifeLabel(LifeParameter.STRENGTH, event.getLife().getStrength());
-        view.setLifeLabel(LifeParameter.FOOD, event.getLife().getFood());
+        view.setLifeLabel(event.getChanged().getKey(), event.getChanged().getValue());
     }
 
     @Subscribe

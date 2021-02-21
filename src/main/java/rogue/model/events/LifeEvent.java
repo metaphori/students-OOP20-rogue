@@ -1,6 +1,8 @@
 package rogue.model.events;
 
+import javafx.util.Pair;
 import rogue.model.creature.Life;
+import rogue.model.creature.LifeParameter;
 
 /**
  * A class representing the change of life.
@@ -9,6 +11,7 @@ import rogue.model.creature.Life;
  */
 public final class LifeEvent<L extends Life> implements Event {
 
+    private final Pair<LifeParameter, Integer> changed;
     private final L life;
 
     /**
@@ -16,8 +19,13 @@ public final class LifeEvent<L extends Life> implements Event {
      * @param life
      *          the life which changed
      */
-    public LifeEvent(final L life) {
+    public LifeEvent(final L life, final Pair<LifeParameter, Integer> changed) {
+        this.changed = changed;
         this.life = life;
+    }
+
+    public Pair<LifeParameter, Integer> getChanged() {
+        return this.changed;
     }
 
     /**
