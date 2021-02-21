@@ -72,6 +72,7 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
         final var newLevel = this.levelStrategy.getLevel(this.getExperience());
         if (this.level != newLevel) {
             this.setLevel(newLevel);
+            System.out.println(newLevel);
             this.setMaxHealthPoints(this.maxHpStrategy.getMaxHp(this.level));
         }
         this.postLifeChange(LifeParameter.EXPERIENCE, this.getExperience());
@@ -136,6 +137,7 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
 
     private void setLevel(final int level) {
         this.level = level;
+        this.postLifeChange(LifeParameter.LEVEL, this.level);
     }
 
     @Override
