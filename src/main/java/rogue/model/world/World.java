@@ -1,10 +1,9 @@
-package rogue.model;
+package rogue.model.world;
 
 import java.util.Map;
 import java.util.stream.Stream;
 
-import rogue.model.world.Direction;
-import rogue.model.world.Tile;
+import rogue.model.Entity;
 
 /**
  * the game world (level manager).

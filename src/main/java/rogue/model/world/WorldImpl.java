@@ -1,19 +1,16 @@
-package rogue.model;
+package rogue.model.world;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import rogue.model.Entity;
 import rogue.model.creature.MonsterFactory;
 import rogue.model.creature.MonsterFactoryImpl;
 import rogue.model.creature.Player;
 import rogue.model.items.ItemFactory;
 import rogue.model.items.ItemFactoryImpl;
-import rogue.model.world.Direction;
-import rogue.model.world.Level;
-import rogue.model.world.LevelImpl;
-import rogue.model.world.Tile;
 
 /**
  * the default world implemetation.

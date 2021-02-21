@@ -64,7 +64,7 @@ public enum PotionType {
      * Use this method to get the potion's health points.
      * @return the potion's health points.
      */
-    public int getHpValue() {
+    protected int getHpValue() {
         return ThreadLocalRandom.current().nextInt(this.hpValue.getKey(), this.hpValue.getValue() + 1) 
                 * (this.effect.equals(Potion.PotionEffect.HEAL) ? 1 : -1);
     }
@@ -73,7 +73,7 @@ public enum PotionType {
      * Use this method to get the potion's effect.
      * @return the potion's effect, HEAL or HURT.
      */
-    public Potion.PotionEffect getEffect() {
+    protected Potion.PotionEffect getEffect() {
         return this.effect;
     }
 

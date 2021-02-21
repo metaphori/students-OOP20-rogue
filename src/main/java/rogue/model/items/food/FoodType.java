@@ -54,7 +54,7 @@ public enum FoodType {
     /**
      * @return the food's starvation value.
      */
-    public int getStarvationValue() {
+    protected int getStarvationValue() {
         return starvationValue;
     }
 
