@@ -2,6 +2,8 @@ package rogue.controller;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import rogue.model.World;
 import rogue.model.WorldImpl;
 import rogue.model.creature.Player;
@@ -36,7 +38,13 @@ public class WorldController {
      * move player and perform a game round.
      * @param event the key press event
      */
-    public final void movePlayer(final KeyEvent event) {
+    public void movePlayer(final KeyEvent event) {
+        // game over
+        if (player.getLife().isDead()) {
+            worldBox.drawGameOver();
+            return;
+        }
+
         final KeyCode key = event.getCode();
 
         Direction direction = Direction.NONE;
@@ -62,17 +70,12 @@ public class WorldController {
                 break;
         }
 
-        // do nothing if player is dead
-        if (player.getLife().isDead()) {
-            return;
-        }
-
         // update tiles only if level is changed
         if (world.round(direction)) {
-            worldBox.drawTiles();
+            ((WorldBox) worldBox).drawTiles();
         }
 
         // always update entities
-        worldBox.drawEntities();
+        ((WorldBox) worldBox).drawEntities();
     }
 }

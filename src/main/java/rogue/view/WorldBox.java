@@ -3,6 +3,7 @@ package rogue.view;
 import java.util.Random;
 
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.ColorAdjust;
@@ -10,6 +11,12 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import rogue.model.Entity;
 import rogue.model.World;
 import rogue.model.creature.Monster;
@@ -68,6 +75,15 @@ public class WorldBox extends HBox {
             Image img = getImage(entity);
             gc.drawImage(img, tile.getX() * SCALE, tile.getY() * SCALE, SCALE, SCALE);
         });
+    }
+
+    public final void drawGameOver() {
+        this.getChildren().clear();
+
+        Text text = new Text();
+        text.setText("GAME OVER");
+        text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 100));
+        this.getChildren().add(text);
     }
 
     private Image getImage(final Tile tile) {

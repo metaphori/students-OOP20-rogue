@@ -39,6 +39,7 @@ import rogue.model.items.inventory.InventoryIsFullException;
 public class LevelImpl implements Level {
     private static final int WIDTH = 32;
     private static final int HEIGHT = 32;
+    private static final int FOOD_DECREASE_ON_COMBAT = 5;
 
     private static final Logger LOG = LoggerFactory.getLogger(Level.class);
     private final Random random = new Random();
@@ -76,6 +77,10 @@ public class LevelImpl implements Level {
      * @param t the tile for the entity to be placed in
      */
     private final BiConsumer<Entity, Tile> placeEntity = (e, t) -> {
+        if (entityMap.containsKey(e)) {
+            removeEntity.accept(e);
+        }
+
         entityMap.put(e, t);
         freeTiles.remove(t);
     };
@@ -88,34 +93,31 @@ public class LevelImpl implements Level {
      * @return the tile next to e
      */
     private final BiFunction<Entity, Direction, Tile> getRelativeTile = (e, d) -> {
-        try {
-            final Tile currentTile = entityMap.get(e);
-            int nextX = currentTile.getX(), nextY = currentTile.getY();
-
-            switch (d) {
-                case NORTH:
-                    nextY--;
-                    break;
-                case EAST:
-                    nextX++;
-                    break;
-                case SOUTH:
-                    nextY++;
-                    break;
-                case WEST:
-                    nextX--;
-                    break;
-                default:
-                    break;
-            }
-
-            return tileMap.get(nextX, nextY);
-
-        } catch (NullPointerException npe) {
-            LOG.info("Entity not present in Level");
+        final Tile currentTile = entityMap.get(e);
+        if (currentTile == null) {
+            return null;
         }
 
-        return null;
+        int nextX = currentTile.getX(), nextY = currentTile.getY();
+
+        switch (d) {
+            case NORTH:
+                nextY--;
+                break;
+            case EAST:
+                nextX++;
+                break;
+            case SOUTH:
+                nextY++;
+                break;
+            case WEST:
+                nextX--;
+                break;
+            default:
+                break;
+        }
+
+        return tileMap.get(nextX, nextY);
     };
 
     /**
@@ -129,7 +131,8 @@ public class LevelImpl implements Level {
      * generate the level map using {@link CaveGenerator}.
      */
     private final Runnable generate = () -> {
-        final var cave = new CaveGenerator(WIDTH, HEIGHT).getCave();
+        final CaveGenerator cg = new CaveGeneratorImpl(WIDTH, HEIGHT);
+        final boolean[][] cave = cg.getCave();
 
         // tileMap
         IntStream.range(0, WIDTH).forEach(x -> {
@@ -158,29 +161,29 @@ public class LevelImpl implements Level {
      * @return the best direction to reach the player
      */
     private final Function<Entity, Direction> nearestDirectionToPlayer = e -> {
-        try {
-            final int east = entityMap.get(player).getX() - entityMap.get(e).getX();
-            final int west = entityMap.get(e).getX() - entityMap.get(player).getX();
-            final int south = entityMap.get(player).getY() - entityMap.get(e).getY();
-            final int north = entityMap.get(e).getY() - entityMap.get(player).getY();
-
-            final Pair<Direction, Integer> xDirection = east > 0 ? new Pair<>(Direction.EAST, east)
-                    : new Pair<>(Direction.WEST, west);
-            final Pair<Direction, Integer> yDirection = south > 0 ? new Pair<>(Direction.SOUTH, south)
-                    : new Pair<>(Direction.NORTH, north);
-
-            return xDirection.getValue() > yDirection.getValue() ? xDirection.getKey() : yDirection.getKey();
-        } catch (NullPointerException npe) {
-            LOG.info("entity or player not present in Level");
+        final Tile playerTile = entityMap.get(player);
+        final Tile entityTile = entityMap.get(e);
+        if (playerTile == null || entityTile == null) {
+            return Direction.NONE;
         }
 
-        return Direction.NONE;
+        final int east = playerTile.getX() - entityTile.getX();
+        final int west = entityTile.getX() - playerTile.getX();
+        final int south = playerTile.getY() - entityTile.getY();
+        final int north = entityTile.getY() - playerTile.getY();
+
+        final Pair<Direction, Integer> xDirection = east > 0 ? new Pair<>(Direction.EAST, east)
+                : new Pair<>(Direction.WEST, west);
+        final Pair<Direction, Integer> yDirection = south > 0 ? new Pair<>(Direction.SOUTH, south)
+                : new Pair<>(Direction.NORTH, north);
+
+        return xDirection.getValue() > yDirection.getValue() ? xDirection.getKey() : yDirection.getKey();
     };
 
     /**
      * moves the player.
      * 
-     * @d the player's movement direction
+     * @param d the player's movement direction
      */
     private Predicate<Direction> movePlayer = d -> {
         final var nextTile = getRelativeTile.apply(player, d);
@@ -197,6 +200,9 @@ public class LevelImpl implements Level {
             if (combat.attack(player, (Creature<?>) nextEntity) == Result.DEAD) {
                 removeEntity.accept(nextEntity);
             }
+
+            // combat is exausting
+            player.getLife().decreaseFood(FOOD_DECREASE_ON_COMBAT);
         } else if (nextEntity instanceof Item) {
             try {
                 player.getInventory().addItem((Item) nextEntity);
@@ -266,7 +272,7 @@ public class LevelImpl implements Level {
 
         // if player is killed
         if (player.getLife().isDead()) {
-            entityMap.remove(player);
+            entityMap.clear();
             LOG.info("Player dead");
         }
         return nextLevel;
