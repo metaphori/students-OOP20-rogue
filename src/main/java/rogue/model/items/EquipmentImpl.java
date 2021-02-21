@@ -54,6 +54,10 @@ public final class EquipmentImpl extends AbstractEventPublisher implements Equip
         this.ring = Optional.empty();
     }
 
+    /**
+     * Registers the given subscriber on {@link EventBus} and 
+     * post the initial status!
+     */
     @Override
     public void register(final EventSubscriber subscriber) {
         super.register(subscriber);

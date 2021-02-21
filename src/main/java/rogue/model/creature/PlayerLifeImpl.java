@@ -51,6 +51,10 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
         this.post(new LifeEvent<>(this, Set.of(new Pair<>(attribute, value))));
     }
 
+    /**
+     * Registers the given subscriber on {@link EventBus} and 
+     * post the initial status!
+     */
     @Override
     public void register(final EventSubscriber subscriber) {
         super.register(subscriber);
