@@ -83,7 +83,11 @@ public interface PlayerLife extends Life {
      * @return the maximum food
      */
     int getMaxFood();
-    
-    public void postAllLife();
+
+    /**
+     * TODO
+     * Post all the life parameters.
+     */
+    void postAllLife();
 
 }

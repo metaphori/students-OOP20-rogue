@@ -41,6 +41,7 @@ public final class PlayerLifeImpl extends AbstractLife implements PlayerLife {
         this.post(new LifeEvent<>(this, Set.of(new Pair<>(parameter, value))));
     }
 
+    @Override
     public void postAllLife() {
         Set.of(new Pair<>(LifeParameter.HP, this.getHealthPoints()), 
                new Pair<>(LifeParameter.MAX_HP, this.maxHealthPoints), 
