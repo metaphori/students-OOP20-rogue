@@ -1,10 +1,13 @@
 package rogue.controller;
 
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.eventbus.Subscribe;
 
+import javafx.util.Pair;
 import rogue.model.creature.LifeParameter;
 import rogue.model.creature.Player;
 import rogue.model.creature.PlayerLife;
@@ -32,14 +35,14 @@ public final class StatusBarControllerImpl implements StatusBarController, Event
         player.getLife().register(this);
         player.getEquipment().register(this);
         // Sets the initial score and equipment view!
-        // this.onLifeChange(new LifeEvent<>(player.getLife()));
+        player.getLife().postAllLife();
         this.onEquipmentChange(new EquipmentEvent(player.getEquipment()));
     }
 
     @Subscribe
     public void onLifeChange(final LifeEvent<PlayerLife> event) {
         LOG.info("Life changed " + event);
-        view.setLifeLabel(event.getChanged().getKey(), event.getChanged().getValue());
+        event.getChanged().forEach(c -> view.setLifeLabel(c.getKey(), c.getValue()));
     }
 
     @Subscribe
