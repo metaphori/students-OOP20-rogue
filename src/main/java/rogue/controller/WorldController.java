@@ -2,12 +2,10 @@ package rogue.controller;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
-import rogue.model.World;
-import rogue.model.WorldImpl;
 import rogue.model.creature.Player;
 import rogue.model.world.Direction;
+import rogue.model.world.World;
+import rogue.model.world.WorldImpl;
 import rogue.view.WorldBox;
 
 /**
