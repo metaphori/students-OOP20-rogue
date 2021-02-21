@@ -30,14 +30,6 @@ public final class StandardLevelIncreaseStrategy implements LevelIncreaseStrateg
             this.levelValue = levelValue;
         }
 
-        // private int getExpValue() {
-        //     return this.expValue;
-        // }
-
-        // private int getLevelValue() {
-        //     return this.levelValue;
-        // }
-
     }
 
     private List<Pair<Integer, Integer>> values;

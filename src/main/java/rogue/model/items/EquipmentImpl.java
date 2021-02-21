@@ -5,6 +5,7 @@ import java.util.Optional;
 import rogue.model.creature.Player;
 import rogue.model.events.AbstractEventPublisher;
 import rogue.model.events.EquipmentEvent;
+import rogue.model.events.EventSubscriber;
 import rogue.model.items.armor.Armor;
 import rogue.model.items.armor.ArmorImpl;
 import rogue.model.items.armor.ArmorType;
@@ -39,20 +40,24 @@ public final class EquipmentImpl extends AbstractEventPublisher implements Equip
             this.armor  = armor;
         }
 
-        // private Weapon getWeapon() {
-        //     return this.weapon;
-        // }
-
-        // private Armor getArmor() {
-        //     return this.armor;
-        // }
     }
 
+    /**
+     * Creates a new EquipmentImpl.
+     * @param player
+     *          the player of the game
+     */
     public EquipmentImpl(final Player player) {
         this.owner = player;
         this.weapon = new BaseWeapon(WeaponType.MACE);
         this.armor = new ArmorImpl(ArmorType.LEATHER);
         this.ring = Optional.empty();
+    }
+
+    @Override
+    public void register(final EventSubscriber subscriber) {
+        super.register(subscriber);
+        this.post(new EquipmentEvent(this));
     }
 
     private void set(final Operation op) {
