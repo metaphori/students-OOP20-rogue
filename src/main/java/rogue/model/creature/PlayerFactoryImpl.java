@@ -13,12 +13,12 @@ import rogue.model.items.EquipmentImpl;
  */
 public final class PlayerFactoryImpl implements PlayerFactory {
 
-    private static class PlayerImpl extends AbstractCreature<PlayerLife> implements Player {
+    private static final class PlayerImpl extends AbstractCreature<PlayerLife> implements Player {
 
         private final Inventory inventory;
         private final Equipment equipment;
 
-        protected PlayerImpl(final PlayerLife life) {
+        private PlayerImpl(final PlayerLife life) {
             super(life);
             this.inventory = new InventoryImpl(this);
             this.equipment = new EquipmentImpl(this);

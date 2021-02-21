@@ -1,6 +1,6 @@
 package rogue.view;
 
-import rogue.model.creature.LifeParameter;
+import rogue.model.creature.PlayerAttribute;
 import rogue.model.items.armor.Armor;
 import rogue.model.items.weapons.Weapon;
 
@@ -11,12 +11,12 @@ public interface StatusBarView extends View {
 
     /**
      * Sets the life label.
-     * @param label
-     *          the {@link LifeParameter} to update
+     * @param attribute
+     *          the {@link PlayerAttribute} to update
      * @param value
      *          the value to replace
      */
-    void setLifeLabel(LifeParameter label, int value);
+    void setLifeLabel(PlayerAttribute attribute, int value);
 
     /**
      * Sets the weapon label.

@@ -1,6 +1,9 @@
 package rogue.model.creature;
 
-public enum LifeParameter {
+/**
+ * Represents an enumeration for declaring player attributes.
+ */
+public enum PlayerAttribute {
 
     /**
      * Maximum health point value.

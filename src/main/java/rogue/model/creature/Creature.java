@@ -10,7 +10,6 @@ import rogue.model.Entity;
 public interface Creature<L extends Life> extends Entity {
 
     /**
-     * 
      * @return the creature's life
      */
     L getLife();

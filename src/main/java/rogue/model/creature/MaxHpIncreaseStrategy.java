@@ -1,8 +1,7 @@
 package rogue.model.creature;
 
 /**
- * This interface manages the strategy with which 
- * to increase the player's max health points.
+ * This interface manages the strategy with which to increase the player's max health points.
  */
 public interface MaxHpIncreaseStrategy {
 

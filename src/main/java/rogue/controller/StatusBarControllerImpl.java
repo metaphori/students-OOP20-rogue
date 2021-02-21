@@ -30,9 +30,6 @@ public final class StatusBarControllerImpl implements StatusBarController, Event
         this.view = new StatusBarViewImpl();
         player.getLife().register(this);
         player.getEquipment().register(this);
-        // Sets the initial score and equipment view!
-        player.getLife().postAllLife();
-        this.onEquipmentChange(new EquipmentEvent(player.getEquipment()));
     }
 
     @Subscribe
