@@ -19,6 +19,8 @@ import rogue.model.items.weapons.WeaponType;
 public class RingsTest {
 
     private final Player player = new PlayerFactoryImpl().create();
+    private static final int LEATHER_AC = 8;
+    private static final int CHAIN_MAIL_AC = 5;
 
     @Before
     public void initTest() {
@@ -43,7 +45,7 @@ public class RingsTest {
         // Improves armor AC
         final Ring ring = new RingImpl(RingType.PROTECTION);
         assertTrue(ring.use(player));
-        assertEquals(10, player.getEquipment().getArmor().getAC());
+        assertEquals(LEATHER_AC - 2, player.getEquipment().getArmor().getAC());
         // detaches the ring
         ring.stopUsing(player);
         // the armor is back to normal state
@@ -70,13 +72,13 @@ public class RingsTest {
         final Ring ring = new RingImpl(RingType.PROTECTION);
         assertTrue(ring.use(player));
         assertEquals(new BaseWeapon(WeaponType.MACE), player.getEquipment().getWeapon());
-        assertEquals(10, player.getEquipment().getArmor().getAC());
+        assertEquals(LEATHER_AC - 2, player.getEquipment().getArmor().getAC());
         // change the weapon does't affect the ring behavior
         player.getEquipment().setWeapon(new BaseWeapon(WeaponType.ARROW));
         assertEquals(new BaseWeapon(WeaponType.ARROW), player.getEquipment().getWeapon());
-        assertEquals(10, player.getEquipment().getArmor().getAC());
+        assertEquals(LEATHER_AC - 2, player.getEquipment().getArmor().getAC());
         ring.stopUsing(player);
-        assertEquals(8, player.getEquipment().getArmor().getAC());
+        assertEquals(LEATHER_AC, player.getEquipment().getArmor().getAC());
     }
 
     @Test
@@ -98,11 +100,10 @@ public class RingsTest {
         // Improves armor AC
         final Ring ring = new RingImpl(RingType.PROTECTION);
         assertTrue(ring.use(player));
-        assertEquals(10, player.getEquipment().getArmor().getAC());
+        assertEquals(LEATHER_AC - 2, player.getEquipment().getArmor().getAC());
         // change the armor currently in use, so i expect the protection ring is now applied to the new armor 
         player.getEquipment().setArmor(new ArmorImpl(ArmorType.CHAIN_MAIL));
-        final var expected = 7;
-        assertEquals(expected, player.getEquipment().getArmor().getAC());
+        assertEquals(CHAIN_MAIL_AC - 2, player.getEquipment().getArmor().getAC());
     }
 
     @Test

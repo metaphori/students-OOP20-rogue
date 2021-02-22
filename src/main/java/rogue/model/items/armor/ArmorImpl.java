@@ -41,9 +41,18 @@ public final class ArmorImpl implements Armor {
         return true;
     }
 
+    private void updateAC(final int amount) {
+        this.ac = this.ac + amount > 0 ? this.ac + amount : 0;
+    }
+
     @Override
     public void increaseAC(final int amount) {
-        this.ac = this.ac + amount;
+        this.updateAC(amount);
+    }
+
+    @Override
+    public void decreaseAC(final int amount) {
+        this.updateAC(-amount);
     }
 
     @Override

@@ -20,6 +20,13 @@ public interface Armor extends Item {
     void increaseAC(int amount);
 
     /**
+     * Decreases the armor's AC of the given value.
+     * @param amount
+     *          the value to add to the armor's AC
+     */
+    void decreaseAC(int amount);
+
+    /**
      * @return the armor type
      */
     ArmorType getArmorType();
