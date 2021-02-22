@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 import rogue.model.Entity;
+import rogue.model.creature.Player;
 
 /**
  * the game world (level manager).
@@ -34,4 +35,9 @@ public interface World {
      * @return if the level is changed
      */
     boolean round(Direction direction);
+
+    /**
+     * @return the player
+     */
+    Player getPlayer();
 }

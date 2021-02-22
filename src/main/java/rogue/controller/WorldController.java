@@ -13,7 +13,6 @@ import rogue.view.WorldBox;
  */
 public class WorldController {
     private final World world;
-    private final Player player;
     private final WorldBox worldBox;
 
     /**
@@ -21,7 +20,6 @@ public class WorldController {
      */
     public WorldController(final Player player) {
         this.world = new WorldImpl(player);
-        this.player = player;
         this.worldBox = new WorldBox(this.world.getWidth(), this.world.getHeight());
         this.worldBox.drawTiles(this.world.getTiles());
         this.worldBox.drawEntities(this.world.getEntityMap());
@@ -40,7 +38,7 @@ public class WorldController {
      */
     public void movePlayer(final KeyEvent event) {
         // game over
-        if (player.getLife().isDead()) {
+        if (this.world.getPlayer().getLife().isDead()) {
             worldBox.drawGameOver();
             return;
         }

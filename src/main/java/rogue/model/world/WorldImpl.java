@@ -63,6 +63,10 @@ public class WorldImpl implements World {
         return currentLevel.getHeight();
     }
 
+    public final Player getPlayer() {
+        return this.player;
+    }
+
     /**
      * @param player the player instance
      */
