@@ -1,6 +1,8 @@
 package rogue.view;
 
+import java.util.Map;
 import java.util.Random;
+import java.util.stream.Stream;
 
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
@@ -19,24 +21,18 @@ import rogue.model.creature.Monster;
 import rogue.model.creature.Player;
 import rogue.model.items.Item;
 import rogue.model.world.Tile;
-import rogue.model.world.World;
 
 public class WorldBox extends HBox {
     private static final Random RANDOM = new Random();
     private static final int VINE_VARIANT_COUNT = 7;
     private static final int SCALE = 25;
-    private final World game;
     private final Canvas tileCanvas, entityCanvas;
 
-    public WorldBox(final World game) {
+    public WorldBox(final int width, final int height) {
         super();
 
-        this.game = game;
-        this.tileCanvas = new Canvas(game.getWidth() * SCALE, game.getHeight() * SCALE);
-        this.entityCanvas = new Canvas(game.getWidth() * SCALE, game.getHeight() * SCALE);
-
-        drawTiles();
-        drawEntities();
+        this.tileCanvas = new Canvas(width * SCALE, height * SCALE);
+        this.entityCanvas = new Canvas(width * SCALE, height * SCALE);
 
         // layer the canvases
         BorderPane bp = new BorderPane();
@@ -50,9 +46,9 @@ public class WorldBox extends HBox {
         this.getChildren().add(bp);
     }
 
-    public final void drawTiles() {
+    public final void drawTiles(final Stream<Tile> tiles) {
         final GraphicsContext gc = tileCanvas.getGraphicsContext2D();
-        game.getTiles().forEach(tile -> {
+        tiles.forEach(tile -> {
             Image img = getImage(tile);
 
             // darker if floor
@@ -64,11 +60,11 @@ public class WorldBox extends HBox {
         });
     }
 
-    public final void drawEntities() {
+    public final void drawEntities(final Map<Entity, Tile> entityMap) {
         final GraphicsContext gc = entityCanvas.getGraphicsContext2D();
         gc.clearRect(0, 0, entityCanvas.getWidth(), entityCanvas.getHeight());
 
-        game.getEntityMap().forEach((entity, tile) -> {
+        entityMap.forEach((entity, tile) -> {
             Image img = getImage(entity);
             gc.drawImage(img, tile.getX() * SCALE, tile.getY() * SCALE, SCALE, SCALE);
         });

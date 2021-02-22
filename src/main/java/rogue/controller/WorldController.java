@@ -22,7 +22,9 @@ public class WorldController {
     public WorldController(final Player player) {
         this.world = new WorldImpl(player);
         this.player = player;
-        this.worldBox = new WorldBox(world);
+        this.worldBox = new WorldBox(this.world.getWidth(), this.world.getHeight());
+        this.worldBox.drawTiles(this.world.getTiles());
+        this.worldBox.drawEntities(this.world.getEntityMap());
     }
 
     /**
@@ -70,10 +72,10 @@ public class WorldController {
 
         // update tiles only if level is changed
         if (world.round(direction)) {
-            ((WorldBox) worldBox).drawTiles();
+            worldBox.drawTiles(this.world.getTiles());
         }
 
         // always update entities
-        ((WorldBox) worldBox).drawEntities();
+        worldBox.drawEntities(this.world.getEntityMap());
     }
 }
