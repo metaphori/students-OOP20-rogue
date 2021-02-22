@@ -19,7 +19,7 @@ public enum RingType {
      */
     PROTECTION(e -> { 
         e.setArmor(new ArmorImpl(e.getArmor().getArmorType())); 
-        e.getArmor().increaseAC(2); 
+        e.getArmor().decreaseAC(2); 
     }),
     /**
      * Improves weapon accuracy.

@@ -1,8 +1,8 @@
 package rogue.model;
 
 /**
- * a generic entity interface.
- * can be an {@link Item} or a {@link Creature}
+ * A generic entity interface.
+ * Can be an {@link Item} or a {@link Creature}
  */
 public interface Entity {
 }

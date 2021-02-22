@@ -39,7 +39,7 @@ import rogue.model.items.inventory.InventoryIsFullException;
 public class LevelImpl implements Level {
     private static final int WIDTH = 32;
     private static final int HEIGHT = 32;
-    private static final int FOOD_DECREASE_ON_COMBAT = 5;
+    private static final int FOOD_DECREASE_ON_COMBAT = 2;
 
     private static final Logger LOG = LoggerFactory.getLogger(Level.class);
     private final Random random = new Random();
