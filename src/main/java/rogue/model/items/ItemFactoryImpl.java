@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Supplier;
 
 import rogue.model.items.armor.ArmorImpl;
 import rogue.model.items.armor.ArmorType;
@@ -22,20 +23,30 @@ import rogue.model.items.weapons.WeaponType;
  * An implementation for an {@link ItemFactory}.
  *
  */
-public class ItemFactoryImpl implements ItemFactory {
+public final class ItemFactoryImpl implements ItemFactory {
 
     private static final int MIN_ITEMS = 15;
     private static final int MAX_ITEMS = 20;
     private static final int ITEM_COUNT_DIFF = MAX_ITEMS - MIN_ITEMS;
 
-    private static final int ARMOR = 0;
-    private static final int FOOD = 1;
-    private static final int POTION = 2;
-    private static final int RING = 3;
-    private static final int SCROLL = 4;
-    private static final int WEAPON = 5;
+    private static final Random RAND = new Random();
 
-    private final Random rand = new Random();
+    enum Items {
+        ARMOR(0, () -> new ArmorImpl(Arrays.asList(ArmorType.values()).get(RAND.nextInt(ArmorType.values().length)))),
+        FOOD(1, () -> new FoodImpl(Arrays.asList(FoodType.values()).get(RAND.nextInt(FoodType.values().length)))),
+        POTION(2, () -> new PotionImpl(Arrays.asList(PotionType.values()).get(RAND.nextInt(PotionType.values().length)))),
+        RING(3, () -> new RingImpl(Arrays.asList(RingType.values()).get(RAND.nextInt(RingType.values().length)))), 
+        SCROLL(4, () -> new ScrollImpl(Arrays.asList(ScrollType.values()).get(RAND.nextInt(ScrollType.values().length)))),
+        WEAPON(5, () -> new BaseWeapon(Arrays.asList(WeaponType.values()).get(RAND.nextInt(WeaponType.values().length))));
+
+        private final int value;
+        private final Supplier<Item> itemSupplier;
+
+        Items(final int value, final Supplier<Item> itemSupplier) {
+            this.value = value;
+            this.itemSupplier = itemSupplier;
+        }
+    }
 
     /**
      * Creates a list containing random items.
@@ -45,29 +56,10 @@ public class ItemFactoryImpl implements ItemFactory {
     public List<Item> getItems(final int quantity) {
         final ArrayList<Item> items = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
-            final int itemIndex = rand.nextInt(6);
-            switch (itemIndex) {
-                case ARMOR:
-                    items.add(new ArmorImpl(Arrays.asList(ArmorType.values()).get(rand.nextInt(Arrays.asList(ArmorType.values()).size()))));
-                    break;
-                case FOOD:
-                    items.add(new FoodImpl(Arrays.asList(FoodType.values()).get(rand.nextInt(Arrays.asList(FoodType.values()).size()))));
-                    break;
-                case POTION:
-                    items.add(new PotionImpl(Arrays.asList(PotionType.values()).get(rand.nextInt(Arrays.asList(PotionType.values()).size()))));
-                    break;
-                case RING:
-                    items.add(new RingImpl(Arrays.asList(RingType.values()).get(rand.nextInt(Arrays.asList(RingType.values()).size()))));
-                    break;
-                case SCROLL:
-                    items.add(new ScrollImpl(Arrays.asList(ScrollType.values()).get(rand.nextInt(Arrays.asList(ScrollType.values()).size()))));
-                    break;
-                case WEAPON:
-                    items.add(new BaseWeapon(Arrays.asList(WeaponType.values()).get(rand.nextInt(Arrays.asList(WeaponType.values()).size()))));
-                    break;
-                default:
-                    throw new IllegalStateException();
-            }
+            final int itemIndex = RAND.nextInt(Items.values().length);
+            Arrays.asList(Items.values()).stream()
+                .filter(o -> o.value == itemIndex)
+                .forEach(o -> items.add(o.itemSupplier.get()));
         }
         return items;
     }
@@ -76,8 +68,8 @@ public class ItemFactoryImpl implements ItemFactory {
      * Creates a List of random items with a random quantity.
      * @return a list of random items.
      */
-    public final List<Item> getItems() {
-        final var itemCount = rand.nextInt(ITEM_COUNT_DIFF);
+    public List<Item> getItems() {
+        final var itemCount = RAND.nextInt(ITEM_COUNT_DIFF);
         return getItems(MIN_ITEMS + itemCount);
     }
 }
