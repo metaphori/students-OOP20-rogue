@@ -22,6 +22,9 @@ import rogue.model.creature.Player;
 import rogue.model.items.Item;
 import rogue.model.world.Tile;
 
+/**
+ * a world visualizer.
+ */
 public class WorldBox extends HBox {
     private static final Random RANDOM = new Random();
     private static final int VINE_VARIANT_COUNT = 7;
