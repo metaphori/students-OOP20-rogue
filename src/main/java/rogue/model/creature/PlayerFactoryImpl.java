@@ -36,17 +36,11 @@ public final class PlayerFactoryImpl implements PlayerFactory {
 
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Player create() {
         return createByLife(new PlayerLifeImpl.Builder().build());
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Player createByLife(final PlayerLife life) {
         return new PlayerImpl(Objects.requireNonNull(life));
