@@ -68,7 +68,7 @@ public class MonsterImageGeneratorImpl implements MonsterImageGenerator {
          * Hobgoglin
          */
         if (monster.getMonsterType().name().equals(MonsterType.HOBGOBLIN.name())) {
-            return new Image(ClassLoader.getSystemResource("images/monster/Hobgoblin.png").toExternalForm(), 32, 32, false, true);
+            return new Image(ClassLoader.getSystemResource("images/monster/HobGoblin.png").toExternalForm(), 32, 32, false, true);
           }
 
         /*
