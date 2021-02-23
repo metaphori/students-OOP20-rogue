@@ -15,6 +15,10 @@ import rogue.controller.WorldController;
 import rogue.controller.inventory.InventoryController;
 import rogue.view.inventory.InventoryViewImpl;
 
+/**
+ * Class that creates the Game View.
+ *
+ */
 public final class GameView {
 
     private final Stage stage = new Stage();

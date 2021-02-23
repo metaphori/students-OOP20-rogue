@@ -12,6 +12,10 @@ import rogue.controller.GameController;
 import rogue.controller.GameControllerImpl;
 import rogue.view.menu.MenuViewImpl;
 
+/**
+ * Class that creates the Menu.
+ *
+ */
 public final class Launcher extends Application {
 
     @Override
@@ -44,6 +48,10 @@ public final class Launcher extends Application {
         primaryStage.show();
     }
 
+    /**
+     * 
+     * @param args unused.
+     */
     public static void main(final String[] args) {
         launch();
     }
