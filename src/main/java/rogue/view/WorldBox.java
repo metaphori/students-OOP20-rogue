@@ -46,6 +46,10 @@ public class WorldBox extends HBox {
         this.getChildren().add(bp);
     }
 
+    /**
+     * fills the tile canvas.
+     * @param tiles the current level's tiles
+     */
     public final void drawTiles(final Stream<Tile> tiles) {
         final GraphicsContext gc = tileCanvas.getGraphicsContext2D();
         tiles.forEach(tile -> {
@@ -60,6 +64,10 @@ public class WorldBox extends HBox {
         });
     }
 
+    /**
+     * fills the entity canvas.
+     * @param entityMap the current level's entity map
+     */
     public final void drawEntities(final Map<Entity, Tile> entityMap) {
         final GraphicsContext gc = entityCanvas.getGraphicsContext2D();
         gc.clearRect(0, 0, entityCanvas.getWidth(), entityCanvas.getHeight());
@@ -70,6 +78,9 @@ public class WorldBox extends HBox {
         });
     }
 
+    /**
+     * draws a game over text.
+     */
     public final void drawGameOver() {
         this.getChildren().clear();
 
