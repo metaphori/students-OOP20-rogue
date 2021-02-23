@@ -10,7 +10,7 @@ public class WorldTest {
 
     @org.junit.Test
     public void testWorldCreation() {
-        World w = new WorldImpl(new PlayerFactoryImpl().create());
+        final World w = new WorldImpl(new PlayerFactoryImpl().create());
         w.getTiles().forEach(t -> assertNotNull(t));
         assertNotNull(w.getPlayer());
         w.getEntityMap().forEach((e, t) -> {

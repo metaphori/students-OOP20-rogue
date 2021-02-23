@@ -35,8 +35,8 @@ public class WorldBox extends HBox {
         this.entityCanvas = new Canvas(width * SCALE, height * SCALE);
 
         // layer the canvases
-        BorderPane bp = new BorderPane();
-        Pane p = new Pane();
+        final BorderPane bp = new BorderPane();
+        final Pane p = new Pane();
         p.getChildren().add(tileCanvas);
         p.getChildren().add(entityCanvas);
         bp.setCenter(p);
@@ -49,7 +49,7 @@ public class WorldBox extends HBox {
     public final void drawTiles(final Stream<Tile> tiles) {
         final GraphicsContext gc = tileCanvas.getGraphicsContext2D();
         tiles.forEach(tile -> {
-            Image img = getImage(tile);
+            final Image img = getImage(tile);
 
             // darker if floor
             final ColorAdjust ca = new ColorAdjust();
@@ -65,7 +65,7 @@ public class WorldBox extends HBox {
         gc.clearRect(0, 0, entityCanvas.getWidth(), entityCanvas.getHeight());
 
         entityMap.forEach((entity, tile) -> {
-            Image img = getImage(entity);
+            final Image img = getImage(entity);
             gc.drawImage(img, tile.getX() * SCALE, tile.getY() * SCALE, SCALE, SCALE);
         });
     }
@@ -73,7 +73,7 @@ public class WorldBox extends HBox {
     public final void drawGameOver() {
         this.getChildren().clear();
 
-        Text text = new Text();
+        final Text text = new Text();
         text.setText("GAME OVER");
         text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 100));
         this.getChildren().add(text);
